@@ -1,0 +1,463 @@
+<nav class="topbar">
+  <div class="topbar__in">
+    <div class="mark"><b>Английский</b><span>ПРАВИЛА</span></div>
+
+    <div class="tabs" role="tablist" aria-label="Разделы грамматики">
+      <span class="tabs__ink" id="tabsInk"></span>
+      <button role="tab" data-tab="tenses" aria-selected="true" aria-controls="tab-tenses">Времена</button>
+      <button role="tab" data-tab="cond" aria-selected="false" aria-controls="tab-cond">Условные</button>
+    </div>
+
+    <div class="dots__wrap">
+      <div class="dots" id="dots" aria-label="Переход к блоку"></div>
+
+      <div class="menu">
+        <button class="menu__btn" id="menuBtn" aria-expanded="false" aria-haspopup="true">
+          РАЗДЕЛЫ
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <path d="M2.5 4.5 L6 8 L9.5 4.5"/>
+          </svg>
+        </button>
+        <div class="menu__pop" id="menuPop" hidden role="menu"></div>
+      </div>
+
+      <div class="prog" title="Отмечено как изученное">
+        <div class="prog__bar"><div class="prog__fill" id="progFill"></div></div>
+        <span class="prog__n" id="progN">0/12</span>
+      </div>
+
+      <button class="tgl" id="tgl" aria-label="Переключить тему">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <circle cx="12" cy="12" r="4.2"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.5 1.5M17.6 17.6l1.5 1.5M19.1 4.9l-1.5 1.5M6.4 17.6l-1.5 1.5"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="tabpanel" id="tab-tenses" role="tabpanel">
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Методичка · все времена · одна система</div>
+    <h1>Времён не двенадцать.<br>Их <span class="tri">3 × 4</span>.</h1>
+    <p class="hero__sub">
+      Английское время — не отдельное слово, которое надо зубрить. Это <b>две настройки</b>:
+      <b>когда</b> это происходит и <b>как</b> вы на это смотрите. Выбрали две — время собралось само.
+      Ниже маршрут из четырёх уровней: от фактов к процессам, от процессов к результатам.
+    </p>
+    <div class="hero__meta">
+      <span class="pill">12 станций</span>
+      <span class="pill">120 заданий с разбором</span>
+      <span class="pill">5 дуэлей похожих времён</span>
+      <span class="pill">24 вопроса в общей проверке</span>
+      <span class="pill">шпаргалка одной таблицей</span>
+    </div>
+    <div class="legend" id="legend"></div>
+  </div>
+</header>
+
+<section class="sect toc" id="t-toc">
+  <div class="wrap">
+    <div class="sect__head" style="margin-bottom:0">
+      <div class="eyebrow">Оглавление</div>
+      <h2>С чего начать</h2>
+      <p>Можно идти маршрутом сверху вниз, а можно прыгнуть сразу в нужный блок — страница при этом листается как обычно.</p>
+    </div>
+    <div class="toc__g" id="tToc"></div>
+  </div>
+</section>
+
+<section class="sect" id="t-algo">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Что спрашивать у себя</div>
+      <h2>Три вопроса вместо двенадцати правил</h2>
+      <p>Это вся навигация по теме, сжатая до трёх шагов. Дальше — разбор каждой клетки по отдельности; сюда удобно возвращаться, когда нужно быстро выбрать время.</p>
+    </div>
+
+    <ol class="steps">
+      <li>
+        <b>ВОПРОС 01</b>
+        <h4>Когда?</h4>
+        <p>Прошлое, настоящее, будущее. Это выбирает вспомогательный глагол: <span class="mono">did / do / will</span>, <span class="mono">was / am / will be</span>, <span class="mono">had / have / will have</span>.</p>
+      </li>
+      <li>
+        <b>ВОПРОС 02</b>
+        <h4>Это факт или процесс?</h4>
+        <p>Факт, привычка, расписание — <span class="mono">Simple</span>. Идёт прямо в этот момент, временно, в кадре — <span class="mono">Continuous</span>.</p>
+      </li>
+      <li>
+        <b>ВОПРОС 03</b>
+        <h4>Важен результат к какому-то моменту?</h4>
+        <p>Да — добавляем <span class="mono">Perfect</span>. А если важно ещё и <em>сколько времени это длится</em> — <span class="mono">Perfect Continuous</span>.</p>
+      </li>
+    </ol>
+
+    <figure class="dia">
+      <div>
+        <svg viewBox="0 0 700 300" role="img" aria-label="Развилка: если у действия есть точное время в прошлом — Past Simple; если времени нет и важен результат — Present Perfect; если важна длительность — Present Perfect Continuous">
+          <rect class="box" x="248" y="14" width="204" height="42" rx="11"/>
+          <text class="t" x="350" y="41" text-anchor="middle">Действие уже произошло</text>
+
+          <path class="ln" d="M350 56 V 82 H 150 V 108" marker-end="url(#ah2)"/>
+          <path class="ln" d="M350 56 V 82 H 470 V 108" marker-end="url(#ah2)"/>
+          <text class="t-lbl" x="158" y="76">есть точное время в прошлом</text>
+          <text class="t-lbl" x="478" y="76">времени в предложении нет</text>
+
+          <rect x="52" y="108" width="196" height="52" rx="11" style="fill:var(--past-soft);stroke:var(--past);stroke-width:1.8"/>
+          <text class="t-m" x="150" y="132" text-anchor="middle" style="fill:var(--past);font-size:12.5px">PAST SIMPLE</text>
+          <text class="t-s" x="150" y="150" text-anchor="middle">yesterday · in 2019 · ago</text>
+
+          <path class="ln" d="M470 108 V 132 H 330 V 172" marker-end="url(#ah2)"/>
+          <path class="ln" d="M470 108 V 132 H 588 V 172" marker-end="url(#ah2)"/>
+          <text class="t-lbl" x="240" y="152">важен результат</text>
+          <text class="t-lbl" x="500" y="152">важно, сколько длится</text>
+
+          <rect x="232" y="172" width="196" height="52" rx="11" style="fill:var(--present-soft);stroke:var(--present);stroke-width:1.8"/>
+          <text class="t-m" x="330" y="196" text-anchor="middle" style="fill:var(--present);font-size:12.5px">PRESENT PERFECT</text>
+          <text class="t-s" x="330" y="214" text-anchor="middle">just · already · never · yet</text>
+
+          <rect x="490" y="172" width="196" height="52" rx="11" style="fill:var(--present-soft);stroke:var(--present);stroke-width:1.8"/>
+          <text class="t-m" x="588" y="192" text-anchor="middle" style="fill:var(--present);font-size:11px">PRESENT PERFECT CONT.</text>
+          <text class="t-s" x="588" y="212" text-anchor="middle">for · since · how long · all day</text>
+
+          <text class="t-lbl" x="52" y="264">Первая развилка — главная: точное время в прошлом полностью</text>
+          <text class="t-lbl" x="52" y="282">отключает Present Perfect, спорить с этим бесполезно.</text>
+          <defs>
+            <marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 z" fill="currentColor"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+      <figcaption>Развилка, на которой спотыкаются 80% учеников: сначала проверяем, названо ли время, и только потом — что именно нам важно сказать.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="sect" id="t-system">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Уровень 0 · механика</div>
+      <h2>Время не выбирают целиком — его собирают из двух деталей</h2>
+      <p>
+        Первая деталь отвечает на вопрос «когда» и решает, какой будет <b>вспомогательный глагол</b>.
+        Вторая отвечает на вопрос «как» и решает, в какой <b>форме встанет смысловой глагол</b>.
+        Дальше — просто арифметика.
+      </p>
+    </div>
+
+    <figure class="dia">
+      <div>
+        <svg viewBox="0 0 700 250" role="img" aria-label="Схема сборки времени: «когда» задаёт вспомогательный глагол had, «как» задаёт форму been плюс V-ing, вместе получается had been working — Past Perfect Continuous">
+          <!-- строка 1: КОГДА -->
+          <text class="t-s" x="18" y="34">1 · КОГДА</text>
+          <rect class="box" x="16" y="44" width="172" height="46" rx="11"/>
+          <text class="t" x="34" y="73">Past — прошлое</text>
+          <path class="ln" d="M196 67 H 322" marker-end="url(#ah)"/>
+          <text class="t-lbl" x="200" y="56">задаёт вспомогательный глагол</text>
+          <rect class="box-hi" x="332" y="44" width="92" height="46" rx="11"/>
+          <text class="t-m" x="378" y="73" text-anchor="middle" style="fill:var(--present)">had</text>
+
+          <!-- строка 2: КАК -->
+          <text class="t-s" x="18" y="166">2 · КАК</text>
+          <rect class="box" x="16" y="176" width="172" height="46" rx="11"/>
+          <text class="t" x="34" y="205">Perfect Continuous</text>
+          <path class="ln" d="M196 199 H 322" marker-end="url(#ah)"/>
+          <text class="t-lbl" x="200" y="188">задаёт форму смыслового глагола</text>
+          <rect class="box-hi" x="332" y="176" width="132" height="46" rx="11"/>
+          <text class="t-m" x="398" y="205" text-anchor="middle" style="fill:var(--present)">been + V-ing</text>
+
+          <!-- схождение -->
+          <path class="ln" d="M424 67 C 470 67 470 116 508 116" marker-end="url(#ah)"/>
+          <path class="ln" d="M464 199 C 486 199 486 148 508 148" marker-end="url(#ah)"/>
+
+          <rect class="box" x="518" y="86" width="166" height="92" rx="14"/>
+          <text class="t-m" x="601" y="124" text-anchor="middle" style="font-size:15px">had been working</text>
+          <text class="t-s" x="601" y="148" text-anchor="middle">PAST PERFECT CONT.</text>
+          <defs>
+            <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 z" fill="currentColor"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+      <figcaption>Одна и та же механика работает для всех двенадцати клеток: меняете «когда» — меняется только вспомогательный глагол; меняете «как» — меняется только форма смыслового.</figcaption>
+    </figure>
+
+    <div class="matrix">
+      <div class="matrix__g" id="matrix"></div>
+    </div>
+    <div class="mxout z-present" id="mxout"></div>
+  </div>
+</section>
+
+<main class="wrap" id="t-roadwrap">
+  <div class="roadmap" id="t-road"></div>
+</main>
+
+<section class="sect" id="t-duels">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Разбор полётов</div>
+      <h2>Пять пар, в которых путаются все</h2>
+      <p>Ошибки почти никогда не бывают «какое-то из двенадцати». Они бывают между двумя соседями. Вот эти соседи и признак, по которому их разводят.</p>
+    </div>
+    <div class="duels" id="duels"></div>
+  </div>
+</section>
+
+<section class="sect" id="t-quiz">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Общая проверка</div>
+      <h2>Двадцать четыре предложения — по два на каждое время</h2>
+      <p>Вперемешку и без подсказок о том, какое время проверяется. После ответа появляется разбор: почему верный вариант верный и чем плох выбранный.</p>
+    </div>
+    <div class="drill z-present" id="tQuiz"></div>
+  </div>
+</section>
+
+<section class="sect" id="t-sheet">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">На один экран</div>
+      <h2>Шпаргалка</h2>
+    </div>
+    <div class="sheet">
+      <table>
+        <thead>
+          <tr><th>Время</th><th>Формула</th><th>Маркеры</th><th>Пример</th></tr>
+        </thead>
+        <tbody id="sheetBody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+</div>
+
+<div class="tabpanel" id="tab-cond" role="tabpanel" hidden>
+<!-- ══════════════════ ГЕРОЙ · УСЛОВНЫЕ ══════════════════ -->
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Правило второе · условные предложения · if</div>
+    <h1>Условие всегда<br>отстаёт на <span class="tri">один шаг</span>.</h1>
+    <p class="hero__sub">
+      Типов условных предложений формально пять, но запоминать пять формул не нужно.
+      Достаточно двух вещей: <b>посчитать «бы»</b> в русском переводе и знать, что
+      <b>часть с if всегда стоит на одно время раньше</b>, чем то, о чём вы говорите.
+      Говорим про будущее — в условии настоящее. Про настоящее — прошедшее. Про прошедшее — предпрошедшее.
+    </p>
+    <div class="hero__meta">
+      <span class="pill">7 станций</span>
+      <span class="pill">определитель типа</span>
+      <span class="pill">5 дуэлей</span>
+      <span class="pill">84 задания с разбором</span>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════════════ ОГЛАВЛЕНИЕ ══════════════════ -->
+<section class="sect toc" id="c-toc">
+  <div class="wrap">
+    <div class="sect__head" style="margin-bottom:0">
+      <div class="eyebrow">Оглавление</div>
+      <h2>С чего начать</h2>
+      <p>Можно идти маршрутом сверху вниз, а можно прыгнуть сразу в нужный блок — страница при этом листается как обычно.</p>
+    </div>
+    <div class="toc__g" id="cToc"></div>
+  </div>
+</section>
+
+<!-- ══════════════════ ОПРЕДЕЛИТЕЛЬ ══════════════════ -->
+<section class="sect" id="c-algo">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Что спрашивать у себя</div>
+      <h2>Два вопроса вместо пяти правил</h2>
+      <p>
+        Сначала считаем «бы» в русском переводе, потом уточняем время. Больше ничего знать не нужно —
+        этих двух шагов хватает, чтобы выбрать тип в любом предложении.
+      </p>
+    </div>
+
+    <ol class="steps">
+      <li>
+        <b>ВОПРОС 01</b>
+        <h4>Сколько «бы» в русском переводе?</h4>
+        <p>Ни одного — это <span class="mono">Zero</span> или <span class="mono">First</span>, реальное условие.
+           Два, как в «якобы да кабы»: «если <b>бы</b> сделал, то <b>бы</b> вышло» — это <span class="mono">Second</span> или <span class="mono">Third</span>.</p>
+      </li>
+      <li>
+        <b>ВОПРОС 02</b>
+        <h4>Если «бы» два — про какое это время?</h4>
+        <p>Про сейчас, и теоретически ещё можно что-то изменить — <span class="mono">Second</span>.
+           Про тогда, и поезд уже ушёл — <span class="mono">Third</span>. По-русски обе фразы звучат одинаково, поэтому решает контекст.</p>
+      </li>
+      <li>
+        <b>ПРОВЕРКА</b>
+        <h4>Половины из разных времён?</h4>
+        <p>Посмотрите на каждую часть отдельно. Условие в прошлом, а результат сегодняшний (часто со словом
+           <span class="mono">now</span>) — это <span class="mono">Mixed</span>, смешанный тип.</p>
+      </li>
+    </ol>
+
+    <div class="det z-present" id="detector">
+      <div class="det__top">
+        <span class="eyebrow">Определитель типа</span>
+        <span class="det__crumbs" id="detCrumbs"></span>
+      </div>
+      <div class="det__body">
+        <div>
+          <div class="det__q" id="detQ"></div>
+          <div class="det__opts" id="detOpts"></div>
+        </div>
+        <div class="det__out" id="detOut"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ ЛЕСТНИЦА ══════════════════ -->
+<section class="sect" id="c-system">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Механика · один шаг назад</div>
+      <h2>Часть с <span class="accent">if</span> всегда на время раньше результата</h2>
+      <p>
+        Это главное наблюдение всей темы. Вы не запоминаете пять отдельных формул — вы запоминаете
+        одно движение: берёте время, о котором говорите, и <b>опускаете условие на ступень ниже</b>.
+        Дальше остаётся только подставить нужный вспомогательный глагол.
+      </p>
+    </div>
+
+    <div class="ladder">
+      <div class="ladder__row z-real">
+        <b>Говорим про будущее</b>
+        <span class="arr">опускаем&nbsp;↓</span>
+        <code>if + Present Simple</code>
+        <em>First</em>
+      </div>
+      <div class="ladder__row z-unreal">
+        <b>Говорим про настоящее</b>
+        <span class="arr">опускаем&nbsp;↓</span>
+        <code>if + Past Simple</code>
+        <em>Second</em>
+      </div>
+      <div class="ladder__row z-pastc">
+        <b>Говорим про прошедшее</b>
+        <span class="arr">опускаем&nbsp;↓</span>
+        <code>if + Past Perfect</code>
+        <em>Third</em>
+      </div>
+    </div>
+
+    <figure class="dia">
+      <div>
+        <svg viewBox="0 0 700 250" role="img" aria-label="Лестница: о чём говорим и в каком времени стоит часть с if — будущее опускается до настоящего, настоящее до прошедшего, прошедшее до предпрошедшего">
+          <text class="t-s" x="20" y="26">О ЧЁМ ГОВОРИМ</text>
+          <text class="t-s" x="392" y="26">ЧТО СТАВИМ ПОСЛЕ IF</text>
+
+          <rect class="box" x="20" y="40" width="210" height="44" rx="11"/>
+          <text class="t" x="125" y="68" text-anchor="middle">Будущее</text>
+          <path class="ln" d="M238 62 H 384" marker-end="url(#lah)"/>
+          <text class="t-lbl" x="252" y="53">на шаг назад</text>
+          <rect class="box" x="392" y="40" width="240" height="44" rx="11"/>
+          <text class="t-m" x="512" y="68" text-anchor="middle">Настоящее</text>
+          <text class="t-s" x="646" y="68">FIRST</text>
+
+          <rect class="box" x="20" y="103" width="210" height="44" rx="11"/>
+          <text class="t" x="125" y="131" text-anchor="middle">Настоящее</text>
+          <path class="ln" d="M238 125 H 384" marker-end="url(#lah)"/>
+          <text class="t-lbl" x="252" y="116">на шаг назад</text>
+          <rect class="box" x="392" y="103" width="240" height="44" rx="11"/>
+          <text class="t-m" x="512" y="131" text-anchor="middle">Прошедшее</text>
+          <text class="t-s" x="646" y="131">SECOND</text>
+
+          <rect class="box" x="20" y="166" width="210" height="44" rx="11"/>
+          <text class="t" x="125" y="194" text-anchor="middle">Прошедшее</text>
+          <path class="ln" d="M238 188 H 384" marker-end="url(#lah)"/>
+          <text class="t-lbl" x="252" y="179">на шаг назад</text>
+          <rect class="box" x="392" y="166" width="240" height="44" rx="11"/>
+          <text class="t-m" x="512" y="194" text-anchor="middle">Предпрошедшее</text>
+          <text class="t-s" x="646" y="194">THIRD</text>
+
+          <path class="ln" style="stroke-dasharray:4 4" d="M125 84 V 103 M125 147 V 166"/>
+          <text class="t-lbl" x="20" y="238">Слева — время, о котором вы говорите. Справа — то, что физически стоит в части с if.</text>
+          <defs>
+            <marker id="lah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 z" fill="currentColor"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+      <figcaption>Три ступени одной лестницы. Нулевой тип в неё не входит: он про то, что верно всегда, поэтому обе половины остаются в настоящем.</figcaption>
+    </figure>
+
+    <div class="callout trap" style="margin-top:30px;max-width:66ch">
+      <h4>Сквозное правило: после if не ставят will</h4>
+      <p>
+        Ни <span class="mono">will</span>, ни <span class="mono">would</span> не заходят за <span class="mono">if</span> — никогда, ни в одном типе.
+        Их место во второй части предложения. Единственное исключение из «второй части» — перевёрнутые предложения
+        с инверсией, но там <span class="mono">if</span> вообще исчезает, а вперёд выходит не will, а
+        <span class="mono">were</span>, <span class="mono">had</span> или <span class="mono">should</span>.
+      </p>
+      <p>То же правило работает после <span class="mono">when, as soon as, until, before, after, in case, unless</span>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ МАРШРУТ ══════════════════ -->
+<main class="wrap">
+  <div class="roadmap" id="c-road"></div>
+</main>
+
+<!-- ══════════════════ ДУЭЛИ ══════════════════ -->
+<section class="sect" id="c-duels">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Разбор полётов</div>
+      <h2>Пять пар, в которых путаются все</h2>
+      <p>Ошибка в условных почти никогда не бывает «какой-то из пяти». Она бывает между двумя соседями — и чаще всего между вторым и третьим типом.</p>
+    </div>
+    <div class="duels" id="cDuels"></div>
+  </div>
+</section>
+
+<!-- ══════════════════ ТРЕНАЖЁР ══════════════════ -->
+<section class="sect" id="c-quiz">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Общая проверка</div>
+      <h2>Четырнадцать предложений на все типы сразу</h2>
+      <p>Вперемешку и без подсказок. После ответа появляется разбор: почему верный вариант верный и чем плох выбранный.</p>
+    </div>
+    <div class="drill z-present" id="cQuiz"></div>
+  </div>
+</section>
+
+<!-- ══════════════════ ШПАРГАЛКА ══════════════════ -->
+<section class="sect" id="c-sheet">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">На один экран</div>
+      <h2>Шпаргалка</h2>
+    </div>
+    <div class="sheet">
+      <table>
+        <thead>
+          <tr><th>Тип</th><th>Формула</th><th>Сигнал</th><th>Пример</th></tr>
+        </thead>
+        <tbody id="cSheetBody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<button class="totop" id="totop" aria-label="Вернуться в начало страницы">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 19V5M5 12l7-7 7 7"/>
+  </svg>
+</button>

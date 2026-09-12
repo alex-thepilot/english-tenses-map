@@ -3,29 +3,27 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Интерактивная методичка по всем 12 временам английского языка: роадмап из четырёх уровней, живые таймлайны, дуэли похожих времён и тренажёр.">
+<meta name="description" content="Интерактивная методичка по английской грамматике: все 12 времён и условные предложения. Роадмап, живые схемы, разбор похожих пар и 228 заданий с объяснением каждого ответа.">
 <meta name="color-scheme" content="dark light">
 <meta name="theme-color" content="#0A1213" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#ECF0EE" media="(prefers-color-scheme: light)">
 
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ru_RU">
-<meta property="og:title" content="Карта английских времён">
-<meta property="og:description" content="Времён не двенадцать — их 3 × 4. Роадмап по всем временам английского: таймлайны, разбор похожих пар и тренажёр.">
+<meta property="og:title" content="Карта английской грамматики">
+<meta property="og:description" content="Времён не двенадцать — их 3 × 4. Условие всегда отстаёт на шаг. Интерактивная методичка с заданиями и разбором каждого ответа.">
 <meta name="twitter:card" content="summary">
 
-<style>
-  /* базовый сброс */
-  body { margin: 0; }
-  img { max-width: 100%; }
-  [hidden] { display: none !important; }
-</style>
-
-<title>Карта английских времён</title>
+<title>Карта английской грамматики</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Golos+Text:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
 
+<style>
+  body { margin: 0; }
+  img { max-width: 100%; }
+  [hidden] { display: none !important; }
+</style>
 <style>
 /* ═══════════════ ТОКЕНЫ ═══════════════
    Тёмная тема — базовая (bare :root).
@@ -162,6 +160,7 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
 .mark span { font-family: var(--f-mono); font-size: .66rem; color: var(--text-mute); letter-spacing: .1em; }
 
 .dots { display: flex; gap: 14px; margin-left: auto; }
+.dots__wrap { margin-left: auto; display: flex; align-items: center; gap: 18px; }
 .dots__grp { display: flex; gap: 4px; }
 .dots a {
   width: 10px; height: 10px; border-radius: 50%;
@@ -183,7 +182,7 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
 }
 .tgl:hover { color: var(--text); border-color: var(--present); }
 .tgl svg { width: 15px; height: 15px; }
-@media (max-width: 940px) { .dots { display: none; } .prog { margin-left: auto; } }
+@media (max-width: 1120px) { .dots { display: none; } }
 
 /* ═══════════════ ГЕРОЙ ═══════════════ */
 .hero { padding: 76px 0 54px; position: relative; overflow: hidden; }
@@ -411,12 +410,29 @@ figcaption {
 .forms .p i { color: var(--ok); }
 .forms .n i { color: var(--bad); }
 
-.chips h4 { margin-bottom: 10px; }
-.chips ul { display: flex; flex-wrap: wrap; gap: 6px; }
-.chips li {
-  font-family: var(--f-mono); font-size: .74rem; padding: 4px 10px; border-radius: 7px;
-  background: var(--zone-soft); color: var(--zone); border: 1px solid transparent;
+.chips {
+  border: 1px solid var(--zone); border-radius: 16px; overflow: hidden;
+  background: var(--zone-soft);
 }
+.chips h4 {
+  margin: 0; padding: 11px 15px; color: var(--zone);
+  border-bottom: 1px dashed color-mix(in srgb, var(--zone) 40%, transparent);
+  display: flex; align-items: center; gap: 8px;
+}
+.chips h4::before {
+  content: ''; width: 7px; height: 7px; border-radius: 50%;
+  background: var(--zone); box-shadow: 0 0 0 3px var(--zone-soft);
+  flex-shrink: 0;
+}
+.chips ul { display: flex; flex-wrap: wrap; gap: 7px; padding: 14px 15px 15px; }
+.chips li {
+  font-family: var(--f-mono); font-weight: 500; font-size: .78rem;
+  padding: 6px 11px; border-radius: 8px; letter-spacing: .01em;
+  background: var(--surface); color: var(--zone);
+  border: 1px solid color-mix(in srgb, var(--zone) 45%, transparent);
+  transition: transform .16s, box-shadow .16s;
+}
+.chips li:hover { transform: translateY(-2px); box-shadow: 0 4px 12px -6px var(--zone); }
 
 /* ═══════════════ ДУЭЛИ ═══════════════ */
 .duels { display: flex; flex-direction: column; gap: 20px; margin-top: 34px; }
@@ -502,10 +518,6 @@ td.fm code { font-family: var(--f-mono); font-size: .82rem; color: var(--text); 
 td.mk { font-family: var(--f-mono); font-size: .78rem; color: var(--text-mute); }
 td.ex { color: var(--text-dim); }
 
-/* ═══════════════ ПОДВАЛ ═══════════════ */
-.foot { margin-top: 80px; border-top: 1px solid var(--line-soft); padding: 34px 0 60px; }
-.foot p { color: var(--text-mute); font-size: .86rem; max-width: 56ch; }
-.foot .mono { color: var(--text-dim); }
 
 /* ═══════════════ ТАЙМЛАЙН: ГРАФИКА ═══════════════ */
 .ax      { stroke: var(--line); stroke-width: 1.5; fill: none; }
@@ -533,28 +545,331 @@ td.ex { color: var(--text-dim); }
 @keyframes nowp   { 0%,100% { opacity: .55 } 50% { opacity: 1 } }
 @keyframes breathe{ 0%,100% { opacity: .10 } 50% { opacity: .26 } }
 @keyframes nudge  { 0%,100% { transform: translateY(0) } 50% { transform: translateY(2.5px) } }
+
+/* ═══════════════ ВКЛАДКИ ПРАВИЛ ═══════════════ */
+.tabs {
+  display: flex; gap: 2px; padding: 3px; border-radius: 12px;
+  background: var(--surface-2); border: 1px solid var(--line-soft);
+  position: relative; flex-shrink: 0;
+}
+.tabs button {
+  position: relative; z-index: 1;
+  font-family: var(--f-display); font-weight: 600; font-size: .76rem; letter-spacing: -.01em;
+  padding: 6px 14px; border-radius: 9px; color: var(--text-mute); white-space: nowrap;
+  transition: color .22s;
+}
+.tabs button:hover { color: var(--text-dim); }
+.tabs button[aria-selected="true"] { color: var(--bg); }
+.tabs__ink {
+  position: absolute; z-index: 0; top: 3px; bottom: 3px; left: 0; width: 0;
+  border-radius: 9px; background: var(--present);
+  transition: transform .34s cubic-bezier(.34,1.3,.5,1), width .34s cubic-bezier(.34,1.3,.5,1);
+}
+@media (prefers-reduced-motion: reduce) { .tabs__ink { transition: none; } }
+
+.tabpanel[hidden] { display: none !important; }
+@media (prefers-reduced-motion: no-preference) {
+  .tabpanel { animation: panelIn .4s cubic-bezier(.22,.9,.3,1) both; }
+}
+@keyframes panelIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+/* ═══════════════ ВЫПАДАЮЩЕЕ МЕНЮ РАЗДЕЛОВ ═══════════════ */
+.menu { position: relative; flex-shrink: 0; }
+.menu__btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: var(--f-mono); font-size: .7rem; letter-spacing: .05em;
+  padding: 7px 12px; border-radius: 10px; border: 1px solid var(--line);
+  color: var(--text-dim); transition: color .2s, border-color .2s, background .2s;
+}
+.menu__btn:hover, .menu__btn[aria-expanded="true"] { color: var(--present); border-color: var(--present); background: var(--present-soft); }
+.menu__btn svg { width: 10px; height: 10px; transition: transform .26s cubic-bezier(.34,1.3,.5,1); }
+.menu__btn[aria-expanded="true"] svg { transform: rotate(180deg); }
+
+.menu__pop {
+  position: absolute; top: calc(100% + 9px); right: 0; z-index: 90;
+  min-width: 268px; padding: 7px; border-radius: 15px;
+  background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow);
+  transform-origin: top right;
+}
+.menu__pop[hidden] { display: none !important; }
+@media (prefers-reduced-motion: no-preference) {
+  .menu__pop { animation: popIn .2s cubic-bezier(.22,1.2,.4,1) both; }
+}
+@keyframes popIn { from { opacity: 0; transform: scale(.94) translateY(-6px); } to { opacity: 1; transform: none; } }
+.menu__pop a {
+  display: flex; align-items: baseline; gap: 10px; text-decoration: none;
+  padding: 8px 11px; border-radius: 10px; color: var(--text-dim); font-size: .87rem;
+  transition: background .16s, color .16s;
+}
+.menu__pop a:hover, .menu__pop a:focus-visible { background: var(--surface-2); color: var(--text); }
+.menu__pop a i {
+  font-style: normal; font-family: var(--f-mono); font-size: .66rem;
+  color: var(--text-mute); min-width: 18px;
+}
+.menu__sep { height: 1px; background: var(--line-soft); margin: 6px 9px; }
+
+/* ═══════════════ ОГЛАВЛЕНИЕ В НАЧАЛЕ ВКЛАДКИ ═══════════════ */
+.toc { margin-top: 40px; }
+.toc__g {
+  margin-top: 18px; display: grid; gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(196px, 1fr));
+}
+.toc a {
+  display: flex; flex-direction: column; gap: 5px; text-decoration: none;
+  padding: 14px 15px; border-radius: 14px; border: 1px solid var(--line);
+  background: var(--surface); color: var(--text);
+  transition: transform .2s cubic-bezier(.34,1.2,.5,1), border-color .2s, box-shadow .2s;
+}
+.toc a:hover, .toc a:focus-visible {
+  transform: translateY(-3px); border-color: var(--zone);
+  box-shadow: 0 10px 24px -16px var(--zone);
+}
+.toc a b { font-family: var(--f-display); font-weight: 700; font-size: .88rem; letter-spacing: -.015em; }
+.toc a span { font-size: .8rem; color: var(--text-mute); line-height: 1.4; }
+.toc a i {
+  font-style: normal; font-family: var(--f-mono); font-size: .64rem; letter-spacing: .12em;
+  color: var(--zone); text-transform: uppercase;
+}
+
+/* ═══════════════ КНОПКА «НАВЕРХ» ═══════════════ */
+.totop {
+  position: fixed; right: 22px; bottom: 22px; z-index: 80;
+  width: 46px; height: 46px; border-radius: 14px;
+  display: grid; place-items: center;
+  background: var(--surface); color: var(--text-dim);
+  border: 1px solid var(--line); box-shadow: var(--shadow);
+  opacity: 0; visibility: hidden; transform: translateY(14px) scale(.9);
+  transition: opacity .28s, transform .28s cubic-bezier(.34,1.3,.5,1), visibility .28s, color .2s, border-color .2s;
+}
+.totop.on { opacity: 1; visibility: visible; transform: none; }
+.totop:hover { color: var(--present); border-color: var(--present); }
+.totop svg { width: 17px; height: 17px; }
+.totop::after {
+  content: 'в начало'; position: absolute; right: calc(100% + 10px); white-space: nowrap;
+  font-family: var(--f-mono); font-size: .68rem; color: var(--text-mute);
+  background: var(--surface); border: 1px solid var(--line); padding: 5px 9px; border-radius: 8px;
+  opacity: 0; transform: translateX(6px); transition: opacity .2s, transform .2s; pointer-events: none;
+}
+.totop:hover::after { opacity: 1; transform: none; }
+@media (max-width: 620px) { .totop { right: 14px; bottom: 14px; } .totop::after { display: none; } }
+
+/* ═══════════════ ЗАДАНИЯ ПОСЛЕ БЛОКА ═══════════════ */
+.drill {
+  margin-top: 34px; border: 1px solid var(--zone);
+  border-radius: 18px; overflow: hidden; background: var(--surface);
+}
+.drill__top {
+  padding: 13px 20px; display: flex; align-items: center; gap: 14px;
+  background: var(--zone-soft); border-bottom: 1px solid color-mix(in srgb, var(--zone) 30%, transparent);
+}
+.drill__top .eyebrow { color: var(--zone); flex-shrink: 0; }
+.drill__bar { flex: 1; height: 4px; border-radius: 3px; background: color-mix(in srgb, var(--zone) 22%, transparent); overflow: hidden; }
+.drill__bar i { display: block; height: 100%; width: 0; background: var(--zone); transition: width .4s cubic-bezier(.3,1,.4,1); }
+.drill__score {
+  font-family: var(--f-mono); font-size: .72rem; color: var(--zone);
+  font-variant-numeric: tabular-nums; flex-shrink: 0;
+}
+.drill__body { padding: 22px 20px 20px; }
+
+/* общая начинка тренажёра — и для станций, и для большого блока */
+.qz__q { font-size: clamp(1rem, 2.3vw, 1.22rem); font-weight: 500; line-height: 1.45; text-wrap: balance; }
+.qz__q u {
+  text-decoration: none; padding: 0 20px; margin: 0 2px;
+  border-bottom: 2px dashed var(--zone); color: var(--zone);
+}
+.qz__opts { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 18px; }
+.qz__opts button {
+  font-family: var(--f-mono); font-size: .86rem; padding: 10px 15px; border-radius: 11px;
+  border: 1px solid var(--line); background: var(--bg-2);
+  transition: border-color .18s, background .18s, color .18s, transform .18s;
+}
+.qz__opts button:hover:not(:disabled) { border-color: var(--zone); color: var(--zone); transform: translateY(-2px); }
+.qz__opts button:disabled { cursor: default; }
+.qz__opts button.right { border-color: var(--ok); background: var(--ok-soft); color: var(--ok); }
+.qz__opts button.wrong { border-color: var(--bad); background: var(--bad-soft); color: var(--bad); }
+@media (prefers-reduced-motion: no-preference) {
+  .qz__opts button.right { animation: pop .34s cubic-bezier(.34,1.5,.5,1); }
+  .qz__opts button.wrong { animation: shake .34s ease; }
+}
+@keyframes pop { 0% { transform: scale(1) } 45% { transform: scale(1.06) } 100% { transform: scale(1) } }
+@keyframes shake { 0%,100% { transform: translateX(0) } 25% { transform: translateX(-4px) } 75% { transform: translateX(4px) } }
+
+/* объяснения: почему верно и почему нет */
+.qz__fb { margin-top: 16px; display: flex; flex-direction: column; gap: 9px; }
+.qz__fb:empty { display: none; }
+.qz__row {
+  display: grid; grid-template-columns: auto 1fr; gap: 11px; align-items: baseline;
+  padding: 11px 14px; border-radius: 12px; font-size: .89rem; line-height: 1.5;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .qz__row { animation: fbIn .3s cubic-bezier(.22,.9,.3,1) both; }
+  .qz__row:nth-child(2) { animation-delay: .07s; }
+}
+@keyframes fbIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: none; } }
+.qz__row.good { background: var(--ok-soft); color: var(--text); }
+.qz__row.bad  { background: var(--bad-soft); color: var(--text); }
+.qz__row b {
+  font-family: var(--f-mono); font-size: .85rem; white-space: nowrap;
+}
+.qz__row.good b { color: var(--ok); }
+.qz__row.bad b { color: var(--bad); }
+.qz__nav { margin-top: 18px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.qz__done { font-size: .88rem; color: var(--text-dim); }
+.qz__done b { color: var(--text); }
+
+/* ═══════════════ СХЕМЫ УСЛОВНЫХ ═══════════════ */
+.cf { margin-top: 26px; border: 1px solid var(--line); border-radius: 16px; background: var(--bg-2); overflow: hidden; }
+.cf__in { padding: 8px 12px 0; overflow-x: auto; }
+.cf svg { display: block; width: 100%; min-width: 460px; height: auto; max-height: 230px; color: var(--text-dim); }
+.cf figcaption {
+  border: none; border-top: 1px solid var(--line-soft); margin: 6px 0 0;
+  padding: 11px 16px; font-size: .8rem; color: var(--text-dim); max-width: none;
+}
+.cf-box { fill: var(--surface); stroke: var(--line); stroke-width: 1.5; }
+.cf-pill { font-family: var(--f-mono); font-size: 10px; letter-spacing: .1em; fill: var(--zone); }
+.cf-lbl { font-family: var(--f-mono); font-size: 8.5px; letter-spacing: .13em; fill: var(--text-mute); }
+.cf-form { font-family: var(--f-mono); font-size: 13px; fill: var(--text); }
+.cf-step { font-family: var(--f-body); font-size: 11px; fill: var(--text-mute); }
+.cf-ex { font-family: var(--f-body); font-size: 12px; fill: var(--text-dim); font-style: italic; }
+.ln-z { fill: none; stroke-width: 1.6; }
+
+/* ═══════════════ ОПРЕДЕЛИТЕЛЬ ТИПА ═══════════════ */
+.det { margin-top: 34px; border: 1px solid var(--line); border-radius: 20px; background: var(--surface); overflow: hidden; }
+.det__top { padding: 14px 22px; border-bottom: 1px solid var(--line-soft); display: flex; align-items: center; gap: 12px; }
+.det__body { padding: 24px 22px; display: grid; grid-template-columns: 1fr minmax(240px, .8fr); gap: 26px; }
+@media (max-width: 800px) { .det__body { grid-template-columns: 1fr; gap: 20px; } }
+.det__q { font-size: 1.04rem; font-weight: 500; line-height: 1.45; text-wrap: balance; }
+.det__opts { display: flex; flex-direction: column; gap: 9px; margin-top: 16px; }
+.det__opts button {
+  text-align: left; padding: 13px 16px; border-radius: 13px;
+  border: 1px solid var(--line); background: var(--bg-2); font-size: .92rem;
+  transition: border-color .18s, background .18s, transform .18s;
+}
+.det__opts button:hover { border-color: var(--present); background: var(--present-soft); transform: translateX(4px); }
+.det__opts button i { font-style: normal; display: block; font-size: .8rem; color: var(--text-mute); margin-top: 3px; }
+.det__out {
+  border-radius: 16px; padding: 20px; background: var(--zone-soft);
+  border: 1px solid var(--zone); align-self: start;
+}
+.det__out .eyebrow { color: var(--zone); }
+.det__out h4 { font-family: var(--f-display); font-weight: 700; font-size: 1.15rem; letter-spacing: -.02em; margin-top: 7px; }
+.det__out code { display: block; font-family: var(--f-mono); font-size: .82rem; color: var(--zone); margin-top: 9px; }
+.det__out p { font-size: .88rem; color: var(--text-dim); margin-top: 10px; }
+.det__out a {
+  display: inline-block; margin-top: 13px; font-family: var(--f-mono); font-size: .74rem;
+  text-decoration: none; color: var(--zone); border: 1px solid var(--zone);
+  padding: 7px 12px; border-radius: 10px;
+}
+.det__out a:hover { background: var(--surface); }
+.det__crumbs { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.det__crumbs span {
+  font-family: var(--f-mono); font-size: .68rem; padding: 4px 9px; border-radius: 7px;
+  background: var(--surface-2); color: var(--text-mute);
+}
+
+/* ═══════════════ ЛЕСТНИЦА ШАГА НАЗАД ═══════════════ */
+.ladder { margin-top: 30px; display: grid; gap: 10px; }
+.ladder__row {
+  display: grid; grid-template-columns: minmax(120px, 1fr) auto minmax(140px, 1fr) minmax(108px, auto);
+  gap: 14px; align-items: center;
+  padding: 15px 18px; border-radius: 14px;
+  border: 1px solid var(--line); background: var(--surface);
+}
+.ladder__row b { font-family: var(--f-display); font-weight: 700; font-size: .92rem; letter-spacing: -.015em; }
+.ladder__row .arr { color: var(--zone); font-family: var(--f-mono); font-size: .9rem; }
+.ladder__row code { font-family: var(--f-mono); font-size: .84rem; color: var(--zone); }
+.ladder__row em {
+  font-style: normal; font-family: var(--f-mono); font-size: .66rem; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--text-mute); text-align: right;
+}
+@media (max-width: 700px) {
+  .ladder__row { grid-template-columns: 1fr auto; gap: 6px 12px; }
+  .ladder__row em { grid-column: 1 / -1; text-align: left; }
+}
+
+/* ═══════════════ МЕЛОЧИ ═══════════════ */
+.sect__head h2 .accent { color: var(--present); }
+.hero__sub .mono { color: var(--present); }
+.station { scroll-margin-top: 84px; }
+.sect { scroll-margin-top: 84px; }
+.level { scroll-margin-top: 70px; }
+
+/* зоны вкладки «Условные»: цвет кодирует реальность */
+.z-real   { --zone: var(--present); --zone-soft: var(--present-soft); }
+.z-unreal { --zone: var(--future);  --zone-soft: var(--future-soft); }
+.z-pastc  { --zone: var(--past);    --zone-soft: var(--past-soft); }
+
+/* ═══════════════ УЗКИЕ ЭКРАНЫ ═══════════════ */
+/* панель: на телефоне в строку не влезали вкладки, меню, прогресс и тема */
+@media (max-width: 760px) {
+  .topbar__in { gap: 10px; padding: 8px 14px; }
+  .mark span { display: none; }
+  .prog__bar { display: none; }
+  .dots__wrap { gap: 10px; }
+}
+@media (max-width: 560px) {
+  .mark { display: none; }
+  .tabs button { font-size: .72rem; padding: 6px 10px; }
+  .menu__btn { font-size: 0; gap: 0; padding: 8px 10px; letter-spacing: 0; }
+  .menu__btn svg { width: 12px; height: 12px; }
+  .menu__pop { min-width: 240px; right: -44px; }
+}
+
+/* маршрут: отступ под «спину» съедал пятую часть узкого экрана */
+@media (max-width: 760px) {
+  :root { --spine: 9px; }
+  .level, .station { padding-left: 34px; }
+  .level::before { top: 58px; }
+  .station::before { top: 50px; }
+}
+@media (max-width: 480px) {
+  .roadmap::before, .level::before, .station::before { display: none; }
+  .level, .station { padding-left: 0; }
+  .wrap { padding: 0 16px; }
+  .mark-btn { margin-left: 0; }
+  .drill__top, .drill__body { padding-left: 15px; padding-right: 15px; }
+}
 </style>
 </head>
 <body>
-
-<!-- ══════════════════ ПАНЕЛЬ ══════════════════ -->
 <nav class="topbar">
   <div class="topbar__in">
-    <div class="mark"><b>Карта времён</b><span>EN&nbsp;·&nbsp;12</span></div>
-    <div class="dots" id="dots" aria-label="Переход к времени"></div>
-    <div class="prog" title="Отмечено как изученное">
-      <div class="prog__bar"><div class="prog__fill" id="progFill"></div></div>
-      <span class="prog__n" id="progN">0/12</span>
+    <div class="mark"><b>Английский</b><span>ПРАВИЛА</span></div>
+
+    <div class="tabs" role="tablist" aria-label="Разделы грамматики">
+      <span class="tabs__ink" id="tabsInk"></span>
+      <button role="tab" data-tab="tenses" aria-selected="true" aria-controls="tab-tenses">Времена</button>
+      <button role="tab" data-tab="cond" aria-selected="false" aria-controls="tab-cond">Условные</button>
     </div>
-    <button class="tgl" id="tgl" aria-label="Переключить тему">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-        <circle cx="12" cy="12" r="4.2"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.5 1.5M17.6 17.6l1.5 1.5M19.1 4.9l-1.5 1.5M6.4 17.6l-1.5 1.5"/>
-      </svg>
-    </button>
+
+    <div class="dots__wrap">
+      <div class="dots" id="dots" aria-label="Переход к блоку"></div>
+
+      <div class="menu">
+        <button class="menu__btn" id="menuBtn" aria-expanded="false" aria-haspopup="true">
+          РАЗДЕЛЫ
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <path d="M2.5 4.5 L6 8 L9.5 4.5"/>
+          </svg>
+        </button>
+        <div class="menu__pop" id="menuPop" hidden role="menu"></div>
+      </div>
+
+      <div class="prog" title="Отмечено как изученное">
+        <div class="prog__bar"><div class="prog__fill" id="progFill"></div></div>
+        <span class="prog__n" id="progN">0/12</span>
+      </div>
+
+      <button class="tgl" id="tgl" aria-label="Переключить тему">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <circle cx="12" cy="12" r="4.2"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.5 1.5M17.6 17.6l1.5 1.5M19.1 4.9l-1.5 1.5M6.4 17.6l-1.5 1.5"/>
+        </svg>
+      </button>
+    </div>
   </div>
 </nav>
 
-<!-- ══════════════════ ГЕРОЙ ══════════════════ -->
+<div class="tabpanel" id="tab-tenses" role="tabpanel">
 <header class="hero">
   <div class="wrap">
     <div class="eyebrow">Методичка · все времена · одна система</div>
@@ -566,95 +881,32 @@ td.ex { color: var(--text-dim); }
     </p>
     <div class="hero__meta">
       <span class="pill">12 станций</span>
+      <span class="pill">120 заданий с разбором</span>
       <span class="pill">5 дуэлей похожих времён</span>
-      <span class="pill">тренажёр на 12 вопросов</span>
+      <span class="pill">24 вопроса в общей проверке</span>
       <span class="pill">шпаргалка одной таблицей</span>
     </div>
     <div class="legend" id="legend"></div>
   </div>
 </header>
 
-<!-- ══════════════════ КАК УСТРОЕНО ══════════════════ -->
-<section class="sect" id="system">
+<section class="sect toc" id="t-toc">
   <div class="wrap">
-    <div class="sect__head">
-      <div class="eyebrow">Уровень 0 · механика</div>
-      <h2>Время не выбирают целиком — его собирают из двух деталей</h2>
-      <p>
-        Первая деталь отвечает на вопрос «когда» и решает, какой будет <b>вспомогательный глагол</b>.
-        Вторая отвечает на вопрос «как» и решает, в какой <b>форме встанет смысловой глагол</b>.
-        Дальше — просто арифметика.
-      </p>
+    <div class="sect__head" style="margin-bottom:0">
+      <div class="eyebrow">Оглавление</div>
+      <h2>С чего начать</h2>
+      <p>Можно идти маршрутом сверху вниз, а можно прыгнуть сразу в нужный блок — страница при этом листается как обычно.</p>
     </div>
-
-    <figure class="dia">
-      <div>
-        <svg viewBox="0 0 700 250" role="img" aria-label="Схема сборки времени: «когда» задаёт вспомогательный глагол had, «как» задаёт форму been плюс V-ing, вместе получается had been working — Past Perfect Continuous">
-          <!-- строка 1: КОГДА -->
-          <text class="t-s" x="18" y="34">1 · КОГДА</text>
-          <rect class="box" x="16" y="44" width="172" height="46" rx="11"/>
-          <text class="t" x="34" y="73">Past — прошлое</text>
-          <path class="ln" d="M196 67 H 322" marker-end="url(#ah)"/>
-          <text class="t-lbl" x="200" y="56">задаёт вспомогательный глагол</text>
-          <rect class="box-hi" x="332" y="44" width="92" height="46" rx="11"/>
-          <text class="t-m" x="378" y="73" text-anchor="middle" style="fill:var(--present)">had</text>
-
-          <!-- строка 2: КАК -->
-          <text class="t-s" x="18" y="166">2 · КАК</text>
-          <rect class="box" x="16" y="176" width="172" height="46" rx="11"/>
-          <text class="t" x="34" y="205">Perfect Continuous</text>
-          <path class="ln" d="M196 199 H 322" marker-end="url(#ah)"/>
-          <text class="t-lbl" x="200" y="188">задаёт форму смыслового глагола</text>
-          <rect class="box-hi" x="332" y="176" width="132" height="46" rx="11"/>
-          <text class="t-m" x="398" y="205" text-anchor="middle" style="fill:var(--present)">been + V-ing</text>
-
-          <!-- схождение -->
-          <path class="ln" d="M424 67 C 470 67 470 116 508 116" marker-end="url(#ah)"/>
-          <path class="ln" d="M464 199 C 486 199 486 148 508 148" marker-end="url(#ah)"/>
-
-          <rect class="box" x="518" y="86" width="166" height="92" rx="14"/>
-          <text class="t-m" x="601" y="124" text-anchor="middle" style="font-size:15px">had been working</text>
-          <text class="t-s" x="601" y="148" text-anchor="middle">PAST PERFECT CONT.</text>
-          <defs>
-            <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-              <path d="M0 0 L10 5 L0 10 z" fill="currentColor"/>
-            </marker>
-          </defs>
-        </svg>
-      </div>
-      <figcaption>Одна и та же механика работает для всех двенадцати клеток: меняете «когда» — меняется только вспомогательный глагол; меняете «как» — меняется только форма смыслового.</figcaption>
-    </figure>
-
-    <div class="matrix">
-      <div class="matrix__g" id="matrix"></div>
-    </div>
-    <div class="mxout z-present" id="mxout"></div>
+    <div class="toc__g" id="tToc"></div>
   </div>
 </section>
 
-<!-- ══════════════════ МАРШРУТ ══════════════════ -->
-<main class="wrap">
-  <div class="roadmap" id="roadmap"></div>
-</main>
-
-<!-- ══════════════════ ДУЭЛИ ══════════════════ -->
-<section class="sect" id="duels">
-  <div class="wrap">
-    <div class="sect__head">
-      <div class="eyebrow">Разбор полётов</div>
-      <h2>Пять пар, в которых путаются все</h2>
-      <p>Ошибки почти никогда не бывают «какое-то из двенадцати». Они бывают между двумя соседями. Вот эти соседи и признак, по которому их разводят.</p>
-    </div>
-    <div class="duels" id="duels"></div>
-  </div>
-</section>
-
-<!-- ══════════════════ АЛГОРИТМ ══════════════════ -->
-<section class="sect" id="algo">
+<section class="sect" id="t-algo">
   <div class="wrap">
     <div class="sect__head">
       <div class="eyebrow">Что спрашивать у себя</div>
       <h2>Три вопроса вместо двенадцати правил</h2>
+      <p>Это вся навигация по теме, сжатая до трёх шагов. Дальше — разбор каждой клетки по отдельности; сюда удобно возвращаться, когда нужно быстро выбрать время.</p>
     </div>
 
     <ol class="steps">
@@ -717,35 +969,90 @@ td.ex { color: var(--text-dim); }
   </div>
 </section>
 
-<!-- ══════════════════ ТРЕНАЖЁР ══════════════════ -->
-<section class="sect" id="quiz">
+<section class="sect" id="t-system">
   <div class="wrap">
     <div class="sect__head">
-      <div class="eyebrow">Проверка</div>
-      <h2>Двенадцать предложений — по одному на каждое время</h2>
-      <p>Без подсчёта баллов на оценку: смысл в объяснении, которое появляется после ответа.</p>
+      <div class="eyebrow">Уровень 0 · механика</div>
+      <h2>Время не выбирают целиком — его собирают из двух деталей</h2>
+      <p>
+        Первая деталь отвечает на вопрос «когда» и решает, какой будет <b>вспомогательный глагол</b>.
+        Вторая отвечает на вопрос «как» и решает, в какой <b>форме встанет смысловой глагол</b>.
+        Дальше — просто арифметика.
+      </p>
     </div>
-    <div class="quiz">
-      <div class="quiz__top">
-        <span class="eyebrow" id="qNum">Вопрос 1 / 12</span>
-        <div class="quiz__bar"><i id="qBar"></i></div>
-        <span class="quiz__score" id="qScore">0 верно</span>
+
+    <figure class="dia">
+      <div>
+        <svg viewBox="0 0 700 250" role="img" aria-label="Схема сборки времени: «когда» задаёт вспомогательный глагол had, «как» задаёт форму been плюс V-ing, вместе получается had been working — Past Perfect Continuous">
+          <!-- строка 1: КОГДА -->
+          <text class="t-s" x="18" y="34">1 · КОГДА</text>
+          <rect class="box" x="16" y="44" width="172" height="46" rx="11"/>
+          <text class="t" x="34" y="73">Past — прошлое</text>
+          <path class="ln" d="M196 67 H 322" marker-end="url(#ah)"/>
+          <text class="t-lbl" x="200" y="56">задаёт вспомогательный глагол</text>
+          <rect class="box-hi" x="332" y="44" width="92" height="46" rx="11"/>
+          <text class="t-m" x="378" y="73" text-anchor="middle" style="fill:var(--present)">had</text>
+
+          <!-- строка 2: КАК -->
+          <text class="t-s" x="18" y="166">2 · КАК</text>
+          <rect class="box" x="16" y="176" width="172" height="46" rx="11"/>
+          <text class="t" x="34" y="205">Perfect Continuous</text>
+          <path class="ln" d="M196 199 H 322" marker-end="url(#ah)"/>
+          <text class="t-lbl" x="200" y="188">задаёт форму смыслового глагола</text>
+          <rect class="box-hi" x="332" y="176" width="132" height="46" rx="11"/>
+          <text class="t-m" x="398" y="205" text-anchor="middle" style="fill:var(--present)">been + V-ing</text>
+
+          <!-- схождение -->
+          <path class="ln" d="M424 67 C 470 67 470 116 508 116" marker-end="url(#ah)"/>
+          <path class="ln" d="M464 199 C 486 199 486 148 508 148" marker-end="url(#ah)"/>
+
+          <rect class="box" x="518" y="86" width="166" height="92" rx="14"/>
+          <text class="t-m" x="601" y="124" text-anchor="middle" style="font-size:15px">had been working</text>
+          <text class="t-s" x="601" y="148" text-anchor="middle">PAST PERFECT CONT.</text>
+          <defs>
+            <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 z" fill="currentColor"/>
+            </marker>
+          </defs>
+        </svg>
       </div>
-      <div class="quiz__body">
-        <div class="quiz__q" id="qText"></div>
-        <div class="quiz__opts" id="qOpts"></div>
-        <p class="quiz__fb" id="qFb"></p>
-        <div class="quiz__nav">
-          <button class="btn" id="qNext" hidden>Дальше →</button>
-          <button class="btn ghost" id="qAgain" hidden>Пройти заново</button>
-        </div>
-      </div>
+      <figcaption>Одна и та же механика работает для всех двенадцати клеток: меняете «когда» — меняется только вспомогательный глагол; меняете «как» — меняется только форма смыслового.</figcaption>
+    </figure>
+
+    <div class="matrix">
+      <div class="matrix__g" id="matrix"></div>
     </div>
+    <div class="mxout z-present" id="mxout"></div>
   </div>
 </section>
 
-<!-- ══════════════════ ШПАРГАЛКА ══════════════════ -->
-<section class="sect" id="sheet">
+<main class="wrap" id="t-roadwrap">
+  <div class="roadmap" id="t-road"></div>
+</main>
+
+<section class="sect" id="t-duels">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Разбор полётов</div>
+      <h2>Пять пар, в которых путаются все</h2>
+      <p>Ошибки почти никогда не бывают «какое-то из двенадцати». Они бывают между двумя соседями. Вот эти соседи и признак, по которому их разводят.</p>
+    </div>
+    <div class="duels" id="duels"></div>
+  </div>
+</section>
+
+<section class="sect" id="t-quiz">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Общая проверка</div>
+      <h2>Двадцать четыре предложения — по два на каждое время</h2>
+      <p>Вперемешку и без подсказок о том, какое время проверяется. После ответа появляется разбор: почему верный вариант верный и чем плох выбранный.</p>
+    </div>
+    <div class="drill z-present" id="tQuiz"></div>
+  </div>
+</section>
+
+<section class="sect" id="t-sheet">
   <div class="wrap">
     <div class="sect__head">
       <div class="eyebrow">На один экран</div>
@@ -759,17 +1066,246 @@ td.ex { color: var(--text-dim); }
         <tbody id="sheetBody"></tbody>
       </table>
     </div>
+  </div>
+</section>
+</div>
 
-    <footer class="foot">
-      <p class="mono">Карта английских времён</p>
-      <p style="margin-top:8px">
-        Материал для занятий: можно идти по маршруту подряд, а можно открывать станцию под конкретную ошибку ученика.
-        Отметки «изучено» хранятся в браузере ученика и никуда не отправляются.
-      </p>
-    </footer>
+<div class="tabpanel" id="tab-cond" role="tabpanel" hidden>
+<!-- ══════════════════ ГЕРОЙ · УСЛОВНЫЕ ══════════════════ -->
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Правило второе · условные предложения · if</div>
+    <h1>Условие всегда<br>отстаёт на <span class="tri">один шаг</span>.</h1>
+    <p class="hero__sub">
+      Типов условных предложений формально пять, но запоминать пять формул не нужно.
+      Достаточно двух вещей: <b>посчитать «бы»</b> в русском переводе и знать, что
+      <b>часть с if всегда стоит на одно время раньше</b>, чем то, о чём вы говорите.
+      Говорим про будущее — в условии настоящее. Про настоящее — прошедшее. Про прошедшее — предпрошедшее.
+    </p>
+    <div class="hero__meta">
+      <span class="pill">7 станций</span>
+      <span class="pill">определитель типа</span>
+      <span class="pill">5 дуэлей</span>
+      <span class="pill">84 задания с разбором</span>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════════════ ОГЛАВЛЕНИЕ ══════════════════ -->
+<section class="sect toc" id="c-toc">
+  <div class="wrap">
+    <div class="sect__head" style="margin-bottom:0">
+      <div class="eyebrow">Оглавление</div>
+      <h2>С чего начать</h2>
+      <p>Можно идти маршрутом сверху вниз, а можно прыгнуть сразу в нужный блок — страница при этом листается как обычно.</p>
+    </div>
+    <div class="toc__g" id="cToc"></div>
   </div>
 </section>
 
+<!-- ══════════════════ ОПРЕДЕЛИТЕЛЬ ══════════════════ -->
+<section class="sect" id="c-algo">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Что спрашивать у себя</div>
+      <h2>Два вопроса вместо пяти правил</h2>
+      <p>
+        Сначала считаем «бы» в русском переводе, потом уточняем время. Больше ничего знать не нужно —
+        этих двух шагов хватает, чтобы выбрать тип в любом предложении.
+      </p>
+    </div>
+
+    <ol class="steps">
+      <li>
+        <b>ВОПРОС 01</b>
+        <h4>Сколько «бы» в русском переводе?</h4>
+        <p>Ни одного — это <span class="mono">Zero</span> или <span class="mono">First</span>, реальное условие.
+           Два, как в «якобы да кабы»: «если <b>бы</b> сделал, то <b>бы</b> вышло» — это <span class="mono">Second</span> или <span class="mono">Third</span>.</p>
+      </li>
+      <li>
+        <b>ВОПРОС 02</b>
+        <h4>Если «бы» два — про какое это время?</h4>
+        <p>Про сейчас, и теоретически ещё можно что-то изменить — <span class="mono">Second</span>.
+           Про тогда, и поезд уже ушёл — <span class="mono">Third</span>. По-русски обе фразы звучат одинаково, поэтому решает контекст.</p>
+      </li>
+      <li>
+        <b>ПРОВЕРКА</b>
+        <h4>Половины из разных времён?</h4>
+        <p>Посмотрите на каждую часть отдельно. Условие в прошлом, а результат сегодняшний (часто со словом
+           <span class="mono">now</span>) — это <span class="mono">Mixed</span>, смешанный тип.</p>
+      </li>
+    </ol>
+
+    <div class="det z-present" id="detector">
+      <div class="det__top">
+        <span class="eyebrow">Определитель типа</span>
+        <span class="det__crumbs" id="detCrumbs"></span>
+      </div>
+      <div class="det__body">
+        <div>
+          <div class="det__q" id="detQ"></div>
+          <div class="det__opts" id="detOpts"></div>
+        </div>
+        <div class="det__out" id="detOut"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ ЛЕСТНИЦА ══════════════════ -->
+<section class="sect" id="c-system">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Механика · один шаг назад</div>
+      <h2>Часть с <span class="accent">if</span> всегда на время раньше результата</h2>
+      <p>
+        Это главное наблюдение всей темы. Вы не запоминаете пять отдельных формул — вы запоминаете
+        одно движение: берёте время, о котором говорите, и <b>опускаете условие на ступень ниже</b>.
+        Дальше остаётся только подставить нужный вспомогательный глагол.
+      </p>
+    </div>
+
+    <div class="ladder">
+      <div class="ladder__row z-real">
+        <b>Говорим про будущее</b>
+        <span class="arr">опускаем&nbsp;↓</span>
+        <code>if + Present Simple</code>
+        <em>First</em>
+      </div>
+      <div class="ladder__row z-unreal">
+        <b>Говорим про настоящее</b>
+        <span class="arr">опускаем&nbsp;↓</span>
+        <code>if + Past Simple</code>
+        <em>Second</em>
+      </div>
+      <div class="ladder__row z-pastc">
+        <b>Говорим про прошедшее</b>
+        <span class="arr">опускаем&nbsp;↓</span>
+        <code>if + Past Perfect</code>
+        <em>Third</em>
+      </div>
+    </div>
+
+    <figure class="dia">
+      <div>
+        <svg viewBox="0 0 700 250" role="img" aria-label="Лестница: о чём говорим и в каком времени стоит часть с if — будущее опускается до настоящего, настоящее до прошедшего, прошедшее до предпрошедшего">
+          <text class="t-s" x="20" y="26">О ЧЁМ ГОВОРИМ</text>
+          <text class="t-s" x="392" y="26">ЧТО СТАВИМ ПОСЛЕ IF</text>
+
+          <rect class="box" x="20" y="40" width="210" height="44" rx="11"/>
+          <text class="t" x="125" y="68" text-anchor="middle">Будущее</text>
+          <path class="ln" d="M238 62 H 384" marker-end="url(#lah)"/>
+          <text class="t-lbl" x="252" y="53">на шаг назад</text>
+          <rect class="box" x="392" y="40" width="240" height="44" rx="11"/>
+          <text class="t-m" x="512" y="68" text-anchor="middle">Настоящее</text>
+          <text class="t-s" x="646" y="68">FIRST</text>
+
+          <rect class="box" x="20" y="103" width="210" height="44" rx="11"/>
+          <text class="t" x="125" y="131" text-anchor="middle">Настоящее</text>
+          <path class="ln" d="M238 125 H 384" marker-end="url(#lah)"/>
+          <text class="t-lbl" x="252" y="116">на шаг назад</text>
+          <rect class="box" x="392" y="103" width="240" height="44" rx="11"/>
+          <text class="t-m" x="512" y="131" text-anchor="middle">Прошедшее</text>
+          <text class="t-s" x="646" y="131">SECOND</text>
+
+          <rect class="box" x="20" y="166" width="210" height="44" rx="11"/>
+          <text class="t" x="125" y="194" text-anchor="middle">Прошедшее</text>
+          <path class="ln" d="M238 188 H 384" marker-end="url(#lah)"/>
+          <text class="t-lbl" x="252" y="179">на шаг назад</text>
+          <rect class="box" x="392" y="166" width="240" height="44" rx="11"/>
+          <text class="t-m" x="512" y="194" text-anchor="middle">Предпрошедшее</text>
+          <text class="t-s" x="646" y="194">THIRD</text>
+
+          <path class="ln" style="stroke-dasharray:4 4" d="M125 84 V 103 M125 147 V 166"/>
+          <text class="t-lbl" x="20" y="238">Слева — время, о котором вы говорите. Справа — то, что физически стоит в части с if.</text>
+          <defs>
+            <marker id="lah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 z" fill="currentColor"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+      <figcaption>Три ступени одной лестницы. Нулевой тип в неё не входит: он про то, что верно всегда, поэтому обе половины остаются в настоящем.</figcaption>
+    </figure>
+
+    <div class="callout trap" style="margin-top:30px;max-width:66ch">
+      <h4>Сквозное правило: после if не ставят will</h4>
+      <p>
+        Ни <span class="mono">will</span>, ни <span class="mono">would</span> не заходят за <span class="mono">if</span> — никогда, ни в одном типе.
+        Их место во второй части предложения. Единственное исключение из «второй части» — перевёрнутые предложения
+        с инверсией, но там <span class="mono">if</span> вообще исчезает, а вперёд выходит не will, а
+        <span class="mono">were</span>, <span class="mono">had</span> или <span class="mono">should</span>.
+      </p>
+      <p>То же правило работает после <span class="mono">when, as soon as, until, before, after, in case, unless</span>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ МАРШРУТ ══════════════════ -->
+<main class="wrap">
+  <div class="roadmap" id="c-road"></div>
+</main>
+
+<!-- ══════════════════ ДУЭЛИ ══════════════════ -->
+<section class="sect" id="c-duels">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Разбор полётов</div>
+      <h2>Пять пар, в которых путаются все</h2>
+      <p>Ошибка в условных почти никогда не бывает «какой-то из пяти». Она бывает между двумя соседями — и чаще всего между вторым и третьим типом.</p>
+    </div>
+    <div class="duels" id="cDuels"></div>
+  </div>
+</section>
+
+<!-- ══════════════════ ТРЕНАЖЁР ══════════════════ -->
+<section class="sect" id="c-quiz">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Общая проверка</div>
+      <h2>Четырнадцать предложений на все типы сразу</h2>
+      <p>Вперемешку и без подсказок. После ответа появляется разбор: почему верный вариант верный и чем плох выбранный.</p>
+    </div>
+    <div class="drill z-present" id="cQuiz"></div>
+  </div>
+</section>
+
+<!-- ══════════════════ ШПАРГАЛКА ══════════════════ -->
+<section class="sect" id="c-sheet">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">На один экран</div>
+      <h2>Шпаргалка</h2>
+    </div>
+    <div class="sheet">
+      <table>
+        <thead>
+          <tr><th>Тип</th><th>Формула</th><th>Сигнал</th><th>Пример</th></tr>
+        </thead>
+        <tbody id="cSheetBody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<button class="totop" id="totop" aria-label="Вернуться в начало страницы">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 19V5M5 12l7-7 7 7"/>
+  </svg>
+</button>
+<script>
+/* ═══════════════════════════════════════════════════════════
+   ХЕЛПЕР ДЛЯ ЗАДАНИЙ
+   Q('предложение с ___', ['+верный', 'почему верно'], ['неверный', 'почему нет'], ...)
+   Плюс в начале варианта помечает правильный ответ.
+   ═══════════════════════════════════════════════════════════ */
+const Q = (s, ...opts) => ({
+  s,
+  o: opts.map(([t, w]) => ({ t: t[0] === '+' ? t.slice(1) : t, ok: t[0] === '+', w }))
+});
+</script>
 <script>
 /* ═══════════════════════════════════════════════════════════
    ГРАФИКА ТАЙМЛАЙНА
@@ -892,10 +1428,8 @@ const DRAW = {
 function timeline(id, uid) {
   return `<svg viewBox="0 0 ${AX.W} ${AX.H}" role="img" aria-label="Схема ${id} на оси времени">${DRAW[id](uid || id)}</svg>`;
 }
-
-/* ═══════════════════════════════════════════════════════════
-   ДАННЫЕ: двенадцать станций
-   ═══════════════════════════════════════════════════════════ */
+</script>
+<script>
 const ASPECTS = [
   { key: 'simple',      name: 'Simple',             core: 'V / V2',            short: 'факт' },
   { key: 'continuous',  name: 'Continuous',         core: 'be + V-ing',        short: 'процесс' },
@@ -1215,132 +1749,13 @@ const LEG = [
   { z: 'present', t: 'Perfect', c: 'have + V3', p: 'Результат к моменту. Дуга.', d: id => `<line class="ax" x1="14" y1="34" x2="146" y2="34"/><circle class="m-ghost" cx="42" cy="34" r="6" style="stroke:var(--zone)"/><path class="m-arc" style="stroke:var(--zone)" d="M 42 22 Q 81 -2 118 16"/><polygon class="m-head" style="fill:var(--zone)" points="113.5,14 122,19 114,26"/><circle class="m-dot" cx="120" cy="34" r="7.5" style="fill:var(--zone)"/>` },
   { z: 'present', t: 'Perfect Continuous', c: 'have been + V-ing', p: 'Процесс и его счётчик.', d: id => `<line class="ax" x1="14" y1="34" x2="146" y2="34"/><defs><clipPath id="lg-${id}"><rect x="30" y="18" width="90" height="32"/></clipPath></defs><g clip-path="url(#lg-${id})"><path class="m-wave flow" style="stroke:var(--zone)" d="${wavePath(6, 146, 34)}"/></g><path class="m-span" style="stroke:var(--zone)" d="M 30 46 v 6 H 120 v -6"/>` }
 ];
-
-document.getElementById('legend').innerHTML = LEG.map((l, i) => `
-  <div class="legend__c z-${l.z}">
-    <svg viewBox="0 0 160 62" role="img" aria-label="Графический знак аспекта ${l.t}">${l.d(i)}</svg>
-    <h4>${l.t}</h4>
-    <span class="mono">${l.c}</span>
-    <p>${l.p}</p>
-  </div>`).join('');
-
-/* ═══════════════ МАТРИЦА-КОНСТРУКТОР ═══════════════ */
+</script>
+<script>
 const ZONES = [
   { key: 'past', label: 'Past · прошлое' },
   { key: 'present', label: 'Present · настоящее' },
   { key: 'future', label: 'Future · будущее' }
 ];
-const byCell = (z, a) => T.find(t => t.zone === z && t.aspect === a);
-
-const mx = document.getElementById('matrix');
-let mxHTML = '<div></div>' + ZONES.map(z => `<div class="mx-h z-${z.key}">${z.label}</div>`).join('');
-ASPECTS.forEach(a => {
-  mxHTML += `<div class="mx-r"><b>${a.name}</b><span>${a.core}</span></div>`;
-  ZONES.forEach(z => {
-    const t = byCell(z.key, a.key);
-    mxHTML += `<button class="mx-c z-${z.key}" data-id="${t.id}" aria-pressed="false">
-      <b>${t.name}</b><i>${t.core}</i><em>${t.thesis}</em></button>`;
-  });
-});
-mx.innerHTML = mxHTML;
-
-/* разбор формулы на детали для панели-конструктора */
-function parts(t) {
-  const aux = { past: { simple: 'did', continuous: 'was / were', perfect: 'had', perfectcont: 'had been' },
-                present: { simple: 'do / does', continuous: 'am / is / are', perfect: 'have / has', perfectcont: 'have / has been' },
-                future: { simple: 'will', continuous: 'will be', perfect: 'will have', perfectcont: 'will have been' } };
-  const form = { simple: 'V', continuous: 'V-ing', perfect: 'V3', perfectcont: 'V-ing' };
-  return [aux[t.zone][t.aspect], form[t.aspect]];
-}
-
-const mxout = document.getElementById('mxout');
-function showCell(id) {
-  const t = T.find(x => x.id === id);
-  const [aux, form] = parts(t);
-  mxout.className = 'mxout z-' + t.zone;
-  mxout.innerHTML = `
-    <div class="mxout__l">
-      <div class="eyebrow">${ZONES.find(z => z.key === t.zone).label.split(' · ')[1]} × ${ASPECTS.find(a => a.key === t.aspect).short}</div>
-      <h3>${t.name}</h3>
-      <p>${t.thesis}. ${t.lead.replace(/<\/?b>/g, '')}</p>
-      <div class="ex">${t.ex[0].en}<i>${t.ex[0].ru}</i></div>
-    </div>
-    <div class="build">
-      <span class="aux">${aux}</span><span class="plus">+</span><span>${form}</span>
-      <a href="#${t.id}">Разобрать →</a>
-    </div>`;
-  mx.querySelectorAll('.mx-c').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.id === id)));
-}
-mx.addEventListener('click', e => {
-  const b = e.target.closest('.mx-c');
-  if (b) showCell(b.dataset.id);
-});
-showCell('present-perfect');
-
-/* ═══════════════ СТАНЦИИ МАРШРУТА ═══════════════ */
-function stationHTML(t) {
-  const blocks = t.blocks.map(b => `
-    <div class="blk callout ${b.kind === 'trap' ? 'trap' : b.kind === 'key' ? 'key' : ''}"
-         ${b.kind === 'plain' ? 'style="border-left-color:var(--line)"' : ''}>
-      <h4>${b.h}</h4><p>${b.p}</p>
-    </div>`).join('');
-
-  const ex = t.ex.map(e => `
-    <li><span class="en">${e.en}</span><span class="ru">${e.ru}</span>${e.nb ? `<span class="nb">${e.nb}</span>` : ''}</li>`).join('');
-
-  return `
-  <article class="station z-${t.zone}" id="${t.id}">
-    <div class="st__top">
-      <div>
-        <div class="eyebrow"><span class="st__idx">${String(t.idx).padStart(2, '0')}</span> · ${ASPECTS.find(a => a.key === t.aspect).name.toUpperCase()}</div>
-        <h3>${t.name}</h3>
-        <div class="mono" style="color:var(--text-mute);font-size:.85rem;margin-top:8px">${t.core}</div>
-      </div>
-      <button class="mark-btn" data-mark="${t.id}">изучено</button>
-    </div>
-
-    <p class="st__thesis">«${t.thesis}»</p>
-
-    <figure class="tl">
-      <div class="tl__in">${timeline(t.id)}</div>
-      <figcaption>${t.tlCap}</figcaption>
-    </figure>
-
-    <div class="st__grid">
-      <div class="prose">
-        <p class="lead">${t.lead}</p>
-        ${blocks}
-        <div class="blk">
-          <h4>Как это звучит</h4>
-          <ul class="ex-list">${ex}</ul>
-        </div>
-      </div>
-      <aside class="side">
-        <div class="forms">
-          <div class="p"><i>+</i><code>${t.forms.p}</code></div>
-          <div class="n"><i>−</i><code>${t.forms.n}</code></div>
-          <div class="q"><i>?</i><code>${t.forms.q}</code></div>
-        </div>
-        <div class="chips">
-          <h4 class="eyebrow">Слова-маркеры</h4>
-          <ul>${t.markers.map(m => `<li>${m}</li>`).join('')}</ul>
-        </div>
-      </aside>
-    </div>
-  </article>`;
-}
-
-const rm = document.getElementById('roadmap');
-rm.innerHTML = LEVELS.map(L => `
-  <section class="level">
-    <div class="level__n">Уровень ${L.n} · ${L.ru}</div>
-    <h2>${L.title} <code>${L.code}</code></h2>
-    <p>${L.txt}</p>
-  </section>
-  ${T.filter(t => t.level === L.n).map(stationHTML).join('')}
-`).join('');
-
-/* ═══════════════ ДУЭЛИ ═══════════════ */
 const DUELS = [
   {
     q: 'Present Simple или Present Continuous?',
@@ -1373,99 +1788,1564 @@ const DUELS = [
     r: 'Длинное — Continuous, короткое — Simple. После while обычно длинное, после when — короткое.'
   }
 ];
+</script>
+<script>
+/* ═══════════════════════════════════════════════════════════
+   ЗАДАНИЯ ПО ВРЕМЕНАМ · часть 1 (уровни 1–2)
+   ═══════════════════════════════════════════════════════════ */
+const DRILL_A = {
 
-document.getElementById('duels').innerHTML = DUELS.map((d, i) => `
-  <div class="duel">
-    <div class="duel__q">${d.q}</div>
-    <div class="duel__b">
-      ${[d.a, d.b].map((s, k) => `
-        <div class="duel__s z-${s.z}">
-          <div class="eyebrow">${s.n}</div>
-          ${s.tl ? `<div class="tlbox">${timeline(s.tl, 'd' + i + k)}</div>` : ''}
-          <p class="en">${s.en}</p>
-          <p class="ru">${s.ru}</p>
-          <p class="why">${s.why}</p>
-        </div>`).join('')}
-    </div>
-    <div class="duel__r"><b>Признак</b><span>${d.r}</span></div>
-  </div>`).join('');
+'present-simple': [
+  Q('My sister ___ in a hospital.',
+    ['+works', 'Профессия — постоянное свойство, а не текущий момент. И sister = «она», значит глагол забирает -s.'],
+    ['work', 'Без -s глагол идёт только с I / you / we / they. Подлежащее здесь одно — sister.'],
+    ['is working', 'Это «занята прямо сейчас» или «временно подрабатывает». Про профессию так не говорят.']),
+  Q('The sun ___ in the east.',
+    ['+rises', 'Факт мира, верный всегда. The sun — «оно», поэтому -s.'],
+    ['rise', 'Потерялась -s: подлежащее одно, значит буква уходит глаголу.'],
+    ['is rising', 'Так сказал бы человек, который смотрит на горизонт прямо сейчас. А это закон природы.']),
+  Q('___ she speak French?',
+    ['+Does', 'Вопрос в Present Simple строится через do / does, а для she — только does.'],
+    ['Do', 'Do идёт с I / you / we / they. Для she нужна форма does.'],
+    ['Is', 'После is обязателен -ing: Is she speaking? Но это был бы вопрос про текущую секунду.']),
+  Q('We ___ TV in the morning.',
+    ['+don\'t watch', 'Отрицание привычки: для we — don\'t, а глагол остаётся в начальной форме.'],
+    ['doesn\'t watch', 'Doesn\'t сочетается только с he / she / it. С we нужен don\'t.'],
+    ['don\'t watching', 'После don\'t глагол всегда голый. Окончанию -ing тут взяться неоткуда.']),
+  Q('The train ___ at 6:45 every morning.',
+    ['+leaves', 'Расписание — это всегда Present Simple, даже когда речь про завтрашний поезд.'],
+    ['is leaving', 'Так говорит человек, стоящий на перроне: «отходит прямо сейчас». А это строка расписания.'],
+    ['leave', 'The train — одно подлежащее, поэтому -s обязательна.']),
+  Q('He ___ coffee — he prefers tea.',
+    ['+doesn\'t drink', 'Постоянная привычка в отрицании. He → doesn\'t.'],
+    ['don\'t drink', 'С he форма don\'t невозможна, нужна doesn\'t.'],
+    ['isn\'t drinking', 'Это значило бы «прямо сейчас не пьёт», хотя речь о вкусах вообще.']),
+  Q('Cats ___ up to 16 hours a day.',
+    ['+sleep', 'Буква s уже стоит у подлежащего (cats), значит глагол остаётся без неё.'],
+    ['sleeps', 'Две s сразу нельзя: либо cats sleep, либо a cat sleeps.'],
+    ['are sleeping', 'Это про кошек, которые спят прямо сейчас. А тут — свойство кошек вообще.']),
+  Q('Water ___ at zero degrees.',
+    ['+freezes', 'Закон природы. Water — «оно», поэтому -s.'],
+    ['freeze', 'Пропала -s у третьего лица.'],
+    ['froze', 'Past Simple сделал бы это разовым событием в прошлом, а закон верен всегда.']),
+  Q('How often ___ you ___ to the gym?',
+    ['+do / go', 'How often спрашивает про регулярность — это Present Simple. Для you вспомогательный do.'],
+    ['are / going', 'Это спросило бы, куда вы идёте сейчас. How often про такое не спрашивают.'],
+    ['does / go', 'Does только для he / she / it. Для you — do.']),
+  Q('This soup ___ delicious.',
+    ['+tastes', 'Taste в значении «быть на вкус» — глагол состояния, у него не бывает -ing.'],
+    ['is tasting', 'Is tasting значит «пробует на вкус» — так говорят о человеке, а не о супе.'],
+    ['taste', 'Soup — «оно», поэтому нужна -s.'])
+],
 
-/* ═══════════════ ТРЕНАЖЁР ═══════════════ */
-const Q = [
-  { s: 'I ___ my keys — I can\'t get into the flat.', o: ['lost', 'have lost', 'was losing'], a: 1,
-    w: '<b>have lost</b> — времени в предложении нет, зато есть последствие прямо сейчас: я стою у двери.' },
-  { s: '___ you ___ Tom at the party yesterday?', o: ['Have / seen', 'Did / see', 'Were / seeing'], a: 1,
-    w: '<b>Did you see</b> — есть <span class="mono">yesterday</span>. Точное время в прошлом выключает перфект.' },
-  { s: 'Look! It ___ again.', o: ['rains', 'is raining', 'has rained'], a: 1,
-    w: '<b>is raining</b> — <span class="mono">Look!</span> означает «прямо сейчас в кадре». Это прямой эфир.' },
-  { s: 'Water ___ at 100 degrees.', o: ['is boiling', 'boils', 'has boiled'], a: 1,
-    w: '<b>boils</b> — факт мира, верный всегда. Настройка по умолчанию, а не текущий момент.' },
-  { s: 'When I arrived, the film ___ already ___.', o: ['has / started', 'had / started', 'was / starting'], a: 1,
-    w: '<b>had started</b> — два события в прошлом, и надо показать, что фильм начался раньше моего прихода.' },
-  { s: 'I ___ English for five years and I still study it.', o: ['learn', 'have learned', 'have been learning'], a: 2,
-    w: '<b>have been learning</b> — важна длительность (<span class="mono">for five years</span>), и процесс продолжается.' },
-  { s: 'This time tomorrow I ___ on the beach.', o: ['will lie', 'will be lying', 'will have lain'], a: 1,
-    w: '<b>will be lying</b> — в названный момент будущего действие будет в процессе.' },
-  { s: '— The phone is ringing! — OK, I ___ it.', o: ['get', 'am getting', '\'ll get'], a: 2,
-    w: '<b>\'ll get</b> — решение принято прямо в момент речи, в ответ на звонок.' },
-  { s: 'By 2030 they ___ the new bridge.', o: ['will build', 'will have built', 'will be building'], a: 1,
-    w: '<b>will have built</b> — слово <span class="mono">by</span> задаёт дедлайн: к этому моменту должно быть готово.' },
-  { s: 'I ___ home when I saw the accident.', o: ['drove', 'was driving', 'have driven'], a: 1,
-    w: '<b>was driving</b> — длинный фон, в который врезалось короткое событие.' },
-  { s: 'She ___ to Japan twice.', o: ['was', 'has been', 'has gone'], a: 1,
-    w: '<b>has been</b> — опыт, «была и вернулась». <span class="mono">has gone</span> означало бы, что она сейчас там.' },
-  { s: 'I ___ what you mean.', o: ['am not understanding', 'don\'t understand', 'haven\'t understood'], a: 1,
-    w: '<b>don\'t understand</b> — <span class="mono">understand</span> глагол состояния, у него не бывает -ing.' }
-];
+'past-simple': [
+  Q('I ___ him at the station yesterday.',
+    ['+saw', 'Yesterday назвало время — значит Past Simple. See → saw.'],
+    ['have seen', 'Точное время в прошлом полностью выключает Present Perfect.'],
+    ['seen', 'Seen — третья форма, она не может стоять без have или had.']),
+  Q('___ you ___ the film last night?',
+    ['+Did / see', 'Вопрос о прошлом: did плюс глагол в начальной форме.'],
+    ['Did / saw', 'Did уже забрал прошедшее себе, поэтому глагол возвращается в начальную форму.'],
+    ['Have / seen', 'Last night — прямая координата во времени, перфект тут невозможен.']),
+  Q('She ___ me back after the interview.',
+    ['+didn\'t call', 'Отрицание в прошедшем: didn\'t плюс начальная форма.'],
+    ['didn\'t called', 'Два показателя прошедшего сразу. Прошедшее уже сидит в didn\'t.'],
+    ['hasn\'t called', 'Это «до сих пор не перезвонила», а не факт из закрытого прошлого.']),
+  Q('We ___ to Berlin in 2019.',
+    ['+moved', 'Назван год — координата есть, значит Past Simple.'],
+    ['have moved', 'In 2019 выключает перфект: он не терпит указаний на время.'],
+    ['were moving', 'Переезд подан как факт, а не как процесс, растянутый во времени.']),
+  Q('Where ___ you ___ this jacket?',
+    ['+did / buy', 'Вопрос о конкретной покупке в прошлом: did плюс начальная форма.'],
+    ['did / bought', 'После did глагол не меняется.'],
+    ['was / buying', 'Покупка — точечное событие, его не растягивают в процесс.']),
+  Q('He ___ born in 1990.',
+    ['+was', 'Родиться — это устойчивое was / were born. И год назван, значит прошедшее.'],
+    ['is', 'Рождение произошло в прошлом и закончилось, настоящее время тут не подходит.'],
+    ['has been', 'С точной датой перфект невозможен.']),
+  Q('They ___ the house two years ago.',
+    ['+built', 'Ago всегда тянет за собой Past Simple.'],
+    ['have built', 'Ago — это прямая координата, перфект от неё выключается.'],
+    ['had built', 'Предпрошедшее нужно, только если в прошлом есть второе событие, к которому мы привязываемся.']),
+  Q('I ___ to school by bus when I was a child.',
+    ['+went', '«Когда я был ребёнком» — закрытый период в прошлом.'],
+    ['go', 'Настоящее время противоречит словам when I was a child.'],
+    ['have gone', 'Период закрыт, а перфекту нужна связь с настоящим.']),
+  Q('___ they at home last weekend?',
+    ['+Were', 'У глагола be свой вопрос: он сам выходит вперёд, did не нужен. They → were.'],
+    ['Did', 'Did потребовал бы смысловой глагол: Did they stay at home? С самим be так не строят.'],
+    ['Was', 'Was идёт с I / he / she / it, а для they нужна форма were.']),
+  Q('The concert ___ at eight and ___ at eleven.',
+    ['+started / finished', 'Два факта в закрытом прошлом подряд — оба в Past Simple.'],
+    ['was starting / finished', 'Начало концерта — точка, а не тянущийся фон.'],
+    ['has started / finished', 'Времена смешаны, и перфект не годится для рассказа о завершённом вечере.'])
+],
 
-let qi = 0, qScore = 0, answered = false;
-const el = {
-  num: document.getElementById('qNum'), bar: document.getElementById('qBar'), sc: document.getElementById('qScore'),
-  txt: document.getElementById('qText'), opts: document.getElementById('qOpts'), fb: document.getElementById('qFb'),
-  next: document.getElementById('qNext'), again: document.getElementById('qAgain')
+'future-simple': [
+  Q('That bag looks heavy. I ___ you.',
+    ['+\'ll help', 'Решение родилось прямо сейчас, в ответ на увиденное. Это и есть работа will.'],
+    ['\'m going to help', 'Going to означало бы, что вы решили помочь заранее, ещё не видя сумку.'],
+    ['help', 'Present Simple не выражает решение о будущем.']),
+  Q('Look at those clouds! It ___.',
+    ['+is going to rain', 'Есть видимые признаки, и вы делаете вывод из того, что перед глазами.'],
+    ['will rain', 'Will — это мнение или прогноз. А здесь вы прямо показываете на тучи.'],
+    ['rains', 'Present Simple описал бы привычку климата, а не это конкретное небо.']),
+  Q('I\'ve already decided: I ___ a new laptop.',
+    ['+am going to buy', 'Решение принято заранее — об этом прямо сказано словом decided.'],
+    ['will buy', 'Will противоречит already decided: он для решений, рождающихся в момент речи.'],
+    ['buy', 'Ничто не указывает на будущее.']),
+  Q('If it ___ tomorrow, we\'ll stay in.',
+    ['+rains', 'После if будущее выражают настоящим временем.'],
+    ['will rain', 'После if will не ставят — это одно из самых устойчивых правил английского.'],
+    ['is raining', 'В условии нужна простая форма, а не процесс.']),
+  Q('I promise I ___ anyone.',
+    ['+won\'t tell', 'Обещание — классическая работа will.'],
+    ['am not telling', 'Это про договорённость или процесс, а не про обещание.'],
+    ['don\'t tell', 'Present Simple звучит как общее правило, а не как обещание.']),
+  Q('— The phone\'s ringing. — I ___ it.',
+    ['+\'ll get', 'Реакция, родившаяся в момент речи.'],
+    ['\'m getting', 'Это значило бы, что вы шли к телефону по заранее составленному плану.'],
+    ['get', 'Нет никакого указания на будущее действие.']),
+  Q('Don\'t worry, I\'m sure she ___ it.',
+    ['+will like', 'Прогноз, мнение — территория will. Слова I\'m sure это подтверждают.'],
+    ['is liking', 'Like — глагол состояния, -ing у него не бывает.'],
+    ['likes', 'Это про «вообще любит», а не про будущую реакцию на подарок.']),
+  Q('We ___ dinner with Tom on Friday — we arranged it last week.',
+    ['+are having', 'Личная договорённость с датой — это Present Continuous в роли будущего.'],
+    ['will have', 'Will не годится: решение приняли неделю назад, а не сейчас.'],
+    ['have', 'Present Simple подошёл бы для расписания поезда, но не для личной встречи.']),
+  Q('I think prices ___ next year.',
+    ['+will rise', 'I think — прямой маркер прогноза, а прогноз это will.'],
+    ['are rising', 'Это про то, что цены растут прямо сейчас.'],
+    ['rise', 'Present Simple не описывает следующий год.']),
+  Q('When you ___ home, call me.',
+    ['+get', 'После when о будущем говорят настоящим временем — так же, как после if.'],
+    ['will get', 'После when will не ставят.'],
+    ['got', 'Прошедшее время противоречит просьбе о будущем.'])
+],
+
+'present-continuous': [
+  Q('Be quiet! The baby ___.',
+    ['+is sleeping', 'Прямо сейчас, в эту секунду — поэтому и просят замолчать.'],
+    ['sleeps', 'Это про режим ребёнка вообще, а просьба — про текущий момент.'],
+    ['slept', 'Прошедшее время не объясняет, почему надо молчать сейчас.']),
+  Q('I ___ what you mean.',
+    ['+don\'t understand', 'Understand — глагол состояния, -ing у него не бывает.'],
+    ['am not understanding', 'Понимать нельзя «нарочно, с усилием», поэтому Continuous тут невозможен.'],
+    ['didn\'t understand', 'Это про прошлое, а речь о непонимании прямо сейчас.']),
+  Q('She ___ with her parents this month.',
+    ['+is living', 'Временная ситуация, ограниченная периодом this month.'],
+    ['lives', 'Это означало бы, что она живёт с родителями всегда.'],
+    ['is live', 'После is обязательно нужен -ing.']),
+  Q('Why ___ you ___ at me like that?',
+    ['+are / looking', 'Прямо сейчас, в этот момент разговора.'],
+    ['do / look', 'Это спросило бы про привычку смотреть так вообще.'],
+    ['are / look', 'После are обязателен -ing.']),
+  Q('I ___ Anna at six — we agreed on it yesterday.',
+    ['+am meeting', 'Договорённость с конкретным временем — будущее через Continuous.'],
+    ['meet', 'Present Simple годится для расписаний, а не для личных договорённостей.'],
+    ['will meet', 'Will противоречит словам «мы договорились вчера».']),
+  Q('Listen! Someone ___ the piano.',
+    ['+is playing', 'Listen! — прямой маркер того, что происходит сию секунду.'],
+    ['plays', 'Это про умение или привычку, а не про звук прямо сейчас.'],
+    ['played', 'Прошедшее не объясняет призыв «слушай!».']),
+  Q('He ___ very rude today. Normally he\'s nice.',
+    ['+is being', 'Is being значит «ведёт себя так сейчас», а не «такой по характеру».'],
+    ['is', 'Просто is rude означало бы, что он грубый человек вообще.'],
+    ['was being', 'Прошедшее противоречит слову today.']),
+  Q('I ___ on a new project this month.',
+    ['+am working', 'Временный период, прямо обозначенный словами this month.'],
+    ['work', 'Это описало бы постоянное место работы.'],
+    ['am work', 'После am нужен -ing.']),
+  Q('___ it ___ outside?',
+    ['+Is / raining', 'Вопрос про то, что происходит за окном прямо сейчас.'],
+    ['Does / rain', 'Это спросило бы, часто ли в этих краях идут дожди.'],
+    ['Is / rain', 'Пропал -ing.']),
+  Q('Don\'t take that plate — I ___ it.',
+    ['+\'m still using', 'Процесс идёт прямо сейчас, поэтому и просят не трогать.'],
+    ['still use', 'Это про привычку пользоваться этой тарелкой вообще.'],
+    ['still used', 'Прошедшее не объясняет просьбу, обращённую к текущему моменту.'])
+],
+
+'past-continuous': [
+  Q('I ___ home when I met Tom.',
+    ['+was walking', 'Длинный фон, в который врезалось короткое событие.'],
+    ['walked', 'Тогда получилось бы два коротких события подряд, и фон исчезает.'],
+    ['have walked', 'Перфект не сочетается с рассказом о конкретном моменте в прошлом.']),
+  Q('While she ___, I ___ the dishes.',
+    ['+was cooking / was washing', 'Два длинных действия шли параллельно — оба в Continuous.'],
+    ['cooked / was washing', 'После while обычно стоит длящееся действие, а тут оно стало точечным.'],
+    ['is cooking / washed', 'Настоящее время противоречит рассказу о прошлом.']),
+  Q('At 9 p.m. yesterday we ___ still ___.',
+    ['+were / driving', 'Точка на часах в прошлом: в этот момент вы были в процессе.'],
+    ['did / drive', 'Это сказало бы, что вы тронулись ровно в девять.'],
+    ['have / driven', 'Перфект не привязывают к точному часу в прошлом.']),
+  Q('It ___ and the wind ___ when we left.',
+    ['+was raining / was blowing', 'Декорации в рассказе — это и есть работа Past Continuous.'],
+    ['rained / blew', 'Получилось перечисление фактов, без атмосферы сцены.'],
+    ['rains / blows', 'Настоящее время противоречит словам when we left.']),
+  Q('Sorry, I ___. Could you repeat that?',
+    ['+wasn\'t listening', 'В тот момент вы не были в процессе слушания.'],
+    ['didn\'t listen', 'Это звучит как «я вообще не стал слушать» — грубее и не про момент.'],
+    ['haven\'t listened', 'Перфект не годится для конкретного момента только что прошедшего разговора.']),
+  Q('What ___ you ___ at eleven last night?',
+    ['+were / doing', 'Спрашиваем, чем человек был занят в конкретный час.'],
+    ['did / doing', 'После did глагол стоит в начальной форме.'],
+    ['have / done', 'Перфект несовместим со словами last night.']),
+  Q('He ___ TV when the lights went out.',
+    ['+was watching', 'Процесс, который прервало внезапное событие.'],
+    ['watched', 'Тогда оба действия становятся точками, и связь «фон плюс вспышка» пропадает.'],
+    ['was watched', 'Это пассив: получилось бы «его смотрели».']),
+  Q('The sun ___ when we reached the top.',
+    ['+was setting', 'Закат был в процессе в момент вашего прихода.'],
+    ['set', 'Это значило бы, что солнце село ровно в тот миг, когда вы поднялись.'],
+    ['was set', 'Пассивная форма, здесь она бессмысленна.']),
+  Q('___ you ___ when I called?',
+    ['+Were / sleeping', 'Спрашиваем, были ли вы в процессе в момент звонка.'],
+    ['Did / sleep', 'Это вопрос про факт сна вообще, а не про момент звонка.'],
+    ['Were / sleep', 'После were обязателен -ing.']),
+  Q('They ___ football when it started to rain.',
+    ['+were playing', 'Игра шла, и дождь её прервал.'],
+    ['played', 'Два коротких события подряд: сыграли и пошёл дождь — связь теряется.'],
+    ['are playing', 'Настоящее время противоречит прошедшему started.'])
+],
+
+'future-continuous': [
+  Q('This time tomorrow I ___ on the beach.',
+    ['+will be lying', 'В конкретный момент будущего действие уже будет идти.'],
+    ['will lie', 'Это просто «лягу», без смысла «буду в процессе именно тогда».'],
+    ['am lying', 'Настоящее время не описывает завтрашний день.']),
+  Q('Don\'t call at seven — I ___.',
+    ['+\'ll be driving', 'Объясняем, почему вас нельзя будет дёргать: будете заняты процессом.'],
+    ['\'ll drive', 'Это про факт поездки, а не про занятость в этот час.'],
+    ['drive', 'Нет указания на будущее.']),
+  Q('___ you ___ the printer later? I just want to know.',
+    ['+Will / be using', 'Вежливое уточнение без намёка на просьбу — фирменная роль этого времени.'],
+    ['Will / use', 'Так вопрос звучит уже как просьба или требование уступить принтер.'],
+    ['Are / using', 'Это про текущий момент, а речь про later.']),
+  Q('At ten tomorrow we ___ the results.',
+    ['+will be discussing', 'В десять процесс уже будет идти.'],
+    ['will discuss', 'Это просто «обсудим», без привязки к моменту.'],
+    ['discuss', 'Present Simple не описывает завтрашнее совещание.']),
+  Q('All day tomorrow they ___ the new office.',
+    ['+will be painting', 'Процесс растянут на весь день — ровно то, что показывает это время.'],
+    ['will paint', 'Это про результат, а не про занятость целый день.'],
+    ['will painting', 'Пропал be: нужна связка will be плюс -ing.']),
+  Q('I ___ in the meeting from three to five.',
+    ['+\'ll be sitting', 'Отрезок будущего, на котором вы заняты.'],
+    ['\'ll sit', 'Просто факт, без ощущения занятого промежутка.'],
+    ['sit', 'Present Simple здесь не выражает будущее.']),
+  Q('Next week at this time she ___ over the Atlantic.',
+    ['+will be flying', 'Момент в будущем, действие в процессе.'],
+    ['will fly', 'Факт перелёта, а не её состояние в тот самый миг.'],
+    ['flies', 'Это расписание рейса, а не рассказ о ней.']),
+  Q('Don\'t worry, I ___ for you at the airport.',
+    ['+\'ll be waiting', 'Вы уже будете там в процессе ожидания, когда человек выйдет.'],
+    ['will waiting', 'Пропал be: нужно will be waiting.'],
+    ['\'m waiting', 'Настоящее время не описывает будущую встречу.']),
+  Q('___ they ___ dinner when we arrive?',
+    ['+Will / be having', 'Спрашиваем, застанем ли мы их за ужином.'],
+    ['Will / have', 'Это спросило бы, будет ли у них ужин вообще.'],
+    ['Are / having', 'Настоящее не годится для момента when we arrive в будущем.']),
+  Q('I ___ my exam at this time on Monday.',
+    ['+\'ll be taking', 'В понедельник в это время экзамен будет идти.'],
+    ['\'ll take', 'Факт сдачи, без привязки к конкретному моменту.'],
+    ['take', 'Нет указания на будущее.'])
+]
+
+};
+</script>
+<script>
+/* ═══════════════════════════════════════════════════════════
+   ЗАДАНИЯ ПО ВРЕМЕНАМ · часть 2 (уровни 3–4)
+   ═══════════════════════════════════════════════════════════ */
+const DRILL_B = {
+
+'present-perfect': [
+  Q('I ___ my keys — I can\'t get in.',
+    ['+have lost', 'Времени в предложении нет, зато есть последствие прямо сейчас: вы стоите у закрытой двери.'],
+    ['lost', 'Past Simple нужен, когда названо когда: lost them yesterday. Здесь важен результат, а не дата.'],
+    ['was losing', 'Потеря мгновенна, её нельзя растянуть в процесс.']),
+  Q('___ you ever ___ to Japan?',
+    ['+Have / been', 'Вопрос про опыт всей жизни: когда именно — неважно.'],
+    ['Did / go', 'Со словом ever про жизненный опыт спрашивают перфектом.'],
+    ['Have / gone', 'Have gone значит «уехал и сейчас там», а вопрос про накопленный опыт.']),
+  Q('He ___ yet.',
+    ['+hasn\'t called', 'Yet — прямой маркер перфекта: ждём до сих пор.'],
+    ['didn\'t call', 'Это факт из закрытого прошлого, а yet говорит, что ситуация ещё длится.'],
+    ['isn\'t calling', 'Это про текущую секунду, а не про отсутствие звонка вообще.']),
+  Q('I ___ the report two hours ago.',
+    ['+finished', 'Ago называет время, и перфект от этого выключается.'],
+    ['have finished', 'С ago перфект невозможен: он не терпит координат во времени.'],
+    ['had finished', 'Предпрошедшее нужно только при втором событии в прошлом.']),
+  Q('She ___ her leg — she\'s in plaster now.',
+    ['+has broken', 'Результат виден прямо сейчас: гипс на ноге.'],
+    ['broke', 'Так говорят, когда важно когда: broke it yesterday. Здесь же важен гипс сейчас.'],
+    ['is breaking', 'Перелом мгновенен, процесс тут невозможен.']),
+  Q('We ___ three meetings this week.',
+    ['+have had', 'Неделя ещё идёт, значит счётчик открыт.'],
+    ['had', 'Так сказали бы про last week, когда период уже закрыт.'],
+    ['are having', 'Это про встречу, идущую прямо сейчас, а не про счёт за неделю.']),
+  Q('I ___ just ___ the email.',
+    ['+have / sent', 'Just — маркер свежего результата, а значит перфекта.'],
+    ['did / send', 'Про то, что случилось только что, говорят перфектом.'],
+    ['have / send', 'После have нужна третья форма: sent.']),
+  Q('He ___ to London — he\'ll be back on Friday.',
+    ['+has gone', 'Gone значит «уехал и сейчас его здесь нет» — это подтверждает вторая часть.'],
+    ['has been', 'Been значило бы «был и уже вернулся», а он возвращается только в пятницу.'],
+    ['is going', 'Это про план или процесс, а не про то, что его уже нет в городе.']),
+  Q('When ___ you ___ this photo?',
+    ['+did / take', 'Слово when прямо спрашивает про время, а перфект координат не терпит.'],
+    ['have / taken', 'When и Present Perfect несовместимы в одном вопросе.'],
+    ['are / taking', 'Это про текущий момент, а фотография уже снята.']),
+  Q('This is the best film I ___ ever ___.',
+    ['+have / seen', 'Опыт всей жизни. В обороте «the best ... I have ever seen» всегда перфект.'],
+    ['did / see', 'В этой устойчивой конструкции Past Simple не используется.'],
+    ['was / seeing', 'Речь не о процессе просмотра, а о накопленном опыте.'])
+],
+
+'past-perfect': [
+  Q('When I arrived, the train ___.',
+    ['+had left', 'Поезд ушёл раньше, чем я приехал: я опоздал.'],
+    ['left', 'Тогда поезд тронулся при мне, и смысл меняется на противоположный.'],
+    ['has left', 'Перфект настоящего не привязывают к событию в прошлом.']),
+  Q('She was upset because she ___ the exam.',
+    ['+had failed', 'Провал случился раньше, чем расстройство, — had расставляет порядок.'],
+    ['has failed', 'Present Perfect не сочетается с was upset в прошлом.'],
+    ['was failing', 'Провал — результат, а не тянущийся процесс.']),
+  Q('By the time we got there, they ___ everything.',
+    ['+had eaten', 'К моменту нашего прихода всё уже было съедено.'],
+    ['ate', 'Тогда они ели одновременно с нашим приходом.'],
+    ['have eaten', 'Перфект настоящего не сочетается с got в прошлом.']),
+  Q('I ___ never ___ snow before that winter.',
+    ['+had / seen', 'Отсчёт ведём от той зимы, а значит нужно предпрошедшее.'],
+    ['have / seen', 'Точка отсчёта здесь в прошлом, а не в настоящем.'],
+    ['did / see', 'С оборотом never before нужен перфект, а не простое прошедшее.']),
+  Q('He told me he ___ the book already.',
+    ['+had read', 'После told всё сдвигается на шаг назад: перфект превращается в had read.'],
+    ['has read', 'После прошедшего told перфект настоящего не остаётся.'],
+    ['reads', 'Настоящее время противоречит слову told.']),
+  Q('I wish I ___ more before the exam.',
+    ['+had studied', 'Сожаление о прошлом строится через had плюс третья форма.'],
+    ['studied', 'I wish I studied — это сожаление о настоящем: «жаль, что я не учусь вообще».'],
+    ['have studied', 'В конструкции I wish перфект настоящего не используется.']),
+  Q('If I ___ known, I would have come.',
+    ['+had', 'Третий тип условных: if плюс had плюс третья форма.'],
+    ['have', 'Для нереального прошлого нужен именно had.'],
+    ['would have', 'Would have после if не ставят — would живёт во второй части.']),
+  Q('The ground was wet because it ___.',
+    ['+had rained', 'Дождь прошёл раньше, чем мы увидели мокрую землю.'],
+    ['rained', 'Теряется связь «сначала дождь, потом его след».'],
+    ['rains', 'Настоящее время противоречит was.']),
+  Q('They ___ already ___ when we phoned.',
+    ['+had / left', 'К моменту звонка они уже ушли.'],
+    ['have / left', 'Точка отсчёта — звонок в прошлом, а не настоящий момент.'],
+    ['did / leave', 'Со словом already и второй точкой в прошлом нужен had.']),
+  Q('I didn\'t recognise her — she ___ her hair.',
+    ['+had dyed', 'Покрасила раньше, чем я её увидел.'],
+    ['dyed', 'Тогда получилось бы, что она красила волосы в момент встречи.'],
+    ['has dyed', 'Перфект настоящего не сочетается с didn\'t recognise.'])
+],
+
+'future-perfect': [
+  Q('By Friday I ___ the project.',
+    ['+will have finished', 'By задаёт дедлайн: к пятнице уже готово.'],
+    ['will finish', 'Это просто «закончу в пятницу», без смысла «уже к тому моменту».'],
+    ['finish', 'Нет указания на будущее.']),
+  Q('By the time you arrive, we ___ dinner.',
+    ['+will have had', 'К моменту вашего приезда ужин уже позади.'],
+    ['will have', 'Это просто «поужинаем», без привязки к вашему приезду.'],
+    ['have had', 'Перфект настоящего не описывает будущий дедлайн.']),
+  Q('In two years they ___ the new line.',
+    ['+will have built', 'К концу срока стройка будет завершена.'],
+    ['will build', 'Нет смысла «успеют к этому моменту».'],
+    ['will be building', 'Это значило бы, что через два года они всё ещё будут строить.']),
+  Q('___ you ___ the report by Monday?',
+    ['+Will / have finished', 'Спрашиваем про готовность к сроку.'],
+    ['Will / finish', 'Это вопрос про сам факт, а не про дедлайн.'],
+    ['Have / finished', 'Это про настоящий момент, а by Monday — про будущее.']),
+  Q('She ___ here for ten years by next June.',
+    ['+will have worked', 'Срок отмеряется к точке в будущем.'],
+    ['will work', 'Это просто «будет работать», без юбилейного счёта.'],
+    ['works', 'Настоящее время не описывает будущую дату.']),
+  Q('Hurry up! The film ___ by the time we get there.',
+    ['+will have started', 'К нашему приходу фильм уже начнётся.'],
+    ['will start', 'Это «начнётся», без связи с нашим опозданием.'],
+    ['starts', 'Это строка расписания, а не прогноз относительно нас.']),
+  Q('By 2030 the company ___ its emissions in half.',
+    ['+will have cut', 'Дедлайн 2030 — классический Future Perfect.'],
+    ['will cut', 'Нет смысла «к этому сроку уже».'],
+    ['cuts', 'Настоящее время не про 2030 год.']),
+  Q('I ___ everything before you come back.',
+    ['+will have packed', 'Всё будет упаковано к вашему возвращению.'],
+    ['will pack', 'Это «упакую», без гарантии, что именно до приезда.'],
+    ['am packing', 'Это про процесс прямо сейчас.']),
+  Q('Don\'t worry — they ___ by then.',
+    ['+will have left', 'К тому моменту их уже не будет.'],
+    ['will leave', 'Это просто «уедут», без привязки к сроку.'],
+    ['have left', 'Перфект настоящего не описывает будущее.']),
+  Q('In an hour I ___ this book.',
+    ['+will have read', 'Через час чтение будет позади.'],
+    ['will read', 'Это «прочту», без дедлайна.'],
+    ['will have been reading', 'Это про длительность («буду читать уже час»), а не про завершённость.'])
+],
+
+'present-perfect-continuous': [
+  Q('I ___ English for five years and I still study it.',
+    ['+have been learning', 'Важна длительность, и процесс продолжается прямо сейчас.'],
+    ['have learned', 'Это про результат «выучил», а не про пять лет процесса.'],
+    ['am learning', 'Теряется отрезок в пять лет, тянущийся из прошлого.']),
+  Q('Your eyes are red. ___ you ___?',
+    ['+Have / been crying', 'Свежие следы только что закончившегося процесса.'],
+    ['Did / cry', 'Это про факт в прошлом, а мы видим результат прямо сейчас.'],
+    ['Are / crying', 'Человек уже не плачет — остались только красные глаза.']),
+  Q('How long ___ you ___ for me?',
+    ['+have / been waiting', 'How long прямо спрашивает про длительность.'],
+    ['did / wait', 'Это про закрытое прошлое, а человек ждёт до сих пор.'],
+    ['are / waiting', 'Теряется отрезок времени, который уже накопился.']),
+  Q('I ___ three books this month.',
+    ['+have read', 'Счёт сделанного — это Perfect. Continuous считает время, а не книги.'],
+    ['have been reading', 'С числом «три книги» нужен результат, а не процесс.'],
+    ['am reading', 'Это про книгу в руках сейчас, а не про счёт за месяц.']),
+  Q('It ___ since morning.',
+    ['+has been raining', 'Since задаёт начало отрезка, и дождь всё ещё идёт.'],
+    ['has rained', 'Это про факт, а не про непрерывность процесса.'],
+    ['rains', 'Present Simple не связывает прошлое с настоящим.']),
+  Q('I ___ him for years — we met at university.',
+    ['+have known', 'Know — глагол состояния, Continuous ему недоступен ни в каком времени.'],
+    ['have been knowing', 'У know не бывает формы с -ing.'],
+    ['am knowing', 'Знание нельзя «делать нарочно», поэтому процесса тут нет.']),
+  Q('Sorry I\'m late — I ___ for a parking space.',
+    ['+have been looking', 'Процесс только что закончился и объясняет опоздание.'],
+    ['have looked', 'Это про результат, а объясняем мы потраченное время.'],
+    ['looked', 'Past Simple оборвал бы связь с настоящим опозданием.']),
+  Q('She ___ the kitchen — that\'s why she\'s covered in paint.',
+    ['+has been painting', 'Следы процесса налицо, и работа могла остаться незаконченной.'],
+    ['has painted', 'Это значило бы, что кухня готова, а мы говорим про краску на ней.'],
+    ['paints', 'Present Simple описал бы профессию маляра, а не этот случай.']),
+  Q('They ___ together since 2015.',
+    ['+have been working', 'Отрезок тянется из прошлого в настоящее, since задаёт его начало.'],
+    ['work', 'Present Simple не показывает, что отсчёт идёт с 2015 года.'],
+    ['are working', 'Теряется весь период, накопившийся с 2015 года.']),
+  Q('You look exhausted. What ___ you ___?',
+    ['+have / been doing', 'Спрашиваем про процесс, оставивший видимые следы.'],
+    ['have / done', 'Это вопрос про результат, вроде «что ты натворил».'],
+    ['did / do', 'Past Simple оборвал бы связь с тем, как человек выглядит сейчас.'])
+],
+
+'past-perfect-continuous': [
+  Q('I ___ for an hour when she finally arrived.',
+    ['+had been waiting', 'К моменту её прихода я ждал уже час.'],
+    ['had waited', 'Теряется картинка длящегося ожидания.'],
+    ['was waiting', 'Не показывает, что час уже накопился к тому моменту.']),
+  Q('He was tired because he ___ all night.',
+    ['+had been working', 'Процесс, шедший до этого, объясняет усталость.'],
+    ['had worked', 'Это про факт работы, а не про изматывающий процесс.'],
+    ['has been working', 'Точка отсчёта в прошлом, а не в настоящем.']),
+  Q('The ground was wet — it ___ all morning.',
+    ['+had been raining', 'Дождь шёл всё утро до того, как мы вышли.'],
+    ['has been raining', 'Перфект настоящего не сочетается с was в прошлом.'],
+    ['was raining', 'Это значило бы, что дождь шёл в тот самый момент, а земля уже была мокрой.']),
+  Q('They ___ for two years before they got married.',
+    ['+had been dating', 'Отрезок отмеряется к событию в прошлом — к свадьбе.'],
+    ['have been dating', 'Точка отсчёта — свадьба в прошлом, а не сегодняшний день.'],
+    ['dated', 'Теряется длительность, накопившаяся к свадьбе.']),
+  Q('She ___ so long that she almost gave up.',
+    ['+had been studying', 'Длительность привела к результату в прошлом.'],
+    ['has been studying', 'Перфект настоящего не сочетается с gave up.'],
+    ['was studying', 'Не передаёт накопленный срок, из-за которого она сдалась.']),
+  Q('When I came in, he ___ for hours — the room was full of smoke.',
+    ['+had been smoking', 'Процесс шёл до моего прихода и оставил следы.'],
+    ['had smoked', 'Это про факт, а не про часы процесса.'],
+    ['smoked', 'Простое прошедшее не показывает, что это было до моего прихода.']),
+  Q('He said his eyes hurt because he ___ at the screen all day.',
+    ['+had been staring', 'После said всё сдвигается на шаг назад.'],
+    ['has been staring', 'После прошедшего said перфект настоящего не остаётся.'],
+    ['is staring', 'Настоящее время противоречит слову said.']),
+  Q('The car broke down. It ___ strange noises for weeks.',
+    ['+had been making', 'Звуки шли неделями до поломки.'],
+    ['has been making', 'Точка отсчёта — поломка в прошлом.'],
+    ['made', 'Теряется длительность в несколько недель.']),
+  Q('By the time the police arrived, the crowd ___ for hours.',
+    ['+had been protesting', 'К моменту приезда полиции протест шёл уже часы.'],
+    ['have been protesting', 'Отсчёт ведём от прошлого, а не от настоящего.'],
+    ['protested', 'Не показывает накопленные часы.']),
+  Q('I was out of breath — I ___.',
+    ['+had been running', 'Бег был до этого и объясняет одышку.'],
+    ['had run', 'Это про факт пробежки, а не про её свежие следы.'],
+    ['ran', 'Не показывает, что бег стал причиной состояния.'])
+],
+
+'future-perfect-continuous': [
+  Q('By next June I ___ here for ten years.',
+    ['+will have been working', 'К моменту в будущем стаж составит ровно десять лет.'],
+    ['will work', 'Нет смысла «к тому моменту уже столько-то».'],
+    ['am working', 'Настоящее время не описывает будущий юбилей.']),
+  Q('By six p.m. they ___ for a whole day.',
+    ['+will have been travelling', 'Счётчик отмеряется к шести вечера.'],
+    ['will travel', 'Просто «поедут», без накопленного срока.'],
+    ['have been travelling', 'Перфект настоящего не описывает будущее.']),
+  Q('In an hour we ___ for six hours straight.',
+    ['+will have been driving', 'Через час за рулём будет уже шесть часов.'],
+    ['will be driving', 'Это про «будем ехать», без счётчика времени.'],
+    ['will have driven', 'Это про пройденный путь, а не про накопленные часы.']),
+  Q('Next month she ___ the piano for twenty years.',
+    ['+will have been playing', 'Юбилей процесса: двадцать лет наберутся к следующему месяцу.'],
+    ['will play', 'Нет накопленного срока.'],
+    ['plays', 'Настоящее время не про следующий месяц.']),
+  Q('By the end of the year I ___ this language for a decade.',
+    ['+will have been studying', 'Десять лет наберутся к концу года.'],
+    ['will study', 'Просто «буду учить», без счётчика.'],
+    ['study', 'Настоящее время не описывает конец года.']),
+  Q('When you arrive, we ___ for two hours.',
+    ['+will have been waiting', 'К вашему приезду мы будем ждать уже два часа.'],
+    ['will wait', 'Это обещание подождать, а не накопленный срок.'],
+    ['waited', 'Прошедшее противоречит словам when you arrive.']),
+  Q('By 2030 the station ___ signals for fifty years.',
+    ['+will have been transmitting', 'Полвека наберутся к 2030 году.'],
+    ['will transmit', 'Нет смысла «уже столько-то лет к этому сроку».'],
+    ['transmits', 'Настоящее время не про 2030 год.']),
+  Q('In September they ___ on this house for a year.',
+    ['+will have been working', 'Год работы наберётся к сентябрю.'],
+    ['will have worked', 'Это про завершённость, а речь именно про длительность.'],
+    ['work', 'Настоящее время не описывает сентябрь.']),
+  Q('By midnight the team ___ non-stop for sixteen hours.',
+    ['+will have been coding', 'Счётчик отмеряется к полуночи.'],
+    ['will code', 'Просто «будут писать код», без накопленного срока.'],
+    ['coded', 'Прошедшее противоречит словам by midnight.']),
+  Q('This time next year I ___ at this company for exactly five years.',
+    ['+will have been working', 'К этому моменту наберётся ровно пять лет непрерывной работы.'],
+    ['will be working', 'Это про занятость в тот момент, без счётчика лет.'],
+    ['work', 'Настоящее время не описывает будущий срок.'])
+]
+
 };
 
-function renderQ() {
-  const q = Q[qi];
-  answered = false;
-  el.num.textContent = `Вопрос ${qi + 1} / ${Q.length}`;
-  el.bar.style.width = (qi / Q.length * 100) + '%';
-  el.sc.textContent = `${qScore} верно`;
-  el.txt.innerHTML = q.s.replace('___', '<u></u>').replace('___', '<u></u>');
-  el.opts.innerHTML = q.o.map((o, i) => `<button data-i="${i}">${o}</button>`).join('');
-  el.fb.innerHTML = '';
-  el.next.hidden = true;
-  el.again.hidden = true;
+/* объединяем обе части в один справочник */
+const DRILLS = Object.assign({}, DRILL_A, DRILL_B);
+</script>
+<script>
+/* ═══════════════════════════════════════════════════════════
+   ОБЩИЙ ТРЕНАЖЁР ПО ВРЕМЕНАМ · по два вопроса на каждое время,
+   вперемешку, без подсказки о том, какое время проверяется
+   ═══════════════════════════════════════════════════════════ */
+const QUIZ_T = [
+  Q('My flight ___ at 6:40, so I need a taxi at four.',
+    ['+leaves', 'Расписание — всегда Present Simple, даже когда речь про завтра.'],
+    ['will leave', 'Will выражает решение или прогноз, а расписание — это факт из таблицы.'],
+    ['is leaving', 'Так сказал бы человек, для которого это личная договорённость, а не строка табло.']),
+  Q('I ___ my keys — I can\'t get into the flat.',
+    ['+have lost', 'Времени в предложении нет, зато есть последствие прямо сейчас.'],
+    ['lost', 'Past Simple нужен, когда названо когда: lost them yesterday.'],
+    ['am losing', 'Потеря мгновенна, растянуть её в процесс нельзя.']),
+  Q('Look! It ___ again, and I left the windows open.',
+    ['+is raining', 'Look! — прямой маркер того, что происходит прямо сейчас.'],
+    ['rains', 'Это описало бы климат вообще, а не небо за окном.'],
+    ['has rained', 'Перфект говорил бы о результате, а мы смотрим на сам дождь.']),
+  Q('___ you ___ Tom at the party last night?',
+    ['+Did / see', 'Last night называет время, значит Past Simple через did.'],
+    ['Have / seen', 'Точное время в прошлом выключает перфект.'],
+    ['Did / saw', 'После did глагол возвращается в начальную форму.']),
+  Q('When I got to the platform, the train ___.',
+    ['+had already left', 'Поезд ушёл раньше моего прихода — это предпрошедшее.'],
+    ['already left', 'Тогда поезд тронулся при мне, и смысл меняется на противоположный.'],
+    ['has already left', 'Перфект настоящего не привязывают к событию в прошлом.']),
+  Q('Water ___ at a hundred degrees — that\'s just physics.',
+    ['+boils', 'Закон природы верен всегда, а water — это «оно», отсюда -s.'],
+    ['is boiling', 'Так говорят про чайник на плите прямо сейчас.'],
+    ['boil', 'Пропала -s у третьего лица.']),
+  Q('This time next week I ___ on a beach in Greece.',
+    ['+will be lying', 'В конкретный момент будущего действие уже будет идти.'],
+    ['will lie', 'Это просто «лягу», без смысла «буду в процессе именно тогда».'],
+    ['am lying', 'Настоящее время не описывает следующую неделю.']),
+  Q('She ___ the piano since she was six.',
+    ['+has been playing', 'Since задаёт начало отрезка, и процесс тянется до сих пор.'],
+    ['plays', 'Present Simple не показывает, что отсчёт идёт с шести лет.'],
+    ['played', 'Past Simple оборвал бы связь с настоящим.']),
+  Q('I ___ home when I saw the accident.',
+    ['+was driving', 'Длинный фон, в который врезалось короткое событие.'],
+    ['drove', 'Тогда оба действия становятся точками и связь «фон плюс вспышка» исчезает.'],
+    ['have driven', 'Перфект не сочетается с конкретным моментом в прошлом.']),
+  Q('By the time you read this, I ___ the country.',
+    ['+will have left', 'By the time задаёт дедлайн: к этому моменту меня уже не будет.'],
+    ['will leave', 'Это просто «уеду», без привязки к моменту чтения.'],
+    ['left', 'Прошедшее противоречит будущему by the time you read this.']),
+  Q('— Someone\'s at the door. — I ___ it.',
+    ['+\'ll get', 'Решение родилось прямо в момент речи.'],
+    ['\'m getting', 'Это значило бы, что вы шли к двери по заранее составленному плану.'],
+    ['get', 'Present Simple не выражает решение о будущем.']),
+  Q('He ___ tired because he ___ all night.',
+    ['+was / had been working', 'Усталость в прошлом объясняется процессом, шедшим до неё.'],
+    ['was / has been working', 'Точка отсчёта здесь в прошлом, а не в настоящем.'],
+    ['is / worked', 'Настоящее время не сочетается с рассказом про прошлую ночь.']),
+  Q('I ___ what you mean — could you explain again?',
+    ['+don\'t understand', 'Understand — глагол состояния, у него не бывает -ing.'],
+    ['am not understanding', 'Понимать нельзя нарочно, поэтому процесса тут нет.'],
+    ['didn\'t understand', 'Это про прошлое, а непонимание прямо сейчас.']),
+  Q('They ___ in this house for twenty years before they sold it.',
+    ['+had been living', 'Срок отмеряется к событию в прошлом — к продаже дома.'],
+    ['have been living', 'Точка отсчёта — продажа в прошлом, а не сегодняшний день.'],
+    ['lived', 'Теряется длительность, накопившаяся к моменту продажи.']),
+  Q('___ you ever ___ sushi?',
+    ['+Have / tried', 'Вопрос про опыт всей жизни: когда именно — неважно.'],
+    ['Did / try', 'Со словом ever про опыт спрашивают перфектом.'],
+    ['Are / trying', 'Это про текущий момент, а не про накопленный опыт.']),
+  Q('We ___ to Italy in 2018 and loved it.',
+    ['+went', 'Год назван, значит координата есть — только Past Simple.'],
+    ['have gone', 'In 2018 полностью выключает перфект.'],
+    ['had gone', 'Предпрошедшее нужно лишь при втором событии в прошлом.']),
+  Q('Don\'t phone me between seven and eight — I ___ dinner.',
+    ['+\'ll be having', 'В этот отрезок будущего вы будете заняты процессом.'],
+    ['\'ll have', 'Это про факт ужина, а не про занятость в эти часы.'],
+    ['have', 'Present Simple здесь не выражает будущее.']),
+  Q('She ___ three emails this morning, and it\'s only ten o\'clock.',
+    ['+has written', 'Утро ещё не кончилось, значит период открыт и счётчик идёт.'],
+    ['wrote', 'Так сказали бы вечером, когда утро уже закрыто.'],
+    ['has been writing', 'С числом «три письма» нужен результат, а не процесс.']),
+  Q('While I ___ dinner, the lights went out.',
+    ['+was cooking', 'После while стоит длящееся действие, которое прервало событие.'],
+    ['cooked', 'Тогда пропадает ощущение фона, в который врезалась вспышка.'],
+    ['have cooked', 'Перфект не сочетается с конкретным моментом в прошлом.']),
+  Q('By next summer I ___ German for three years.',
+    ['+will have been learning', 'К моменту в будущем наберётся ровно три года процесса.'],
+    ['will learn', 'Нет смысла «к тому сроку уже столько-то».'],
+    ['have learned', 'Перфект настоящего не описывает будущее.']),
+  Q('My brother ___ glasses, but today he\'s wearing lenses.',
+    ['+wears', 'Постоянная привычка. Контраст с «сегодня» подчёркивает, что это Simple.'],
+    ['is wearing', 'Это про то, что на нём надето прямо сейчас, — а сейчас как раз линзы.'],
+    ['wear', 'Brother — это «он», значит нужна -s.']),
+  Q('He told me he ___ the book already.',
+    ['+had read', 'После told всё сдвигается на шаг назад в прошлое.'],
+    ['has read', 'После прошедшего told перфект настоящего не удерживается.'],
+    ['reads', 'Настоящее время противоречит слову told.']),
+  Q('Your hands are filthy! What ___ you ___?',
+    ['+have / been doing', 'Спрашиваем про процесс, оставивший видимые следы.'],
+    ['have / done', 'Это вопрос про результат, а нас интересует, откуда грязь.'],
+    ['did / do', 'Past Simple оборвал бы связь с тем, что мы видим прямо сейчас.']),
+  Q('If it ___ tomorrow, the match will be cancelled.',
+    ['+snows', 'После if будущее выражают настоящим временем.'],
+    ['will snow', 'После if will не ставят — правило работает без исключений.'],
+    ['snowed', 'Прошедшее превратило бы это в нереальное условие про настоящее.'])
+];
+</script>
+<script>
+/* ═══════════════════════════════════════════════════════════
+   УСЛОВНЫЕ ПРЕДЛОЖЕНИЯ · графика
+   Цвет кодирует реальность: бирюза — реально, перивинкл —
+   воображаемое настоящее, охра — воображаемое прошлое.
+   ═══════════════════════════════════════════════════════════ */
+const CF = { W: 500, H: 168 };
+
+/* одна строка «если → то» с пилюлей «о чём речь» и шагом назад */
+function condFig(o) {
+  const pillW = Math.max(150, o.about.length * 7.4 + 34);
+  const step = o.step
+    ? `<path class="ln-z" style="stroke:var(--zone)" d="M 46 40 V 56" marker-end="url(#cah)"/>
+       <text class="cf-step" x="58" y="53">${o.step}</text>`
+    : `<text class="cf-step" x="22" y="53">${o.nostep || ''}</text>`;
+  return `<svg viewBox="0 0 ${CF.W} ${CF.H}" role="img" aria-label="Схема: ${o.about}, если ${o.ifPart}, то ${o.mainPart}">
+    <rect x="20" y="10" width="${pillW}" height="26" rx="13" style="fill:var(--zone-soft);stroke:var(--zone);stroke-width:1.4"/>
+    <text class="cf-pill" x="${20 + pillW / 2}" y="27" text-anchor="middle">${o.about}</text>
+    ${step}
+    <rect class="cf-box" x="20" y="58" width="206" height="54" rx="12"/>
+    <text class="cf-lbl" x="32" y="76">IF</text>
+    <text class="cf-form" x="123" y="97" text-anchor="middle">${o.ifPart}</text>
+    <path class="ln-z" style="stroke:var(--zone)" d="M 228 85 H 262" marker-end="url(#cah)"/>
+    <text class="cf-step" x="245" y="77" text-anchor="middle">то</text>
+    <rect class="cf-box" x="274" y="58" width="206" height="54" rx="12"/>
+    <text class="cf-lbl" x="286" y="76">ГЛАВНАЯ ЧАСТЬ</text>
+    <text class="cf-form" x="377" y="97" text-anchor="middle">${o.mainPart}</text>
+    <text class="cf-ex" x="250" y="140" text-anchor="middle">${o.ex}</text>
+    <defs><marker id="cah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="currentColor"/></marker></defs>
+  </svg>`;
 }
 
-el.opts.addEventListener('click', e => {
-  const b = e.target.closest('button');
-  if (!b || answered) return;
-  answered = true;
-  const q = Q[qi], pick = +b.dataset.i;
-  [...el.opts.children].forEach((btn, i) => {
-    btn.disabled = true;
-    if (i === q.a) btn.classList.add('right');
-    else if (i === pick) btn.classList.add('wrong');
-  });
-  if (pick === q.a) qScore++;
-  el.sc.textContent = `${qScore} верно`;
-  el.bar.style.width = ((qi + 1) / Q.length * 100) + '%';
-  el.fb.innerHTML = q.w;
-  if (qi < Q.length - 1) { el.next.hidden = false; el.next.focus(); }
-  else {
-    el.again.hidden = false;
-    const verdict = qScore >= 11 ? 'Система собрана — можно идти говорить.'
-      : qScore >= 8 ? 'Крепкая база. Слабые места — в дуэлях выше.'
-      : 'Есть куда расти: вернитесь к уровню 3, там живёт большинство ошибок.';
-    el.fb.innerHTML = q.w + `<br><br><b>Итог: ${qScore} из ${Q.length}.</b> ${verdict}`;
-  }
-});
-el.next.addEventListener('click', () => { qi++; renderQ(); });
-el.again.addEventListener('click', () => { qi = 0; qScore = 0; renderQ(); });
-renderQ();
+/* смешанный тип: две половины из разных времён */
+function mixedFig() {
+  return `<svg viewBox="0 0 500 196" role="img" aria-label="Смешанный тип: условие в прошлом, результат в настоящем, и обратный вариант">
+    <text class="cf-lbl" x="20" y="18">ВАРИАНТ 1 · ПРОШЛОЕ ⟶ НАСТОЯЩЕЕ</text>
+    <rect class="cf-box" x="20" y="26" width="206" height="44" rx="11"/>
+    <text class="cf-form" x="123" y="54" text-anchor="middle">if + had + V3</text>
+    <path class="ln-z" style="stroke:var(--zone)" d="M 228 48 H 262" marker-end="url(#cah2)"/>
+    <rect class="cf-box" x="274" y="26" width="206" height="44" rx="11"/>
+    <text class="cf-form" x="377" y="54" text-anchor="middle">would + V</text>
+    <text class="cf-ex" x="20" y="88">If I had studied medicine, I would be a doctor now.</text>
 
-/* ═══════════════ ШПАРГАЛКА ═══════════════ */
+    <line x1="20" y1="104" x2="480" y2="104" style="stroke:var(--line)"/>
+
+    <text class="cf-lbl" x="20" y="126">ВАРИАНТ 2 · НАСТОЯЩЕЕ ⟶ ПРОШЛОЕ</text>
+    <rect class="cf-box" x="20" y="134" width="206" height="44" rx="11"/>
+    <text class="cf-form" x="123" y="162" text-anchor="middle">if + V2</text>
+    <path class="ln-z" style="stroke:var(--zone)" d="M 228 156 H 262" marker-end="url(#cah2)"/>
+    <rect class="cf-box" x="274" y="134" width="206" height="44" rx="11"/>
+    <text class="cf-form" x="377" y="162" text-anchor="middle">would have + V3</text>
+    <defs><marker id="cah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="currentColor"/></marker></defs>
+  </svg>`;
+}
+
+const CDRAW = {
+  'zero': () => condFig({ about: 'ВСЕГДА, БЕЗ ИСКЛЮЧЕНИЙ', nostep: 'шага назад нет — обе части в настоящем',
+    ifPart: 'if + Present Simple', mainPart: 'Present Simple', ex: 'If you heat water, it boils.' }),
+  'first': () => condFig({ about: 'ГОВОРИМ ПРО БУДУЩЕЕ', step: 'шаг назад → настоящее',
+    ifPart: 'if + Present Simple', mainPart: 'will + V', ex: 'If it rains, I will stay at home.' }),
+  'second': () => condFig({ about: 'ГОВОРИМ ПРО НАСТОЯЩЕЕ', step: 'шаг назад → прошедшее',
+    ifPart: 'if + Past Simple', mainPart: 'would + V', ex: 'If I had money, I would buy a house.' }),
+  'third': () => condFig({ about: 'ГОВОРИМ ПРО ПРОШЕДШЕЕ', step: 'шаг назад → предпрошедшее',
+    ifPart: 'if + had + V3', mainPart: 'would have + V3', ex: 'If I had known, I would have come.' }),
+  'mixed': () => mixedFig(),
+  'inversion': () => condFig({ about: 'IF УБИРАЕМ СОВСЕМ', nostep: 'вперёд выходит were / had / should',
+    ifPart: 'Had + подлежащее + V3', mainPart: 'would have + V3', ex: 'Had I known, I would have helped.' }),
+  'wish': () => condFig({ about: 'ЖАЛЬ, ЧТО…', step: 'тот же шаг назад',
+    ifPart: 'wish + V2 / had + V3', mainPart: '— главной части нет', ex: 'I wish I had studied more.' })
+};
+
+/* ═══════════════════════════════════════════════════════════
+   УСЛОВНЫЕ ПРЕДЛОЖЕНИЯ · станции
+   ═══════════════════════════════════════════════════════════ */
+const CLEVELS = [
+  { n: 1, title: 'Реальность', code: 'без «бы»', ru: 'Это может случиться',
+    txt: 'Первый этаж — условия, которые могут сработать по-настоящему. В русском переводе тут <b>ни одного «бы»</b>: «если пойдёт дождь», «если нагреть воду». Два типа, и они закрывают большую часть бытовой речи.' },
+  { n: 2, title: 'Воображение', code: '«если бы … то … бы»', ru: 'Этого не было и не будет',
+    txt: 'Второй этаж — то, чего нет. В русском появляются <b>два «бы»</b>, и это самый надёжный сигнал. Остаётся один вопрос: мы фантазируем про сейчас или жалеем о том, что было тогда.' },
+  { n: 3, title: 'Гибриды', code: 'половинки из разных типов', ru: 'Когда времена не совпадают',
+    txt: 'Верхний этаж. Ничего нового учить не нужно — здесь те же детали, просто собранные крест-накрест. Плюс два родственника условных: инверсия без <span class="mono">if</span> и конструкция <span class="mono">I wish</span>.' }
+];
+
+const C = [
+{
+  id: 'zero', zone: 'real', level: 1, idx: 1,
+  name: 'Zero Conditional', core: 'if + Present, Present',
+  thesis: 'Не условие, а закон',
+  short: 'Нулевой',
+  mxEx: 'If you heat water, it boils.',
+  figCap: 'Единственный тип без шага назад: обе половины стоят в настоящем, потому что речь не про случай, а про правило.',
+  lead: 'Единственный тип, где нет и намёка на «если бы». Здесь <b>if можно заменить на when</b>, и смысл не изменится. Речь про то, что срабатывает каждый раз.',
+  blocks: [
+    { kind: 'key', h: 'Проверка одной подстановкой',
+      p: 'Подставьте «когда» вместо «если». Если фраза не испортилась — это Zero.<br><span class="mono">If you heat ice, it melts.</span> = <span class="mono">When you heat ice, it melts.</span><br>А вот «Если пойдёт дождь, я останусь дома» с «когда» уже звучит странно — значит, это не Zero.' },
+    { kind: 'plain', h: 'Где живёт',
+      p: 'Законы природы, инструкции, правила, личные закономерности. <span class="mono">If you press this button, the machine stops.</span> · <span class="mono">If I drink coffee at night, I don\'t sleep.</span>' },
+    { kind: 'trap', h: 'Ловушка: will сюда не ставят вообще',
+      p: 'Ни в одну из частей. Результат не «случится однажды» — он случается всегда.<br><span class="mono no">If you heat water, it will boil</span> (в значении закона) → <span class="mono yes">If you heat water, it boils</span>' }
+  ],
+  forms: { p: 'If you heat water, it <b>boils</b>.', n: 'If you don\'t water plants, they <b>die</b>.', q: 'What <b>happens</b> if you mix them?' },
+  markers: ['always', 'every time', 'when (= if)', 'usually', 'normally'],
+  ex: [
+    { en: 'If you <i class="v">heat</i> water to 100 °C, it <i class="v">boils</i>.', ru: 'Если нагреть воду до ста градусов, она кипит.', nb: 'закон природы — ни одного «бы»' },
+    { en: 'If I <i class="v">don\'t sleep</i> enough, I <i class="v">get</i> headaches.', ru: 'Если я не высыпаюсь, у меня болит голова.', nb: 'личная закономерность' },
+    { en: 'If you <i class="v">press</i> this button, the machine <i class="v">stops</i>.', ru: 'Если нажать эту кнопку, машина остановится.', nb: 'инструкция' }
+  ]
+},
+{
+  id: 'first', zone: 'real', level: 1, idx: 2,
+  name: 'First Conditional', core: 'if + Present, will + V',
+  thesis: 'Реально — и это про будущее',
+  short: 'Первый',
+  mxEx: "If it rains, I'll stay at home.",
+  figCap: 'Первая ступень лестницы: говорим про будущее, а в условие ставим настоящее время.',
+  lead: 'Реальное условие: это может произойти на самом деле. В русском переводе здесь <b>ни одного «бы»</b> — «Если пойдёт дождь, я останусь дома».',
+  blocks: [
+    { kind: 'key', h: 'Шаг назад в действии',
+      p: 'Говорим про <b>будущее</b> — а в if-части ставим <b>настоящее</b>. Это первая ступень той самой лестницы: условие всегда отстаёт от результата на один шаг.' },
+    { kind: 'trap', h: 'Ловушка номер один во всём английском',
+      p: 'После <span class="mono">if</span> никогда не ставят <span class="mono">will</span>.<br><span class="mono no">If it will rain, I\'ll stay home</span> → <span class="mono yes">If it <b>rains</b>, I\'ll stay home</span><br>То же самое после <span class="mono">when, as soon as, until, before, after</span>: <span class="mono yes">I\'ll call you as soon as I <b>arrive</b></span>.' },
+    { kind: 'plain', h: 'Чем можно заменить will',
+      p: 'Во второй части вместо <span class="mono">will</span> легко встают <span class="mono">can, may, might, should, must</span> и даже повелительное наклонение.<br><span class="mono">If it rains, we <b>can</b> stay in.</span> · <span class="mono">If you see him, <b>tell</b> him to call me.</span>' },
+    { kind: 'plain', h: 'Unless = if not',
+      p: '<span class="mono">Unless you hurry, you\'ll miss it.</span> = <span class="mono">If you don\'t hurry, you\'ll miss it.</span> Обратите внимание: после unless отрицание уже не нужно — оно внутри самого слова.' }
+  ],
+  forms: { p: 'If it <b>rains</b>, I <b>\'ll stay</b> home.', n: 'If he <b>doesn\'t come</b>, we <b>\'ll start</b> without him.', q: 'What <b>will</b> you <b>do</b> if she says no?' },
+  markers: ['if', 'unless', 'as soon as', 'when', 'in case', 'provided that', 'will / can / may'],
+  ex: [
+    { en: 'If it <i class="v">rains</i>, I <i class="v">\'ll stay</i> at home.', ru: 'Если пойдёт дождь, я останусь дома.', nb: 'ни одного «бы» — значит, реальность' },
+    { en: 'If you <i class="v">don\'t hurry</i>, you <i class="v">\'ll miss</i> the train.', ru: 'Если не поторопишься, опоздаешь на поезд.' },
+    { en: 'I <i class="v">\'ll call</i> you as soon as I <i class="v">arrive</i>.', ru: 'Я позвоню, как только приеду.', nb: 'после as soon as тоже без will' },
+    { en: 'If you <i class="v">see</i> Tom, <i class="v">tell</i> him I\'m waiting.', ru: 'Если увидишь Тома, скажи ему, что я жду.', nb: 'вместо will — повелительное' }
+  ]
+},
+{
+  id: 'second', zone: 'unreal', level: 2, idx: 3,
+  name: 'Second Conditional', core: 'if + V2, would + V',
+  thesis: 'Два «бы» — и речь про сейчас',
+  short: 'Второй',
+  mxEx: 'If I had money, I would buy a house.',
+  figCap: 'Вторая ступень: говорим про настоящее, а в условие ставим прошедшее. Прошедшее время тут не про прошлое, а про «понарошку».',
+  lead: 'Нереальное или маловероятное условие, относящееся к <b>настоящему или будущему</b>. В русском здесь два «бы»: «Если бы у меня <b>были</b> деньги, я <b>бы купил</b> машину».',
+  blocks: [
+    { kind: 'key', h: 'Детектор двух «бы»',
+      p: 'Как только в русском переводе появляется «если <b>бы</b> … то … <b>бы</b>» — это точно второй или третий тип. Первый и нулевой отпадают сразу. Остаётся один вопрос: речь про сейчас или про тогда.' },
+    { kind: 'plain', h: 'Шаг назад',
+      p: 'Говорим про <b>настоящее</b> — а в if-части ставим <b>прошедшее</b>. Вторая ступень лестницы. Прошедшее время здесь работает не как прошлое, а как метка «это выдумка».' },
+    { kind: 'plain', h: 'Почему were, а не was',
+      p: 'В нереальном условии для всех лиц традиционно идёт <span class="mono">were</span>: <span class="mono">If I <b>were</b> you…</span>, <span class="mono">If he <b>were</b> here…</span> В разговорной речи слышно и <span class="mono">was</span>, но <span class="mono">were</span> — беспроигрышный вариант, а в обороте <span class="mono">If I were you</span> он обязателен.' },
+    { kind: 'plain', h: 'Самый частый способ дать совет',
+      p: '<span class="mono">If I were you, I would…</span> — по-русски это «на твоём месте я бы…». Запомните оборот целиком, он пригодится чаще всего остального в этой теме.' },
+    { kind: 'trap', h: 'Ловушка: would за if не заходит',
+      p: 'Правило то же, что и с <span class="mono">will</span>.<br><span class="mono no">If I would have money…</span> → <span class="mono yes">If I <b>had</b> money…</span>' }
+  ],
+  forms: { p: 'If I <b>had</b> time, I <b>would help</b>.', n: 'If I <b>didn\'t work</b> here, I <b>wouldn\'t know</b>.', q: 'What <b>would</b> you <b>do</b> if you won?' },
+  markers: ['if I were you', 'would', 'could', 'might', 'imagine', 'suppose'],
+  ex: [
+    { en: 'If I <i class="v">had</i> more money, I <i class="v">would buy</i> a house.', ru: 'Если бы у меня было больше денег, я бы купил дом.', nb: 'два «бы» — и всё это про сейчас' },
+    { en: 'If I <i class="v">were</i> you, I <i class="v">\'d apologise</i>.', ru: 'На твоём месте я бы извинился.', nb: 'совет' },
+    { en: 'What <i class="v">would</i> you <i class="v">do</i> if you <i class="v">won</i> the lottery?', ru: 'Что бы ты сделал, если бы выиграл в лотерею?' },
+    { en: 'If he <i class="v">studied</i> harder, he <i class="v">would pass</i>.', ru: 'Если бы он больше занимался, он бы сдал.', nb: 'он плохо учится сейчас — поэтому и не сдаёт' }
+  ]
+},
+{
+  id: 'third', zone: 'pastc', level: 2, idx: 4,
+  name: 'Third Conditional', core: 'if + had + V3, would have + V3',
+  thesis: 'Два «бы» — но поезд ушёл',
+  short: 'Третий',
+  mxEx: 'If I had known, I would have come.',
+  figCap: 'Третья ступень, дальше опускаться некуда: говорим про прошедшее, а в условие ставим предпрошедшее.',
+  lead: 'Нереальное условие <b>в прошлом</b>. Изменить уже ничего нельзя — это разговор о том, чего не случилось. В русском тут те же два «бы», что и во втором типе, поэтому различить их можно только по смыслу.',
+  blocks: [
+    { kind: 'key', h: 'Как отличить от второго типа',
+      p: 'Спросите себя: про какое время речь?<br>«Если бы у меня были деньги <b>(сейчас)</b>, я бы купил» — <b>второй</b>.<br>«Если бы у меня были деньги <b>(тогда)</b>, я бы купил» — <b>третий</b>.<br>Русский эти два случая не разводит вообще. Английский обязан, и подсказку приходится брать из контекста.' },
+    { kind: 'plain', h: 'Шаг назад',
+      p: 'Говорим про <b>прошедшее</b> — а в if-части ставим <b>предпрошедшее</b>. Третья ступень лестницы, ниже уже нечего.' },
+    { kind: 'plain', h: 'Как это звучит по-человечески',
+      p: 'Этот тип почти всегда означает «эх, надо было» или «вот если бы ты тогда…». Сожаление или мягкий упрёк: <span class="mono">If you had told me, I would have helped.</span>' },
+    { kind: 'trap', h: 'Ловушка: would have после if',
+      p: '<span class="mono no">If I would have known…</span> → <span class="mono yes">If I <b>had</b> known…</span><br>Это самая частая ошибка в третьем типе. Would никогда не заходит за <span class="mono">if</span> — ни в каком виде.' }
+  ],
+  forms: { p: 'If I <b>had known</b>, I <b>would have come</b>.', n: 'If she <b>hadn\'t helped</b>, we <b>wouldn\'t have finished</b>.', q: 'What <b>would</b> you <b>have done</b>?' },
+  markers: ['would have', 'could have', 'might have', 'if only', '«надо было»'],
+  ex: [
+    { en: 'If I <i class="v">had known</i>, I <i class="v">would have come</i> earlier.', ru: 'Если бы я знал, я бы приехал раньше.', nb: 'тогда — и уже ничего не изменить' },
+    { en: 'If you <i class="v">had told</i> me, I <i class="v">could have helped</i>.', ru: 'Если бы ты сказал, я бы мог помочь.', nb: 'мягкий упрёк' },
+    { en: 'She <i class="v">wouldn\'t have missed</i> the flight if she <i class="v">had left</i> earlier.', ru: 'Она бы не опоздала на рейс, если бы выехала раньше.' }
+  ]
+},
+{
+  id: 'mixed', zone: 'pastc', level: 3, idx: 5,
+  name: 'Mixed Conditionals', core: 'половинки из разных типов',
+  thesis: 'Условие и результат в разных временах',
+  short: 'Смешанный',
+  mxEx: 'If I had studied medicine, I would be a doctor now.',
+  figCap: 'Смешанный тип не добавляет новых деталей: он берёт if-часть от одного типа, а главную — от другого.',
+  lead: 'Смешанный тип появляется, когда <b>условие и результат живут в разных временах</b>. Чаще всего ошибка была в прошлом, а расплачиваемся мы за неё прямо сейчас.',
+  blocks: [
+    { kind: 'key', h: 'Вариант 1 · прошлое → настоящее',
+      p: '<span class="mono">If I <b>had studied</b> medicine, I <b>would be</b> a doctor now.</span><br>Условие в прошлом (не выучился), результат в настоящем (не врач). Формула: <span class="mono">if + had + V3, would + V</span>.<br>Слово <span class="mono">now</span> в конце почти всегда выдаёт именно этот вариант.' },
+    { kind: 'plain', h: 'Вариант 2 · настоящее → прошлое',
+      p: '<span class="mono">If I <b>weren\'t</b> so shy, I <b>would have asked</b> her out.</span><br>Постоянное свойство (стеснительный вообще), последствие в прошлом (не позвал). Формула: <span class="mono">if + V2, would have + V3</span>.' },
+    { kind: 'plain', h: 'Как распознать',
+      p: 'Посмотрите на каждую половину по отдельности и определите, к какому времени она относится. Если времена не совпали — перед вами смешанный тип. Никакой отдельной формулы запоминать не нужно.' }
+  ],
+  forms: { p: 'If I <b>had saved</b>, I <b>would be</b> rich now.', n: 'If he <b>hadn\'t lied</b>, we <b>wouldn\'t be</b> in this mess.', q: '<b>Would</b> you <b>be</b> here if you <b>had taken</b> that job?' },
+  markers: ['now', 'today', 'still', '«до сих пор»', '«тогда → сейчас»'],
+  ex: [
+    { en: 'If I <i class="v">had studied</i> medicine, I <i class="v">would be</i> a doctor now.', ru: 'Если бы я выучился на врача, я бы сейчас им работал.', nb: 'прошлое → настоящее' },
+    { en: 'If he <i class="v">had taken</i> that job, he <i class="v">would be living</i> in Berlin.', ru: 'Если бы он согласился на ту работу, он бы сейчас жил в Берлине.' },
+    { en: 'If I <i class="v">weren\'t</i> afraid of flying, I <i class="v">would have gone</i> with you.', ru: 'Если бы я не боялся летать, я бы поехал с вами.', nb: 'настоящее → прошлое' }
+  ]
+},
+{
+  id: 'inversion', zone: 'unreal', level: 3, idx: 6,
+  name: 'Инверсия без if', core: 'Were / Had / Should + подлежащее',
+  thesis: 'Убираем if — поднимаем глагол',
+  short: 'Инверсия',
+  mxEx: 'Had I known, I would have helped.',
+  figCap: 'Союз if исчезает, а его работу берёт на себя вспомогательный глагол, вышедший вперёд.',
+  lead: 'В книжной и деловой речи <span class="mono">if</span> можно выбросить совсем, а вспомогательный глагол поставить вперёд. Смысл тот же, звучание — строже.',
+  blocks: [
+    { kind: 'key', h: 'Три рабочие формулы',
+      p: '<span class="mono">If I <b>were</b> you</span> → <span class="mono"><b>Were</b> I you</span><br><span class="mono">If I <b>had</b> known</span> → <span class="mono"><b>Had</b> I known</span><br><span class="mono">If you <b>should</b> need help</span> → <span class="mono"><b>Should</b> you need help</span>' },
+    { kind: 'trap', h: 'Ловушка: инвертируются только три глагола',
+      p: 'Вперёд выходят только <span class="mono">were</span>, <span class="mono">had</span> и <span class="mono">should</span>. С обычными глаголами так не делают:<br><span class="mono no">Studied he harder, he would pass</span> — такого в английском нет.' },
+    { kind: 'plain', h: 'В отрицании не сокращают',
+      p: '<span class="mono yes">Had I not known…</span>, а не <span class="mono no">Hadn\'t I known…</span> Сокращённая форма в инверсии превратила бы фразу в вопрос.' },
+    { kind: 'plain', h: 'Где встретится',
+      p: 'Договоры, деловая переписка, литература. <span class="mono">Should you have any questions, please contact us.</span> — стандартная концовка делового письма, которую стоит просто узнавать в лицо.' }
+  ],
+  forms: { p: '<b>Had</b> I known, I would have helped.', n: '<b>Had</b> I <b>not</b> seen it myself…', q: '<i>инверсия сама по себе не вопрос</i>' },
+  markers: ['Were I…', 'Had I…', 'Should you…', 'формальный стиль'],
+  ex: [
+    { en: '<i class="v">Were</i> I you, I would accept the offer.', ru: 'На вашем месте я бы согласился на предложение.', nb: '= If I were you' },
+    { en: '<i class="v">Had</i> we left earlier, we would have caught the train.', ru: 'Если бы мы выехали раньше, мы бы успели на поезд.', nb: '= If we had left' },
+    { en: '<i class="v">Should</i> you need assistance, call this number.', ru: 'Если вам понадобится помощь, позвоните по этому номеру.', nb: 'деловой стандарт' }
+  ]
+},
+{
+  id: 'wish', zone: 'pastc', level: 3, idx: 7,
+  name: 'I wish / If only', core: 'wish + V2 / had + V3',
+  thesis: 'Тот же шаг назад, только без if',
+  short: 'I wish',
+  mxEx: 'I wish I had studied more.',
+  figCap: 'Механика та же, что в условных: сожаление о настоящем опускается в прошедшее, сожаление о прошлом — в предпрошедшее.',
+  lead: 'Ближайший родственник второго и третьего типов: та же механика шага назад, только вместо <span class="mono">if</span> стоит <span class="mono">I wish</span> или <span class="mono">If only</span>. По-русски это «жаль, что…» или «вот бы…».',
+  blocks: [
+    { kind: 'key', h: 'Две ступени — ровно как в условных',
+      p: 'Сожаление о <b>настоящем</b> → прошедшее время:<br><span class="mono">I wish I <b>had</b> more time.</span> — Жаль, что у меня мало времени <i>сейчас</i>.<br><br>Сожаление о <b>прошлом</b> → предпрошедшее:<br><span class="mono">I wish I <b>had studied</b> more.</span> — Жаль, что я мало учился <i>тогда</i>.' },
+    { kind: 'trap', h: 'Ловушка перевода: отрицание переворачивается',
+      p: 'Русское «жаль, что <b>не</b>» превращается в английское утверждение — частицу «не» съедает само слово <span class="mono">wish</span>.<br>«Жаль, что я <b>не</b> знаю» → <span class="mono yes">I wish I <b>knew</b></span> (без not)<br>«Жаль, что здесь <b>так</b> холодно» → <span class="mono yes">I wish it <b>weren\'t</b> so cold</span>' },
+    { kind: 'plain', h: 'Раздражение чужим поведением → would',
+      p: '<span class="mono">I wish he <b>would</b> stop interrupting.</span> — про то, что делает кто-то другой и что хочется прекратить. Про себя так не говорят: <span class="mono no">I wish I would…</span>' },
+    { kind: 'plain', h: 'If only — то же самое, но громче',
+      p: '<span class="mono">If only we had left earlier!</span> Смысл тот же, эмоции сильнее. Часто идёт с восклицательным знаком и без второй части.' }
+  ],
+  forms: { p: 'I <b>wish</b> I <b>knew</b> the answer.', n: 'I <b>wish</b> it <b>weren\'t</b> so cold.', q: '<b>Don\'t</b> you <b>wish</b> you <b>had gone</b>?' },
+  markers: ['I wish', 'If only', '«жаль, что»', '«вот бы»', 'would (о чужом)'],
+  ex: [
+    { en: 'I wish I <i class="v">knew</i> the answer.', ru: 'Жаль, что я не знаю ответа.', nb: 'про сейчас — и «не» по-английски исчезает' },
+    { en: 'I wish I <i class="v">had studied</i> more.', ru: 'Жаль, что я мало учился.', nb: 'про тогда' },
+    { en: 'I wish he <i class="v">would stop</i> interrupting.', ru: 'Вот бы он перестал перебивать.', nb: 'раздражение чужим поведением' },
+    { en: 'If only we <i class="v">had left</i> earlier!', ru: 'Вот если бы мы выехали раньше!' }
+  ]
+}
+];
+
+/* ═══════════════ ДУЭЛИ · УСЛОВНЫЕ ═══════════════ */
+const CDUELS = [
+  {
+    q: 'First или Second? — считаем «бы»',
+    a: { z: 'real', n: 'First · реально', en: 'If it <i class="v">rains</i>, I <i class="v">\'ll stay</i> home.', ru: 'Если пойдёт дождь, я останусь дома.', why: 'Ни одного «бы». Дождь вполне может пойти — это реальный прогноз на будущее.' },
+    b: { z: 'unreal', n: 'Second · воображение', en: 'If it <i class="v">rained</i>, I <i class="v">would stay</i> home.', ru: 'Если бы шёл дождь, я бы остался дома.', why: 'Два «бы». Дождя нет и не ожидается — мы просто фантазируем.' },
+    r: 'Посчитайте «бы» в русском переводе. Ноль — первый тип. Два — второй или третий.'
+  },
+  {
+    q: 'Second или Third? — спрашиваем «когда»',
+    a: { z: 'unreal', n: 'Second · если бы сейчас', en: 'If I <i class="v">had</i> money, I <i class="v">would buy</i> it.', ru: 'Если бы у меня были деньги, я бы это купил.', why: 'Денег нет прямо сейчас. Ситуацию теоретически ещё можно изменить.' },
+    b: { z: 'pastc', n: 'Third · если бы тогда', en: 'If I <i class="v">had had</i> money, I <i class="v">would have bought</i> it.', ru: 'Если бы у меня были деньги, я бы это купил.', why: 'Денег не было тогда, и вещь уже не куплена. Изменить нельзя ничего.' },
+    r: 'Русский перевод у обоих одинаковый — вот почему это самая коварная пара. Разводить их приходится по смыслу: речь про сейчас или про тогда.'
+  },
+  {
+    q: 'Third или Mixed? — куда смотрит результат',
+    a: { z: 'pastc', n: 'Third · результат в прошлом', en: 'If I <i class="v">had studied</i>, I <i class="v">would have passed</i>.', ru: 'Если бы я учился, я бы сдал.', why: 'Обе половины про прошлое: не учился тогда — не сдал тогда.' },
+    b: { z: 'pastc', n: 'Mixed · результат сейчас', en: 'If I <i class="v">had studied</i>, I <i class="v">would be</i> a doctor now.', ru: 'Если бы я учился, я бы сейчас был врачом.', why: 'Условие в прошлом, а результат в настоящем. Слово now выдаёт смешанный тип.' },
+    r: 'Проверьте половины по отдельности. Обе про прошлое — третий тип. Разошлись по временам — смешанный.'
+  },
+  {
+    q: 'if или when? — насколько это точно',
+    a: { z: 'real', n: 'if · может быть', en: '<i class="v">If</i> I finish early, I\'ll call you.', ru: 'Если закончу рано, позвоню.', why: 'Не факт, что закончу рано. Условие под вопросом.' },
+    b: { z: 'real', n: 'when · точно будет', en: '<i class="v">When</i> I finish, I\'ll call you.', ru: 'Когда закончу, позвоню.', why: 'Закончу обязательно, вопрос только в том, во сколько.' },
+    r: 'if — событие под вопросом, when — событие точно произойдёт. Но правило «никакого will после них» одинаково для обоих.'
+  },
+  {
+    q: 'I wish + прошедшее или предпрошедшее?',
+    a: { z: 'unreal', n: 'wish + V2 · про сейчас', en: 'I wish I <i class="v">spoke</i> French.', ru: 'Жаль, что я не говорю по-французски.', why: 'Не говорю прямо сейчас. Один шаг назад — как во втором типе.' },
+    b: { z: 'pastc', n: 'wish + had + V3 · про тогда', en: 'I wish I <i class="v">had learnt</i> French.', ru: 'Жаль, что я не выучил французский.', why: 'Не выучил тогда, в прошлом. Два шага назад — как в третьем типе.' },
+    r: 'Та же лестница, что и в условных: сожаление о настоящем опускается на один шаг, о прошлом — на два.'
+  }
+];
+</script>
+<script>
+/* ═══════════════════════════════════════════════════════════
+   ЗАДАНИЯ ПО УСЛОВНЫМ ПРЕДЛОЖЕНИЯМ
+   ═══════════════════════════════════════════════════════════ */
+const CDRILLS = {
+
+'zero': [
+  Q('If you ___ ice, it melts.',
+    ['+heat', 'Закон природы: обе части в настоящем времени.'],
+    ['will heat', 'После if will не ставят никогда, и уж тем более в законе природы.'],
+    ['would heat', 'Would превратил бы закон в фантазию, а лёд тает на самом деле.']),
+  Q('Water ___ if you cool it to zero.',
+    ['+freezes', 'Нулевой тип: и условие, и результат в настоящем.'],
+    ['will freeze', 'Will сделал бы это прогнозом на один конкретный случай, а это правило, работающее всегда.'],
+    ['froze', 'Прошедшее время превратило бы закон в разовое событие.']),
+  Q('If I ___ coffee late, I don\'t sleep.',
+    ['+drink', 'Личная закономерность работает так же, как закон природы.'],
+    ['will drink', 'После if will не ставят.'],
+    ['would drink', 'Два «бы» тут ни при чём: это не фантазия, а то, что происходит каждый раз.']),
+  Q('If you press this button, the machine ___.',
+    ['+stops', 'Инструкция описывает то, что срабатывает всегда, — обе части в настоящем.'],
+    ['will stop', 'Так сказали бы про один конкретный раз. В инструкции нужен общий случай.'],
+    ['stopped', 'Прошедшее превратило бы инструкцию в рассказ о случившемся.']),
+  Q('Plants ___ if you don\'t water them.',
+    ['+die', 'Общее правило про все растения, а не про конкретный горшок.'],
+    ['will die', 'Это прогноз про один случай, а нам нужна закономерность.'],
+    ['would die', 'Would уводит в область воображаемого, а растения гибнут по-настоящему.']),
+  Q('If the temperature ___ below zero, the pipes freeze.',
+    ['+falls', 'Каждый раз, когда это происходит, — значит нулевой тип.'],
+    ['will fall', 'После if will не ставят.'],
+    ['would fall', 'Речь не о фантазии, а о том, что случается регулярно.']),
+  Q('My dog barks if someone ___ the doorbell.',
+    ['+rings', 'Устойчивая реакция, повторяющаяся каждый раз.'],
+    ['will ring', 'После if will не ставят.'],
+    ['rang', 'Прошедшее сделало бы это рассказом об одном конкретном звонке.']),
+  Q('If you ___ salt into water, it dissolves.',
+    ['+put', 'Обе части в настоящем — это правило химии.'],
+    ['will put', 'После if will не ставят.'],
+    ['would put', 'Растворение соли — факт, а не предположение.']),
+  Q('If you don\'t ___ enough, you get tired.',
+    ['+sleep', 'Закономерность, верная всегда.'],
+    ['slept', 'Прошедшее превратило бы это в нереальное условие про настоящее.'],
+    ['will sleep', 'После if will не ставят.']),
+  Q('Metal ___ when you heat it.',
+    ['+expands', 'Здесь when равно if — верный признак нулевого типа.'],
+    ['will expand', 'Это прогноз про конкретный кусок металла, а не закон физики.'],
+    ['would expand', 'Would увёл бы в воображаемое, а расширение металла реально.'])
+],
+
+'first': [
+  Q('If it ___ tomorrow, we\'ll cancel the picnic.',
+    ['+rains', 'После if будущее выражают настоящим временем.'],
+    ['will rain', 'Главное правило темы: после if will не ставят.'],
+    ['would rain', 'Would — это два «бы», а здесь в русском нет ни одного.']),
+  Q('I\'ll call you as soon as I ___.',
+    ['+arrive', 'После as soon as действует то же правило, что и после if.'],
+    ['will arrive', 'После as soon as, when, until, before will тоже не ставят.'],
+    ['arrived', 'Прошедшее противоречит обещанию про будущее.']),
+  Q('If you don\'t hurry, you ___ the bus.',
+    ['+\'ll miss', 'Will живёт в главной части — именно там ему и место.'],
+    ['miss', 'В главной части нужен показатель будущего.'],
+    ['would miss', 'Would относится ко второму типу, а опоздание тут вполне реально.']),
+  Q('___ you help me if I ___ stuck?',
+    ['+Will / get', 'Will в главной части, настоящее время после if.'],
+    ['Will / will get', 'Второй will после if лишний — это самая частая ошибка.'],
+    ['Would / got', 'Это уже второй тип: «а помог бы ты, если бы я застрял».']),
+  Q('Unless you ___, you\'ll be late.',
+    ['+leave now', 'Unless уже содержит в себе отрицание: unless = if not.'],
+    ['don\'t leave now', 'Получилось двойное отрицание: «если не не уйдёшь».'],
+    ['won\'t leave', 'После unless, как и после if, will не ставят.']),
+  Q('If you see Tom, ___ him to call me.',
+    ['+tell', 'В главной части вместо will спокойно стоит повелительное наклонение.'],
+    ['will tell', 'Здесь просьба, а не прогноз, поэтому нужна форма приказа.'],
+    ['would tell', 'Would превратил бы просьбу в фантазию.']),
+  Q('We\'ll start the meeting when everyone ___.',
+    ['+is here', 'После when о будущем говорят настоящим временем.'],
+    ['will be here', 'После when will не ставят — правило то же, что и для if.'],
+    ['would be here', 'Would здесь неуместен: собрание реально начнётся.']),
+  Q('If I ___ time tonight, I might join you.',
+    ['+have', 'После if настоящее время, а в главной части might вместо will.'],
+    ['will have', 'После if will не ставят.'],
+    ['had', 'Прошедшее превратило бы это во второй тип: «если бы у меня было время».']),
+  Q('Take an umbrella in case it ___.',
+    ['+rains', 'После in case действует то же правило: будущее через настоящее.'],
+    ['will rain', 'После in case will не ставят.'],
+    ['would rain', 'Дождь вполне реален, фантазии тут нет.']),
+  Q('If she ___ the exam, she\'ll go to university.',
+    ['+passes', 'Настоящее после if, will в главной части. И -s для she.'],
+    ['will pass', 'После if will не ставят.'],
+    ['passed', 'Прошедшее сделало бы поступление воображаемым.'])
+],
+
+'second': [
+  Q('If I ___ you, I\'d take the job.',
+    ['+were', 'В нереальном условии для всех лиц идёт were, а в обороте If I were you он обязателен.'],
+    ['am', 'Настоящее время не годится: вы не можете быть другим человеком, это фантазия.'],
+    ['will be', 'После if will не ставят, и совет строится не через будущее.']),
+  Q('If I ___ more money, I would travel more.',
+    ['+had', 'Второй тип: после if прошедшее время, в главной части would.'],
+    ['have', 'Настоящее превратило бы это в реальное условие, а денег нет.'],
+    ['would have', 'Would за if не заходит — это одна из главных ошибок темы.']),
+  Q('What ___ you do if you won the lottery?',
+    ['+would', 'Два «бы» в русском: «что бы ты сделал, если бы выиграл».'],
+    ['will', 'Выигрыш в лотерею подан как фантазия, а не как реальный план.'],
+    ['did', 'Простое прошедшее сделало бы это вопросом о реальном прошлом.']),
+  Q('If he ___ harder, he would pass.',
+    ['+studied', 'Прошедшее после if — метка того, что на самом деле он не занимается.'],
+    ['studies', 'Настоящее сделало бы условие реальным, а мы говорим о том, чего нет.'],
+    ['would study', 'Would после if невозможен.']),
+  Q('I ___ that if I were you.',
+    ['+wouldn\'t do', 'Главная часть второго типа: would плюс начальная форма.'],
+    ['won\'t do', 'Will не сочетается со вторым типом: это фантазия, а не прогноз.'],
+    ['didn\'t do', 'Простое прошедшее превратило бы совет в рассказ о прошлом.']),
+  Q('If we ___ a car, we could drive there.',
+    ['+had', 'Прошедшее после if. В главной части вместо would стоит could — так тоже можно.'],
+    ['have', 'Настоящее сделало бы условие реальным, а машины у нас нет.'],
+    ['would have', 'Would за if не заходит.']),
+  Q('If I ___ speak Chinese, I\'d work in Beijing.',
+    ['+could', 'Could — это прошедшая форма can, а значит подходящий шаг назад.'],
+    ['can', 'Настоящее время превратило бы это в реальное условие.'],
+    ['will', 'После if will не ставят.']),
+  Q('She would be happier if she ___ so much.',
+    ['+didn\'t work', 'Прошедшее после if, хотя речь о её нынешней жизни.'],
+    ['doesn\'t work', 'Настоящее не даёт нужного шага назад.'],
+    ['wouldn\'t work', 'Would после if невозможен.']),
+  Q('If the shop ___ open, I would buy some milk.',
+    ['+were', 'Нереальное условие про настоящее: магазин закрыт.'],
+    ['is', 'Настоящее сделало бы условие реальным, а магазин не работает.'],
+    ['will be', 'После if will не ставят.']),
+  Q('If I ___ a superpower, I\'d choose invisibility.',
+    ['+had', 'Чистая фантазия — значит второй тип.'],
+    ['have', 'Настоящее подало бы суперсилу как реальную возможность.'],
+    ['would have', 'Would за if не заходит.'])
+],
+
+'third': [
+  Q('If I ___ known, I would have come.',
+    ['+had', 'Третий тип: после if предпрошедшее, то есть had плюс третья форма.'],
+    ['have', 'Перфект настоящего не даёт нужного шага назад.'],
+    ['would have', 'Самая частая ошибка темы: would никогда не заходит за if.']),
+  Q('She would have passed if she ___ harder.',
+    ['+had studied', 'Условие в прошлом требует had плюс третья форма.'],
+    ['studied', 'Простое прошедшее дало бы второй тип: «если бы она занималась сейчас».'],
+    ['would have studied', 'Would после if невозможен.']),
+  Q('If we ___ earlier, we wouldn\'t have missed the train.',
+    ['+had left', 'Поезд уже ушёл — изменить ничего нельзя, значит третий тип.'],
+    ['left', 'Простое прошедшее сместило бы смысл в сторону настоящего.'],
+    ['would leave', 'Would после if не ставят.']),
+  Q('I ___ you if you had asked.',
+    ['+would have helped', 'Главная часть третьего типа: would have плюс третья форма.'],
+    ['would help', 'Это дало бы смешанный тип — результат в настоящем, а тут всё в прошлом.'],
+    ['will help', 'Will не сочетается с нереальным прошлым.']),
+  Q('If he ___ so fast, he wouldn\'t have crashed.',
+    ['+hadn\'t driven', 'Отрицание в предпрошедшем: hadn\'t плюс третья форма.'],
+    ['didn\'t drive', 'Простое прошедшее не даёт нужной глубины шага назад.'],
+    ['wouldn\'t drive', 'Would после if невозможен.']),
+  Q('What ___ you ___ if you had been there?',
+    ['+would / have done', 'Вопрос в третьем типе: would have плюс третья форма.'],
+    ['will / do', 'Will не сочетается с нереальным прошлым.'],
+    ['would / do', 'Пропало have: без него получается второй тип, то есть «сейчас».']),
+  Q('If they ___ us, we could have joined them.',
+    ['+had told', 'Условие в прошлом: had плюс третья форма.'],
+    ['told', 'Простое прошедшее увело бы во второй тип.'],
+    ['would have told', 'Would за if не заходит.']),
+  Q('The party would have been better if you ___.',
+    ['+had come', 'Вечеринка уже прошла, изменить ничего нельзя.'],
+    ['came', 'Простое прошедшее не подходит: речь именно про завершённое прошлое.'],
+    ['would come', 'Would после if невозможен.']),
+  Q('If I ___ that film, I\'d have recognised the actor.',
+    ['+had seen', 'Не смотрел тогда — не узнал тогда. Всё в прошлом.'],
+    ['saw', 'Простое прошедшее дало бы второй тип.'],
+    ['would see', 'Would после if не ставят.']),
+  Q('He wouldn\'t have got lost if he ___ a map.',
+    ['+had taken', 'Карту не взял тогда, и результат уже случился.'],
+    ['took', 'Простое прошедшее сместило бы смысл во второй тип.'],
+    ['would take', 'Would после if невозможен.'])
+],
+
+'mixed': [
+  Q('If I ___ medicine, I would be a doctor now.',
+    ['+had studied', 'Условие в прошлом, а результат в настоящем — классический смешанный тип.'],
+    ['studied', 'Это дало бы чистый второй тип, без отсылки к прошлому решению.'],
+    ['would study', 'Would после if невозможен.']),
+  Q('If he hadn\'t lost his passport, he ___ in Spain now.',
+    ['+would be', 'Слово now показывает, что результат в настоящем: would плюс начальная форма.'],
+    ['would have been', 'Это дало бы чистый третий тип, а результат у нас сегодняшний.'],
+    ['will be', 'Will не сочетается с нереальным условием.']),
+  Q('If I ___ so shy, I would have asked her out.',
+    ['+weren\'t', 'Постоянное свойство в настоящем, а последствие в прошлом — обратный смешанный тип.'],
+    ['hadn\'t been', 'Это дало бы чистый третий тип, а стеснительность — черта характера вообще.'],
+    ['wouldn\'t be', 'Would после if невозможен.']),
+  Q('If she had taken that job, she ___ in Berlin today.',
+    ['+would be living', 'Решение в прошлом, жизнь в настоящем. Слово today выдаёт смешанный тип.'],
+    ['would have lived', 'Это увело бы результат обратно в прошлое.'],
+    ['will live', 'Will не сочетается с нереальным условием.']),
+  Q('If I ___ up earlier, I wouldn\'t be so tired now.',
+    ['+had got', 'Проспал утром, а усталость мучает прямо сейчас.'],
+    ['got', 'Простое прошедшее дало бы второй тип про привычку вставать рано вообще.'],
+    ['would get', 'Would после if невозможен.']),
+  Q('If I spoke Italian, I ___ that job last year.',
+    ['+would have got', 'Незнание языка — свойство вообще, а работа упущена в прошлом году.'],
+    ['would get', 'Это увело бы результат в настоящее, а речь про прошлый год.'],
+    ['will get', 'Will не сочетается с нереальным условием.']),
+  Q('We ___ friends now if I hadn\'t moved away.',
+    ['+would still be', 'Переезд в прошлом, дружбы нет сейчас.'],
+    ['would have been', 'Это дало бы чистый третий тип, а слово now указывает на настоящее.'],
+    ['are', 'Настоящее время подало бы это как реальность, а друзьями мы не остались.']),
+  Q('If he weren\'t afraid of heights, he ___ with us yesterday.',
+    ['+would have climbed', 'Страх — постоянное свойство, а восхождение было вчера.'],
+    ['would climb', 'Это увело бы результат в настоящее, а речь про вчера.'],
+    ['will climb', 'Will не сочетается с нереальным условием.']),
+  Q('If they had invested then, they ___ rich today.',
+    ['+would be', 'Слова then и today прямо разводят половины по временам.'],
+    ['would have been', 'Это оставило бы результат в прошлом, а он у нас сегодняшний.'],
+    ['are', 'Настоящее подало бы богатство как факт, а его нет.']),
+  Q('I ___ so nervous now if I had prepared better.',
+    ['+wouldn\'t be', 'Подготовка в прошлом, нервы прямо сейчас.'],
+    ['wouldn\'t have been', 'Это вернуло бы результат в прошлое, а слово now держит его в настоящем.'],
+    ['won\'t be', 'Will не сочетается с нереальным условием.'])
+],
+
+'inversion': [
+  Q('___ I you, I would accept the offer.',
+    ['+Were', 'Инверсия от If I were you: were выходит вперёд, if исчезает.'],
+    ['Was', 'В нереальном условии для всех лиц идёт were, и в инверсии тоже.'],
+    ['If were', 'Либо if, либо инверсия. Вместе они не ставятся.']),
+  Q('___ I known, I would have helped.',
+    ['+Had', 'Инверсия от If I had known: вперёд выходит had.'],
+    ['Have', 'Нужна форма предпрошедшего, то есть had.'],
+    ['Would have', 'Would остаётся в главной части и вперёд не выходит.']),
+  Q('___ you need any help, call this number.',
+    ['+Should', 'Инверсия от If you should need: вежливая деловая формула.'],
+    ['Would', 'Would в инверсию не выходит.'],
+    ['Will', 'Will не участвует в инверсии условия.']),
+  Q('___ we left earlier, we would have caught the train.',
+    ['+Had', 'Условие в прошлом, значит вперёд выходит had.'],
+    ['Did', 'Did в инверсии условных не используется.'],
+    ['Have', 'Нужно предпрошедшее: had.']),
+  Q('___ he not warned us, we would have got lost.',
+    ['+Had', 'В инверсии отрицание ставят отдельно: Had he not warned.'],
+    ['Hadn\'t', 'В инверсии не сокращают: сокращение превратило бы фразу в вопрос.'],
+    ['Didn\'t', 'Did в инверсии условных не используется.']),
+  Q('___ it not for your help, I would have failed.',
+    ['+Were', 'Устойчивый оборот Were it not for — «если бы не».'],
+    ['Was', 'В инверсии условия идёт were для всех лиц.'],
+    ['Had', 'Had потребовал бы третью форму глагола после подлежащего.']),
+  Q('Какой вариант возможен? «Если бы он больше занимался, он бы сдал.»',
+    ['+If he studied harder, he would pass.', 'Обычный глагол инвертировать нельзя — остаётся только вариант с if.'],
+    ['Studied he harder, he would pass.', 'Так не говорят: вперёд выходят только were, had и should.'],
+    ['Did he study harder, he would pass.', 'Did в инверсии условных не используется.']),
+  Q('___ you have any questions, please contact us.',
+    ['+Should', 'Стандартная концовка делового письма.'],
+    ['Will', 'Will не участвует в инверсии.'],
+    ['Would', 'Would остаётся в главной части.']),
+  Q('___ I not seen it myself, I wouldn\'t believe it.',
+    ['+Had', 'Предпрошедшее с раздельным отрицанием.'],
+    ['Hadn\'t', 'В инверсии сокращённую форму не используют.'],
+    ['Have', 'Нужно предпрошедшее had, а не have.']),
+  Q('___ the weather better, we would go out.',
+    ['+Were', 'Инверсия от If the weather were better.'],
+    ['Was', 'В нереальном условии идёт were для всех лиц.'],
+    ['Had', 'Had требует после подлежащего третью форму глагола, а здесь её нет.'])
+],
+
+'wish': [
+  Q('I wish I ___ the answer.',
+    ['+knew', 'Сожаление о настоящем опускается на один шаг — в прошедшее время.'],
+    ['know', 'Настоящее время не даёт нужного шага назад.'],
+    ['would know', 'Would после wish говорит о чужом поведении, а не о собственном знании.']),
+  Q('I wish I ___ harder at school.',
+    ['+had studied', 'Сожаление о прошлом опускается на два шага — в предпрошедшее.'],
+    ['studied', 'Это было бы сожаление о настоящем: «жаль, что я мало занимаюсь вообще».'],
+    ['would study', 'Про себя так не говорят: would относится к чужим действиям.']),
+  Q('I wish it ___ so cold.',
+    ['+weren\'t', 'Про настоящее — прошедшее время, и для погоды традиционно were.'],
+    ['isn\'t', 'Настоящее время после wish не используется.'],
+    ['wouldn\'t be', 'Would тут неуместен: погода не «упрямится» нарочно.']),
+  Q('I wish he ___ interrupting me.',
+    ['+would stop', 'Раздражение чужим поведением, которое хочется прекратить.'],
+    ['stopped', 'Это было бы описание состояния, а не просьба изменить поведение.'],
+    ['had stopped', 'Это сожаление о прошлом, а человек перебивает прямо сейчас.']),
+  Q('«Жаль, что я не говорю по-испански» — I wish I ___ Spanish.',
+    ['+spoke', 'Русское «не» съедает само слово wish, поэтому по-английски глагол утвердительный.'],
+    ['don\'t speak', 'Двойное отрицание: получилось бы «жаль, что я не не говорю».'],
+    ['didn\'t speak', 'То же двойное отрицание, только в прошедшем времени.']),
+  Q('If only we ___ earlier! The train has gone.',
+    ['+had left', 'Поезд уже ушёл — сожаление о прошлом, значит предпрошедшее.'],
+    ['left', 'Это было бы сожаление о настоящей привычке выезжать поздно.'],
+    ['would leave', 'Про собственные прошлые действия would не используют.']),
+  Q('I wish I ___ that email yesterday.',
+    ['+hadn\'t sent', 'Письмо отправлено вчера — сожаление о прошлом.'],
+    ['didn\'t send', 'Простое прошедшее не даёт нужной глубины для сожаления о случившемся.'],
+    ['wouldn\'t send', 'Would не годится для собственного поступка в прошлом.']),
+  Q('She wishes she ___ taller.',
+    ['+were', 'Сожаление о настоящем, и после wish традиционно идёт were.'],
+    ['is', 'Настоящее время после wish не используется.'],
+    ['would be', 'Рост не зависит от её желания — would тут неуместен.']),
+  Q('I wish you ___ me sooner — I could have helped.',
+    ['+had told', 'Вторая часть в третьем типе показывает, что речь о прошлом.'],
+    ['told', 'Простое прошедшее дало бы сожаление о настоящей привычке молчать.'],
+    ['would tell', 'Про уже случившееся would не используют.']),
+  Q('I wish I ___ drive — I\'d buy a car.',
+    ['+could', 'Could — прошедшая форма can, то есть нужный шаг назад про настоящее.'],
+    ['can', 'Настоящее время после wish не используется.'],
+    ['would', 'Would говорил бы о нежелании, а речь про отсутствие навыка.'])
+]
+
+};
+
+/* ═══════════════ ОБЩИЙ ТРЕНАЖЁР · УСЛОВНЫЕ ═══════════════ */
+const QUIZ_C = [
+  Q('If you ___ water to 100 degrees, it boils.',
+    ['+heat', 'Закон природы — нулевой тип, обе части в настоящем.'],
+    ['will heat', 'После if will не ставят.'],
+    ['heated', 'Прошедшее превратило бы закон в фантазию.']),
+  Q('If it ___ tomorrow, the match will be cancelled.',
+    ['+rains', 'Ни одного «бы» — реальное условие в будущем, то есть первый тип.'],
+    ['will rain', 'Главное правило: после if will не ставят.'],
+    ['rained', 'Прошедшее сделало бы дождь воображаемым.']),
+  Q('If I ___ you, I\'d accept the offer.',
+    ['+were', 'Два «бы» и речь про сейчас — второй тип. В обороте If I were you всегда were.'],
+    ['was', 'В нереальном условии для всех лиц традиционно идёт were.'],
+    ['am', 'Настоящее время превратило бы фантазию в реальность.']),
+  Q('If I ___ known about the meeting, I would have come.',
+    ['+had', 'Два «бы» и речь про прошлое — третий тип.'],
+    ['have', 'Нужно предпрошедшее: had плюс третья форма.'],
+    ['would have', 'Would никогда не заходит за if.']),
+  Q('If she had taken that job, she ___ in Berlin now.',
+    ['+would be', 'Условие в прошлом, результат в настоящем — смешанный тип. Слово now это выдаёт.'],
+    ['would have been', 'Это вернуло бы результат в прошлое, а он сегодняшний.'],
+    ['will be', 'Will не сочетается с нереальным условием.']),
+  Q('___ I known earlier, I would have called.',
+    ['+Had', 'Инверсия от If I had known: вперёд выходит had, if исчезает.'],
+    ['Have', 'Нужна форма предпрошедшего.'],
+    ['If had', 'Либо if, либо инверсия — вместе они не ставятся.']),
+  Q('I wish I ___ how to swim.',
+    ['+knew', 'Сожаление о настоящем — один шаг назад, в прошедшее.'],
+    ['know', 'После wish настоящее время не используется.'],
+    ['had known', 'Это было бы сожаление о прошлом, а плавать хочется уметь сейчас.']),
+  Q('Plants die if you ___ water them.',
+    ['+don\'t', 'Нулевой тип: общее правило, обе части в настоящем.'],
+    ['won\'t', 'После if will и won\'t не ставят.'],
+    ['didn\'t', 'Прошедшее увело бы во второй тип.']),
+  Q('I\'ll text you as soon as I ___ home.',
+    ['+get', 'После as soon as будущее выражают настоящим — как и после if.'],
+    ['will get', 'После as soon as will не ставят.'],
+    ['got', 'Прошедшее противоречит обещанию про будущее.']),
+  Q('What would you do if you ___ a million?',
+    ['+won', 'Два «бы» и фантазия про настоящее — второй тип, после if прошедшее.'],
+    ['win', 'Настоящее подало бы выигрыш как реальный план.'],
+    ['would win', 'Would после if невозможен.']),
+  Q('We wouldn\'t have got lost if he ___ a map.',
+    ['+had taken', 'Всё уже случилось — третий тип, после if предпрошедшее.'],
+    ['took', 'Простое прошедшее увело бы во второй тип.'],
+    ['would take', 'Would после if не ставят.']),
+  Q('If I weren\'t afraid of flying, I ___ with you last summer.',
+    ['+would have gone', 'Свойство характера в настоящем, а поездка упущена в прошлом — смешанный тип.'],
+    ['would go', 'Это увело бы результат в настоящее, а речь про прошлое лето.'],
+    ['will go', 'Will не сочетается с нереальным условием.']),
+  Q('___ you need anything, just let me know.',
+    ['+Should', 'Инверсия от If you should need — вежливая деловая формула.'],
+    ['Will', 'Will в инверсии условия не используется.'],
+    ['Would', 'Would остаётся в главной части.']),
+  Q('If only I ___ that message yesterday!',
+    ['+hadn\'t sent', 'Сожаление о вчерашнем поступке — значит предпрошедшее.'],
+    ['didn\'t send', 'Простое прошедшее не годится для сожаления о конкретном случившемся.'],
+    ['wouldn\'t send', 'Про собственный поступок в прошлом would не используют.'])
+];
+</script>
+<script>
+/* ═══════════════════════════════════════════════════════════
+   ТРЕНАЖЁР · один компонент на все 21 блок заданий
+   Показывает по одному вопросу. После ответа — разбор:
+   почему верный вариант верный и чем плох выбранный.
+   ═══════════════════════════════════════════════════════════ */
+function makeQuiz(root, questions, opts) {
+  opts = opts || {};
+  const title = opts.title || 'Проверь себя';
+  let i = 0, score = 0, answered = false;
+
+  root.innerHTML = `
+    <div class="drill__top">
+      <span class="eyebrow" data-r="num"></span>
+      <div class="drill__bar"><i data-r="bar"></i></div>
+      <span class="drill__score" data-r="score"></span>
+    </div>
+    <div class="drill__body">
+      <div class="qz__q" data-r="q"></div>
+      <div class="qz__opts" data-r="opts"></div>
+      <div class="qz__fb" data-r="fb"></div>
+      <div class="qz__nav">
+        <button class="btn" data-r="next" hidden>Дальше →</button>
+        <button class="btn ghost" data-r="again" hidden>Пройти заново</button>
+        <span class="qz__done" data-r="done"></span>
+      </div>
+    </div>`;
+
+  const el = {};
+  root.querySelectorAll('[data-r]').forEach(n => el[n.dataset.r] = n);
+
+  function render() {
+    const q = questions[i];
+    answered = false;
+    el.num.textContent = `${title} · ${i + 1} / ${questions.length}`;
+    el.bar.style.width = (i / questions.length * 100) + '%';
+    el.score.textContent = `${score} верно`;
+    el.q.innerHTML = q.s.split('___').join('<u></u>');
+    el.opts.innerHTML = q.o.map((o, k) => `<button data-k="${k}">${o.t}</button>`).join('');
+    el.fb.innerHTML = '';
+    el.next.hidden = true;
+    el.again.hidden = true;
+    el.done.textContent = '';
+  }
+
+  el.opts.addEventListener('click', e => {
+    const b = e.target.closest('button');
+    if (!b || answered) return;
+    answered = true;
+
+    const q = questions[i], pick = +b.dataset.k;
+    const right = q.o.findIndex(o => o.ok);
+    [...el.opts.children].forEach((btn, k) => {
+      btn.disabled = true;
+      if (k === right) btn.classList.add('right');
+      else if (k === pick) btn.classList.add('wrong');
+    });
+
+    const rows = [];
+    if (pick !== right) {
+      rows.push(`<div class="qz__row bad"><b>✗ ${q.o[pick].t}</b><span>${q.o[pick].w}</span></div>`);
+    } else {
+      score++;
+    }
+    rows.push(`<div class="qz__row good"><b>✓ ${q.o[right].t}</b><span>${q.o[right].w}</span></div>`);
+    el.fb.innerHTML = rows.join('');
+
+    el.score.textContent = `${score} верно`;
+    el.bar.style.width = ((i + 1) / questions.length * 100) + '%';
+
+    if (i < questions.length - 1) {
+      el.next.hidden = false;
+    } else {
+      el.again.hidden = false;
+      const pct = score / questions.length;
+      el.done.innerHTML = `<b>Итог: ${score} из ${questions.length}.</b> ` + (
+        pct >= 0.9 ? 'Тема закрыта — можно идти дальше.' :
+        pct >= 0.7 ? 'База крепкая, слабые места видно по разборам выше.' :
+                     'Стоит перечитать блок и вернуться к заданиям.');
+    }
+  });
+
+  el.next.addEventListener('click', () => { i++; render(); root.scrollIntoView({ block: 'nearest' }); });
+  el.again.addEventListener('click', () => { i = 0; score = 0; render(); });
+  render();
+}
+
+/* ═══════════════════════════════════════════════════════════
+   СТАНЦИЯ · общая для времён и условных
+   ═══════════════════════════════════════════════════════════ */
+function stationHTML(it, cfg) {
+  const blocks = it.blocks.map(b => `
+    <div class="blk callout ${b.kind === 'trap' ? 'trap' : b.kind === 'key' ? 'key' : ''}"
+         ${b.kind === 'plain' ? 'style="border-left-color:var(--line)"' : ''}>
+      <h4>${b.h}</h4><p>${b.p}</p>
+    </div>`).join('');
+
+  const ex = it.ex.map(e => `
+    <li><span class="en">${e.en}</span><span class="ru">${e.ru}</span>${e.nb ? `<span class="nb">${e.nb}</span>` : ''}</li>`).join('');
+
+  return `
+  <article class="station z-${it.zone}" id="${it.id}">
+    <div class="st__top">
+      <div>
+        <div class="eyebrow"><span class="st__idx">${String(it.idx).padStart(2, '0')}</span> · ${cfg.kindLabel(it)}</div>
+        <h3>${it.name}</h3>
+        <div class="mono" style="color:var(--text-mute);font-size:.85rem;margin-top:8px">${it.core}</div>
+      </div>
+      <button class="mark-btn" data-mark="${it.id}">изучено</button>
+    </div>
+
+    <p class="st__thesis">«${it.thesis}»</p>
+
+    ${cfg.figure(it)}
+
+    <div class="st__grid">
+      <div class="prose">
+        <p class="lead">${it.lead}</p>
+        ${blocks}
+        <div class="blk">
+          <h4>Как это звучит</h4>
+          <ul class="ex-list">${ex}</ul>
+        </div>
+      </div>
+      <aside class="side">
+        <div class="forms">
+          <div class="p"><i>+</i><code>${it.forms.p}</code></div>
+          <div class="n"><i>−</i><code>${it.forms.n}</code></div>
+          <div class="q"><i>?</i><code>${it.forms.q}</code></div>
+        </div>
+        <div class="chips">
+          <h4 class="eyebrow">Слова-маркеры</h4>
+          <ul>${it.markers.map(m => `<li>${m}</li>`).join('')}</ul>
+        </div>
+      </aside>
+    </div>
+
+    <div class="drill" id="drill-${it.id}"></div>
+  </article>`;
+}
+
+function renderRoadmap(rootId, levels, items, cfg) {
+  const rm = document.getElementById(rootId);
+  rm.innerHTML = levels.map(L => `
+    <section class="level" id="${cfg.pid}-lvl${L.n}">
+      <div class="level__n">Уровень ${L.n} · ${L.ru}</div>
+      <h2>${L.title} <code>${L.code}</code></h2>
+      <p>${L.txt}</p>
+    </section>
+    ${items.filter(x => x.level === L.n).map(x => stationHTML(x, cfg)).join('')}
+  `).join('');
+
+  items.forEach(x => {
+    const host = document.getElementById('drill-' + x.id);
+    const qs = cfg.drills[x.id];
+    if (host && qs) makeQuiz(host, qs, { title: 'Задание' });
+    else if (host) host.remove();
+  });
+}
+
+/* ═══════════════════════════════════════════════════════════
+   ВКЛАДКА «ВРЕМЕНА»
+   ═══════════════════════════════════════════════════════════ */
+document.getElementById('legend').innerHTML = LEG.map((l, i) => `
+  <div class="legend__c z-${l.z}">
+    <svg viewBox="0 0 160 62" role="img" aria-label="Графический знак аспекта ${l.t}">${l.d(i)}</svg>
+    <h4>${l.t}</h4>
+    <span class="mono">${l.c}</span>
+    <p>${l.p}</p>
+  </div>`).join('');
+
+const byCell = (z, a) => T.find(t => t.zone === z && t.aspect === a);
+const mx = document.getElementById('matrix');
+let mxHTML = '<div></div>' + ZONES.map(z => `<div class="mx-h z-${z.key}">${z.label}</div>`).join('');
+ASPECTS.forEach(a => {
+  mxHTML += `<div class="mx-r"><b>${a.name}</b><span>${a.core}</span></div>`;
+  ZONES.forEach(z => {
+    const t = byCell(z.key, a.key);
+    mxHTML += `<button class="mx-c z-${z.key}" data-id="${t.id}" aria-pressed="false">
+      <b>${t.name}</b><i>${t.core}</i><em>${t.thesis}</em></button>`;
+  });
+});
+mx.innerHTML = mxHTML;
+
+function parts(t) {
+  const aux = { past: { simple: 'did', continuous: 'was / were', perfect: 'had', perfectcont: 'had been' },
+                present: { simple: 'do / does', continuous: 'am / is / are', perfect: 'have / has', perfectcont: 'have / has been' },
+                future: { simple: 'will', continuous: 'will be', perfect: 'will have', perfectcont: 'will have been' } };
+  const form = { simple: 'V', continuous: 'V-ing', perfect: 'V3', perfectcont: 'V-ing' };
+  return [aux[t.zone][t.aspect], form[t.aspect]];
+}
+
+const mxout = document.getElementById('mxout');
+function showCell(id) {
+  const t = T.find(x => x.id === id);
+  const [aux, form] = parts(t);
+  mxout.className = 'mxout z-' + t.zone;
+  mxout.innerHTML = `
+    <div class="mxout__l">
+      <div class="eyebrow">${ZONES.find(z => z.key === t.zone).label.split(' · ')[1]} × ${ASPECTS.find(a => a.key === t.aspect).short}</div>
+      <h3>${t.name}</h3>
+      <p>${t.thesis}. ${t.lead.replace(/<\/?b>/g, '')}</p>
+      <div class="ex">${t.ex[0].en}<i>${t.ex[0].ru}</i></div>
+    </div>
+    <div class="build">
+      <span class="aux">${aux}</span><span class="plus">+</span><span>${form}</span>
+      <a href="#${t.id}">Разобрать →</a>
+    </div>`;
+  mx.querySelectorAll('.mx-c').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.id === id)));
+}
+mx.addEventListener('click', e => {
+  const b = e.target.closest('.mx-c');
+  if (b) showCell(b.dataset.id);
+});
+showCell('present-perfect');
+
+renderRoadmap('t-road', LEVELS, T, {
+  pid: 't',
+  drills: DRILLS,
+  kindLabel: it => ASPECTS.find(a => a.key === it.aspect).name.toUpperCase(),
+  figure: it => `<figure class="tl"><div class="tl__in">${timeline(it.id)}</div><figcaption>${it.tlCap}</figcaption></figure>`
+});
+
+function renderDuels(hostId, list, figFn) {
+  document.getElementById(hostId).innerHTML = list.map((d, i) => `
+    <div class="duel">
+      <div class="duel__q">${d.q}</div>
+      <div class="duel__b">
+        ${[d.a, d.b].map((s, k) => `
+          <div class="duel__s z-${s.z}">
+            <div class="eyebrow">${s.n}</div>
+            ${s.tl ? `<div class="tlbox">${figFn(s.tl, 'd' + hostId + i + k)}</div>` : ''}
+            <p class="en">${s.en}</p>
+            <p class="ru">${s.ru}</p>
+            <p class="why">${s.why}</p>
+          </div>`).join('')}
+      </div>
+      <div class="duel__r"><b>Признак</b><span>${d.r}</span></div>
+    </div>`).join('');
+}
+renderDuels('duels', DUELS, (id, uid) => timeline(id, uid));
+
+makeQuiz(document.getElementById('tQuiz'), QUIZ_T, { title: 'Вопрос' });
+
 document.getElementById('sheetBody').innerHTML = T.map(t => `
   <tr class="z-${t.zone}">
     <td class="nm"><b>${t.name}</b></td>
@@ -1474,44 +3354,255 @@ document.getElementById('sheetBody').innerHTML = T.map(t => `
     <td class="ex">${t.ex[0].en.replace(/<\/?i[^>]*>/g, '')}</td>
   </tr>`).join('');
 
-/* ═══════════════ НАВИГАЦИЯ-ТОЧКИ ═══════════════ */
-document.getElementById('dots').innerHTML = LEVELS.map(L => `
-  <span class="dots__grp">${T.filter(t => t.level === L.n)
-    .map(t => `<a class="z-${t.zone}" href="#${t.id}" data-dot="${t.id}" title="${t.name}" aria-label="${t.name}"></a>`).join('')}</span>`).join('');
+/* ═══════════════════════════════════════════════════════════
+   ВКЛАДКА «УСЛОВНЫЕ»
+   ═══════════════════════════════════════════════════════════ */
+renderRoadmap('c-road', CLEVELS, C, {
+  pid: 'c',
+  drills: CDRILLS,
+  kindLabel: it => it.short.toUpperCase(),
+  figure: it => `<figure class="cf"><div class="cf__in">${CDRAW[it.id]()}</div><figcaption>${it.figCap}</figcaption></figure>`
+});
 
-/* ═══════════════ ПРОГРЕСС «ИЗУЧЕНО» ═══════════════ */
-const KEY = 'tenses-done-v1';
+renderDuels('cDuels', CDUELS, () => '');
+makeQuiz(document.getElementById('cQuiz'), QUIZ_C, { title: 'Вопрос' });
+
+document.getElementById('cSheetBody').innerHTML = C.map(c => `
+  <tr class="z-${c.zone}">
+    <td class="nm"><b>${c.name}</b></td>
+    <td class="fm"><code>${c.core}</code></td>
+    <td class="mk">${c.markers.slice(0, 3).join(' · ')}</td>
+    <td class="ex">${c.mxEx}</td>
+  </tr>`).join('');
+
+/* ── определитель типа ───────────────────────────────────── */
+const DET = {
+  start: {
+    q: 'Сколько «бы» в русском переводе?',
+    opts: [
+      { t: 'Ни одного', i: '«Если пойдёт дождь, я останусь дома»', go: 'real' },
+      { t: 'Два — «если бы… то… бы»', i: '«Если бы пошёл дождь, я бы остался дома»', go: 'unreal' }
+    ]
+  },
+  real: {
+    q: 'Это работает всегда — или речь про один случай в будущем?',
+    opts: [
+      { t: 'Работает всегда', i: 'закон природы, инструкция, привычка', res: 'zero' },
+      { t: 'Один случай в будущем', i: 'может произойти, а может и нет', res: 'first' }
+    ]
+  },
+  unreal: {
+    q: 'Про какое время речь?',
+    opts: [
+      { t: 'Про сейчас', i: '«если бы у меня были деньги» — сейчас их нет', res: 'second' },
+      { t: 'Про тогда, в прошлом', i: '«если бы я знал» — тогда не знал, поезд ушёл', res: 'third' },
+      { t: 'Условие тогда, а результат сейчас', i: '«если бы выучился, был бы врачом сейчас»', res: 'mixed' }
+    ]
+  }
+};
+
+const detQ = document.getElementById('detQ');
+const detOpts = document.getElementById('detOpts');
+const detOut = document.getElementById('detOut');
+const detCrumbs = document.getElementById('detCrumbs');
+let detPath = [];
+
+function detStep(key) {
+  const node = DET[key];
+  detQ.textContent = node.q;
+  detOpts.innerHTML = node.opts.map((o, k) =>
+    `<button data-k="${k}" data-node="${key}">${o.t}<i>${o.i}</i></button>`).join('');
+  detCrumbs.innerHTML = detPath.map(p => `<span>${p}</span>`).join('') +
+    (detPath.length ? '<span data-reset style="cursor:pointer">↺ заново</span>' : '');
+}
+
+function detResult(id) {
+  const c = C.find(x => x.id === id);
+  detOut.parentElement.parentElement.className = 'det z-' + c.zone;
+  detQ.textContent = 'Готово — вот ваш тип.';
+  detOpts.innerHTML = '<button data-reset>Определить ещё раз<i>вернуться к первому вопросу</i></button>';
+  detOut.innerHTML = `
+    <div class="eyebrow">${c.short} тип</div>
+    <h4>${c.name}</h4>
+    <code>${c.core}</code>
+    <p>${c.thesis}.</p>
+    <p style="font-family:var(--f-mono);font-size:.82rem;color:var(--text-dim)">${c.mxEx}</p>
+    <a href="#${c.id}">Разобрать подробно →</a>`;
+  detCrumbs.innerHTML = detPath.map(p => `<span>${p}</span>`).join('') +
+    '<span data-reset style="cursor:pointer">↺ заново</span>';
+}
+
+function detReset() {
+  detPath = [];
+  detOut.parentElement.parentElement.className = 'det z-present';
+  detOut.innerHTML = `<div class="eyebrow">Результат</div>
+    <h4 style="color:var(--text-mute)">Ответьте на вопрос слева</h4>
+    <p>Определитель повторяет ту же логику, что и три шага выше: сначала «бы», потом время.</p>`;
+  detStep('start');
+}
+
+document.getElementById('detector').addEventListener('click', e => {
+  const b = e.target.closest('button, [data-reset]');
+  if (!b) return;
+  if (b.hasAttribute('data-reset')) { detReset(); return; }
+  const node = DET[b.dataset.node];
+  if (!node) return;
+  const o = node.opts[+b.dataset.k];
+  detPath.push(o.t);
+  if (o.res) detResult(o.res); else detStep(o.go);
+});
+detReset();
+
+/* ═══════════════════════════════════════════════════════════
+   НАВИГАЦИЯ: вкладки, оглавление, меню, точки, прогресс
+   ═══════════════════════════════════════════════════════════ */
+const TABDEF = {
+  tenses: {
+    panel: 'tab-tenses', toc: 'tToc', items: T, total: 12,
+    nav: [
+      { id: 't-algo', n: 'Что спрашивать у себя', s: 'Три вопроса вместо двенадцати правил', e: 'Старт' },
+      { id: 't-system', n: 'Как это устроено', s: 'Время собирается из двух деталей', e: 'Уровень 0' },
+      { id: 't-lvl1', n: 'Simple', s: 'Факты: было, есть, будет', e: 'Уровень 1' },
+      { id: 't-lvl2', n: 'Continuous', s: 'Процессы в моменте', e: 'Уровень 2' },
+      { id: 't-lvl3', n: 'Perfect', s: 'Результат к какому-то моменту', e: 'Уровень 3' },
+      { id: 't-lvl4', n: 'Perfect Continuous', s: 'Процесс и его счётчик', e: 'Уровень 4' },
+      { id: 't-duels', n: 'Сравнение времён', s: 'Пять пар, в которых путаются все', e: 'Разбор' },
+      { id: 't-quiz', n: 'Общая проверка', s: '24 предложения вперемешку', e: 'Тренажёр' },
+      { id: 't-sheet', n: 'Шпаргалка', s: 'Все двенадцать одной таблицей', e: 'Итог' }
+    ]
+  },
+  cond: {
+    panel: 'tab-cond', toc: 'cToc', items: C, total: 7,
+    nav: [
+      { id: 'c-algo', n: 'Что спрашивать у себя', s: 'Два вопроса и определитель типа', e: 'Старт' },
+      { id: 'c-system', n: 'Механика шага назад', s: 'Часть с if всегда на время раньше', e: 'Основа' },
+      { id: 'c-lvl1', n: 'Реальность', s: 'Zero и First — без «бы»', e: 'Уровень 1' },
+      { id: 'c-lvl2', n: 'Воображение', s: 'Second и Third — два «бы»', e: 'Уровень 2' },
+      { id: 'c-lvl3', n: 'Гибриды', s: 'Mixed, инверсия, I wish', e: 'Уровень 3' },
+      { id: 'c-duels', n: 'Сравнение типов', s: 'Пять пар, в которых путаются все', e: 'Разбор' },
+      { id: 'c-quiz', n: 'Общая проверка', s: '14 предложений на все типы', e: 'Тренажёр' },
+      { id: 'c-sheet', n: 'Шпаргалка', s: 'Все типы одной таблицей', e: 'Итог' }
+    ]
+  }
+};
+
+let tab = 'tenses';
+
+/* оглавление в начале вкладки */
+Object.keys(TABDEF).forEach(k => {
+  const d = TABDEF[k];
+  document.getElementById(d.toc).innerHTML = d.nav.map(s =>
+    `<a href="#${s.id}"><i>${s.e}</i><b>${s.n}</b><span>${s.s}</span></a>`).join('');
+});
+
+/* выпадающее меню разделов */
+const menuBtn = document.getElementById('menuBtn');
+const menuPop = document.getElementById('menuPop');
+function fillMenu() {
+  menuPop.innerHTML = TABDEF[tab].nav
+    .map(s => `<a href="#${s.id}" role="menuitem"><i>${s.e}</i><span>${s.n}</span></a>`)
+    .join('<div class="menu__sep" hidden></div>');
+}
+menuBtn.addEventListener('click', e => {
+  e.stopPropagation();
+  const open = menuPop.hidden;
+  menuPop.hidden = !open;
+  menuBtn.setAttribute('aria-expanded', String(open));
+});
+menuPop.addEventListener('click', e => {
+  if (e.target.closest('a')) { menuPop.hidden = true; menuBtn.setAttribute('aria-expanded', 'false'); }
+});
+document.addEventListener('click', () => {
+  if (!menuPop.hidden) { menuPop.hidden = true; menuBtn.setAttribute('aria-expanded', 'false'); }
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && !menuPop.hidden) { menuPop.hidden = true; menuBtn.setAttribute('aria-expanded', 'false'); menuBtn.focus(); }
+});
+
+/* точки-станции в панели */
+function fillDots() {
+  const d = TABDEF[tab];
+  const groups = {};
+  d.items.forEach(x => { (groups[x.level] = groups[x.level] || []).push(x); });
+  document.getElementById('dots').innerHTML = Object.keys(groups).map(lv =>
+    `<span class="dots__grp">${groups[lv].map(x =>
+      `<a class="z-${x.zone}" href="#${x.id}" data-dot="${x.id}" title="${x.name}" aria-label="${x.name}"></a>`).join('')}</span>`).join('');
+}
+
+/* переключение вкладок */
+const tabsInk = document.getElementById('tabsInk');
+const tabBtns = [...document.querySelectorAll('.tabs button')];
+function moveInk() {
+  const active = tabBtns.find(b => b.getAttribute('aria-selected') === 'true');
+  if (!active) return;
+  tabsInk.style.width = active.offsetWidth + 'px';
+  tabsInk.style.transform = `translateX(${active.offsetLeft - 3}px)`;
+}
+function setTab(name, scroll) {
+  tab = name;
+  tabBtns.forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === name)));
+  Object.keys(TABDEF).forEach(k => {
+    document.getElementById(TABDEF[k].panel).hidden = (k !== name);
+  });
+  moveInk(); fillDots(); fillMenu(); paint();
+  if (scroll !== false) window.scrollTo({ top: 0, behavior: motionOK() ? 'smooth' : 'auto' });
+}
+tabBtns.forEach(b => b.addEventListener('click', () => setTab(b.dataset.tab)));
+window.addEventListener('resize', moveInk);
+
+function motionOK() { return !window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
+
+/* прогресс «изучено» — свой для каждой вкладки */
+const KEY = 'eng-rules-done-v2';
 let done = new Set();
 try { done = new Set(JSON.parse(localStorage.getItem(KEY) || '[]')); } catch (e) { done = new Set(); }
 
 function paint() {
-  T.forEach(t => {
-    const on = done.has(t.id);
-    const st = document.getElementById(t.id);
+  const all = T.concat(C);
+  all.forEach(x => {
+    const on = done.has(x.id);
+    const st = document.getElementById(x.id);
     if (st) {
       st.classList.toggle('done', on);
       const btn = st.querySelector('.mark-btn');
       if (btn) { btn.textContent = on ? 'изучено' : 'отметить'; btn.setAttribute('aria-pressed', String(on)); }
     }
-    const d = document.querySelector(`[data-dot="${t.id}"]`);
-    if (d) d.classList.toggle('on', on);
+    const dot = document.querySelector(`[data-dot="${x.id}"]`);
+    if (dot) dot.classList.toggle('on', on);
   });
-  document.getElementById('progFill').style.width = (done.size / T.length * 100) + '%';
-  document.getElementById('progN').textContent = `${done.size}/${T.length}`;
   document.querySelectorAll('.mx-c').forEach(c => c.classList.toggle('done', done.has(c.dataset.id)));
+
+  const d = TABDEF[tab];
+  const n = d.items.filter(x => done.has(x.id)).length;
+  document.getElementById('progFill').style.width = (n / d.total * 100) + '%';
+  document.getElementById('progN').textContent = `${n}/${d.total}`;
 }
+
 document.addEventListener('click', e => {
   const b = e.target.closest('[data-mark]');
   if (!b) return;
   const id = b.dataset.mark;
   done.has(id) ? done.delete(id) : done.add(id);
-  try { localStorage.setItem(KEY, JSON.stringify([...done])); } catch (e) {}
+  try { localStorage.setItem(KEY, JSON.stringify([...done])); } catch (err) {}
   paint();
 });
-paint();
 
-/* ═══════════════ ТЕМА ═══════════════ */
-const TKEY = 'tenses-theme';
+/* кнопка «вернуться в начало» */
+const toTop = document.getElementById('totop');
+let ticking = false;
+function syncToTop() { toTop.classList.toggle('on', window.scrollY > 520); }
+window.addEventListener('scroll', () => {
+  if (ticking) return;
+  ticking = true;
+  requestAnimationFrame(() => { syncToTop(); ticking = false; });
+}, { passive: true });
+syncToTop();   // страница могла открыться уже прокрученной — по ссылке с якорем
+toTop.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: motionOK() ? 'smooth' : 'auto' });
+});
+
+/* тема */
+const TKEY = 'eng-rules-theme';
 try {
   const saved = localStorage.getItem(TKEY);
   if (saved) document.documentElement.setAttribute('data-theme', saved);
@@ -1521,8 +3612,31 @@ document.getElementById('tgl').addEventListener('click', () => {
   const isDark = cur ? cur === 'dark' : !window.matchMedia('(prefers-color-scheme: light)').matches;
   const next = isDark ? 'light' : 'dark';
   document.documentElement.setAttribute('data-theme', next);
-  try { localStorage.setItem(TKEY, next); } catch (e) {}
+  try { localStorage.setItem(TKEY, next); } catch (err) {}
 });
+
+/* ссылка вида #third должна открыть нужную вкладку */
+function tabForHash(h) {
+  const id = h.replace('#', '');
+  if (!id) return null;
+  if (C.some(c => c.id === id) || id.indexOf('c-') === 0) return 'cond';
+  if (T.some(t => t.id === id) || id.indexOf('t-') === 0) return 'tenses';
+  return null;
+}
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[href^="#"]');
+  if (!a) return;
+  const want = tabForHash(a.getAttribute('href'));
+  if (want && want !== tab) setTab(want, false);
+});
+
+setTab(tabForHash(location.hash) || 'tenses', false);
+requestAnimationFrame(moveInk);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(moveInk);
+if (location.hash) {
+  const target = document.getElementById(location.hash.slice(1));
+  if (target) requestAnimationFrame(() => { target.scrollIntoView(); syncToTop(); });
+}
 </script>
 </body>
 </html>

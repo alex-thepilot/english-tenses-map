@@ -4,7 +4,8 @@
 
     <div class="tabs" role="tablist" aria-label="Разделы грамматики">
       <span class="tabs__ink" id="tabsInk"></span>
-      <button role="tab" data-tab="tenses" aria-selected="true" aria-controls="tab-tenses">Времена</button>
+      <button role="tab" data-tab="sentence" aria-selected="true" aria-controls="tab-sentence">Основа</button>
+      <button role="tab" data-tab="tenses" aria-selected="false" aria-controls="tab-tenses">Времена</button>
       <button role="tab" data-tab="cond" aria-selected="false" aria-controls="tab-cond">Условные</button>
     </div>
 
@@ -23,7 +24,7 @@
 
       <div class="prog" title="Отмечено как изученное">
         <div class="prog__bar"><div class="prog__fill" id="progFill"></div></div>
-        <span class="prog__n" id="progN">0/12</span>
+        <span class="prog__n" id="progN">0/8</span>
       </div>
 
       <button class="tgl" id="tgl" aria-label="Переключить тему">
@@ -35,8 +36,268 @@
   </div>
 </nav>
 
-<div class="tabpanel" id="tab-tenses" role="tabpanel">
-<header class="hero">
+<div class="tabpanel" id="tab-sentence" role="tabpanel">
+<!-- ══════════════════ ГЕРОЙ · ОСНОВА ══════════════════ -->
+<header class="hero" id="s-hero">
+  <div class="wrap">
+    <div class="eyebrow">Основа · как строится предложение</div>
+    <h1>Глагол в английском<br>есть <span class="tri">всегда</span>.</h1>
+    <p class="hero__sub">
+      Русский спокойно обходится без глагола: «Я Саша», «Он дома», «Мне холодно».
+      Английский так не умеет — это его главное, незыблемое правило. Поэтому любое предложение
+      начинается с одного вопроса: <b>есть ли глагол в русском варианте?</b> Нет — ставим
+      <span class="mono">to be</span>. Есть — берём его и ставим в нужное время.
+      А вопрос строится не интонацией, а перестановкой слов.
+    </p>
+    <div class="hero__meta">
+      <span class="pill">8 станций</span>
+      <span class="pill">конструктор предложения</span>
+      <span class="pill">80 заданий с разбором</span>
+      <span class="pill">5 дуэлей</span>
+      <span class="pill">16 вопросов в общей проверке</span>
+    </div>
+
+    <div class="slotdemo" role="img" aria-label="Пример: в русском «Я Саша» между словами пусто, в английском I am Sasha — пустую ячейку занимает am">
+      <span class="lbl">Русский</span>
+      <span class="chip r-subj">Я</span><span class="chip empty">?</span><span class="chip r-rest">Саша</span>
+      <span class="lbl">Английский</span>
+      <span class="chip r-subj">I</span><span class="chip r-aux fill">am</span><span class="chip r-rest">Sasha</span>
+      <span class="cap">Средняя ячейка в русском пустая. В английском пустой она быть не может — туда встаёт <b>be</b>.</span>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════════════ ОГЛАВЛЕНИЕ ══════════════════ -->
+<section class="sect toc" id="s-toc">
+  <div class="wrap">
+    <div class="sect__head" style="margin-bottom:0">
+      <div class="eyebrow">Оглавление</div>
+      <h2>С чего начать</h2>
+      <p>Можно идти маршрутом сверху вниз, а можно прыгнуть сразу в нужный блок — страница при этом листается как обычно.</p>
+    </div>
+    <div class="toc__g" id="sToc"></div>
+  </div>
+</section>
+
+<!-- ══════════════════ ЧТО СПРАШИВАТЬ У СЕБЯ ══════════════════ -->
+<section class="sect" id="s-algo">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Что спрашивать у себя</div>
+      <h2>Три вопроса к любому предложению</h2>
+      <p>Перед тем как говорить или писать, пройдите по этим шагам. Они работают для любого предложения — от «Я Саша» до вопроса про красную машину.</p>
+    </div>
+
+    <ol class="steps">
+      <li>
+        <b>ВОПРОС 01</b>
+        <h4>Есть ли в русском предложении глагол?</h4>
+        <p>Ищем действие. «Я Саша», «Он дома», «Мне холодно» — действия нет, ставим <span class="mono">to be</span> в нужной форме.
+           «Я люблю кофе» — действие есть, берём глагол и ставим его в нужное время.</p>
+        <a class="goto" href="#t-hero">Как выбрать время →</a>
+      </li>
+      <li>
+        <b>ВОПРОС 02</b>
+        <h4>Это вопрос?</h4>
+        <p>Тогда вперёд выходит помощник: <span class="mono">do / does / did / will</span>. Если глагола в русском нет —
+           вперёд выходит сам <span class="mono">be</span>. Дальше идёт тот, кто действует, потом глагол, потом всё остальное.</p>
+      </li>
+      <li>
+        <b>ВОПРОС 03</b>
+        <h4>Есть вопросительное слово?</h4>
+        <p>Оно встаёт самым первым, перед помощником. И это не обязательно одно слово: «какого цвета» — <span class="mono">what color</span>,
+           «какая красная машина» — <span class="mono">what red car</span>. Вопросительное слово — это всё, что вы хотите узнать.</p>
+      </li>
+    </ol>
+
+    <div class="callout trap" style="margin-top:28px;max-width:66ch">
+      <h4>Исключение: модальные глаголы</h4>
+      <p>Правила выше не касаются <span class="mono">can, must, should, may</span> и их родственников. Модальный глагол — самостоятельная
+         сущность и сам работает помощником, поэтому do ему не нужен ни в вопросе, ни в утверждении.
+         «Ты можешь танцевать?» — не <span class="mono no">Do you can dance?</span>, а <span class="mono yes">Can you dance?</span>
+         Подробно о модальных — в отдельных уроках.</p>
+    </div>
+
+    <figure class="dia">
+      <div>
+        <svg viewBox="0 0 700 290" role="img" aria-label="Главное правило: если в русском предложении нет действия — ставим to be, например I am Sasha; если действие есть — ставим глагол в нужном времени, например I like coffee. В любом случае глагол в английском есть всегда">
+          <rect class="box" x="225" y="12" width="250" height="42" rx="11"/>
+          <text class="t" x="350" y="38" text-anchor="middle">Русское предложение</text>
+
+          <path class="ln" d="M350 54 V 88 H 175 V 108" marker-end="url(#sah)"/>
+          <path class="ln" d="M350 88 H 525 V 108" marker-end="url(#sah)"/>
+          <text class="t-lbl" x="360" y="76">есть в нём действие?</text>
+          <text class="t-lbl" x="163" y="104" text-anchor="end">нет · «Я Саша»</text>
+          <text class="t-lbl" x="537" y="104">да · «Я люблю кофе»</text>
+
+          <rect x="60" y="112" width="230" height="62" rx="12" style="fill:var(--future-soft);stroke:var(--future);stroke-width:1.8"/>
+          <text class="t-m" x="175" y="139" text-anchor="middle" style="fill:var(--future)">to be</text>
+          <text class="t-s" x="175" y="161" text-anchor="middle">am · is · are · was · will be</text>
+
+          <rect x="410" y="112" width="230" height="62" rx="12" style="fill:var(--present-soft);stroke:var(--present);stroke-width:1.8"/>
+          <text class="t-m" x="525" y="139" text-anchor="middle" style="fill:var(--present)">глагол во времени</text>
+          <text class="t-s" x="525" y="161" text-anchor="middle">like · liked · will like</text>
+
+          <text class="t-m" x="175" y="202" text-anchor="middle">I am Sasha.</text>
+          <text class="t-m" x="525" y="202" text-anchor="middle">I like coffee.</text>
+          <text class="t-lbl" x="525" y="222" text-anchor="middle">какое время — на вкладке «Времена»</text>
+
+          <line x1="60" y1="244" x2="640" y2="244" style="stroke:var(--line);stroke-dasharray:4 4"/>
+          <text class="t" x="350" y="274" text-anchor="middle">Итог один: в английском предложении глагол есть всегда</text>
+          <defs>
+            <marker id="sah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 z" fill="currentColor"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+      <figcaption>Главное правило одной развилкой. Ветки расходятся только в том, какой глагол встанет в ячейку, — пустой она не остаётся никогда.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ══════════════════ МЕХАНИКА ══════════════════ -->
+<section class="sect" id="s-system">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Уровень 0 · механика</div>
+      <h2>Предложение собирается из ячеек, и у каждой своё место</h2>
+      <p>
+        Кто, глагол, остальное — каждое слово стоит в своей ячейке. Чтобы превратить утверждение в вопрос,
+        по смыслу ничего добавлять не нужно: <b>ячейки просто переставляются</b>. Помощник уезжает в начало,
+        а вопросительное слово встаёт ещё раньше него.
+      </p>
+    </div>
+
+    <figure class="dia">
+      <div>
+        <svg viewBox="0 0 700 262" role="img" aria-label="Как утверждение становится вопросом: в You like coffee помощник do спрятан; в вопросе Do you like coffee он выходит первым; в вопросе What do you like перед ним встаёт вопросительное слово">
+          <text class="t-s" x="20" y="46">УТВЕРЖДЕНИЕ</text>
+          <rect x="180" y="24" width="60" height="34" rx="9" style="fill:var(--surface-2);stroke:var(--line);stroke-width:1.5"/>
+          <text class="t-m" x="210" y="46" text-anchor="middle">You</text>
+          <rect x="248" y="24" width="60" height="34" rx="9" style="fill:none;stroke:var(--future);stroke-width:1.5;stroke-dasharray:4 3;opacity:.75"/>
+          <text class="t-m" x="278" y="46" text-anchor="middle" style="fill:var(--future);opacity:.75">(do)</text>
+          <rect x="316" y="24" width="60" height="34" rx="9" style="fill:var(--present-soft);stroke:var(--present);stroke-width:1.5"/>
+          <text class="t-m" x="346" y="46" text-anchor="middle" style="fill:var(--present)">like</text>
+          <rect x="384" y="24" width="84" height="34" rx="9" style="fill:none;stroke:var(--line);stroke-width:1.5;stroke-dasharray:4 3"/>
+          <text class="t-m" x="426" y="46" text-anchor="middle">coffee</text>
+          <text class="t-m" x="476" y="46">.</text>
+          <text class="t-lbl" x="548" y="46">«Ты любишь кофе.»</text>
+
+          <path class="ln" d="M278 61 C 278 90, 210 86, 210 110" marker-end="url(#mah)"/>
+          <text class="t-lbl" x="296" y="92">помощник выходит из тени и встаёт первым</text>
+
+          <text class="t-s" x="20" y="138">ОБЩИЙ ВОПРОС</text>
+          <rect x="180" y="116" width="60" height="34" rx="9" style="fill:var(--future-soft);stroke:var(--future);stroke-width:1.8"/>
+          <text class="t-m" x="210" y="138" text-anchor="middle" style="fill:var(--future)">Do</text>
+          <rect x="248" y="116" width="60" height="34" rx="9" style="fill:var(--surface-2);stroke:var(--line);stroke-width:1.5"/>
+          <text class="t-m" x="278" y="138" text-anchor="middle">you</text>
+          <rect x="316" y="116" width="60" height="34" rx="9" style="fill:var(--present-soft);stroke:var(--present);stroke-width:1.5"/>
+          <text class="t-m" x="346" y="138" text-anchor="middle" style="fill:var(--present)">like</text>
+          <rect x="384" y="116" width="84" height="34" rx="9" style="fill:none;stroke:var(--line);stroke-width:1.5;stroke-dasharray:4 3"/>
+          <text class="t-m" x="426" y="138" text-anchor="middle">coffee</text>
+          <text class="t-m" x="476" y="138">?</text>
+          <text class="t-lbl" x="548" y="138">«Ты любишь кофе?»</text>
+
+          <path class="ln" d="M210 153 C 210 182, 286 178, 286 202" marker-end="url(#mah)"/>
+          <text class="t-lbl" x="306" y="184">перед помощником встаёт вопросительное слово</text>
+
+          <text class="t-s" x="20" y="230">СО СЛОВОМ</text>
+          <rect x="180" y="208" width="72" height="34" rx="9" style="fill:var(--past-soft);stroke:var(--past);stroke-width:1.8"/>
+          <text class="t-m" x="216" y="230" text-anchor="middle" style="fill:var(--past)">What</text>
+          <rect x="260" y="208" width="52" height="34" rx="9" style="fill:var(--future-soft);stroke:var(--future);stroke-width:1.5"/>
+          <text class="t-m" x="286" y="230" text-anchor="middle" style="fill:var(--future)">do</text>
+          <rect x="320" y="208" width="60" height="34" rx="9" style="fill:var(--surface-2);stroke:var(--line);stroke-width:1.5"/>
+          <text class="t-m" x="350" y="230" text-anchor="middle">you</text>
+          <rect x="388" y="208" width="60" height="34" rx="9" style="fill:var(--present-soft);stroke:var(--present);stroke-width:1.5"/>
+          <text class="t-m" x="418" y="230" text-anchor="middle" style="fill:var(--present)">like</text>
+          <text class="t-m" x="456" y="230">?</text>
+          <text class="t-lbl" x="548" y="230">«Что ты любишь?»</text>
+          <defs>
+            <marker id="mah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 z" fill="currentColor"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+      <figcaption>Смысловой глагол like не сдвигается ни разу. Двигаются только помощник и вопросительное слово — поэтому они и окрашены иначе.</figcaption>
+    </figure>
+
+    <div class="bu" id="sBuild">
+      <div class="bu__top"><span class="eyebrow">Конструктор предложения</span><span class="bu__hint">выберите вид и тип — ячейки перестроятся</span></div>
+      <div class="bu__ctl">
+        <div class="bu__grp">
+          <span class="eyebrow">1 · Что в русском предложении?</span>
+          <div class="seg" id="buKind"></div>
+        </div>
+        <div class="bu__grp">
+          <span class="eyebrow">2 · Какое предложение строим?</span>
+          <div class="seg" id="buType"></div>
+        </div>
+      </div>
+      <div class="bu__out">
+        <div class="bu__ru" id="buRu"></div>
+        <div class="train bu__train" id="buTrain" aria-live="polite"></div>
+        <div class="bu__schema" id="buSchema"></div>
+        <p class="bu__note" id="buNote"></p>
+      </div>
+      <div class="roles" id="buRoles"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ МАРШРУТ ══════════════════ -->
+<main class="wrap">
+  <div class="roadmap" id="s-road"></div>
+</main>
+
+<!-- ══════════════════ ДУЭЛИ ══════════════════ -->
+<section class="sect" id="s-duels">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Разбор полётов</div>
+      <h2>Пять пар, которые путают чаще всего</h2>
+      <p>Два похожих предложения рядом и один признак, по которому их разводят.</p>
+    </div>
+    <div class="duels" id="sDuels"></div>
+  </div>
+</section>
+
+<!-- ══════════════════ ТРЕНАЖЁР ══════════════════ -->
+<section class="sect" id="s-quiz">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Общая проверка</div>
+      <h2>Шестнадцать предложений — по два на каждую станцию</h2>
+      <p>Вперемешку и без подсказок. После ответа появляется разбор: почему верный вариант верный и чем плох выбранный.</p>
+    </div>
+    <div class="drill z-present" id="sQuiz"></div>
+  </div>
+</section>
+
+<!-- ══════════════════ ШПАРГАЛКА ══════════════════ -->
+<section class="sect" id="s-sheet">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">На один экран</div>
+      <h2>Шпаргалка</h2>
+      <p>Все схемы предложения в одной таблице: по строкам — что строим, по столбцам — что было в русском.</p>
+    </div>
+    <div class="sheet">
+      <table>
+        <thead>
+          <tr><th>Предложение</th><th>Схема</th><th>Глагола нет · be</th><th>Есть глагол · do</th><th>Модальный · can</th></tr>
+        </thead>
+        <tbody id="sSheetBody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<div class="tabpanel" id="tab-tenses" role="tabpanel" hidden>
+<header class="hero" id="t-hero">
   <div class="wrap">
     <div class="eyebrow">Методичка · все времена · одна система</div>
     <h1>Времён не двенадцать.<br>Их <span class="tri">3 × 4</span>.</h1>
@@ -238,7 +499,7 @@
 
 <div class="tabpanel" id="tab-cond" role="tabpanel" hidden>
 <!-- ══════════════════ ГЕРОЙ · УСЛОВНЫЕ ══════════════════ -->
-<header class="hero">
+<header class="hero" id="c-hero">
   <div class="wrap">
     <div class="eyebrow">Правило второе · условные предложения · if</div>
     <h1>Условие всегда<br>отстаёт на <span class="tri">один шаг</span>.</h1>

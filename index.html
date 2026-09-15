@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Интерактивная методичка по английской грамматике: все 12 времён и условные предложения. Роадмап, живые схемы, разбор похожих пар и 228 заданий с объяснением каждого ответа.">
+<meta name="description" content="Интерактивная методичка по английской грамматике: как строится предложение, все 12 времён и условные предложения. Роадмапы, живые схемы, конструктор предложения и 324 задания с объяснением каждого ответа.">
 <meta name="color-scheme" content="dark light">
 <meta name="theme-color" content="#0A1213" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#ECF0EE" media="(prefers-color-scheme: light)">
@@ -11,7 +11,7 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:title" content="Карта английской грамматики">
-<meta property="og:description" content="Времён не двенадцать — их 3 × 4. Условие всегда отстаёт на шаг. Интерактивная методичка с заданиями и разбором каждого ответа.">
+<meta property="og:description" content="Глагол в английском есть всегда. Времён не двенадцать — их 3 × 4. Условие всегда отстаёт на шаг. Интерактивная методичка с заданиями и разбором каждого ответа.">
 <meta name="twitter:card" content="summary">
 
 <title>Карта английской грамматики</title>
@@ -829,6 +829,190 @@ td.ex { color: var(--text-dim); }
   .mark-btn { margin-left: 0; }
   .drill__top, .drill__body { padding-left: 15px; padding-right: 15px; }
 }
+
+/* ═══════════════ ВКЛАДКА «ОСНОВА» ═══════════════ */
+/* зоны станций: цвет кодирует роль слова, о котором станция */
+.z-jump { --zone: var(--future);  --zone-soft: var(--future-soft); }
+.z-stay { --zone: var(--present); --zone-soft: var(--present-soft); }
+.z-ask  { --zone: var(--past);    --zone-soft: var(--past-soft); }
+
+/* роли слов в предложении */
+.r-q    { --rc: var(--past);     --rs: var(--past-soft); }
+.r-aux  { --rc: var(--future);   --rs: var(--future-soft); }
+.r-verb { --rc: var(--present);  --rs: var(--present-soft); }
+.r-subj { --rc: var(--text);     --rs: var(--surface-2); }
+.r-rest { --rc: var(--text-dim); --rs: transparent; }
+
+/* ячейки-слова */
+.train { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; }
+.chip {
+  display: inline-block; font-family: var(--f-mono); font-size: .92rem; font-weight: 500; line-height: 1.2;
+  padding: 8px 12px; border-radius: 10px; white-space: nowrap;
+  color: var(--rc, var(--text)); background: var(--rs, transparent);
+  border: 1px solid color-mix(in srgb, var(--rc, var(--text)) 50%, transparent);
+}
+.chip.r-rest { border-style: dashed; }
+.chip.ghost { opacity: .55; border-style: dashed; background: transparent; }
+.chip.bad {
+  color: var(--bad); background: var(--bad-soft); border-color: var(--bad);
+  text-decoration: line-through; text-decoration-thickness: 1.5px;
+}
+.chip.end { border: none; background: none; padding: 8px 1px; color: var(--text-mute); }
+.chip.jump { box-shadow: 0 0 0 3px var(--rs); }
+@media (prefers-reduced-motion: no-preference) {
+  .chip.jump { animation: chipGlow 2.6s ease-in-out infinite; }
+}
+@keyframes chipGlow {
+  0%, 100% { box-shadow: 0 0 0 3px var(--rs); }
+  50%      { box-shadow: 0 0 0 5px var(--rs), 0 0 22px -6px var(--rc); }
+}
+
+/* герой: пустая ячейка в русском и be на её месте в английском */
+.slotdemo {
+  margin-top: 42px; display: grid; grid-template-columns: auto repeat(3, max-content);
+  gap: 10px; align-items: center; width: fit-content; max-width: 100%;
+  padding: 20px 22px; border-radius: 16px; border: 1px solid var(--line-soft); background: var(--bg-2);
+}
+.slotdemo .lbl {
+  font-family: var(--f-mono); font-size: .64rem; letter-spacing: .13em; text-transform: uppercase;
+  color: var(--text-mute); padding-right: 10px;
+}
+.slotdemo .chip { font-size: 1.05rem; padding: 10px 16px; text-align: center; }
+.slotdemo .chip.empty {
+  color: var(--text-mute); background: transparent; min-width: 64px;
+  border: 1.5px dashed var(--text-mute);
+}
+.slotdemo .chip.fill { box-shadow: 0 0 0 4px var(--rs), 0 0 26px -8px var(--rc); }
+.slotdemo .cap {
+  grid-column: 1 / -1; font-size: .84rem; color: var(--text-dim); margin-top: 4px;
+  /* подпись не должна раздвигать колонки ячеек своей длиной — только занимать их ширину */
+  width: 0; min-width: 100%;
+}
+.slotdemo .cap b { color: var(--future); font-family: var(--f-mono); font-weight: 500; }
+@media (prefers-reduced-motion: no-preference) {
+  .slotdemo .chip.empty { animation: slotBlink 2.4s ease-in-out infinite; }
+  .slotdemo .chip.fill  { animation: slotFill 2.4s ease-in-out infinite; }
+}
+@keyframes slotBlink { 0%, 100% { opacity: .45; } 50% { opacity: 1; } }
+@keyframes slotFill {
+  0%, 100% { box-shadow: 0 0 0 3px var(--rs); }
+  50%      { box-shadow: 0 0 0 6px var(--rs), 0 0 30px -6px var(--rc); }
+}
+@media (max-width: 420px) {
+  .slotdemo { padding: 16px; gap: 8px; }
+  .slotdemo .lbl { padding-right: 4px; font-size: .58rem; }
+  .slotdemo .chip { font-size: .9rem; padding: 8px 11px; }
+  .slotdemo .chip.empty { min-width: 44px; }
+}
+
+/* схема станции */
+.sfig { margin-top: 26px; border: 1px solid var(--line); border-radius: 16px; background: var(--bg-2); overflow: hidden; }
+.sfig__rows { padding: 18px 18px 16px; display: grid; gap: 12px; }
+.sfig__row { display: grid; grid-template-columns: 124px minmax(0, 1fr); gap: 14px; align-items: center; }
+.sfig__lbl {
+  font-family: var(--f-mono); font-size: .64rem; letter-spacing: .13em; text-transform: uppercase; color: var(--text-mute);
+}
+.sfig__ru { font-size: 1.02rem; color: var(--text); }
+.sfig figcaption {
+  border: none; border-top: 1px solid var(--line-soft); margin: 0;
+  padding: 11px 16px; font-size: .8rem; color: var(--text-dim); max-width: none;
+}
+.sgap {
+  display: inline-block; min-width: 42px; margin: 0 4px; padding: 1px 8px; text-align: center;
+  font-family: var(--f-mono); font-size: .8rem; color: var(--text-mute);
+  border: 1.5px dashed var(--text-mute); border-radius: 8px;
+}
+@media (max-width: 560px) { .sfig__row { grid-template-columns: 1fr; gap: 6px; } }
+
+/* кнопка перехода на другую вкладку */
+.goto {
+  display: inline-flex; align-items: center; gap: 8px; margin-top: 10px; align-self: flex-start;
+  font-family: var(--f-mono); font-size: .76rem; text-decoration: none; letter-spacing: .02em;
+  color: var(--present); border: 1px solid var(--present); padding: 8px 13px; border-radius: 10px;
+  transition: background .2s, transform .2s cubic-bezier(.34,1.3,.5,1);
+}
+.goto:hover, .goto:focus-visible { background: var(--present-soft); transform: translateX(3px); }
+
+/* конструктор предложения */
+.bu { margin-top: 34px; border: 1px solid var(--line); border-radius: 20px; background: var(--surface); overflow: hidden; }
+.bu__top {
+  padding: 14px 22px; border-bottom: 1px solid var(--line-soft);
+  display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;
+}
+.bu__hint { font-size: .8rem; color: var(--text-mute); }
+.bu__ctl { padding: 20px 22px 4px; display: grid; gap: 18px; }
+.bu__grp > .eyebrow { display: block; margin-bottom: 10px; }
+.seg { display: flex; flex-wrap: wrap; gap: 8px; }
+.seg button {
+  text-align: left; padding: 9px 14px; border-radius: 11px; font-size: .9rem;
+  border: 1px solid var(--line); background: var(--bg-2);
+  transition: border-color .18s, background .18s, color .18s, transform .18s;
+}
+.seg button i { display: block; font-style: normal; font-size: .74rem; color: var(--text-mute); margin-top: 2px; }
+.seg button:hover { border-color: var(--present); transform: translateY(-2px); }
+.seg button[aria-pressed="true"] { border-color: var(--present); background: var(--present-soft); color: var(--present); }
+.seg button[aria-pressed="true"] i { color: var(--text-dim); }
+.bu__out {
+  margin: 16px 22px 20px; padding: 22px; border-radius: 16px;
+  background: var(--bg-2); border: 1px solid var(--line-soft);
+  display: grid; gap: 14px;
+}
+.bu__ru { font-size: 1.1rem; }
+.bu__ru b {
+  display: block; margin-bottom: 4px; font-family: var(--f-mono); font-weight: 500;
+  font-size: .64rem; letter-spacing: .13em; color: var(--text-mute);
+}
+.bu__train { min-height: 52px; }
+.bu__train .chip { font-size: 1.12rem; padding: 10px 16px; }
+.bu__schema {
+  font-family: var(--f-mono); font-size: .82rem; color: var(--text-dim);
+  padding-top: 12px; border-top: 1px dashed var(--line);
+}
+.bu__note { font-size: .9rem; color: var(--text-dim); max-width: 66ch; }
+.bu__note b { color: var(--text); font-weight: 600; }
+.roles { display: flex; flex-wrap: wrap; gap: 8px 18px; padding: 0 22px 20px; }
+.roles span { display: inline-flex; align-items: center; gap: 8px; font-size: .8rem; color: var(--text-dim); }
+.roles i { width: 14px; height: 14px; border-radius: 4px; background: var(--rs); border: 1px solid var(--rc); flex-shrink: 0; }
+.roles em { font-style: normal; color: var(--text-mute); }
+@media (max-width: 480px) {
+  .bu__top, .bu__ctl { padding-left: 15px; padding-right: 15px; }
+  .bu__out { margin: 14px 15px 18px; padding: 16px; }
+  .bu__train .chip { font-size: .98rem; padding: 8px 12px; }
+  .roles { padding: 0 15px 18px; }
+}
+
+/* якоря героев: переход с другой вкладки не прячет заголовок под панелью */
+.hero { scroll-margin-top: 70px; }
+.steps .goto { margin-top: 4px; }
+
+/* шпаргалка основы: пять столбцов */
+#s-sheet table { min-width: 820px; }
+#s-sheet td.ex { font-family: var(--f-mono); font-size: .8rem; white-space: nowrap; }
+#s-sheet td.nm b { color: var(--text); }
+
+/* панель с тремя вкладками на узких экранах */
+@media (max-width: 900px) {
+  .topbar__in { gap: 10px; padding: 8px 14px; }
+  .mark span { display: none; }
+  .prog__bar { display: none; }
+  .dots__wrap { gap: 10px; }
+}
+@media (max-width: 560px) {
+  .prog { display: none; }
+  .tabs button { font-size: .7rem; padding: 6px 9px; }
+}
+@media (max-width: 400px) {
+  .topbar__in { gap: 8px; padding: 8px 10px; }
+  .tabs button { font-size: .66rem; padding: 6px 7px; }
+}
+
+/* самые узкие телефоны: три вкладки, меню и тема должны влезть в 320px */
+@media (max-width: 360px) {
+  .topbar__in { padding: 8px 8px; gap: 6px; }
+  .dots__wrap { gap: 6px; }
+  .tabs button { font-size: .64rem; padding: 6px 6px; }
+  .menu__btn { padding: 8px 8px; }
+}
 </style>
 </head>
 <body>
@@ -838,7 +1022,8 @@ td.ex { color: var(--text-dim); }
 
     <div class="tabs" role="tablist" aria-label="Разделы грамматики">
       <span class="tabs__ink" id="tabsInk"></span>
-      <button role="tab" data-tab="tenses" aria-selected="true" aria-controls="tab-tenses">Времена</button>
+      <button role="tab" data-tab="sentence" aria-selected="true" aria-controls="tab-sentence">Основа</button>
+      <button role="tab" data-tab="tenses" aria-selected="false" aria-controls="tab-tenses">Времена</button>
       <button role="tab" data-tab="cond" aria-selected="false" aria-controls="tab-cond">Условные</button>
     </div>
 
@@ -857,7 +1042,7 @@ td.ex { color: var(--text-dim); }
 
       <div class="prog" title="Отмечено как изученное">
         <div class="prog__bar"><div class="prog__fill" id="progFill"></div></div>
-        <span class="prog__n" id="progN">0/12</span>
+        <span class="prog__n" id="progN">0/8</span>
       </div>
 
       <button class="tgl" id="tgl" aria-label="Переключить тему">
@@ -869,8 +1054,268 @@ td.ex { color: var(--text-dim); }
   </div>
 </nav>
 
-<div class="tabpanel" id="tab-tenses" role="tabpanel">
-<header class="hero">
+<div class="tabpanel" id="tab-sentence" role="tabpanel">
+<!-- ══════════════════ ГЕРОЙ · ОСНОВА ══════════════════ -->
+<header class="hero" id="s-hero">
+  <div class="wrap">
+    <div class="eyebrow">Основа · как строится предложение</div>
+    <h1>Глагол в английском<br>есть <span class="tri">всегда</span>.</h1>
+    <p class="hero__sub">
+      Русский спокойно обходится без глагола: «Я Саша», «Он дома», «Мне холодно».
+      Английский так не умеет — это его главное, незыблемое правило. Поэтому любое предложение
+      начинается с одного вопроса: <b>есть ли глагол в русском варианте?</b> Нет — ставим
+      <span class="mono">to be</span>. Есть — берём его и ставим в нужное время.
+      А вопрос строится не интонацией, а перестановкой слов.
+    </p>
+    <div class="hero__meta">
+      <span class="pill">8 станций</span>
+      <span class="pill">конструктор предложения</span>
+      <span class="pill">80 заданий с разбором</span>
+      <span class="pill">5 дуэлей</span>
+      <span class="pill">16 вопросов в общей проверке</span>
+    </div>
+
+    <div class="slotdemo" role="img" aria-label="Пример: в русском «Я Саша» между словами пусто, в английском I am Sasha — пустую ячейку занимает am">
+      <span class="lbl">Русский</span>
+      <span class="chip r-subj">Я</span><span class="chip empty">?</span><span class="chip r-rest">Саша</span>
+      <span class="lbl">Английский</span>
+      <span class="chip r-subj">I</span><span class="chip r-aux fill">am</span><span class="chip r-rest">Sasha</span>
+      <span class="cap">Средняя ячейка в русском пустая. В английском пустой она быть не может — туда встаёт <b>be</b>.</span>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════════════ ОГЛАВЛЕНИЕ ══════════════════ -->
+<section class="sect toc" id="s-toc">
+  <div class="wrap">
+    <div class="sect__head" style="margin-bottom:0">
+      <div class="eyebrow">Оглавление</div>
+      <h2>С чего начать</h2>
+      <p>Можно идти маршрутом сверху вниз, а можно прыгнуть сразу в нужный блок — страница при этом листается как обычно.</p>
+    </div>
+    <div class="toc__g" id="sToc"></div>
+  </div>
+</section>
+
+<!-- ══════════════════ ЧТО СПРАШИВАТЬ У СЕБЯ ══════════════════ -->
+<section class="sect" id="s-algo">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Что спрашивать у себя</div>
+      <h2>Три вопроса к любому предложению</h2>
+      <p>Перед тем как говорить или писать, пройдите по этим шагам. Они работают для любого предложения — от «Я Саша» до вопроса про красную машину.</p>
+    </div>
+
+    <ol class="steps">
+      <li>
+        <b>ВОПРОС 01</b>
+        <h4>Есть ли в русском предложении глагол?</h4>
+        <p>Ищем действие. «Я Саша», «Он дома», «Мне холодно» — действия нет, ставим <span class="mono">to be</span> в нужной форме.
+           «Я люблю кофе» — действие есть, берём глагол и ставим его в нужное время.</p>
+        <a class="goto" href="#t-hero">Как выбрать время →</a>
+      </li>
+      <li>
+        <b>ВОПРОС 02</b>
+        <h4>Это вопрос?</h4>
+        <p>Тогда вперёд выходит помощник: <span class="mono">do / does / did / will</span>. Если глагола в русском нет —
+           вперёд выходит сам <span class="mono">be</span>. Дальше идёт тот, кто действует, потом глагол, потом всё остальное.</p>
+      </li>
+      <li>
+        <b>ВОПРОС 03</b>
+        <h4>Есть вопросительное слово?</h4>
+        <p>Оно встаёт самым первым, перед помощником. И это не обязательно одно слово: «какого цвета» — <span class="mono">what color</span>,
+           «какая красная машина» — <span class="mono">what red car</span>. Вопросительное слово — это всё, что вы хотите узнать.</p>
+      </li>
+    </ol>
+
+    <div class="callout trap" style="margin-top:28px;max-width:66ch">
+      <h4>Исключение: модальные глаголы</h4>
+      <p>Правила выше не касаются <span class="mono">can, must, should, may</span> и их родственников. Модальный глагол — самостоятельная
+         сущность и сам работает помощником, поэтому do ему не нужен ни в вопросе, ни в утверждении.
+         «Ты можешь танцевать?» — не <span class="mono no">Do you can dance?</span>, а <span class="mono yes">Can you dance?</span>
+         Подробно о модальных — в отдельных уроках.</p>
+    </div>
+
+    <figure class="dia">
+      <div>
+        <svg viewBox="0 0 700 290" role="img" aria-label="Главное правило: если в русском предложении нет действия — ставим to be, например I am Sasha; если действие есть — ставим глагол в нужном времени, например I like coffee. В любом случае глагол в английском есть всегда">
+          <rect class="box" x="225" y="12" width="250" height="42" rx="11"/>
+          <text class="t" x="350" y="38" text-anchor="middle">Русское предложение</text>
+
+          <path class="ln" d="M350 54 V 88 H 175 V 108" marker-end="url(#sah)"/>
+          <path class="ln" d="M350 88 H 525 V 108" marker-end="url(#sah)"/>
+          <text class="t-lbl" x="360" y="76">есть в нём действие?</text>
+          <text class="t-lbl" x="163" y="104" text-anchor="end">нет · «Я Саша»</text>
+          <text class="t-lbl" x="537" y="104">да · «Я люблю кофе»</text>
+
+          <rect x="60" y="112" width="230" height="62" rx="12" style="fill:var(--future-soft);stroke:var(--future);stroke-width:1.8"/>
+          <text class="t-m" x="175" y="139" text-anchor="middle" style="fill:var(--future)">to be</text>
+          <text class="t-s" x="175" y="161" text-anchor="middle">am · is · are · was · will be</text>
+
+          <rect x="410" y="112" width="230" height="62" rx="12" style="fill:var(--present-soft);stroke:var(--present);stroke-width:1.8"/>
+          <text class="t-m" x="525" y="139" text-anchor="middle" style="fill:var(--present)">глагол во времени</text>
+          <text class="t-s" x="525" y="161" text-anchor="middle">like · liked · will like</text>
+
+          <text class="t-m" x="175" y="202" text-anchor="middle">I am Sasha.</text>
+          <text class="t-m" x="525" y="202" text-anchor="middle">I like coffee.</text>
+          <text class="t-lbl" x="525" y="222" text-anchor="middle">какое время — на вкладке «Времена»</text>
+
+          <line x1="60" y1="244" x2="640" y2="244" style="stroke:var(--line);stroke-dasharray:4 4"/>
+          <text class="t" x="350" y="274" text-anchor="middle">Итог один: в английском предложении глагол есть всегда</text>
+          <defs>
+            <marker id="sah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 z" fill="currentColor"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+      <figcaption>Главное правило одной развилкой. Ветки расходятся только в том, какой глагол встанет в ячейку, — пустой она не остаётся никогда.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ══════════════════ МЕХАНИКА ══════════════════ -->
+<section class="sect" id="s-system">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Уровень 0 · механика</div>
+      <h2>Предложение собирается из ячеек, и у каждой своё место</h2>
+      <p>
+        Кто, глагол, остальное — каждое слово стоит в своей ячейке. Чтобы превратить утверждение в вопрос,
+        по смыслу ничего добавлять не нужно: <b>ячейки просто переставляются</b>. Помощник уезжает в начало,
+        а вопросительное слово встаёт ещё раньше него.
+      </p>
+    </div>
+
+    <figure class="dia">
+      <div>
+        <svg viewBox="0 0 700 262" role="img" aria-label="Как утверждение становится вопросом: в You like coffee помощник do спрятан; в вопросе Do you like coffee он выходит первым; в вопросе What do you like перед ним встаёт вопросительное слово">
+          <text class="t-s" x="20" y="46">УТВЕРЖДЕНИЕ</text>
+          <rect x="180" y="24" width="60" height="34" rx="9" style="fill:var(--surface-2);stroke:var(--line);stroke-width:1.5"/>
+          <text class="t-m" x="210" y="46" text-anchor="middle">You</text>
+          <rect x="248" y="24" width="60" height="34" rx="9" style="fill:none;stroke:var(--future);stroke-width:1.5;stroke-dasharray:4 3;opacity:.75"/>
+          <text class="t-m" x="278" y="46" text-anchor="middle" style="fill:var(--future);opacity:.75">(do)</text>
+          <rect x="316" y="24" width="60" height="34" rx="9" style="fill:var(--present-soft);stroke:var(--present);stroke-width:1.5"/>
+          <text class="t-m" x="346" y="46" text-anchor="middle" style="fill:var(--present)">like</text>
+          <rect x="384" y="24" width="84" height="34" rx="9" style="fill:none;stroke:var(--line);stroke-width:1.5;stroke-dasharray:4 3"/>
+          <text class="t-m" x="426" y="46" text-anchor="middle">coffee</text>
+          <text class="t-m" x="476" y="46">.</text>
+          <text class="t-lbl" x="548" y="46">«Ты любишь кофе.»</text>
+
+          <path class="ln" d="M278 61 C 278 90, 210 86, 210 110" marker-end="url(#mah)"/>
+          <text class="t-lbl" x="296" y="92">помощник выходит из тени и встаёт первым</text>
+
+          <text class="t-s" x="20" y="138">ОБЩИЙ ВОПРОС</text>
+          <rect x="180" y="116" width="60" height="34" rx="9" style="fill:var(--future-soft);stroke:var(--future);stroke-width:1.8"/>
+          <text class="t-m" x="210" y="138" text-anchor="middle" style="fill:var(--future)">Do</text>
+          <rect x="248" y="116" width="60" height="34" rx="9" style="fill:var(--surface-2);stroke:var(--line);stroke-width:1.5"/>
+          <text class="t-m" x="278" y="138" text-anchor="middle">you</text>
+          <rect x="316" y="116" width="60" height="34" rx="9" style="fill:var(--present-soft);stroke:var(--present);stroke-width:1.5"/>
+          <text class="t-m" x="346" y="138" text-anchor="middle" style="fill:var(--present)">like</text>
+          <rect x="384" y="116" width="84" height="34" rx="9" style="fill:none;stroke:var(--line);stroke-width:1.5;stroke-dasharray:4 3"/>
+          <text class="t-m" x="426" y="138" text-anchor="middle">coffee</text>
+          <text class="t-m" x="476" y="138">?</text>
+          <text class="t-lbl" x="548" y="138">«Ты любишь кофе?»</text>
+
+          <path class="ln" d="M210 153 C 210 182, 286 178, 286 202" marker-end="url(#mah)"/>
+          <text class="t-lbl" x="306" y="184">перед помощником встаёт вопросительное слово</text>
+
+          <text class="t-s" x="20" y="230">СО СЛОВОМ</text>
+          <rect x="180" y="208" width="72" height="34" rx="9" style="fill:var(--past-soft);stroke:var(--past);stroke-width:1.8"/>
+          <text class="t-m" x="216" y="230" text-anchor="middle" style="fill:var(--past)">What</text>
+          <rect x="260" y="208" width="52" height="34" rx="9" style="fill:var(--future-soft);stroke:var(--future);stroke-width:1.5"/>
+          <text class="t-m" x="286" y="230" text-anchor="middle" style="fill:var(--future)">do</text>
+          <rect x="320" y="208" width="60" height="34" rx="9" style="fill:var(--surface-2);stroke:var(--line);stroke-width:1.5"/>
+          <text class="t-m" x="350" y="230" text-anchor="middle">you</text>
+          <rect x="388" y="208" width="60" height="34" rx="9" style="fill:var(--present-soft);stroke:var(--present);stroke-width:1.5"/>
+          <text class="t-m" x="418" y="230" text-anchor="middle" style="fill:var(--present)">like</text>
+          <text class="t-m" x="456" y="230">?</text>
+          <text class="t-lbl" x="548" y="230">«Что ты любишь?»</text>
+          <defs>
+            <marker id="mah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 z" fill="currentColor"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+      <figcaption>Смысловой глагол like не сдвигается ни разу. Двигаются только помощник и вопросительное слово — поэтому они и окрашены иначе.</figcaption>
+    </figure>
+
+    <div class="bu" id="sBuild">
+      <div class="bu__top"><span class="eyebrow">Конструктор предложения</span><span class="bu__hint">выберите вид и тип — ячейки перестроятся</span></div>
+      <div class="bu__ctl">
+        <div class="bu__grp">
+          <span class="eyebrow">1 · Что в русском предложении?</span>
+          <div class="seg" id="buKind"></div>
+        </div>
+        <div class="bu__grp">
+          <span class="eyebrow">2 · Какое предложение строим?</span>
+          <div class="seg" id="buType"></div>
+        </div>
+      </div>
+      <div class="bu__out">
+        <div class="bu__ru" id="buRu"></div>
+        <div class="train bu__train" id="buTrain" aria-live="polite"></div>
+        <div class="bu__schema" id="buSchema"></div>
+        <p class="bu__note" id="buNote"></p>
+      </div>
+      <div class="roles" id="buRoles"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ МАРШРУТ ══════════════════ -->
+<main class="wrap">
+  <div class="roadmap" id="s-road"></div>
+</main>
+
+<!-- ══════════════════ ДУЭЛИ ══════════════════ -->
+<section class="sect" id="s-duels">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Разбор полётов</div>
+      <h2>Пять пар, которые путают чаще всего</h2>
+      <p>Два похожих предложения рядом и один признак, по которому их разводят.</p>
+    </div>
+    <div class="duels" id="sDuels"></div>
+  </div>
+</section>
+
+<!-- ══════════════════ ТРЕНАЖЁР ══════════════════ -->
+<section class="sect" id="s-quiz">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Общая проверка</div>
+      <h2>Шестнадцать предложений — по два на каждую станцию</h2>
+      <p>Вперемешку и без подсказок. После ответа появляется разбор: почему верный вариант верный и чем плох выбранный.</p>
+    </div>
+    <div class="drill z-present" id="sQuiz"></div>
+  </div>
+</section>
+
+<!-- ══════════════════ ШПАРГАЛКА ══════════════════ -->
+<section class="sect" id="s-sheet">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">На один экран</div>
+      <h2>Шпаргалка</h2>
+      <p>Все схемы предложения в одной таблице: по строкам — что строим, по столбцам — что было в русском.</p>
+    </div>
+    <div class="sheet">
+      <table>
+        <thead>
+          <tr><th>Предложение</th><th>Схема</th><th>Глагола нет · be</th><th>Есть глагол · do</th><th>Модальный · can</th></tr>
+        </thead>
+        <tbody id="sSheetBody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<div class="tabpanel" id="tab-tenses" role="tabpanel" hidden>
+<header class="hero" id="t-hero">
   <div class="wrap">
     <div class="eyebrow">Методичка · все времена · одна система</div>
     <h1>Времён не двенадцать.<br>Их <span class="tri">3 × 4</span>.</h1>
@@ -1072,7 +1517,7 @@ td.ex { color: var(--text-dim); }
 
 <div class="tabpanel" id="tab-cond" role="tabpanel" hidden>
 <!-- ══════════════════ ГЕРОЙ · УСЛОВНЫЕ ══════════════════ -->
-<header class="hero">
+<header class="hero" id="c-hero">
   <div class="wrap">
     <div class="eyebrow">Правило второе · условные предложения · if</div>
     <h1>Условие всегда<br>отстаёт на <span class="tri">один шаг</span>.</h1>
@@ -3104,7 +3549,803 @@ const QUIZ_C = [
 </script>
 <script>
 /* ═══════════════════════════════════════════════════════════
-   ТРЕНАЖЁР · один компонент на все 21 блок заданий
+   ОСНОВА · КАК СТРОИТСЯ ПРЕДЛОЖЕНИЕ
+   Цвет кодирует роль слова в предложении:
+   перивинкл — «прыгает вперёд» (be, do, will, can),
+   бирюза — смысловой глагол, стоит на месте,
+   охра — вопросительное слово, всегда первое.
+   Ячейки: [роль, текст, флаги] — флаги: jump, ghost, bad.
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── конструктор: 3 вида × 5 типов, из этих же данных собирается шпаргалка ── */
+const BUILD_KINDS = [
+  { key: 'be',  t: 'Глагола нет',  i: '«Ты дома»',            note: 'В русском глагола нет — его место занимает <b>be</b>. Он сам выходит вперёд в вопросе и сам принимает not.' },
+  { key: 'do',  t: 'Есть глагол',  i: '«Ты любишь кофе»',     note: 'Глагол в русском есть — be не нужен. Для вопроса и отрицания зовём помощника <b>do</b>: в утверждении он спрятан внутри глагола.' },
+  { key: 'can', t: 'Модальный',    i: '«Ты умеешь танцевать»', note: 'Модальный глагол <b>сам себе помощник</b>: вперёд выходит сам, not принимает сам, do ему не нужен.' }
+];
+
+const BUILD_TYPES = [
+  { key: 'pos', t: 'Утверждение',       sch: 'кто → глагол → остальное',                note: 'Базовый порядок: сначала кто, потом глагол.' },
+  { key: 'neg', t: 'Отрицание',         sch: 'кто → помощник + not → глагол',           note: 'Not цепляется к помощнику, а не к смысловому глаголу.' },
+  { key: 'q',   t: 'Вопрос',            sch: 'помощник → кто → глагол ?',               note: 'Помощник встаёт первым: вопрос задаёт порядок слов, а не интонация.' },
+  { key: 'wh',  t: 'Вопрос со словом',  sch: 'вопр. слово → помощник → кто → глагол ?', note: 'Вопросительное слово встаёт перед всей схемой вопроса.' },
+  { key: 'who', t: 'Вопрос «кто?»',     sch: 'вопр. слово (= кто) → глагол ?',          note: 'Спрашиваем про того, кто действует: вопросительное слово само занимает место «кто», и помощник не нужен.' }
+];
+
+const BUILD = {
+  be: {
+    pos: { ru: 'Ты дома.',         s: 'кто → be → остальное',                 tr: [['subj','You'],['aux','are'],['rest','at home'],['end','.']] },
+    neg: { ru: 'Ты не дома.',      s: 'кто → be + not → остальное',           tr: [['subj','You'],['aux','aren\'t'],['rest','at home'],['end','.']] },
+    q:   { ru: 'Ты дома?',         s: 'be → кто → остальное ?',               tr: [['aux','Are','jump'],['subj','you'],['rest','at home'],['end','?']] },
+    wh:  { ru: 'Где ты?',          s: 'вопр. слово → be → кто ?',             tr: [['q','Where'],['aux','are','jump'],['subj','you'],['end','?']] },
+    who: { ru: 'Кто дома?',        s: 'вопр. слово (= кто) → be → остальное ?', tr: [['q','Who'],['aux','is'],['rest','at home'],['end','?']] }
+  },
+  do: {
+    pos: { ru: 'Ты любишь кофе.',     s: 'кто → (do) → глагол → остальное',        tr: [['subj','You'],['aux','(do)','ghost'],['verb','like'],['rest','coffee'],['end','.']] },
+    neg: { ru: 'Ты не любишь кофе.',  s: 'кто → do + not → глагол → остальное',    tr: [['subj','You'],['aux','don\'t'],['verb','like'],['rest','coffee'],['end','.']] },
+    q:   { ru: 'Ты любишь кофе?',     s: 'do → кто → глагол → остальное ?',        tr: [['aux','Do','jump'],['subj','you'],['verb','like'],['rest','coffee'],['end','?']] },
+    wh:  { ru: 'Что ты любишь?',      s: 'вопр. слово → do → кто → глагол ?',      tr: [['q','What'],['aux','do','jump'],['subj','you'],['verb','like'],['end','?']] },
+    who: { ru: 'Кто любит кофе?',     s: 'вопр. слово (= кто) → глагол → остальное ?', tr: [['q','Who'],['verb','likes'],['rest','coffee'],['end','?']] }
+  },
+  can: {
+    pos: { ru: 'Ты умеешь танцевать.',     s: 'кто → can → глагол',              tr: [['subj','You'],['aux','can'],['verb','dance'],['end','.']] },
+    neg: { ru: 'Ты не умеешь танцевать.',  s: 'кто → can + not → глагол',        tr: [['subj','You'],['aux','can\'t'],['verb','dance'],['end','.']] },
+    q:   { ru: 'Ты умеешь танцевать?',     s: 'can → кто → глагол ?',            tr: [['aux','Can','jump'],['subj','you'],['verb','dance'],['end','?']] },
+    wh:  { ru: 'Что ты умеешь делать?',    s: 'вопр. слово → can → кто → глагол ?', tr: [['q','What'],['aux','can','jump'],['subj','you'],['verb','do'],['end','?']] },
+    who: { ru: 'Кто умеет танцевать?',     s: 'вопр. слово (= кто) → can → глагол ?', tr: [['q','Who'],['aux','can'],['verb','dance'],['end','?']] }
+  }
+};
+
+const ROLES = [
+  { r: 'q',    t: 'Вопросительное слово', i: 'всегда первое' },
+  { r: 'aux',  t: 'Помощник: be, do, will, can', i: 'умеет выходить вперёд' },
+  { r: 'subj', t: 'Кто действует', i: '' },
+  { r: 'verb', t: 'Смысловой глагол', i: 'стоит на месте' },
+  { r: 'rest', t: 'Остальное', i: '' }
+];
+
+/* ── уровни маршрута ── */
+const SLEVELS = [
+  { n: 1, title: 'Утверждение', code: 'кто → глагол → остальное', ru: 'Главное правило',
+    txt: 'Первый этаж — само предложение. Здесь живёт главное правило: <b>в английском глагол есть всегда</b>. Нет глагола в русском — ставим be. Есть — берём его и ставим в нужное время. Плюс порядок слов, который в английском не гуляет.' },
+  { n: 2, title: 'Вопрос', code: 'помощник → кто → глагол ?', ru: 'Меняем порядок',
+    txt: 'Второй этаж. Английский задаёт вопрос не интонацией, а <b>порядком слов</b>: помощник выходит вперёд, а вопросительное слово — ещё раньше. И «вопросительное слово» запросто бывает длиной в три слова.' },
+  { n: 3, title: 'Отрицание и модальные', code: 'not · can · must', ru: 'Помощник и исключение',
+    txt: 'Верхний этаж. Отрицание зовёт того же помощника, что и вопрос. А модальные глаголы — исключение из всех правил выше: они <b>сами себе помощники</b>.' }
+];
+
+/* ── станции ── */
+const S = [
+{
+  id: 's-be', zone: 'jump', level: 1, idx: 1,
+  name: 'Нет глагола → to be', core: 'am / is / are · was / were · will be',
+  thesis: 'Пустую ячейку занимает be',
+  short: 'be',
+  fig: {
+    rows: [
+      { l: 'Русский', ru: 'Я <span class="sgap">?</span> Саша.' },
+      { l: 'Английский', tr: [['subj','I'],['aux','am','jump'],['rest','Sasha'],['end','.']] }
+    ],
+    cap: 'В русском между «я» и «Саша» пусто. В английском ячейка под глагол пустой не бывает — туда встаёт be.'
+  },
+  lead: 'Главное, незыблемое правило английского: <b>в предложении всегда есть глагол</b>. Русский спокойно обходится без него — «Я Саша», «Он дома», «Мне холодно». Английский так не умеет, и пустое место занимает глагол <span class="mono">to be</span> — «быть, являться, находиться».',
+  blocks: [
+    { kind: 'key', h: 'Как понять, что нужен be',
+      p: 'Поищите в русском предложении действие. «Я Саша» — что я делаю? Ничего, я просто есть. Действия нет — ставим be: <span class="mono">I am Sasha</span>.<br>«Я читаю» — действие есть, be не нужен: <span class="mono">I read</span>.' },
+    { kind: 'plain', h: 'Какую форму выбрать',
+      p: '<b>Сейчас:</b> <span class="mono">I am</span> · <span class="mono">he / she / it is</span> · <span class="mono">we / you / they are</span><br><b>Раньше:</b> <span class="mono">I / he / she / it was</span> · <span class="mono">we / you / they were</span><br><b>Потом:</b> <span class="mono">will be</span> для всех.<br>В прошедшем и будущем русский вспоминает про «быть»: «я <b>был</b> дома», «я <b>буду</b> дома». Это тот же самый be — <span class="mono">I was at home</span>, <span class="mono">I will be at home</span>.' },
+    { kind: 'plain', h: 'Где русский прячет be',
+      p: 'Имя и профессия: «Я врач» → <span class="mono">I am a doctor</span><br>Возраст: «Мне 25» → <span class="mono">I am 25</span><br>Место: «Он дома» → <span class="mono">He is at home</span><br>Состояние: «Мне холодно» → <span class="mono">I am cold</span><br>Качество: «Машина красная» → <span class="mono">The car is red</span>' },
+    { kind: 'trap', h: 'Ловушка: «у меня есть» — это не be',
+      p: 'Если в русском речь о том, что у кого-то что-то есть, английский берёт глагол <span class="mono">have</span> — «иметь».<br>«У меня есть машина» → <span class="mono yes">I have a car</span>, а не <span class="mono no">I am a car</span><br>Сравните: «Мне 25 лет» — это be: <span class="mono yes">I am 25</span>, а не <span class="mono no">I have 25 years</span>.' },
+    { kind: 'plain', h: 'Тонкость: когда в русском нет даже «кто»',
+      p: '«Холодно», «Уже поздно» — в русском нет ни глагола, ни того, о ком речь. Английский подставит оба: <span class="mono">It is cold</span> · <span class="mono">It is late</span>.<br>А если сообщаем, что где-то что-то есть — «В комнате стол», — предложение начинается с <span class="mono">there is / there are</span>: <span class="mono">There is a table in the room</span>.' },
+    { kind: 'plain', h: 'Тонкость: русский глагол, который становится be',
+      p: '«Я боюсь», «Он опаздывает», «Я интересуюсь» — по-русски это глаголы, а по-английски <b>состояния</b>: <span class="mono">I am afraid</span> · <span class="mono">He is late</span> · <span class="mono">I am interested</span>. Правило не нарушено: глагол в предложении есть, просто это be.' }
+  ],
+  forms: { p: 'I <b>am</b> Sasha. · She <b>is</b> a doctor.', n: 'I <b>am not</b> Sasha. · They <b>aren\'t</b> at home.', q: '<b>Are</b> you Sasha? · <b>Is</b> it cold?' },
+  markers: ['am / is / are', 'was / were', 'will be', 'нет действия', '«был» / «буду»', 'возраст · место · состояние'],
+  ex: [
+    { en: 'I <i class="v">am</i> Sasha.', ru: 'Я Саша.', nb: 'глагола нет — ставим be' },
+    { en: 'She <i class="v">is</i> 25.', ru: 'Ей 25 лет.', nb: 'возраст — тоже через be, а не have' },
+    { en: 'We <i class="v">were</i> at home yesterday.', ru: 'Вчера мы были дома.', nb: 'прошедшее: were' },
+    { en: 'It <i class="v">is</i> cold today.', ru: 'Сегодня холодно.', nb: 'нет ни глагола, ни «кто» — английский подставит оба' }
+  ]
+},
+{
+  id: 's-verb', zone: 'stay', level: 1, idx: 2,
+  name: 'Есть глагол → время', core: 'кто + глагол в нужном времени',
+  thesis: 'Если глагол есть — be не нужен',
+  short: 'глагол',
+  fig: {
+    rows: [
+      { l: 'Русский', ru: 'Я <b>люблю</b> кофе.' },
+      { l: 'Верно', tr: [['subj','I'],['verb','like'],['rest','coffee'],['end','.']] },
+      { l: 'Ошибка', tr: [['subj','I'],['aux','am','bad'],['verb','like'],['rest','coffee'],['end','.']] }
+    ],
+    cap: 'Глагол в русском уже есть — значит, ячейка занята. Второй «быть» туда не встаёт.'
+  },
+  lead: 'Вторая ветка главного правила. Если в русском предложении есть действие — «я люблю», «она работает», «мы поехали», — английский берёт этот глагол и ставит его в <b>нужное время</b>. Как выбрать время — отдельная большая тема, для неё есть своя вкладка.',
+  blocks: [
+    { kind: 'key', h: 'Глагол занял ячейку — be уже не нужен',
+      p: 'В одной ячейке помещается только один глагол. Раз там уже стоит <span class="mono">like</span>, для <span class="mono">am</span> места не остаётся.<br><span class="mono no">I am like coffee</span> → <span class="mono yes">I like coffee</span><br><span class="mono no">She is work in a bank</span> → <span class="mono yes">She works in a bank</span><br>Это самая частая ошибка русскоговорящих — стоит проверять её в каждом предложении.' },
+    { kind: 'plain', h: 'А как же I am working?',
+      p: 'Не путайте с Continuous. Там <span class="mono">am</span> работает помощником времени, и смысловой глагол обязательно стоит с <span class="mono">-ing</span>: <span class="mono">I am working</span> — «я работаю прямо сейчас». Голый глагол после am невозможен: <span class="mono no">I am work</span>.' },
+    { kind: 'plain', h: 'Форма глагола зависит от времени',
+      p: '«Я работаю / работал / буду работать» → <span class="mono">I work / worked / will work</span>. Какое время выбрать по смыслу, разбираем дальше — на вкладке «Времена».<br><a class="goto" href="#t-hero">Перейти к временам →</a>' }
+  ],
+  forms: { p: 'I <b>like</b> coffee. · She <b>works</b> here.', n: 'I <b>don\'t like</b> coffee.', q: '<b>Do</b> you <b>like</b> coffee?' },
+  markers: ['есть действие', 'люблю · работаю · еду', 'глагол → время', 'без am / is / are'],
+  ex: [
+    { en: 'I <i class="v">like</i> coffee.', ru: 'Я люблю кофе.', nb: 'глагол есть — be не нужен' },
+    { en: 'She <i class="v">works</i> in a bank.', ru: 'Она работает в банке.' },
+    { en: 'We <i class="v">went</i> to the cinema.', ru: 'Мы ходили в кино.', nb: 'прошедшее время' },
+    { en: 'They <i class="v">are playing</i> football now.', ru: 'Они сейчас играют в футбол.', nb: 'здесь are — помощник времени, а не be вместо глагола' }
+  ]
+},
+{
+  id: 's-order', zone: 'stay', level: 1, idx: 3,
+  name: 'Порядок слов', core: 'кто → глагол → что → где → когда',
+  thesis: 'У каждого слова своя ячейка',
+  short: 'порядок',
+  fig: {
+    rows: [
+      { l: 'Русский', ru: 'Вчера в парке я видел Тома.' },
+      { l: 'Английский', tr: [['subj','I'],['verb','saw'],['rest','Tom'],['rest','in the park'],['rest','yesterday'],['end','.']] }
+    ],
+    cap: 'По-русски слова можно переставлять почти как угодно. В английском у каждого своя ячейка, и порядок несёт смысл.'
+  },
+  lead: 'По-русски можно сказать «я люблю кофе», «кофе я люблю», «люблю я кофе» — смысл не изменится. В английском так не получится: <b>порядок слов фиксирован</b>, и именно он показывает, кто что делает.',
+  blocks: [
+    { kind: 'key', h: 'Базовая схема',
+      p: '<b>кто → глагол → что → где → когда</b><br><span class="mono">I saw Tom in the park yesterday.</span><br>Место идёт раньше времени: сначала «где», потом «когда».' },
+    { kind: 'plain', h: 'Почему это так важно',
+      p: 'В английском почти нет падежей, и роль слова определяет его место.<br><span class="mono">The dog bit the man</span> — собака укусила человека.<br><span class="mono">The man bit the dog</span> — человек укусил собаку.<br>Слова те же, а смысл перевернулся.' },
+    { kind: 'trap', h: 'Ловушка: very much и often',
+      p: 'Наречие не встаёт между глаголом и тем, на что он направлен.<br><span class="mono no">I like very much coffee</span> → <span class="mono yes">I like coffee very much</span><br>Слова частоты — <span class="mono">always, often, never</span> — стоят перед смысловым глаголом, но после be:<br><span class="mono yes">I often read</span> · <span class="mono yes">He is always busy</span>' }
+  ],
+  forms: { p: 'I <b>read</b> books at home every evening.', n: 'I <b>don\'t read</b> books at home.', q: '<b>Do</b> you read books at home?' },
+  markers: ['кто → глагол', 'где → когда', 'very much — в конце', 'often — перед глаголом', 'always — после be'],
+  ex: [
+    { en: 'I <i class="v">saw</i> Tom in the park yesterday.', ru: 'Вчера в парке я видел Тома.', nb: 'кто → глагол → кого → где → когда' },
+    { en: 'She <i class="v">speaks</i> English very well.', ru: 'Она очень хорошо говорит по-английски.', nb: 'very well — после того, на каком языке' },
+    { en: 'We often <i class="v">go</i> there.', ru: 'Мы часто туда ходим.', nb: 'often — перед смысловым глаголом' },
+    { en: 'He <i class="v">is</i> always busy.', ru: 'Он всегда занят.', nb: 'always — после be' }
+  ]
+},
+{
+  id: 's-yesno', zone: 'jump', level: 2, idx: 4,
+  name: 'Вопрос «да или нет»', core: 'помощник → кто → глагол → остальное ?',
+  thesis: 'Помощник выходит вперёд',
+  short: 'общий вопрос',
+  fig: {
+    rows: [
+      { l: 'Утверждение', tr: [['subj','You'],['aux','(do)','ghost'],['verb','like'],['rest','coffee'],['end','.']] },
+      { l: 'Вопрос', tr: [['aux','Do','jump'],['subj','you'],['verb','like'],['rest','coffee'],['end','?']] }
+    ],
+    cap: 'В утверждении помощник do спрятан. Как только появляется вопрос, он выходит из тени и встаёт первым.'
+  },
+  lead: 'Вопрос, на который отвечают «да» или «нет». В русском мы просто меняем интонацию: «Ты любишь кофе?» В английском интонации мало — меняется <b>порядок слов</b>: вперёд выходит вспомогательный глагол.',
+  blocks: [
+    { kind: 'key', h: 'Схема',
+      p: '<b>помощник → кто → глагол → остальное ?</b><br><span class="mono">Do you like coffee?</span> · <span class="mono">Did she call?</span> · <span class="mono">Will they come?</span>' },
+    { kind: 'plain', h: 'Откуда берётся do',
+      p: 'Он был в предложении всегда, просто прятался внутри глагола: <span class="mono">You like</span> = <span class="mono">You do like</span>. В вопросе помощник выходит наружу и встаёт первым.<br>Вместе с ним уходит и окончание: <span class="mono">She likes</span> → <span class="mono">Does she like?</span> — -s перепрыгнула на does, а глагол остался голым.' },
+    { kind: 'plain', h: 'Если глагола нет — вперёд выходит be',
+      p: 'Помощник не нужен: be сам умеет вставать первым.<br><span class="mono">You are Sasha</span> → <span class="mono">Are you Sasha?</span><br><span class="mono">It was cold</span> → <span class="mono">Was it cold?</span>' },
+    { kind: 'trap', h: 'Ловушка: двойное прошедшее и двойная -s',
+      p: 'После помощника глагол всегда голый: время и -s уже забрал помощник.<br><span class="mono no">Did you went?</span> → <span class="mono yes">Did you go?</span><br><span class="mono no">Does she likes?</span> → <span class="mono yes">Does she like?</span>' }
+  ],
+  forms: { p: 'You <b>like</b> coffee. · You <b>are</b> Sasha.', n: 'You <b>don\'t like</b> coffee.', q: '<b>Do</b> you like coffee? · <b>Are</b> you Sasha?' },
+  markers: ['Do / Does / Did', 'Am / Is / Are', 'Was / Were', 'Will', 'ответ yes / no'],
+  ex: [
+    { en: '<i class="v">Do</i> you like coffee?', ru: 'Ты любишь кофе?', nb: 'помощник do вышел вперёд' },
+    { en: '<i class="v">Does</i> she work here?', ru: 'Она здесь работает?', nb: '-s ушла к does' },
+    { en: '<i class="v">Are</i> you Sasha?', ru: 'Ты Саша?', nb: 'глагола нет — вперёд выходит be' },
+    { en: '<i class="v">Did</i> they call you?', ru: 'Они тебе звонили?', nb: 'прошедшее — did, глагол голый' }
+  ]
+},
+{
+  id: 's-wh', zone: 'ask', level: 2, idx: 5,
+  name: 'Вопрос со словом', core: 'вопр. слово → помощник → кто → глагол ?',
+  thesis: 'Вопросительное слово — самое первое',
+  short: 'вопрос со словом',
+  fig: {
+    rows: [
+      { l: 'Общий вопрос', tr: [['aux','Do'],['subj','you'],['verb','like'],['rest','coffee'],['end','?']] },
+      { l: 'Со словом', tr: [['q','What','jump'],['aux','do'],['subj','you'],['verb','like'],['end','?']] }
+    ],
+    cap: 'Схема общего вопроса остаётся целиком — вопросительное слово просто встаёт перед ней.'
+  },
+  lead: 'Если вопрос начинается с «что», «где», «когда», «почему» — схема та же, что у общего вопроса. Добавляется ровно одно: <b>вопросительное слово встаёт в самое начало</b>, перед помощником.',
+  blocks: [
+    { kind: 'key', h: 'Схема',
+      p: '<b>вопросительное слово → помощник → кто → глагол → остальное ?</b><br><span class="mono">What do you like?</span> · <span class="mono">Where does she live?</span> · <span class="mono">When did they arrive?</span>' },
+    { kind: 'plain', h: 'Без глагола — то же самое, только с be',
+      p: '<span class="mono">Where are you?</span> — Где ты?<br><span class="mono">Who is he?</span> — Кто он?<br><span class="mono">Why are you so sad?</span> — Почему ты такой грустный?' },
+    { kind: 'plain', h: 'Основные вопросительные слова',
+      p: '<span class="mono">what</span> — что, какой · <span class="mono">where</span> — где, куда · <span class="mono">when</span> — когда · <span class="mono">why</span> — почему · <span class="mono">who</span> — кто · <span class="mono">how</span> — как · <span class="mono">which</span> — который · <span class="mono">whose</span> — чей' },
+    { kind: 'trap', h: 'Ловушка: вопрос о том, кто действует',
+      p: 'Если спрашиваем про того, <b>кто совершает действие</b>, вопросительное слово само занимает ячейку «кто». Помощник тогда не нужен, и порядок остаётся как в утверждении.<br>«Кто тебе позвонил?» → <span class="mono yes">Who called you?</span>, а не <span class="mono no">Who did call you?</span><br>«Кому ты позвонил?» → <span class="mono yes">Who did you call?</span> — здесь «кто» уже ты, и схема обычная.' }
+  ],
+  forms: { p: 'You <b>like</b> coffee.', n: 'Why <b>don\'t</b> you like coffee?', q: '<b>What</b> do you like? · <b>Where</b> are you?' },
+  markers: ['what', 'where', 'when', 'why', 'who', 'how', 'which', 'whose'],
+  ex: [
+    { en: '<i class="v">What</i> do you want?', ru: 'Что ты хочешь?' },
+    { en: '<i class="v">Where</i> does he live?', ru: 'Где он живёт?', nb: '-s ушла к does' },
+    { en: '<i class="v">Why</i> are you so sad?', ru: 'Почему ты такой грустный?', nb: 'глагола нет — be' },
+    { en: '<i class="v">Who</i> called you?', ru: 'Кто тебе звонил?', nb: 'спрашиваем про того, кто действует, — без помощника' }
+  ]
+},
+{
+  id: 's-whgroup', zone: 'ask', level: 2, idx: 6,
+  name: 'Вопросительное слово из нескольких слов', core: '[то, о чём спрашиваем] → помощник → кто → глагол ?',
+  thesis: 'Вопросительное слово — это то, что хотим узнать',
+  short: 'группа вопроса',
+  fig: {
+    rows: [
+      { l: 'Русский', ru: 'Какого цвета эта машина?' },
+      { l: 'Английский', tr: [['q','What color','jump'],['aux','is'],['subj','this car'],['end','?']] },
+      { l: 'Русский', ru: 'Какая красная машина тебе понравилась больше всего?' },
+      { l: 'Английский', tr: [['q','What red car','jump'],['aux','did'],['subj','you'],['verb','like'],['rest','most'],['end','?']] }
+    ],
+    cap: 'По-русски «какого цвета» звучит как одно понятие — и английский держит его вместе: вся группа целиком встаёт в начало.'
+  },
+  lead: 'В русском вопросе кажется, что вопросительное слово одно: «какого». Но спрашиваем-то мы не «какого», а <b>какого цвета</b>. В английском вопросительное слово — это <b>всё, о чём мы спрашиваем</b>, и оно может состоять из двух, трёх и более слов.',
+  blocks: [
+    { kind: 'key', h: 'Как найти границы группы',
+      p: 'Спросите себя: что именно я хочу узнать? Всё это и есть вопросительное слово.<br>«Какого <b>цвета</b> машина?» → <span class="mono">What color</span> is the car?<br>«Какая <b>красная машина</b> понравилась?» → <span class="mono">What red car</span> did you like?<br>«<b>Сколько книг</b> ты прочитал?» → <span class="mono">How many books</span> did you read?' },
+    { kind: 'trap', h: 'Ловушка: разорвать группу',
+      p: 'Группу нельзя делить — она переезжает в начало целиком.<br><span class="mono no">What is color this car?</span> → <span class="mono yes">What color is this car?</span><br><span class="mono no">How many did you read books?</span> → <span class="mono yes">How many books did you read?</span>' },
+    { kind: 'plain', h: 'Самые частые группы',
+      p: '<span class="mono">what time</span> — во сколько · <span class="mono">what kind of</span> — какой (вид) · <span class="mono">how many / how much</span> — сколько · <span class="mono">how long</span> — как долго · <span class="mono">how often</span> — как часто · <span class="mono">how old</span> — сколько лет · <span class="mono">whose book</span> — чья книга' },
+    { kind: 'plain', h: 'Тонкость: предлог может уйти в конец',
+      p: '«Возле какого дома ты живёшь?» Строго по схеме — <span class="mono">Near which house do you live?</span> Так правильно, но звучит книжно. В живой речи предлог обычно отправляют в конец: <span class="mono">Which house do you live near?</span><br>«С кем ты говорил?» → <span class="mono">Who did you talk to?</span>' }
+  ],
+  forms: { p: 'This car <b>is</b> red.', n: 'Which car <b>didn\'t</b> you like?', q: '<b>What color</b> is this car?' },
+  markers: ['what color', 'what time', 'how many', 'how much', 'how long', 'how old', 'what kind of', 'whose …'],
+  ex: [
+    { en: '<i class="v">What color</i> is this car?', ru: 'Какого цвета эта машина?', nb: '«какого цвета» — одна группа' },
+    { en: '<i class="v">What red car</i> did you like most?', ru: 'Какая красная машина тебе понравилась больше всего?', nb: 'группа из трёх слов' },
+    { en: '<i class="v">How many books</i> did you read?', ru: 'Сколько книг ты прочитал?' },
+    { en: '<i class="v">What time</i> is it?', ru: 'Который час?' }
+  ]
+},
+{
+  id: 's-neg', zone: 'jump', level: 3, idx: 7,
+  name: 'Отрицание', core: 'кто → помощник + not → глагол → остальное',
+  thesis: 'Not цепляется к помощнику',
+  short: 'отрицание',
+  fig: {
+    rows: [
+      { l: 'С глаголом', tr: [['subj','I'],['aux','don\'t','jump'],['verb','like'],['rest','coffee'],['end','.']] },
+      { l: 'Без глагола', tr: [['subj','I'],['aux','am not','jump'],['rest','Sasha'],['end','.']] },
+      { l: 'Модальный', tr: [['subj','I'],['aux','can\'t','jump'],['verb','dance'],['end','.']] }
+    ],
+    cap: 'Not никогда не встаёт сам по себе рядом с обычным глаголом — ему нужен помощник, к которому можно прицепиться.'
+  },
+  lead: 'В русском частица «не» встаёт прямо перед глаголом: «я не люблю». В английском <span class="mono">not</span> к обычному глаголу цепляться не умеет. Ему нужен <b>помощник</b> — тот же самый, что выходит вперёд в вопросе.',
+  blocks: [
+    { kind: 'key', h: 'Схема',
+      p: '<b>кто → помощник + not → глагол → остальное</b><br><span class="mono">I do not like</span> = <span class="mono">I don\'t like</span> · <span class="mono">She doesn\'t work</span> · <span class="mono">We didn\'t go</span>' },
+    { kind: 'plain', h: 'Без глагола — not просто встаёт после be',
+      p: 'Помощник не нужен, be справляется сам: <span class="mono">I am not Sasha</span> · <span class="mono">It isn\'t cold</span> · <span class="mono">They weren\'t at home</span>.' },
+    { kind: 'trap', h: 'Ловушка: not прямо перед глаголом',
+      p: '<span class="mono no">I not like coffee</span> → <span class="mono yes">I don\'t like coffee</span><br><span class="mono no">She don\'t know</span> → <span class="mono yes">She doesn\'t know</span><br><span class="mono no">He didn\'t went</span> → <span class="mono yes">He didn\'t go</span>' },
+    { kind: 'plain', h: 'Сокращения — норма живой речи',
+      p: '<span class="mono">do not → don\'t · does not → doesn\'t · did not → didn\'t · is not → isn\'t · are not → aren\'t · will not → won\'t · cannot → can\'t</span><br>У <span class="mono">I am not</span> пары нет — только <span class="mono">I\'m not</span>.' }
+  ],
+  forms: { p: 'I <b>like</b> coffee. · I <b>am</b> Sasha.', n: 'I <b>don\'t like</b> coffee. · I <b>am not</b> Sasha.', q: '<b>Don\'t</b> you like coffee?' },
+  markers: ['don\'t / doesn\'t', 'didn\'t', 'isn\'t / aren\'t', 'wasn\'t / weren\'t', 'won\'t', 'can\'t'],
+  ex: [
+    { en: 'I <i class="v">don\'t like</i> coffee.', ru: 'Я не люблю кофе.', nb: 'not прицепился к do' },
+    { en: 'She <i class="v">doesn\'t work</i> on Sundays.', ru: 'Она не работает по воскресеньям.', nb: '-s ушла к does' },
+    { en: 'I <i class="v">am not</i> hungry.', ru: 'Я не голоден.', nb: 'глагола нет — not встаёт после be' },
+    { en: 'They <i class="v">didn\'t call</i>.', ru: 'Они не позвонили.', nb: 'didn\'t плюс голый глагол' }
+  ]
+},
+{
+  id: 's-modal', zone: 'jump', level: 3, idx: 8,
+  name: 'Модальные глаголы', core: 'can / must / should + голый глагол',
+  thesis: 'Модальный сам себе помощник',
+  short: 'модальные',
+  fig: {
+    rows: [
+      { l: 'Обычный глагол', tr: [['aux','Do','jump'],['subj','you'],['verb','dance'],['end','?']] },
+      { l: 'Модальный', tr: [['aux','Can','jump'],['subj','you'],['verb','dance'],['end','?']] },
+      { l: 'Ошибка', tr: [['aux','Do','bad'],['subj','you'],['aux','can'],['verb','dance'],['end','?']] }
+    ],
+    cap: 'Модальный глагол уже умеет всё, что умеет помощник: выходить вперёд и принимать not. Второй помощник ему не нужен.'
+  },
+  lead: 'Все правила выше не касаются модальных глаголов — <span class="mono">can, must, should, may, might, could, would</span>. Это <b>самостоятельные сущности</b>: они сами работают помощниками, поэтому <span class="mono">do / does / did</span> им не нужны ни в вопросе, ни в отрицании. Подробно о каждом модальном — в отдельных уроках; здесь только то, как они меняют строй предложения.',
+  blocks: [
+    { kind: 'key', h: 'В вопросе — сразу вперёд',
+      p: '«Ты можешь танцевать?»<br><span class="mono no">Do you can dance?</span> → <span class="mono yes">Can you dance?</span><br>Модальный сам выходит на первое место — точно так же, как be.' },
+    { kind: 'plain', h: 'В утверждении — без помощника, даже если есть глагол',
+      p: '<span class="mono">I can swim</span> · <span class="mono">You should go</span> · <span class="mono">She must work</span><br>Смысловой глагол после модального стоит голым: без <span class="mono">to</span> и без <span class="mono">-s</span>.' },
+    { kind: 'trap', h: 'Ловушка: to, -s и do рядом с модальным',
+      p: '<span class="mono no">She cans swim</span> → <span class="mono yes">She can swim</span> — у модальных нет -s даже с he / she / it.<br><span class="mono no">I can to swim</span> → <span class="mono yes">I can swim</span> — после модального to не ставят.<br><span class="mono no">I don\'t can</span> → <span class="mono yes">I can\'t</span> — not цепляется прямо к модальному.' },
+    { kind: 'plain', h: 'А have to?',
+      p: 'Это не модальный, а обычный глагол, поэтому ему нужен do: <span class="mono">Do you have to go?</span> · <span class="mono">I don\'t have to go</span>. Об этом тоже будет отдельный урок.' }
+  ],
+  forms: { p: 'I <b>can</b> dance. · She <b>should</b> go.', n: 'I <b>can\'t</b> dance. · You <b>mustn\'t</b> smoke.', q: '<b>Can</b> you dance? · <b>Should</b> I go?' },
+  markers: ['can / could', 'must', 'should', 'may / might', 'would', 'без do', 'без to', 'без -s'],
+  ex: [
+    { en: '<i class="v">Can</i> you dance?', ru: 'Ты умеешь танцевать?', nb: 'не Do you can dance' },
+    { en: 'She <i class="v">can</i> speak three languages.', ru: 'Она может говорить на трёх языках.', nb: 'после can — голый глагол, у can нет -s' },
+    { en: 'You <i class="v">shouldn\'t</i> eat so late.', ru: 'Тебе не стоит есть так поздно.', nb: 'not прямо к модальному' },
+    { en: 'What <i class="v">can</i> I do?', ru: 'Что я могу сделать?', nb: 'вопр. слово → модальный → кто → глагол' }
+  ]
+}
+];
+
+/* ── дуэли: у каждой стороны своя строка ячеек ── */
+const SDUELS = [
+  {
+    q: 'Be или глагол? — ищем действие',
+    a: { z: 'jump', n: 'Нет глагола → be', tr: [['subj','I'],['aux','am','jump'],['rest','a teacher'],['end','.']],
+         en: 'I <i class="v">am</i> a teacher.', ru: 'Я учитель.', why: 'Действия нет — я просто кто-то. Пустую ячейку занимает be.' },
+    b: { z: 'stay', n: 'Есть глагол → без be', tr: [['subj','I'],['verb','teach'],['rest','English'],['end','.']],
+         en: 'I <i class="v">teach</i> English.', ru: 'Я преподаю английский.', why: 'Действие есть — teach. Ячейка занята, be сюда уже не встанет.' },
+    r: 'Нашли в русском действие — be не нужен. Не нашли — ставим be. В одной ячейке они не уживаются: I am teach — ошибка.'
+  },
+  {
+    q: 'Кто выходит вперёд в вопросе?',
+    a: { z: 'jump', n: 'Be выходит сам', tr: [['aux','Are','jump'],['subj','you'],['rest','a teacher'],['end','?']],
+         en: '<i class="v">Are</i> you a teacher?', ru: 'Ты учитель?', why: 'Be умеет вставать первым без посторонней помощи.' },
+    b: { z: 'jump', n: 'Глаголу нужен do', tr: [['aux','Do','jump'],['subj','you'],['verb','teach'],['rest','English'],['end','?']],
+         en: '<i class="v">Do</i> you teach English?', ru: 'Ты преподаёшь английский?', why: 'Обычный глагол вперёд не выходит — вместо него встаёт помощник do.' },
+    r: 'Вперёд выходят только «прыгающие» слова: be, помощники и модальные. Смысловой глагол всегда остаётся на своём месте.'
+  },
+  {
+    q: 'Модальный или обычный глагол?',
+    a: { z: 'jump', n: 'Модальный · сам себе помощник', tr: [['aux','Can','jump'],['subj','you'],['verb','swim'],['end','?']],
+         en: '<i class="v">Can</i> you swim?', ru: 'Ты умеешь плавать?', why: 'Can сам выходит вперёд, do ему не нужен.' },
+    b: { z: 'stay', n: 'Обычный · зовёт do', tr: [['aux','Do','jump'],['subj','you'],['verb','swim'],['end','?']],
+         en: '<i class="v">Do</i> you swim?', ru: 'Ты плаваешь?', why: 'Swim — обычный глагол, в вопросе ему нужен помощник.' },
+    r: 'Модальный уже работает помощником. Do you can — это два помощника в одном вопросе.'
+  },
+  {
+    q: '«Кто позвонил?» или «Кому позвонил?»',
+    a: { z: 'ask', n: 'Про того, кто действует', tr: [['q','Who','jump'],['verb','called'],['rest','you'],['end','?']],
+         en: '<i class="v">Who</i> called you?', ru: 'Кто тебе позвонил?', why: 'Who сам занимает ячейку «кто». Порядок как в утверждении, помощник не нужен.' },
+    b: { z: 'ask', n: 'Про того, кому звонили', tr: [['q','Who','jump'],['aux','did'],['subj','you'],['verb','call'],['end','?']],
+         en: '<i class="v">Who</i> did you call?', ru: 'Кому ты позвонил?', why: '«Кто» здесь — ты. Схема обычная: вопросительное слово → помощник → кто → глагол.' },
+    r: 'Спросите себя, о ком вопрос: о том, кто совершил действие, или о том, на кого оно направлено. В первом случае помощник не нужен.'
+  },
+  {
+    q: 'Одно вопросительное слово или группа?',
+    a: { z: 'ask', n: 'Одно слово', tr: [['q','What','jump'],['aux','is'],['subj','this'],['end','?']],
+         en: '<i class="v">What</i> is this?', ru: 'Что это?', why: 'Спрашиваем про сам предмет — вопросительное слово одно.' },
+    b: { z: 'ask', n: 'Группа из двух слов', tr: [['q','What color','jump'],['aux','is'],['subj','this'],['end','?']],
+         en: '<i class="v">What color</i> is this?', ru: 'Какого это цвета?', why: 'Спрашиваем про цвет — «какого цвета» переезжает в начало целиком.' },
+    r: 'Вопросительное слово — это всё, что вы хотите узнать. Сколько в нём окажется слов, решает смысл, а не русский перевод.'
+  }
+];
+</script>
+<script>
+/* ═══════════════════════════════════════════════════════════
+   ЗАДАНИЯ · КАК СТРОИТСЯ ПРЕДЛОЖЕНИЕ
+   ═══════════════════════════════════════════════════════════ */
+const SDRILLS = {
+
+'s-be': [
+  Q('«Я Саша.»',
+    ['+I am Sasha.', 'Действия в русском нет — пустую ячейку под глагол занимает be. С I — только am.'],
+    ['I Sasha.', 'Без глагола английское предложение не существует. Пустую ячейку нужно заполнить be.'],
+    ['I is Sasha.', 'Is идёт с he / she / it. С I всегда am.']),
+  Q('She ___ a doctor.',
+    ['+is', 'Профессия — действия нет, значит be. Для she форма is.'],
+    ['are', 'Are идёт с we / you / they, а she — это «она».'],
+    ['am', 'Am бывает только с I.']),
+  Q('«Мне 25 лет.»',
+    ['+I am 25.', 'Возраст в английском — это состояние, поэтому be: «я есть двадцать пять».'],
+    ['I have 25 years.', 'Дословный перевод с русского. Годами не «владеют» — возраст передаётся через be.'],
+    ['Me is 25.', 'Тот, о ком речь, в английском — I, а не me. И с I нужен am.']),
+  Q('They ___ at home yesterday.',
+    ['+were', 'Прошедшее время от be для they — were. Действия нет: они просто были дома.'],
+    ['was', 'Was идёт с I / he / she / it, а для they нужно were.'],
+    ['are', 'Слово yesterday требует прошедшего времени.']),
+  Q('«Сегодня холодно.»',
+    ['+It is cold today.', 'В русском нет ни глагола, ни «кто». Английский подставит оба: it и is.'],
+    ['Is cold today.', 'Ячейка «кто» не может пустовать — для погоды английский ставит it.'],
+    ['Today cold.', 'Нет глагола вообще — такое предложение по-английски невозможно.']),
+  Q('I ___ in London next week.',
+    ['+will be', 'Будущее от be — will be для всех лиц: «я буду в Лондоне».'],
+    ['will', 'Will — только метка будущего. Без be предложение остаётся без глагола.'],
+    ['be', 'Голый be не показывает ни лицо, ни время.']),
+  Q('«У меня есть машина.»',
+    ['+I have a car.', 'Когда речь о том, что у кого-то что-то есть, английский берёт глагол have — «иметь».'],
+    ['I am a car.', 'Так получилось бы «я — машина». Обладание передаётся через have, а не be.'],
+    ['Me is a car.', 'Дословный перевод «у меня есть» ломает предложение: нужно I have.']),
+  Q('My parents ___ teachers.',
+    ['+are', 'Действия нет — профессия. My parents — это «они», поэтому are.'],
+    ['is', 'Родителей двое, значит нужна форма для «они» — are.'],
+    ['be', 'Голый be не показывает ни лицо, ни время.']),
+  Q('«В комнате два стула.»',
+    ['+There are two chairs in the room.', 'Сообщаем, что где-то что-то есть, — предложение начинается с there are. Стульев два — поэтому are.'],
+    ['In the room two chairs.', 'Нет глагола — английское предложение так существовать не может.'],
+    ['There is two chairs in the room.', 'There is — для одного предмета. Стульев два, значит there are.']),
+  Q('«Я боюсь собак.»',
+    ['+I am afraid of dogs.', 'Бояться по-английски — состояние, afraid. Состояние передаётся через be.'],
+    ['I afraid of dogs.', 'Afraid — прилагательное, а не глагол. Без be в предложении не осталось глагола.'],
+    ['I do afraid of dogs.', 'Do не заменяет be: afraid не действие, его нельзя «делать».'])
+],
+
+'s-verb': [
+  Q('«Я люблю кофе.»',
+    ['+I like coffee.', 'Действие есть — like. Ячейка под глагол занята, be не нужен.'],
+    ['I am like coffee.', 'Классическая ошибка: глагол like уже есть, второй «быть» для него лишний.'],
+    ['Like coffee I.', 'Порядок слов фиксирован: сначала кто, потом глагол.']),
+  Q('«Она работает в банке.»',
+    ['+She works in a bank.', 'Глагол есть — work. Для she в настоящем добавляется -s.'],
+    ['She is work in a bank.', 'Is и work не уживаются в одной ячейке: раз есть глагол, be не нужен.'],
+    ['She is works in a bank.', 'Два глагола подряд. Достаточно works.']),
+  Q('We ___ to the cinema yesterday.',
+    ['+went', 'Глагол есть — «ходили». Yesterday требует прошедшего: go → went.'],
+    ['were go', 'Were не ставят рядом с обычным глаголом: ячейка уже занята go.'],
+    ['are went', 'Are и went — два глагола сразу, да ещё в разных временах.']),
+  Q('«Он играет на гитаре.»',
+    ['+He plays the guitar.', 'Действие есть — play. Для he в настоящем -s.'],
+    ['He is play the guitar.', 'Глагол play уже занял ячейку, is здесь лишний.'],
+    ['He play the guitar.', 'С he в настоящем времени глагол забирает -s.']),
+  Q('I ___ English every day.',
+    ['+study', 'Глагол есть — «учу». Every day говорит о привычке, и с I форма без -s.'],
+    ['am study', 'Am перед обычным глаголом — та самая ошибка «be плюс глагол».'],
+    ['studying', 'Форма с -ing не может быть глаголом сама по себе, ей нужен помощник.']),
+  Q('«Мы живём в Москве.»',
+    ['+We live in Moscow.', 'Действие есть — live. Be не нужен.'],
+    ['We are live in Moscow.', 'Are и live не встают в одну ячейку.'],
+    ['We lives in Moscow.', 'Окончание -s бывает только с he / she / it, а we — «мы».']),
+  Q('They ___ football right now.',
+    ['+are playing', 'Здесь are — не be вместо глагола, а помощник времени Continuous. С ним глагол всегда идёт с -ing.'],
+    ['are play', 'После are голый глагол невозможен. Либо are playing, либо просто play.'],
+    ['play', 'Right now — «прямо сейчас», для этого нужно время Continuous: are playing.']),
+  Q('«Я знаю ответ.»',
+    ['+I know the answer.', 'Глагол есть — know. Be не нужен.'],
+    ['I am know the answer.', 'Know уже занимает ячейку глагола — am лишний.'],
+    ['I am knowing the answer.', 'Know — глагол состояния, у него не бывает -ing. Подробнее — на вкладке «Времена».']),
+  Q('«Она вчера купила платье.»',
+    ['+She bought a dress yesterday.', 'Глагол есть — «купила». Прошедшее: buy → bought.'],
+    ['She was buy a dress yesterday.', 'Was и buy не уживаются: раз есть глагол, be не нужен.'],
+    ['She is bought a dress yesterday.', 'Is плюс третья форма — это пассив: «её купили». Смысл совсем другой.']),
+  Q('«Мой брат быстро бегает.»',
+    ['+My brother runs fast.', 'Действие есть — run. Brother — это «он», поэтому -s.'],
+    ['My brother is run fast.', 'Is рядом с обычным глаголом — лишний.'],
+    ['My brother run fast.', 'Для «он» в настоящем глагол забирает -s.'])
+],
+
+'s-order': [
+  Q('«Вчера в парке я видел Тома.»',
+    ['+I saw Tom in the park yesterday.', 'кто → глагол → кого → где → когда.'],
+    ['I saw in the park Tom yesterday.', 'Между глаголом и тем, кого видел, ничего не встаёт: saw Tom.'],
+    ['In the park yesterday saw I Tom.', 'В утверждении глагол не обгоняет того, кто действует.']),
+  Q('«Я очень люблю кофе.»',
+    ['+I like coffee very much.', 'Very much идёт после того, что любим.'],
+    ['I like very much coffee.', 'Very much не может разделять глагол и то, на что он направлен.'],
+    ['I very much coffee like.', 'Глагол должен стоять сразу после того, кто действует.']),
+  Q('«Она хорошо говорит по-английски.»',
+    ['+She speaks English well.', 'Well — после того, на каком языке говорят.'],
+    ['She speaks well English.', 'Well не встаёт между глаголом и English.'],
+    ['She well speaks English.', 'Well в английском обычно не ставят перед глаголом.']),
+  Q('«Мы часто ходим в кино.»',
+    ['+We often go to the cinema.', 'Слова частоты стоят перед смысловым глаголом.'],
+    ['We go often to the cinema.', 'Often не встаёт между глаголом и тем, куда идём.'],
+    ['Often go we to the cinema.', 'Глагол не может обгонять того, кто действует.']),
+  Q('«Он всегда занят.»',
+    ['+He is always busy.', 'Действия нет — be. Always ставится после be.'],
+    ['He always is busy.', 'С be слово частоты идёт после него, а не перед.'],
+    ['Always he busy.', 'Пропал be — в предложении не осталось глагола.']),
+  Q('«Собака укусила мужчину.»',
+    ['+The dog bit the man.', 'Тот, кто действует, стоит первым: собака.'],
+    ['The man bit the dog.', 'Слова те же, но порядок перевернул смысл: получилось «человек укусил собаку».'],
+    ['Bit the dog the man.', 'Глагол не может стоять в начале утверждения.']),
+  Q('«Я читаю книги дома каждый вечер.»',
+    ['+I read books at home every evening.', 'кто → глагол → что → где → когда: место раньше времени.'],
+    ['I every evening read books at home.', 'Время не встаёт между «кто» и глаголом.'],
+    ['I read at home books every evening.', 'Между глаголом и тем, что читаю, место не вклинивается.']),
+  Q('«Моя сестра работает в больнице.»',
+    ['+My sister works in a hospital.', 'кто → глагол → где.'],
+    ['In a hospital works my sister.', 'Такой порядок звучит как стихи. В обычной речи первым идёт тот, кто действует.'],
+    ['My sister in a hospital works.', 'Глагол должен стоять сразу после того, кто действует.']),
+  Q('«Я никогда не пью кофе вечером.»',
+    ['+I never drink coffee in the evening.', 'Never — перед смысловым глаголом. И never уже отрицание, not не нужен.'],
+    ['I drink never coffee in the evening.', 'Never не встаёт между глаголом и тем, что пью.'],
+    ['Never I drink coffee in the evening.', 'Never в начале требует особого порядка слов — в обычной речи так не говорят.']),
+  Q('«Мы купили новую машину в прошлом месяце.»',
+    ['+We bought a new car last month.', 'кто → глагол → что → когда.'],
+    ['We bought last month a new car.', 'Время не вклинивается между глаголом и тем, что купили.'],
+    ['Last month bought we a new car.', 'Глагол не может обгонять того, кто действует.'])
+],
+
+'s-yesno': [
+  Q('«Ты любишь кофе?»',
+    ['+Do you like coffee?', 'Глагол есть — в вопросе вперёд выходит помощник do.'],
+    ['You like coffee?', 'Так бывает в разговоре с удивлённой интонацией, но нормальный вопрос строится через помощника.'],
+    ['Like you coffee?', 'Смысловой глагол вперёд не выходит — вместо него встаёт do.']),
+  Q('«Она здесь работает?»',
+    ['+Does she work here?', 'Помощник does забрал -s, глагол остался голым.'],
+    ['Does she works here?', 'Двойная -s: она уже ушла к does.'],
+    ['Is she work here?', 'Is — это be, а глагол в русском есть. Нужен помощник does.']),
+  Q('«Ты Саша?»',
+    ['+Are you Sasha?', 'Глагола нет — вперёд выходит сам be.'],
+    ['Do you Sasha?', 'Do зовут на помощь глаголу, а глагола здесь нет. Нужен be.'],
+    ['You are Sasha?', 'Порядок утверждения. В вопросе be встаёт первым.']),
+  Q('___ they call you yesterday?',
+    ['+Did', 'Глагол есть — call. Прошедшее время, поэтому помощник did.'],
+    ['Do', 'Yesterday — прошлое, а do про настоящее.'],
+    ['Were', 'Were — это be, а у нас есть глагол call. Ему нужен did.']),
+  Q('___ it cold yesterday?',
+    ['+Was', 'Глагола нет — «было холодно». Be в прошедшем для it — was.'],
+    ['Did', 'Did нужен обычному глаголу, а cold — не глагол. Здесь работает be.'],
+    ['Were', 'Were — для we / you / they. С it — was.']),
+  Q('«Ты придёшь завтра?»',
+    ['+Will you come tomorrow?', 'Будущее: помощник will выходит вперёд.'],
+    ['Do you come tomorrow?', 'Do про привычку в настоящем, а речь о завтрашнем дне.'],
+    ['You will come tomorrow?', 'Порядок утверждения. В вопросе will встаёт первым.']),
+  Q('___ he like pizza?',
+    ['+Does', 'Глагол есть, he — значит помощник does.'],
+    ['Do', 'Do — для I / you / we / they. С he — does.'],
+    ['Is', 'Is — это be, а у нас есть глагол like.']),
+  Q('«Ты голоден?»',
+    ['+Are you hungry?', 'Глагола нет — голоден — это состояние. Вперёд выходит be.'],
+    ['Do you hungry?', 'Hungry — не глагол, его нельзя «делать». Нужен be.'],
+    ['Have you hungry?', 'Have — «иметь», а здесь состояние. Работает be.']),
+  Q('«Он вчера купил машину?»',
+    ['+Did he buy a car yesterday?', 'Did забрал прошедшее время, buy остался голым.'],
+    ['Did he bought a car yesterday?', 'Двойное прошедшее: оно уже в did.'],
+    ['Does he buy a car yesterday?', 'Yesterday требует прошедшего — did.']),
+  Q('«Твоя сестра дома?»',
+    ['+Is your sister at home?', 'Глагола нет — место. Вперёд выходит be, для sister — is.'],
+    ['Does your sister at home?', 'Does нужен глаголу, а глагола здесь нет.'],
+    ['Your sister is at home?', 'Порядок утверждения — в вопросе be встаёт первым.'])
+],
+
+'s-wh': [
+  Q('«Что ты хочешь?»',
+    ['+What do you want?', 'вопр. слово → помощник → кто → глагол.'],
+    ['What you want?', 'Пропал помощник: после вопросительного слова нужен do.'],
+    ['What want you?', 'Смысловой глагол вперёд не выходит — нужен помощник do.']),
+  Q('«Где он живёт?»',
+    ['+Where does he live?', 'Помощник does забрал -s, live остался голым.'],
+    ['Where he lives?', 'Порядок утверждения. В вопросе после where нужен помощник.'],
+    ['Where does he lives?', 'Двойная -s: она уже ушла к does.']),
+  Q('«Где ты?»',
+    ['+Where are you?', 'Глагола нет — после where встаёт be.'],
+    ['Where do you?', 'Do нужен обычному глаголу, а здесь глагола нет.'],
+    ['Where you are?', 'В вопросе be должен обогнать you.']),
+  Q('«Кто тебе позвонил?»',
+    ['+Who called you?', 'Спрашиваем про того, кто действует: who сам занимает ячейку «кто», помощник не нужен.'],
+    ['Who did call you?', 'Помощник лишний — в вопросе о том, кто действует, порядок как в утверждении.'],
+    ['Who did you call?', 'Это уже другой вопрос: «кому ты позвонил?». Здесь «кто» — ты.']),
+  Q('«Кому ты позвонил?»',
+    ['+Who did you call?', '«Кто» здесь — ты, поэтому схема обычная: вопр. слово → did → кто → глагол.'],
+    ['Who called you?', 'Это вопрос «кто тебе позвонил?» — смысл перевернулся.'],
+    ['Who you called?', 'Пропал помощник did.']),
+  Q('«Почему ты такой грустный?»',
+    ['+Why are you so sad?', 'Глагола нет — после why встаёт be.'],
+    ['Why do you so sad?', 'Sad — не глагол, do здесь не к чему прицепиться.'],
+    ['Why you are so sad?', 'В вопросе be встаёт перед you.']),
+  Q('«Когда они приехали?»',
+    ['+When did they arrive?', 'Прошедшее — did, arrive голый.'],
+    ['When they arrived?', 'Порядок утверждения, пропал помощник.'],
+    ['When did they arrived?', 'Двойное прошедшее — оно уже в did.']),
+  Q('«Как тебя зовут?»',
+    ['+What is your name?', 'По-английски спрашивают «что есть твоё имя» — what и be.'],
+    ['How is your name?', 'Дословный перевод «как». How is — это «как поживает», к имени не подходит.'],
+    ['What your name?', 'Пропал be — в предложении нет глагола.']),
+  Q('«Что случилось?»',
+    ['+What happened?', 'Спрашиваем про то, что само совершило действие: what занимает ячейку «кто», помощник не нужен.'],
+    ['What did happen?', 'Помощник лишний — в вопросе о том, кто или что действует, порядок как в утверждении.'],
+    ['What was happened?', 'Happen не бывает в пассиве: «было случено» — бессмыслица.']),
+  Q('«Куда ты идёшь?»',
+    ['+Where are you going?', 'Время Continuous: помощник are выходит вперёд, going остаётся на месте.'],
+    ['Where you are going?', 'В вопросе помощник are обгоняет you.'],
+    ['Where do you going?', 'Do и -ing не сочетаются: для «прямо сейчас» помощник — are.'])
+],
+
+'s-whgroup': [
+  Q('«Какого цвета эта машина?»',
+    ['+What color is this car?', '«Какого цвета» — одна группа, она целиком встаёт в начало.'],
+    ['What is color this car?', 'Группу разорвали: color должен остаться рядом с what.'],
+    ['Which color this car is?', 'В вопросе be встаёт перед this car.']),
+  Q('«Какая красная машина тебе понравилась больше всего?»',
+    ['+What red car did you like most?', 'Спрашиваем про красную машину — вся группа из трёх слов идёт первой.'],
+    ['What did you like red car most?', 'Группа разорвана: red car должна остаться рядом с what.'],
+    ['What red car you liked most?', 'После группы нужен помощник did.']),
+  Q('«Сколько книг ты прочитал?»',
+    ['+How many books did you read?', '«Сколько книг» — одна группа, за ней помощник did.'],
+    ['How many did you read books?', 'Books оторвали от how many — группу делить нельзя.'],
+    ['How many books you read?', 'Пропал помощник did.']),
+  Q('«Во сколько начинается фильм?»',
+    ['+What time does the film start?', '«Во сколько» — what time. Дальше does, start голый.'],
+    ['What does time the film start?', 'Группа what time разорвана.'],
+    ['What time the film starts?', 'Порядок утверждения, пропал помощник.']),
+  Q('«Сколько тебе лет?»',
+    ['+How old are you?', 'По-английски спрашивают «насколько ты старый» — how old и be.'],
+    ['How many years do you have?', 'Дословный перевод. Годами не «владеют», возраст — это be.'],
+    ['How old do you have?', 'Возраст — состояние, нужен be, а не do и have.']),
+  Q('«Как долго ты ждал?»',
+    ['+How long did you wait?', '«Как долго» — how long, одна группа. Дальше did и голый wait.'],
+    ['How did you wait long?', 'Long оторвали от how — смысл развалился.'],
+    ['How long you waited?', 'Пропал помощник did.']),
+  Q('«Какую музыку ты любишь?»',
+    ['+What music do you like?', '«Какую музыку» — what music, одна группа.'],
+    ['What do you like music?', 'Music оторвали от what.'],
+    ['What music you like?', 'Пропал помощник do.']),
+  Q('«Чья это книга?»',
+    ['+Whose book is this?', '«Чья книга» — одна группа, она целиком идёт вперёд.'],
+    ['Whose this book is?', 'В вопросе be должен встать перед this.'],
+    ['Who book is this?', 'Who — это «кто». «Чья» по-английски whose.']),
+  Q('«Как часто ты ходишь в спортзал?»',
+    ['+How often do you go to the gym?', '«Как часто» — how often, одна группа.'],
+    ['How do you often go to the gym?', 'Often оторвали от how — получилось «как ты обычно ходишь».'],
+    ['How often you go to the gym?', 'Пропал помощник do.']),
+  Q('«С кем ты говорил?»',
+    ['+Who did you talk to?', 'В живой речи предлог уходит в конец. Строго по схеме — To whom did you talk? — правильно, но книжно.'],
+    ['Who did you talk?', 'Потерялся предлог: talk to — «говорить с», без to смысл разваливается.'],
+    ['To who you talked?', 'Пропал помощник did.'])
+],
+
+'s-neg': [
+  Q('«Я не люблю кофе.»',
+    ['+I don\'t like coffee.', 'Not цепляется к помощнику do, глагол остаётся голым.'],
+    ['I not like coffee.', 'Not не умеет цепляться к обычному глаголу — ему нужен do.'],
+    ['I am not like coffee.', 'Глагол like есть, be лишний. Нужен помощник do.']),
+  Q('«Она не работает по воскресеньям.»',
+    ['+She doesn\'t work on Sundays.', 'Для she помощник does, -s ушла к нему.'],
+    ['She don\'t work on Sundays.', 'Don\'t — для I / you / we / they. С she — doesn\'t.'],
+    ['She doesn\'t works on Sundays.', 'Двойная -s: она уже в doesn\'t.']),
+  Q('«Я не голоден.»',
+    ['+I am not hungry.', 'Глагола нет — not встаёт после be, помощник не нужен.'],
+    ['I don\'t hungry.', 'Do нужен обычному глаголу, а hungry — не глагол.'],
+    ['I not hungry.', 'Пропал be — в предложении нет глагола.']),
+  Q('«Они вчера не звонили.»',
+    ['+They didn\'t call yesterday.', 'Прошедшее время ушло в didn\'t, call голый.'],
+    ['They didn\'t called yesterday.', 'Двойное прошедшее: оно уже в didn\'t.'],
+    ['They don\'t called yesterday.', 'Don\'t — настоящее, а речь о вчерашнем дне.']),
+  Q('It ___ cold today.',
+    ['+isn\'t', 'Глагола нет — «не холодно». Not встаёт к be: is not → isn\'t.'],
+    ['doesn\'t', 'Does нужен глаголу, а cold — не глагол.'],
+    ['not', 'Пропал be — без него в предложении нет глагола.']),
+  Q('«Мы не были дома.»',
+    ['+We weren\'t at home.', 'Глагола нет, прошедшее: were not → weren\'t.'],
+    ['We didn\'t at home.', 'Did нужен глаголу, а здесь глагола нет — работает be.'],
+    ['We wasn\'t at home.', 'Was — для I / he / she / it. С we — were.']),
+  Q('«Он не придёт.»',
+    ['+He won\'t come.', 'Будущее: not цепляется к will — won\'t. Come голый.'],
+    ['He will not comes.', 'После will глагол всегда голый, без -s.'],
+    ['He doesn\'t will come.', 'Will сам помощник, do ему не нужен.']),
+  Q('«Я не Саша.»',
+    ['+I\'m not Sasha.', 'Глагола нет — not после be. Сокращение от I am not — только I\'m not.'],
+    ['I amn\'t Sasha.', 'Сокращения amn\'t в английском нет.'],
+    ['I don\'t Sasha.', 'Do нужен глаголу, а здесь глагола нет.']),
+  Q('«Мой брат не знает ответа.»',
+    ['+My brother doesn\'t know the answer.', 'Brother — это «он», помощник does, know голый.'],
+    ['My brother not knows the answer.', 'Not не цепляется к обычному глаголу — нужен doesn\'t.'],
+    ['My brother isn\'t know the answer.', 'Know — глагол, be рядом с ним лишний.']),
+  Q('«Они сейчас не играют.»',
+    ['+They aren\'t playing now.', 'Continuous: not цепляется к помощнику are, playing на месте.'],
+    ['They don\'t playing now.', 'Do и -ing не сочетаются: для «прямо сейчас» помощник — are.'],
+    ['They not playing now.', 'Пропал помощник are.'])
+],
+
+'s-modal': [
+  Q('«Ты умеешь танцевать?»',
+    ['+Can you dance?', 'Модальный can сам выходит вперёд, do ему не нужен.'],
+    ['Do you can dance?', 'Два помощника в одном вопросе: can уже справляется сам.'],
+    ['Can you to dance?', 'После модального to не ставят.']),
+  Q('«Она может говорить на трёх языках.»',
+    ['+She can speak three languages.', 'У модальных нет -s, и после них глагол голый.'],
+    ['She cans speak three languages.', 'У модальных глаголов нет -s даже с she.'],
+    ['She can to speak three languages.', 'После can to не ставят.']),
+  Q('«Я не умею плавать.»',
+    ['+I can\'t swim.', 'Not цепляется прямо к модальному: cannot → can\'t.'],
+    ['I don\'t can swim.', 'Модальный сам принимает not, do не нужен.'],
+    ['I can\'t to swim.', 'После модального to не ставят.']),
+  Q('«Тебе стоит пойти к врачу.»',
+    ['+You should see a doctor.', 'Should — модальный, после него голый глагол.'],
+    ['You should to see a doctor.', 'После should to не ставят.'],
+    ['You do should see a doctor.', 'Модальному do не нужен.']),
+  Q('«Что я могу сделать?»',
+    ['+What can I do?', 'вопр. слово → модальный → кто → глагол.'],
+    ['What do I can do?', 'Модальный сам работает помощником — do лишний.'],
+    ['What I can do?', 'В вопросе модальный встаёт перед I.']),
+  Q('«Можно войти?»',
+    ['+May I come in?', 'Модальный may выходит вперёд — вежливая просьба.'],
+    ['Do I may come in?', 'May не нуждается в do.'],
+    ['May I to come in?', 'После may to не ставят.']),
+  Q('«Он должен работать завтра.»',
+    ['+He must work tomorrow.', 'Must — модальный: без -s, глагол после него голый.'],
+    ['He musts work tomorrow.', 'У модальных нет -s.'],
+    ['He must to work tomorrow.', 'После must to не ставят.']),
+  Q('«Тебе не стоит есть так поздно.»',
+    ['+You shouldn\'t eat so late.', 'Not цепляется к should, eat голый.'],
+    ['You don\'t should eat so late.', 'Should сам принимает not, do не нужен.'],
+    ['You shouldn\'t to eat so late.', 'После should to не ставят.']),
+  Q('«Тебе нужно идти?» — через have to',
+    ['+Do you have to go?', 'Have to — не модальный, а обычный глагол, поэтому ему нужен do.'],
+    ['Have you to go?', 'Так говорили раньше в британском английском, сегодня это звучит устаревшим.'],
+    ['Do you must go?', 'Must — модальный, do ему не нужен: было бы Must you go?']),
+  Q('«Где я могу купить билет?»',
+    ['+Where can I buy a ticket?', 'вопр. слово → can → кто → глагол.'],
+    ['Where I can buy a ticket?', 'Порядок утверждения — в вопросе can обгоняет I.'],
+    ['Where do I can buy a ticket?', 'Can сам себе помощник, do лишний.'])
+]
+
+};
+
+/* ═══════════════ ОБЩИЙ ТРЕНАЖЁР · ОСНОВА ═══════════════ */
+const QUIZ_S = [
+  Q('«Мой отец — инженер.»',
+    ['+My father is an engineer.', 'Действия нет — пустую ячейку занимает be.'],
+    ['My father an engineer.', 'Без глагола английское предложение невозможно.'],
+    ['My father does an engineer.', 'Do нужен глаголу, а здесь действия нет — работает be.']),
+  Q('We ___ in Rome last summer.',
+    ['+were', 'Глагола нет — «были». Прошедшее от be для we — were.'],
+    ['was', 'Was — для I / he / she / it. С we — were.'],
+    ['did', 'Did нужен обычному глаголу, а тут глагола нет.']),
+  Q('«Я работаю в офисе.»',
+    ['+I work in an office.', 'Глагол есть — be не нужен.'],
+    ['I am work in an office.', 'Am и work в одной ячейке не уживаются.'],
+    ['I working in an office.', 'Форма с -ing сама по себе не глагол, ей нужен помощник.']),
+  Q('«Она говорит по-французски.»',
+    ['+She speaks French.', 'Глагол есть, she — поэтому -s.'],
+    ['She is speak French.', 'Is рядом с обычным глаголом лишний.'],
+    ['She speak French.', 'Для she в настоящем глагол забирает -s.']),
+  Q('«Я очень люблю музыку.»',
+    ['+I love music very much.', 'Very much — после того, что любим.'],
+    ['I love very much music.', 'Very much не разделяет глагол и то, на что он направлен.'],
+    ['Very much I love music.', 'Very much не встаёт в начало предложения.']),
+  Q('«Мы вчера смотрели фильм дома.»',
+    ['+We watched a film at home yesterday.', 'кто → глагол → что → где → когда.'],
+    ['We watched at home a film yesterday.', 'Место не вклинивается между глаголом и тем, что смотрели.'],
+    ['We yesterday watched a film at home.', 'Время не встаёт между «кто» и глаголом.']),
+  Q('«Ты говоришь по-английски?»',
+    ['+Do you speak English?', 'Глагол есть — в вопросе вперёд выходит do.'],
+    ['Are you speak English?', 'Are — это be, а глагол speak есть. Нужен do.'],
+    ['Speak you English?', 'Смысловой глагол вперёд не выходит.']),
+  Q('«Он был дома?»',
+    ['+Was he at home?', 'Глагола нет — вперёд выходит be в прошедшем.'],
+    ['Did he at home?', 'Did нужен глаголу, а здесь глагола нет.'],
+    ['Did he be at home?', 'Be не нуждается в помощнике — он выходит вперёд сам.']),
+  Q('«Что ты делаешь?»',
+    ['+What are you doing?', 'Прямо сейчас — Continuous: what → are → you → doing.'],
+    ['What you are doing?', 'В вопросе помощник are обгоняет you.'],
+    ['What do you doing?', 'Do и -ing не сочетаются.']),
+  Q('«Кто это сделал?»',
+    ['+Who did it?', 'Спрашиваем про того, кто действовал: who на месте «кто». Did здесь — сам глагол «сделал».'],
+    ['Who did do it?', 'Помощник лишний: в вопросе о том, кто действует, он не нужен.'],
+    ['Who it did?', 'It — то, что сделали, оно идёт после глагола.']),
+  Q('«Какого размера эта куртка?»',
+    ['+What size is this jacket?', '«Какого размера» — what size, одна группа.'],
+    ['What is size this jacket?', 'Группу разорвали: size должен остаться рядом с what.'],
+    ['What size this jacket is?', 'В вопросе be встаёт перед this jacket.']),
+  Q('«Сколько денег тебе нужно?»',
+    ['+How much money do you need?', '«Сколько денег» — одна группа, за ней do.'],
+    ['How much do you need money?', 'Money оторвали от how much.'],
+    ['How much money you need?', 'Пропал помощник do.']),
+  Q('«Я не понимаю.»',
+    ['+I don\'t understand.', 'Not цепляется к do.'],
+    ['I not understand.', 'Not не цепляется к обычному глаголу напрямую.'],
+    ['I am not understand.', 'Глагол есть — be лишний.']),
+  Q('«Их нет дома.»',
+    ['+They aren\'t at home.', 'Глагола нет — not после be.'],
+    ['They don\'t at home.', 'Do нужен глаголу, а здесь его нет.'],
+    ['They not at home.', 'Пропал be.']),
+  Q('«Ты можешь мне помочь?»',
+    ['+Can you help me?', 'Модальный сам выходит вперёд.'],
+    ['Do you can help me?', 'Два помощника: can справляется сам.'],
+    ['Can you to help me?', 'После can to не ставят.']),
+  Q('«Ему не стоит курить.»',
+    ['+He shouldn\'t smoke.', 'Not цепляется прямо к should, у модальных нет -s.'],
+    ['He doesn\'t should smoke.', 'Модальному do не нужен.'],
+    ['He shouldn\'t to smoke.', 'После should to не ставят.'])
+];
+</script>
+<script>
+/* ═══════════════════════════════════════════════════════════
+   ТРЕНАЖЁР · один компонент на все блоки заданий
    Показывает по одному вопросу. После ответа — разбор:
    почему верный вариант верный и чем плох выбранный.
    ═══════════════════════════════════════════════════════════ */
@@ -3190,7 +4431,7 @@ function makeQuiz(root, questions, opts) {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   СТАНЦИЯ · общая для времён и условных
+   СТАНЦИЯ · общая для всех вкладок
    ═══════════════════════════════════════════════════════════ */
 function stationHTML(it, cfg) {
   const blocks = it.blocks.map(b => `
@@ -3333,7 +4574,7 @@ function renderDuels(hostId, list, figFn) {
         ${[d.a, d.b].map((s, k) => `
           <div class="duel__s z-${s.z}">
             <div class="eyebrow">${s.n}</div>
-            ${s.tl ? `<div class="tlbox">${figFn(s.tl, 'd' + hostId + i + k)}</div>` : ''}
+            ${(s.tl || s.tr) ? `<div class="tlbox">${figFn(s.tl || s.tr, 'd' + hostId + i + k)}</div>` : ''}
             <p class="en">${s.en}</p>
             <p class="ru">${s.ru}</p>
             <p class="why">${s.why}</p>
@@ -3454,9 +4695,109 @@ document.getElementById('detector').addEventListener('click', e => {
 detReset();
 
 /* ═══════════════════════════════════════════════════════════
+   ВКЛАДКА «ОСНОВА»
+   ═══════════════════════════════════════════════════════════ */
+function trainHTML(tr) {
+  return tr.map(([role, text, flag]) => role === 'end'
+    ? `<span class="chip end" data-key="end">${text}</span>`
+    : `<span class="chip r-${role}${flag ? ' ' + flag : ''}" data-key="${role}">${text}</span>`).join('');
+}
+
+/* строка ячеек → обычный текст: спрятанный помощник пропускаем, знак препинания без пробела */
+function plainSentence(tr) {
+  return tr.filter(c => c[2] !== 'ghost')
+    .reduce((acc, [role, text]) => role === 'end' ? acc + text : (acc ? acc + ' ' : '') + text, '');
+}
+
+renderRoadmap('s-road', SLEVELS, S, {
+  pid: 's',
+  drills: SDRILLS,
+  kindLabel: it => it.short.toUpperCase(),
+  figure: it => `<figure class="sfig"><div class="sfig__rows">${it.fig.rows.map(r => `
+      <div class="sfig__row">
+        <span class="sfig__lbl">${r.l}</span>
+        ${r.tr ? `<div class="train">${trainHTML(r.tr)}</div>` : `<div class="sfig__ru">${r.ru}</div>`}
+      </div>`).join('')}
+    </div><figcaption>${it.fig.cap}</figcaption></figure>`
+});
+
+renderDuels('sDuels', SDUELS, tr => `<div class="train">${trainHTML(tr)}</div>`);
+makeQuiz(document.getElementById('sQuiz'), QUIZ_S, { title: 'Вопрос' });
+
+document.getElementById('sSheetBody').innerHTML = BUILD_TYPES.map(ty => `
+  <tr>
+    <td class="nm"><b>${ty.t}</b></td>
+    <td class="fm"><code>${ty.sch}</code></td>
+    ${BUILD_KINDS.map(k => `<td class="ex">${plainSentence(BUILD[k.key][ty.key].tr)}</td>`).join('')}
+  </tr>`).join('');
+
+/* ── конструктор предложения ──
+   Ячейки узнаются по роли (data-key), поэтому при перестройке помощник
+   видимо переезжает в начало, а не появляется на новом месте из ниоткуда. */
+const bu = { kind: 'do', type: 'q' };
+const buKind = document.getElementById('buKind');
+const buType = document.getElementById('buType');
+const buTrain = document.getElementById('buTrain');
+
+buKind.innerHTML = BUILD_KINDS.map(k => `<button data-v="${k.key}" aria-pressed="false">${k.t}<i>${k.i}</i></button>`).join('');
+buType.innerHTML = BUILD_TYPES.map(t => `<button data-v="${t.key}" aria-pressed="false">${t.t}</button>`).join('');
+document.getElementById('buRoles').innerHTML = ROLES.map(r =>
+  `<span class="r-${r.r}"><i></i>${r.t}${r.i ? ` <em>· ${r.i}</em>` : ''}</span>`).join('');
+
+function flipTrain(host, html) {
+  const animate = host.children.length > 0 && typeof host.animate === 'function' && motionOK();
+  const before = {};
+  if (animate) host.querySelectorAll('[data-key]').forEach(n => { before[n.dataset.key] = n.getBoundingClientRect(); });
+  host.innerHTML = html;
+  if (!animate) return;
+  host.querySelectorAll('[data-key]').forEach((n, i) => {
+    const b = before[n.dataset.key];
+    const a = n.getBoundingClientRect();
+    if (b) {
+      const dx = b.left - a.left, dy = b.top - a.top;
+      if (Math.abs(dx) > .5 || Math.abs(dy) > .5) {
+        n.animate([{ transform: `translate(${dx}px, ${dy}px)` }, { transform: 'none' }],
+                  { duration: 480, easing: 'cubic-bezier(.34,1.3,.5,1)' });
+      }
+    } else {
+      n.animate([{ opacity: 0, transform: 'translateY(-12px) scale(.85)' }, { opacity: 1, transform: 'none' }],
+                { duration: 340, delay: 80 + i * 30, easing: 'cubic-bezier(.22,.9,.3,1)', fill: 'backwards' });
+    }
+  });
+}
+
+function renderBuild() {
+  const cell = BUILD[bu.kind][bu.type];
+  const k = BUILD_KINDS.find(x => x.key === bu.kind);
+  const t = BUILD_TYPES.find(x => x.key === bu.type);
+  buKind.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === bu.kind)));
+  buType.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === bu.type)));
+  document.getElementById('buRu').innerHTML = `<b>ПО-РУССКИ</b>«${cell.ru}»`;
+  flipTrain(buTrain, trainHTML(cell.tr));
+  document.getElementById('buSchema').textContent = 'Схема: ' + cell.s;
+  document.getElementById('buNote').innerHTML = `${k.note} ${t.note}`;
+}
+buKind.addEventListener('click', e => { const b = e.target.closest('button'); if (b) { bu.kind = b.dataset.v; renderBuild(); } });
+buType.addEventListener('click', e => { const b = e.target.closest('button'); if (b) { bu.type = b.dataset.v; renderBuild(); } });
+renderBuild();
+
+/* ═══════════════════════════════════════════════════════════
    НАВИГАЦИЯ: вкладки, оглавление, меню, точки, прогресс
    ═══════════════════════════════════════════════════════════ */
 const TABDEF = {
+  sentence: {
+    panel: 'tab-sentence', toc: 'sToc', items: S, total: 8,
+    nav: [
+      { id: 's-algo', n: 'Что спрашивать у себя', s: 'Три вопроса к любому предложению', e: 'Старт' },
+      { id: 's-system', n: 'Как устроено предложение', s: 'Ячейки и конструктор', e: 'Уровень 0' },
+      { id: 's-lvl1', n: 'Утверждение', s: 'be, глагол, порядок слов', e: 'Уровень 1' },
+      { id: 's-lvl2', n: 'Вопрос', s: 'Помощник и вопросительное слово', e: 'Уровень 2' },
+      { id: 's-lvl3', n: 'Отрицание и модальные', s: 'not и can без помощника', e: 'Уровень 3' },
+      { id: 's-duels', n: 'Сравнение конструкций', s: 'Пять пар, которые путают', e: 'Разбор' },
+      { id: 's-quiz', n: 'Общая проверка', s: '16 предложений вперемешку', e: 'Тренажёр' },
+      { id: 's-sheet', n: 'Шпаргалка', s: 'Все схемы одной таблицей', e: 'Итог' }
+    ]
+  },
   tenses: {
     panel: 'tab-tenses', toc: 'tToc', items: T, total: 12,
     nav: [
@@ -3486,7 +4827,7 @@ const TABDEF = {
   }
 };
 
-let tab = 'tenses';
+let tab = 'sentence';
 
 /* оглавление в начале вкладки */
 Object.keys(TABDEF).forEach(k => {
@@ -3549,6 +4890,8 @@ function setTab(name, scroll) {
 }
 tabBtns.forEach(b => b.addEventListener('click', () => setTab(b.dataset.tab)));
 window.addEventListener('resize', moveInk);
+/* ширина кнопок меняется и без resize — например, когда догружается шрифт */
+if (window.ResizeObserver) new ResizeObserver(moveInk).observe(document.querySelector('.tabs'));
 
 function motionOK() { return !window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
 
@@ -3558,7 +4901,7 @@ let done = new Set();
 try { done = new Set(JSON.parse(localStorage.getItem(KEY) || '[]')); } catch (e) { done = new Set(); }
 
 function paint() {
-  const all = T.concat(C);
+  const all = S.concat(T, C);
   all.forEach(x => {
     const on = done.has(x.id);
     const st = document.getElementById(x.id);
@@ -3619,6 +4962,7 @@ document.getElementById('tgl').addEventListener('click', () => {
 function tabForHash(h) {
   const id = h.replace('#', '');
   if (!id) return null;
+  if (S.some(x => x.id === id) || id.indexOf('s-') === 0) return 'sentence';
   if (C.some(c => c.id === id) || id.indexOf('c-') === 0) return 'cond';
   if (T.some(t => t.id === id) || id.indexOf('t-') === 0) return 'tenses';
   return null;
@@ -3630,7 +4974,7 @@ document.addEventListener('click', e => {
   if (want && want !== tab) setTab(want, false);
 });
 
-setTab(tabForHash(location.hash) || 'tenses', false);
+setTab(tabForHash(location.hash) || 'sentence', false);
 requestAnimationFrame(moveInk);
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(moveInk);
 if (location.hash) {

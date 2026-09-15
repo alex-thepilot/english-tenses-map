@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════
-   ТРЕНАЖЁР · один компонент на все 21 блок заданий
+   ТРЕНАЖЁР · один компонент на все блоки заданий
    Показывает по одному вопросу. После ответа — разбор:
    почему верный вариант верный и чем плох выбранный.
    ═══════════════════════════════════════════════════════════ */
@@ -85,7 +85,7 @@ function makeQuiz(root, questions, opts) {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   СТАНЦИЯ · общая для времён и условных
+   СТАНЦИЯ · общая для всех вкладок
    ═══════════════════════════════════════════════════════════ */
 function stationHTML(it, cfg) {
   const blocks = it.blocks.map(b => `
@@ -228,7 +228,7 @@ function renderDuels(hostId, list, figFn) {
         ${[d.a, d.b].map((s, k) => `
           <div class="duel__s z-${s.z}">
             <div class="eyebrow">${s.n}</div>
-            ${s.tl ? `<div class="tlbox">${figFn(s.tl, 'd' + hostId + i + k)}</div>` : ''}
+            ${(s.tl || s.tr) ? `<div class="tlbox">${figFn(s.tl || s.tr, 'd' + hostId + i + k)}</div>` : ''}
             <p class="en">${s.en}</p>
             <p class="ru">${s.ru}</p>
             <p class="why">${s.why}</p>
@@ -349,9 +349,109 @@ document.getElementById('detector').addEventListener('click', e => {
 detReset();
 
 /* ═══════════════════════════════════════════════════════════
+   ВКЛАДКА «ОСНОВА»
+   ═══════════════════════════════════════════════════════════ */
+function trainHTML(tr) {
+  return tr.map(([role, text, flag]) => role === 'end'
+    ? `<span class="chip end" data-key="end">${text}</span>`
+    : `<span class="chip r-${role}${flag ? ' ' + flag : ''}" data-key="${role}">${text}</span>`).join('');
+}
+
+/* строка ячеек → обычный текст: спрятанный помощник пропускаем, знак препинания без пробела */
+function plainSentence(tr) {
+  return tr.filter(c => c[2] !== 'ghost')
+    .reduce((acc, [role, text]) => role === 'end' ? acc + text : (acc ? acc + ' ' : '') + text, '');
+}
+
+renderRoadmap('s-road', SLEVELS, S, {
+  pid: 's',
+  drills: SDRILLS,
+  kindLabel: it => it.short.toUpperCase(),
+  figure: it => `<figure class="sfig"><div class="sfig__rows">${it.fig.rows.map(r => `
+      <div class="sfig__row">
+        <span class="sfig__lbl">${r.l}</span>
+        ${r.tr ? `<div class="train">${trainHTML(r.tr)}</div>` : `<div class="sfig__ru">${r.ru}</div>`}
+      </div>`).join('')}
+    </div><figcaption>${it.fig.cap}</figcaption></figure>`
+});
+
+renderDuels('sDuels', SDUELS, tr => `<div class="train">${trainHTML(tr)}</div>`);
+makeQuiz(document.getElementById('sQuiz'), QUIZ_S, { title: 'Вопрос' });
+
+document.getElementById('sSheetBody').innerHTML = BUILD_TYPES.map(ty => `
+  <tr>
+    <td class="nm"><b>${ty.t}</b></td>
+    <td class="fm"><code>${ty.sch}</code></td>
+    ${BUILD_KINDS.map(k => `<td class="ex">${plainSentence(BUILD[k.key][ty.key].tr)}</td>`).join('')}
+  </tr>`).join('');
+
+/* ── конструктор предложения ──
+   Ячейки узнаются по роли (data-key), поэтому при перестройке помощник
+   видимо переезжает в начало, а не появляется на новом месте из ниоткуда. */
+const bu = { kind: 'do', type: 'q' };
+const buKind = document.getElementById('buKind');
+const buType = document.getElementById('buType');
+const buTrain = document.getElementById('buTrain');
+
+buKind.innerHTML = BUILD_KINDS.map(k => `<button data-v="${k.key}" aria-pressed="false">${k.t}<i>${k.i}</i></button>`).join('');
+buType.innerHTML = BUILD_TYPES.map(t => `<button data-v="${t.key}" aria-pressed="false">${t.t}</button>`).join('');
+document.getElementById('buRoles').innerHTML = ROLES.map(r =>
+  `<span class="r-${r.r}"><i></i>${r.t}${r.i ? ` <em>· ${r.i}</em>` : ''}</span>`).join('');
+
+function flipTrain(host, html) {
+  const animate = host.children.length > 0 && typeof host.animate === 'function' && motionOK();
+  const before = {};
+  if (animate) host.querySelectorAll('[data-key]').forEach(n => { before[n.dataset.key] = n.getBoundingClientRect(); });
+  host.innerHTML = html;
+  if (!animate) return;
+  host.querySelectorAll('[data-key]').forEach((n, i) => {
+    const b = before[n.dataset.key];
+    const a = n.getBoundingClientRect();
+    if (b) {
+      const dx = b.left - a.left, dy = b.top - a.top;
+      if (Math.abs(dx) > .5 || Math.abs(dy) > .5) {
+        n.animate([{ transform: `translate(${dx}px, ${dy}px)` }, { transform: 'none' }],
+                  { duration: 480, easing: 'cubic-bezier(.34,1.3,.5,1)' });
+      }
+    } else {
+      n.animate([{ opacity: 0, transform: 'translateY(-12px) scale(.85)' }, { opacity: 1, transform: 'none' }],
+                { duration: 340, delay: 80 + i * 30, easing: 'cubic-bezier(.22,.9,.3,1)', fill: 'backwards' });
+    }
+  });
+}
+
+function renderBuild() {
+  const cell = BUILD[bu.kind][bu.type];
+  const k = BUILD_KINDS.find(x => x.key === bu.kind);
+  const t = BUILD_TYPES.find(x => x.key === bu.type);
+  buKind.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === bu.kind)));
+  buType.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === bu.type)));
+  document.getElementById('buRu').innerHTML = `<b>ПО-РУССКИ</b>«${cell.ru}»`;
+  flipTrain(buTrain, trainHTML(cell.tr));
+  document.getElementById('buSchema').textContent = 'Схема: ' + cell.s;
+  document.getElementById('buNote').innerHTML = `${k.note} ${t.note}`;
+}
+buKind.addEventListener('click', e => { const b = e.target.closest('button'); if (b) { bu.kind = b.dataset.v; renderBuild(); } });
+buType.addEventListener('click', e => { const b = e.target.closest('button'); if (b) { bu.type = b.dataset.v; renderBuild(); } });
+renderBuild();
+
+/* ═══════════════════════════════════════════════════════════
    НАВИГАЦИЯ: вкладки, оглавление, меню, точки, прогресс
    ═══════════════════════════════════════════════════════════ */
 const TABDEF = {
+  sentence: {
+    panel: 'tab-sentence', toc: 'sToc', items: S, total: 8,
+    nav: [
+      { id: 's-algo', n: 'Что спрашивать у себя', s: 'Три вопроса к любому предложению', e: 'Старт' },
+      { id: 's-system', n: 'Как устроено предложение', s: 'Ячейки и конструктор', e: 'Уровень 0' },
+      { id: 's-lvl1', n: 'Утверждение', s: 'be, глагол, порядок слов', e: 'Уровень 1' },
+      { id: 's-lvl2', n: 'Вопрос', s: 'Помощник и вопросительное слово', e: 'Уровень 2' },
+      { id: 's-lvl3', n: 'Отрицание и модальные', s: 'not и can без помощника', e: 'Уровень 3' },
+      { id: 's-duels', n: 'Сравнение конструкций', s: 'Пять пар, которые путают', e: 'Разбор' },
+      { id: 's-quiz', n: 'Общая проверка', s: '16 предложений вперемешку', e: 'Тренажёр' },
+      { id: 's-sheet', n: 'Шпаргалка', s: 'Все схемы одной таблицей', e: 'Итог' }
+    ]
+  },
   tenses: {
     panel: 'tab-tenses', toc: 'tToc', items: T, total: 12,
     nav: [
@@ -381,7 +481,7 @@ const TABDEF = {
   }
 };
 
-let tab = 'tenses';
+let tab = 'sentence';
 
 /* оглавление в начале вкладки */
 Object.keys(TABDEF).forEach(k => {
@@ -444,6 +544,8 @@ function setTab(name, scroll) {
 }
 tabBtns.forEach(b => b.addEventListener('click', () => setTab(b.dataset.tab)));
 window.addEventListener('resize', moveInk);
+/* ширина кнопок меняется и без resize — например, когда догружается шрифт */
+if (window.ResizeObserver) new ResizeObserver(moveInk).observe(document.querySelector('.tabs'));
 
 function motionOK() { return !window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
 
@@ -453,7 +555,7 @@ let done = new Set();
 try { done = new Set(JSON.parse(localStorage.getItem(KEY) || '[]')); } catch (e) { done = new Set(); }
 
 function paint() {
-  const all = T.concat(C);
+  const all = S.concat(T, C);
   all.forEach(x => {
     const on = done.has(x.id);
     const st = document.getElementById(x.id);
@@ -514,6 +616,7 @@ document.getElementById('tgl').addEventListener('click', () => {
 function tabForHash(h) {
   const id = h.replace('#', '');
   if (!id) return null;
+  if (S.some(x => x.id === id) || id.indexOf('s-') === 0) return 'sentence';
   if (C.some(c => c.id === id) || id.indexOf('c-') === 0) return 'cond';
   if (T.some(t => t.id === id) || id.indexOf('t-') === 0) return 'tenses';
   return null;
@@ -525,7 +628,7 @@ document.addEventListener('click', e => {
   if (want && want !== tab) setTab(want, false);
 });
 
-setTab(tabForHash(location.hash) || 'tenses', false);
+setTab(tabForHash(location.hash) || 'sentence', false);
 requestAnimationFrame(moveInk);
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(moveInk);
 if (location.hash) {

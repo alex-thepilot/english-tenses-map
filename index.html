@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Интерактивная методичка по английской грамматике: как строится предложение, все 12 времён и условные предложения. Роадмапы, живые схемы, конструктор предложения и 324 задания с объяснением каждого ответа.">
+<meta name="description" content="Интерактивная методичка по английской грамматике: как строится предложение, все 12 времён, условные предложения и местоимения. Роадмапы, живые схемы, конструкторы и 420 заданий с объяснением каждого ответа.">
 <meta name="color-scheme" content="dark light">
 <meta name="theme-color" content="#0A1213" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#ECF0EE" media="(prefers-color-scheme: light)">
@@ -990,6 +990,29 @@ td.ex { color: var(--text-dim); }
 #s-sheet td.ex { font-family: var(--f-mono); font-size: .8rem; white-space: nowrap; }
 #s-sheet td.nm b { color: var(--text); }
 
+/* ═══════════════ ВКЛАДКА «МЕСТОИМЕНИЯ» ═══════════════ */
+/* зоны: цвет кодирует форму местоимения */
+.z-nom  { --zone: var(--present); --zone-soft: var(--present-soft); }
+.z-acc  { --zone: var(--future);  --zone-soft: var(--future-soft); }
+.z-pos  { --zone: var(--past);    --zone-soft: var(--past-soft); }
+.z-same { --zone: var(--text-mute); --zone-soft: var(--surface-2); }
+
+/* роли слов: «как в словаре», «изменилось», «чей?», «не меняется» */
+.r-nom  { --rc: var(--present); --rs: var(--present-soft); }
+.r-acc  { --rc: var(--future);  --rs: var(--future-soft); }
+.r-pos  { --rc: var(--past);    --rs: var(--past-soft); }
+.r-same { --rc: var(--text-dim); --rs: var(--surface-2); }
+
+/* выделенное слово в русском предложении конструктора */
+.bu__ru .hl { font-weight: 700; color: var(--rc); }
+
+/* шпаргалка местоимений: пять столбцов */
+#p-sheet table { min-width: 820px; }
+#p-sheet td.ex { font-family: var(--f-mono); font-size: .8rem; white-space: nowrap; }
+#p-sheet td.nm b { color: var(--text); }
+#p-sheet td.fm code { white-space: nowrap; }
+#p-sheet .tx { display: block; margin-top: 3px; font-size: .74rem; color: var(--text-mute); }
+
 /* панель с тремя вкладками на узких экранах */
 @media (max-width: 900px) {
   .topbar__in { gap: 10px; padding: 8px 14px; }
@@ -1013,6 +1036,12 @@ td.ex { color: var(--text-dim); }
   .tabs button { font-size: .64rem; padding: 6px 6px; }
   .menu__btn { padding: 8px 8px; }
 }
+
+/* четыре вкладки не влезают в 320px — панель вкладок прокручивается по горизонтали */
+@media (max-width: 560px) {
+  .tabs { flex-shrink: 1; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+  .tabs::-webkit-scrollbar { display: none; }
+}
 </style>
 </head>
 <body>
@@ -1025,6 +1054,7 @@ td.ex { color: var(--text-dim); }
       <button role="tab" data-tab="sentence" aria-selected="true" aria-controls="tab-sentence">Основа</button>
       <button role="tab" data-tab="tenses" aria-selected="false" aria-controls="tab-tenses">Времена</button>
       <button role="tab" data-tab="cond" aria-selected="false" aria-controls="tab-cond">Условные</button>
+      <button role="tab" data-tab="pron" aria-selected="false" aria-controls="tab-pron">Местоимения</button>
     </div>
 
     <div class="dots__wrap">
@@ -1728,6 +1758,213 @@ td.ex { color: var(--text-dim); }
           <tr><th>Тип</th><th>Формула</th><th>Сигнал</th><th>Пример</th></tr>
         </thead>
         <tbody id="cSheetBody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<div class="tabpanel" id="tab-pron" role="tabpanel" hidden>
+<!-- ══════════════════ ГЕРОЙ · МЕСТОИМЕНИЯ ══════════════════ -->
+<header class="hero" id="p-hero">
+  <div class="wrap">
+    <div class="eyebrow">Правило третье · she или her · he или his</div>
+    <h1>Русский уже знает,<br>где <span class="tri">she</span>, а где <span class="tri">her</span>.</h1>
+    <p class="hero__sub">
+      Выбор между <span class="mono">she</span> и <span class="mono">her</span> кажется случайным, пока не заметишь:
+      в русском такая же разница уже есть — «она» и «её». Мы её просто не замечаем.
+      Переведите предложение на русский и посмотрите на местоимение: <b>не изменилось — не меняется и английское,
+      изменилось — меняется и оно</b>.
+    </p>
+    <div class="hero__meta">
+      <span class="pill">8 станций</span>
+      <span class="pill">конструктор местоимения</span>
+      <span class="pill">80 заданий с разбором</span>
+      <span class="pill">5 дуэлей</span>
+      <span class="pill">16 вопросов в общей проверке</span>
+    </div>
+
+    <div class="slotdemo" role="img" aria-label="Пример: «Она читает книгу» — слово «она» не изменилось, по-английски she. «Я вижу её» — «она» превратилась в «её», по-английски her">
+      <span class="lbl">Русский</span>
+      <span class="chip r-nom">Она</span><span class="chip r-rest">читает</span><span class="chip r-rest">книгу</span>
+      <span class="lbl">Английский</span>
+      <span class="chip r-nom">She</span><span class="chip r-rest">reads</span><span class="chip r-rest">a book</span>
+      <span class="lbl">Русский</span>
+      <span class="chip r-nom">Я</span><span class="chip r-rest">вижу</span><span class="chip r-acc fill">её</span>
+      <span class="lbl">Английский</span>
+      <span class="chip r-nom">I</span><span class="chip r-rest">see</span><span class="chip r-acc fill">her</span>
+      <span class="cap">«Она» осталась как в словаре — <b>she</b>. «Она» превратилась в «её» — <b>her</b>.</span>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════════════ ОГЛАВЛЕНИЕ ══════════════════ -->
+<section class="sect toc" id="p-toc">
+  <div class="wrap">
+    <div class="sect__head" style="margin-bottom:0">
+      <div class="eyebrow">Оглавление</div>
+      <h2>С чего начать</h2>
+      <p>Можно идти маршрутом сверху вниз, а можно прыгнуть сразу в нужный блок — страница при этом листается как обычно.</p>
+    </div>
+    <div class="toc__g" id="pToc"></div>
+  </div>
+</section>
+
+<!-- ══════════════════ ЧТО СПРАШИВАТЬ У СЕБЯ ══════════════════ -->
+<section class="sect" id="p-algo">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Что спрашивать у себя</div>
+      <h2>Три вопроса к любому местоимению</h2>
+      <p>Они работают для всех: от «я» и «меня» до «нас» и «их». Первого вопроса обычно хватает.</p>
+    </div>
+
+    <ol class="steps">
+      <li>
+        <b>ВОПРОС 01</b>
+        <h4>Изменилось ли русское слово?</h4>
+        <p>Не изменилось («она», «он», «мы») — берём <span class="mono">I, he, she, we, they</span>. Изменилось («её», «ему», «нас») — берём <span class="mono">me, him, her, us, them</span>.</p>
+      </li>
+      <li>
+        <b>ВОПРОС 02</b>
+        <h4>Где слово стоит в английском предложении?</h4>
+        <p>Перед глаголом — тот, кто делает: <span class="mono">She reads</span>. После глагола или предлога — тот, на кого направлено: <span class="mono">I see her</span>, <span class="mono">with her</span>. Это запасной ход на случай, если русская фраза устроена иначе.</p>
+        <a class="goto" href="#p-ru">Когда русский подводит →</a>
+      </li>
+      <li>
+        <b>ВОПРОС 03</b>
+        <h4>Это человек или вещь?</h4>
+        <p>Для вещи слова <span class="mono">he, she, him, her</span> не годятся — только <span class="mono">it</span>, даже если по-русски «он» или «она».</p>
+      </li>
+    </ol>
+
+    <figure class="dia">
+      <div>
+        <svg viewBox="0 0 700 290" role="img" aria-label="Главное правило: если русское местоимение не изменилось, например «она», по-английски первая форма she; если изменилось, например «её», по-английски вторая форма her">
+          <rect class="box" x="225" y="12" width="250" height="42" rx="11"/>
+          <text class="t" x="350" y="38" text-anchor="middle">Русское местоимение</text>
+
+          <path class="ln" d="M350 54 V 88 H 175 V 108" marker-end="url(#pah)"/>
+          <path class="ln" d="M350 88 H 525 V 108" marker-end="url(#pah)"/>
+          <text class="t-lbl" x="360" y="76">оно изменилось?</text>
+          <text class="t-lbl" x="163" y="104" text-anchor="end">нет · «она»</text>
+          <text class="t-lbl" x="537" y="104">да · «её»</text>
+
+          <rect x="40" y="112" width="270" height="62" rx="12" style="fill:var(--present-soft);stroke:var(--present);stroke-width:1.8"/>
+          <text class="t-m" x="175" y="139" text-anchor="middle" style="fill:var(--present)">I · he · she · we · they</text>
+          <text class="t-s" x="175" y="161" text-anchor="middle">кто делает · перед глаголом</text>
+
+          <rect x="390" y="112" width="270" height="62" rx="12" style="fill:var(--future-soft);stroke:var(--future);stroke-width:1.8"/>
+          <text class="t-m" x="525" y="139" text-anchor="middle" style="fill:var(--future)">me · him · her · us · them</text>
+          <text class="t-s" x="525" y="161" text-anchor="middle">на кого направлено · после глагола</text>
+
+          <text class="t-m" x="175" y="202" text-anchor="middle">She reads.</text>
+          <text class="t-m" x="525" y="202" text-anchor="middle">I see her.</text>
+
+          <line x1="60" y1="228" x2="640" y2="228" style="stroke:var(--line);stroke-dasharray:4 4"/>
+          <text class="t" x="350" y="258" text-anchor="middle">Исключения: you и it — у них одна форма на все случаи</text>
+          <text class="t-lbl" x="350" y="278" text-anchor="middle">и «чей?» — отдельная тема, my · his · their</text>
+          <defs>
+            <marker id="pah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 z" fill="currentColor"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+      <figcaption>Правило одной развилкой. Русское слово подсказывает форму: изменилось оно или нет — столько же меняется и английское.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ══════════════════ МЕХАНИКА ══════════════════ -->
+<section class="sect" id="p-system">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Уровень 0 · механика</div>
+      <h2>У каждого местоимения две формы — как и в русском</h2>
+      <p>
+        Выберите русское слово и посмотрите, в каком виде оно стоит в предложении. Если оно <b>осталось как в словаре</b>,
+        английское слово тоже не меняется. Если <b>изменилось</b> — меняется и английское.
+      </p>
+    </div>
+
+    <div class="bu" id="pBuild">
+      <div class="bu__top"><span class="eyebrow">Конструктор местоимения</span><span class="bu__hint">выберите слово и его вид — ячейки перестроятся</span></div>
+      <div class="bu__ctl">
+        <div class="bu__grp">
+          <span class="eyebrow">1 · Какое слово в русском?</span>
+          <div class="seg" id="pbWho"></div>
+        </div>
+        <div class="bu__grp">
+          <span class="eyebrow">2 · В каком виде оно в предложении?</span>
+          <div class="seg" id="pbForm"></div>
+        </div>
+      </div>
+      <div class="bu__out">
+        <div class="bu__ru" id="pbRu"></div>
+        <div class="train bu__train" id="pbTrain" aria-live="polite"></div>
+        <div class="bu__schema" id="pbSchema"></div>
+        <p class="bu__note" id="pbNote"></p>
+      </div>
+      <div class="roles" id="pbRoles"></div>
+    </div>
+
+    <div class="callout key" style="margin-top:30px;max-width:66ch">
+      <h4>Отдельная тема: «чей?»</h4>
+      <p>
+        Слова <span class="mono">my, your, his, her, our, their</span> отвечают на вопрос «чей?» и стоят перед существительным.
+        Они вынесены в отдельный уровень, чтобы не смешиваться с двумя формами выше: русское «его» бывает и «кого?»,
+        и «чей?», а в английском это разные слова.
+      </p>
+      <a class="goto" href="#p-lvl3">К теме «чей?» →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ МАРШРУТ ══════════════════ -->
+<main class="wrap">
+  <div class="roadmap" id="p-road"></div>
+</main>
+
+<!-- ══════════════════ ДУЭЛИ ══════════════════ -->
+<section class="sect" id="p-duels">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Разбор полётов</div>
+      <h2>Пять пар, которые путают чаще всего</h2>
+      <p>Два похожих предложения рядом и один признак, по которому их разводят.</p>
+    </div>
+    <div class="duels" id="pDuels"></div>
+  </div>
+</section>
+
+<!-- ══════════════════ ТРЕНАЖЁР ══════════════════ -->
+<section class="sect" id="p-quiz">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Общая проверка</div>
+      <h2>Шестнадцать предложений — по два на каждую станцию</h2>
+      <p>Вперемешку и без подсказок. После ответа появляется разбор: почему верный вариант верный и чем плох выбранный.</p>
+    </div>
+    <div class="drill z-present" id="pQuiz"></div>
+  </div>
+</section>
+
+<!-- ══════════════════ ШПАРГАЛКА ══════════════════ -->
+<section class="sect" id="p-sheet">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">На один экран</div>
+      <h2>Шпаргалка</h2>
+      <p>По строкам — русское слово, по столбцам — в каком виде оно встретилось в русской фразе.</p>
+    </div>
+    <div class="sheet">
+      <table>
+        <thead>
+          <tr><th>Слово</th><th>Как в словаре · кто?</th><th>Изменилось · кого?</th><th>Чей?</th><th>Пример</th></tr>
+        </thead>
+        <tbody id="pSheetBody"></tbody>
       </table>
     </div>
   </div>
@@ -4345,6 +4582,853 @@ const QUIZ_S = [
 </script>
 <script>
 /* ═══════════════════════════════════════════════════════════
+   МЕСТОИМЕНИЯ · she или her
+   Цвет кодирует форму местоимения:
+   бирюза — «как в словаре» (кто делает), перивинкл — «изменилось»
+   (на кого направлено), охра — «чей?», серый — не меняется (you, it).
+   Ячейки: [роль, текст] — роли: nom, acc, pos, same, rest, end.
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── семь «лиц»: из этих данных собираются конструктор и шпаргалка ── */
+const PERSONS = [
+  { key: 'i',    t: 'я',         nomRu: 'я',          accRu: 'меня · мне · мной',        posRu: 'мой · моя · моё · мои', nom: 'I',    acc: 'me',   pos: 'my',    ex: 'I read · He sees me · my book' },
+  { key: 'you',  t: 'ты / вы',   nomRu: 'ты · вы',    accRu: 'тебя · тебе · вас · вам',  posRu: 'твой · ваш',            nom: 'you',  acc: 'you',  pos: 'your',  ex: 'You read · I see you · your book' },
+  { key: 'he',   t: 'он',        nomRu: 'он',         accRu: 'его · ему · ним',          posRu: 'его',                   nom: 'he',   acc: 'him',  pos: 'his',   ex: 'He reads · I see him · his book' },
+  { key: 'she',  t: 'она',       nomRu: 'она',        accRu: 'её · ей · ней',            posRu: 'её',                    nom: 'she',  acc: 'her',  pos: 'her',   ex: 'She reads · I see her · her book' },
+  { key: 'it',   t: 'вещь',      nomRu: 'он · она · оно', accRu: 'его · её · ему · ей',  posRu: 'его · её',              nom: 'it',   acc: 'it',   pos: 'its',   ex: 'It works · I see it · its color' },
+  { key: 'we',   t: 'мы',        nomRu: 'мы',         accRu: 'нас · нам · нами',         posRu: 'наш · наша · наше',     nom: 'we',   acc: 'us',   pos: 'our',   ex: 'We read · He sees us · our book' },
+  { key: 'they', t: 'они',       nomRu: 'они',        accRu: 'их · им · ими',            posRu: 'их',                    nom: 'they', acc: 'them', pos: 'their', ex: 'They read · I see them · their book' }
+];
+
+/* ── конструктор: 7 лиц × 2 вида ── */
+const PB_FORMS = [
+  { key: 'nom', t: 'Как в словаре',  i: '«Она читает»' },
+  { key: 'acc', t: 'Изменилось',     i: '«Я вижу её»' }
+];
+
+const PB = {
+  i: {
+    nom: { ru: '<b>Я</b> читаю.',                tr: [['nom','I'],['rest','read'],['end','.']],                         s: '«я» осталось как в словаре → I' },
+    acc: { ru: 'Он видит <b>меня</b>.',          tr: [['nom','He'],['rest','sees'],['acc','me'],['end','.']],           s: '«я» → «меня»: изменилось → me' },
+    note: 'Три русские формы — «меня», «мне», «мной» — по-английски одно слово: <b>me</b>.'
+  },
+  you: {
+    nom: { ru: '<b>Ты</b> читаешь.',             tr: [['same','You'],['rest','read'],['end','.']],                      s: '«ты» осталось как в словаре → you' },
+    acc: { ru: 'Я вижу <b>тебя</b>.',            tr: [['nom','I'],['rest','see'],['same','you'],['end','.']],           s: '«ты» → «тебя»: изменилось, но по-английски всё равно you' },
+    note: '<b>You</b> — и «ты», и «вы», и «тебя», и «вам». Выбирать между двумя формами здесь не нужно.'
+  },
+  he: {
+    nom: { ru: '<b>Он</b> читает.',              tr: [['nom','He'],['rest','reads'],['end','.']],                       s: '«он» осталось как в словаре → he' },
+    acc: { ru: 'Я вижу <b>его</b>.',             tr: [['nom','I'],['rest','see'],['acc','him'],['end','.']],            s: '«он» → «его»: изменилось → him' },
+    note: 'Так говорят о человеке. О предмете, даже если по-русски он «он», скажут <b>it</b>.'
+  },
+  she: {
+    nom: { ru: '<b>Она</b> читает.',             tr: [['nom','She'],['rest','reads'],['end','.']],                      s: '«она» осталось как в словаре → she' },
+    acc: { ru: 'Я вижу <b>её</b>.',              tr: [['nom','I'],['rest','see'],['acc','her'],['end','.']],            s: '«она» → «её»: изменилось → her' },
+    note: 'Так говорят о человеке. О предмете, даже если по-русски он «она», скажут <b>it</b>.'
+  },
+  it: {
+    nom: { ru: '<b>Она</b> (машина) здесь.',     tr: [['same','It'],['rest','is'],['rest','here'],['end','.']],         s: 'вещь — всегда it, хотя по-русски «она»' },
+    acc: { ru: 'Я вижу <b>её</b> (машину).',     tr: [['nom','I'],['rest','see'],['same','it'],['end','.']],            s: 'вещь — всегда it, хотя по-русски «её»' },
+    note: 'Любая вещь по-английски — <b>it</b>, как бы она ни называлась по-русски: «он», «она» или «оно». И в первой, и во второй форме слово то же.'
+  },
+  we: {
+    nom: { ru: '<b>Мы</b> читаем.',              tr: [['nom','We'],['rest','read'],['end','.']],                        s: '«мы» осталось как в словаре → we' },
+    acc: { ru: 'Он видит <b>нас</b>.',           tr: [['nom','He'],['rest','sees'],['acc','us'],['end','.']],           s: '«мы» → «нас»: изменилось → us' },
+    note: 'Формы «нас», «нам», «нами» — по-английски одно слово: <b>us</b>.'
+  },
+  they: {
+    nom: { ru: '<b>Они</b> читают.',             tr: [['nom','They'],['rest','read'],['end','.']],                      s: '«они» осталось как в словаре → they' },
+    acc: { ru: 'Я вижу <b>их</b>.',              tr: [['nom','I'],['rest','see'],['acc','them'],['end','.']],           s: '«они» → «их»: изменилось → them' },
+    note: 'Формы «их», «им», «ими» — по-английски одно слово: <b>them</b>.'
+  }
+};
+
+const PROLES = [
+  { r: 'nom',  t: 'Как в словаре', i: 'кто делает · перед глаголом' },
+  { r: 'acc',  t: 'Изменилось', i: 'на кого направлено · после глагола и предлога' },
+  { r: 'pos',  t: 'Чей?', i: 'перед существительным' },
+  { r: 'same', t: 'Не меняется', i: 'you · it' },
+  { r: 'rest', t: 'Остальные слова', i: '' }
+];
+
+/* ── уровни маршрута ── */
+const PLEVELS = [
+  { n: 1, title: 'Две формы', code: 'изменилось ли слово?', ru: 'Главное правило',
+    txt: 'Первый этаж — само правило. У английского местоимения две формы, как и у русского: «как в словаре» и «изменённая». Выбор делает один вопрос — <b>изменилось ли слово в русском</b>. Плюс подсказка по месту в предложении, на случай если русский сбивает.' },
+  { n: 2, title: 'Особые случаи', code: 'you · it · двое · нравится', ru: 'Где легко ошибиться',
+    txt: 'Второй этаж. Два слова, у которых форма одна на все случаи; ситуация, когда рядом стоит чьё-то имя; и русские фразы, устроенные иначе, чем английские. Правило первого этажа остаётся — здесь только его границы.' },
+  { n: 3, title: 'Чей?', code: 'my · your · his · her · our · their', ru: 'Отдельная тема',
+    txt: 'Верхний этаж — третий набор слов, который отвечает на вопрос «чей?». Он вынесен отдельно, чтобы не смешиваться с первыми двумя: эти слова стоят не вместо существительного, а перед ним.' }
+];
+
+/* ── станции ── */
+const P = [
+{
+  id: 'p-test', zone: 'nom', level: 1, idx: 1,
+  name: 'Проверка по-русски', core: 'не изменилось → she · изменилось → her',
+  thesis: 'Русское слово не изменилось — и английское тоже',
+  short: 'проверка',
+  fig: {
+    rows: [
+      { l: 'я',   tr: [['nom','я'],['end','→'],['nom','I'],['end','·'],['acc','меня, мне, мной'],['end','→'],['acc','me']] },
+      { l: 'он',  tr: [['nom','он'],['end','→'],['nom','he'],['end','·'],['acc','его, ему, него, ним'],['end','→'],['acc','him']] },
+      { l: 'она', tr: [['nom','она'],['end','→'],['nom','she'],['end','·'],['acc','её, ей, ней'],['end','→'],['acc','her']] },
+      { l: 'мы',  tr: [['nom','мы'],['end','→'],['nom','we'],['end','·'],['acc','нас, нам, нами'],['end','→'],['acc','us']] },
+      { l: 'они', tr: [['nom','они'],['end','→'],['nom','they'],['end','·'],['acc','их, им, них, ними'],['end','→'],['acc','them']] }
+    ],
+    cap: 'Слева — русское слово «как в словаре» и английская пара к нему, справа — то, что получается из слова, когда оно изменилось. Русская форма подсказывает английскую.'
+  },
+  lead: 'Выбор между <span class="mono">she</span> и <span class="mono">her</span> кажется случайным, пока не заметишь: <b>в русском такая же разница уже есть</b>. «Она читает» и «Я вижу её» — одно местоимение, но во втором предложении оно изменилось. Английский делает то же самое, просто в родном языке мы этого не замечаем.',
+  blocks: [
+    { kind: 'key', h: 'Как проверить за секунду',
+      p: 'Переведите предложение на русский и посмотрите на местоимение.<br>Если по-русски получается «она», по-английски будет <span class="mono">she</span>.<br>Если русское слово поменялось («её», «ей», «ней»), по-английски будет <span class="mono">her</span>.<br><b>Коротко:</b> русское слово не изменилось — значит, и английское не меняется. Изменилось — меняется и английское.' },
+    { kind: 'plain', h: 'Четыре примера',
+      p: 'Она читает. → <span class="mono">She reads.</span> («она» осталась как есть — she)<br>Я вижу её. → <span class="mono">I see her.</span> («она» превратилась в «её» — her)<br>Я дал ей книгу. → <span class="mono">I gave her a book.</span><br>Я пошёл с ней. → <span class="mono">I went with her.</span>' },
+    { kind: 'plain', h: 'С остальными местоимениями так же',
+      p: 'я → <span class="mono">I</span>, а «меня», «мне», «мной» → <span class="mono">me</span><br>он → <span class="mono">he</span>, а «его», «ему», «ним» → <span class="mono">him</span><br>мы → <span class="mono">we</span>, а «нас», «нам», «нами» → <span class="mono">us</span><br>они → <span class="mono">they</span>, а «их», «им», «ими» → <span class="mono">them</span><br>Полная таблица — в шпаргалке внизу.' },
+    { kind: 'plain', h: 'Для преподавателя: как это называется',
+      p: 'Слово «как в словаре» — это именительный падеж: в английском его называют <i>subject pronoun</i> (<span class="mono">I, he, she, we, they</span>). Все остальные падежи — <i>object pronoun</i> (<span class="mono">me, him, her, us, them</span>). Ученику термины не нужны: хватает вопроса «изменилось ли слово?».' },
+    { kind: 'trap', h: 'Ограничение: проверка работает на смысле, а не на словах',
+      p: 'Бывает, что русская фраза устроена иначе, чем английская: «у неё есть машина» — слово «неё» изменилось, а по-английски это <span class="mono">She has a car</span>. Такие случаи разобраны ниже.<br><a class="goto" href="#p-ru">Когда русский подводит →</a>' }
+  ],
+  forms: { p: '<b>She</b> reads. · I see <b>her</b>.', n: '<b>She</b> doesn\'t read. · I don\'t see <b>her</b>.', q: 'Does <b>she</b> read? · Do you see <b>her</b>?' },
+  markers: ['изменилось ли слово?', 'она → she', 'её · ей · ней → her', 'как в словаре', 'форма не та, что в словаре'],
+  ex: [
+    { en: '<i class="v">She</i> reads every day.', ru: 'Она читает каждый день.', nb: '«она» не изменилась — she' },
+    { en: 'I see <i class="v">her</i>.', ru: 'Я вижу её.', nb: '«она» → «её»: her' },
+    { en: 'I gave <i class="v">her</i> a book.', ru: 'Я дал ей книгу.', nb: '«ей» — тоже изменилось' },
+    { en: 'I went with <i class="v">her</i>.', ru: 'Я пошёл с ней.', nb: '«ней» — изменилось' }
+  ]
+},
+{
+  id: 'p-nom', zone: 'nom', level: 1, idx: 2,
+  name: 'Как в словаре: I · he · she · we · they', core: 'I · he · she · we · they + глагол',
+  thesis: 'Тот, кто делает, стоит перед глаголом',
+  short: 'кто делает',
+  fig: {
+    rows: [
+      { l: 'Русский',    ru: '<b>Она</b> любит кофе.' },
+      { l: 'Английский', tr: [['nom','She'],['rest','loves'],['rest','coffee'],['end','.']] },
+      { l: 'Русский',    ru: '<b>Они</b> живут в Лондоне.' },
+      { l: 'Английский', tr: [['nom','They'],['rest','live'],['rest','in London'],['end','.']] }
+    ],
+    cap: 'Слово «как в словаре» отвечает на вопрос «кто?». В английском оно стоит перед глаголом.'
+  },
+  lead: 'Первый набор — слова «как в словаре»: <span class="mono">I, he, she, we, they</span>. Они отвечают на вопрос <b>«кто делает?»</b> и стоят <b>перед глаголом</b>: <span class="mono">She loves coffee</span>. Если по-русски слово не изменилось, берём именно эти.',
+  blocks: [
+    { kind: 'key', h: 'Подсказка по месту',
+      p: 'Тот, кто делает действие, стоит перед глаголом: <span class="mono">He loves…</span> — кто любит? Он. Если местоимение открывает предложение и сразу за ним идёт глагол, это почти всегда <span class="mono">I, he, she, we, they</span>.' },
+    { kind: 'plain', h: 'Пять пар «в словаре»',
+      p: 'я → <span class="mono">I</span> · он → <span class="mono">he</span> · она → <span class="mono">she</span> · мы → <span class="mono">we</span> · они → <span class="mono">they</span><br>Ещё два слова ведут себя особо и разобраны на отдельной станции: «ты / вы» → <span class="mono">you</span> и «вещь» → <span class="mono">it</span>.' },
+    { kind: 'plain', h: 'Местоимение пропускать нельзя',
+      p: 'В русском можно сказать «Читаю книгу» — «кто» понятно по окончанию. В английском ячейка «кто» заполнена всегда: <span class="mono no">Read a book</span> → <span class="mono yes">I read a book</span>.<br><a class="goto" href="#s-hero">Про ячейки — на вкладке «Основа» →</a>' },
+    { kind: 'plain', h: 'I пишется с большой буквы всегда',
+      p: '<span class="mono">I</span> — единственное местоимение, которое пишется с заглавной даже в середине предложения: <span class="mono">Yesterday I called him</span>.' },
+    { kind: 'trap', h: 'Ловушка: me или her в роли «кто делает»',
+      p: '<span class="mono no">Me like coffee</span> → <span class="mono yes">I like coffee</span><br><span class="mono no">Her works in a bank</span> → <span class="mono yes">She works in a bank</span><br>Проверка по-русски: «меня любит кофе» или «её работает» не скажешь, нужно «я люблю» и «она работает». Слово «как в словаре» — значит, первая форма.' }
+  ],
+  forms: { p: '<b>She</b> reads. · <b>They</b> live here.', n: '<b>He</b> doesn\'t know. · <b>We</b> aren\'t ready.', q: 'Does <b>she</b> know? · Are <b>they</b> at home?' },
+  markers: ['перед глаголом', 'кто делает?', 'I · he · she · we · they', 'начало предложения', 'как в словаре'],
+  ex: [
+    { en: '<i class="v">I</i> live in Moscow.', ru: 'Я живу в Москве.' },
+    { en: '<i class="v">She</i> works in a bank.', ru: 'Она работает в банке.' },
+    { en: '<i class="v">We</i> are friends.', ru: 'Мы друзья.', nb: 'глагола нет — ставим be' },
+    { en: '<i class="v">They</i> don\'t speak French.', ru: 'Они не говорят по-французски.' }
+  ]
+},
+{
+  id: 'p-acc', zone: 'acc', level: 1, idx: 3,
+  name: 'Изменилось: me · him · her · us · them', core: 'глагол / предлог + me · him · her · us · them',
+  thesis: 'На кого направлено — после глагола или предлога',
+  short: 'на кого',
+  fig: {
+    rows: [
+      { l: 'Русский',    ru: 'Я вижу <b>её</b>.' },
+      { l: 'Английский', tr: [['nom','I'],['rest','see'],['acc','her'],['end','.']] },
+      { l: 'Русский',    ru: 'Я пошёл с <b>ней</b>.' },
+      { l: 'Английский', tr: [['nom','I'],['rest','went'],['rest','with'],['acc','her'],['end','.']] }
+    ],
+    cap: 'Слово после глагола или после предлога называет того, на кого направлено действие. В русском оно изменилось — в английском тоже.'
+  },
+  lead: 'Второй набор — слова, которые в русском <b>изменились</b>: «меня», «мне», «нас», «её», «им». В английском это <span class="mono">me, him, her, us, them</span>. Они отвечают на вопросы <b>«кого? кому? с кем? о ком?»</b> — то есть называют того, <b>на кого направлено действие</b>.',
+  blocks: [
+    { kind: 'key', h: 'Подсказка по месту',
+      p: 'Тот, на кого направлено действие, стоит <b>после глагола</b> или <b>после маленьких слов</b> <span class="mono">with, for, to, about</span>: <span class="mono">…loves him</span>, <span class="mono">for him</span>, <span class="mono">with him</span>.<br>То есть если местоимение стоит после глагола или после предлога, почти всегда будет форма <span class="mono">me, him, her, us, them</span>.' },
+    { kind: 'plain', h: 'Пять пар «изменилось»',
+      p: '«меня, мне, мной» → <span class="mono">me</span> · «его, ему, него, ним» → <span class="mono">him</span> · «её, ей, ней» → <span class="mono">her</span> · «нас, нам, нами» → <span class="mono">us</span> · «их, им, них, ими» → <span class="mono">them</span>' },
+    { kind: 'plain', h: 'Русские падежи английскому не нужны',
+      p: 'Там, где русскому нужны разные формы, английский обходится одной:<br><span class="mono">I see him</span> — вижу кого? · <span class="mono">I gave him a book</span> — дал кому? · <span class="mono">I went with him</span> — с кем? · <span class="mono">I talked about him</span> — о ком?' },
+    { kind: 'plain', h: 'Тонкость: «ним» бывает разным',
+      p: '«С ним» и «к ним» — одно и то же русское слово, а по-английски разное: <span class="mono">with him</span>, но <span class="mono">to them</span>. Здесь решает смысл: речь об одном человеке или о нескольких.' },
+    { kind: 'trap', h: 'Ловушка: первая форма после глагола или предлога',
+      p: '<span class="mono no">I see she</span> → <span class="mono yes">I see her</span><br><span class="mono no">He loves I</span> → <span class="mono yes">He loves me</span><br><span class="mono no">with he</span> → <span class="mono yes">with him</span><br>Проверка по-русски: «он любит я» режет слух — нужно «меня». Значит, <span class="mono">me</span>. Предлог ничего не меняет: после <span class="mono">with, for, to, about, from, of, at</span> всегда вторая форма.' }
+  ],
+  forms: { p: 'I see <b>her</b>. · He called <b>us</b>.', n: 'I don\'t know <b>him</b>.', q: 'Do you know <b>them</b>? · Can you help <b>me</b>?' },
+  markers: ['после глагола', 'после with · for · to · about', 'кого? кому? с кем?', 'me · him · her · us · them', 'слово изменилось'],
+  ex: [
+    { en: 'He loves <i class="v">me</i>.', ru: 'Он любит меня.', nb: '«я» → «меня»: me' },
+    { en: 'I see <i class="v">her</i> every day.', ru: 'Я вижу её каждый день.' },
+    { en: 'Give <i class="v">him</i> the book.', ru: 'Дай ему книгу.', nb: '«ему» — изменилось' },
+    { en: 'We talked about <i class="v">them</i>.', ru: 'Мы говорили о них.', nb: 'после предлога about' }
+  ]
+},
+{
+  id: 'p-same', zone: 'same', level: 2, idx: 4,
+  name: 'Не меняются: you и it', core: 'you → you · it → it',
+  thesis: 'Два слова, у которых одна форма на всё',
+  short: 'you · it',
+  fig: {
+    rows: [
+      { l: 'Русский',    ru: '<b>Ты</b> читаешь. · Я вижу <b>тебя</b>.' },
+      { l: 'Английский', tr: [['same','You'],['rest','read'],['end','·'],['nom','I'],['rest','see'],['same','you'],['end','.']] },
+      { l: 'Русский',    ru: '<b>Она</b> (машина) здесь. · Я вижу <b>её</b>.' },
+      { l: 'Английский', tr: [['same','It'],['rest','is here'],['end','·'],['nom','I'],['rest','see'],['same','it'],['end','.']] }
+    ],
+    cap: 'У you и it форма одна и для «кто делает», и для «на кого направлено» — выбирать не нужно.'
+  },
+  lead: 'Два слова выпадают из схемы «изменилось — меняется»: <span class="mono">you</span> и <span class="mono">it</span>. В русском у них по нескольку форм, а в английском — одна. Поэтому проверка «изменилось ли слово?» им не нужна.',
+  blocks: [
+    { kind: 'key', h: 'You: и «ты», и «вы», и «тебя», и «вам»',
+      p: '«Ты», «тебя», «тебе», «вы», «вас», «вам» — всё это по-английски <span class="mono">you</span>.<br><span class="mono">You read</span> — ты читаешь / вы читаете · <span class="mono">I see you</span> — вижу тебя / вас · <span class="mono">I called you</span> — позвонил тебе / вам.<br>Отдельного «вежливого вы» в английском нет: разницу между «ты» и «вы» передают тоном и словами, а не местоимением.' },
+    { kind: 'plain', h: 'It: всё, что не человек',
+      p: 'Стол, идея, письмо, погода — это <span class="mono">it</span>. И «он», и «она», и «оно» из русского превращаются в <span class="mono">it</span>.<br>«Где ключ? Он на столе» → <span class="mono">Where is the key? It is on the table.</span><br>«Я вижу машину. Она красная» → <span class="mono">I see a car. It is red.</span>' },
+    { kind: 'trap', h: 'Ловушка: русский род переносить нельзя',
+      p: 'По-русски машина «она», стол «он», окно «оно» — это грамматика, а не смысл. Английский родом предметов не интересуется.<br><span class="mono no">I love my car. She is fast.</span> → <span class="mono yes">I love my car. It is fast.</span><br><span class="mono no">I can\'t find the book. Where is her?</span> → <span class="mono yes">Where is it?</span><br>Для предметов he / she / him / her не годятся.' },
+    { kind: 'plain', h: 'Исключение: животные с именами',
+      p: 'Если у животного есть имя, для хозяина оно почти человек — и говорят <span class="mono">he</span> или <span class="mono">she</span>: <span class="mono">This is Murka. She is two.</span> Безымянное животное — <span class="mono">it</span>.' },
+    { kind: 'plain', h: 'It без «он», «она», «оно»',
+      p: '«Холодно», «Уже поздно» — в русском нет даже местоимения, английский подставляет <span class="mono">it</span>: <span class="mono">It is cold</span>, <span class="mono">It is late</span>. Это то же правило с вкладки «Основа»: ячейка «кто» заполнена всегда.' }
+  ],
+  forms: { p: '<b>You</b> read. · I see <b>it</b>.', n: '<b>It</b> isn\'t here. · I don\'t see <b>you</b>.', q: 'Do <b>you</b> know <b>it</b>?' },
+  markers: ['ты · вы → you', 'тебя · вас · вам → you', 'вещь → it', 'род не переносится', 'погода → it', 'есть имя → he / she'],
+  ex: [
+    { en: '<i class="v">You</i> are right.', ru: 'Ты прав. / Вы правы.', nb: 'один you на «ты» и «вы»' },
+    { en: 'I called <i class="v">you</i> yesterday.', ru: 'Я звонил вам вчера.', nb: '«вам» — всё равно you' },
+    { en: 'Where is the key? <i class="v">It</i> is on the table.', ru: 'Где ключ? Он на столе.', nb: 'вещь — it, хотя по-русски «он»' },
+    { en: 'I love my car. <i class="v">It</i> is very fast.', ru: 'Я люблю свою машину. Она очень быстрая.', nb: 'машина — «она», но it' }
+  ]
+},
+{
+  id: 'p-pair', zone: 'nom', level: 2, idx: 5,
+  name: 'Двое в одном месте', core: 'Tom and I · Tom and me',
+  thesis: 'Вычеркните второго и проверьте',
+  short: 'двое',
+  fig: {
+    rows: [
+      { l: 'Русский',    ru: '<b>Том и я</b> пошли в кино.' },
+      { l: 'Английский', tr: [['rest','Tom'],['rest','and'],['nom','I'],['rest','went'],['rest','to the cinema'],['end','.']] },
+      { l: 'Русский',    ru: 'Она позвонила <b>Тому и мне</b>.' },
+      { l: 'Английский', tr: [['nom','She'],['rest','called'],['rest','Tom'],['rest','and'],['acc','me'],['end','.']] }
+    ],
+    cap: 'Рядом с чужим именем местоимение подчиняется тем же правилам, что и в одиночку.'
+  },
+  lead: 'Когда рядом с местоимением стоит ещё чьё-то имя — <span class="mono">Tom and I</span>, <span class="mono">my wife and me</span> — легко запутаться. Правило при этом не меняется: <b>изменилось ли русское слово?</b> Имя второго человека на выбор не влияет.',
+  blocks: [
+    { kind: 'key', h: 'Вычеркните второго',
+      p: 'Уберите второго человека и посмотрите, что останется.<br><span class="mono">Tom and ___ went to the cinema.</span> Без Тома: «___ пошёл» → <span class="mono">I went</span>. Значит, <span class="mono">Tom and I went</span>.<br><span class="mono">She called Tom and ___.</span> Без Тома: «позвонила ___» → <span class="mono">called me</span>. Значит, <span class="mono">Tom and me</span>.' },
+    { kind: 'trap', h: 'Ловушка: «me and Tom» в роли «кто делает»',
+      p: '<span class="mono no">Me and Tom went to the cinema</span> → <span class="mono yes">Tom and I went to the cinema</span><br>По-русски «Том и я» — слово «я» не изменилось, значит, остаётся <span class="mono">I</span>. В живой речи «Me and Tom…» слышно часто, но в школьном и деловом английском это считается ошибкой.' },
+    { kind: 'trap', h: 'Ловушка: перебор правильности',
+      p: 'Кто выучил, что «me and Tom» плохо, начинает ставить <span class="mono">I</span> везде: <span class="mono no">He gave it to Tom and I</span> → <span class="mono yes">He gave it to Tom and me</span>.<br>После глагола и предлога — вторая форма, даже если рядом другой человек.' },
+    { kind: 'plain', h: 'Вежливый порядок',
+      p: 'По-английски принято называть себя последним: <span class="mono">Tom and I</span>, <span class="mono">my wife and me</span>, а не <span class="mono">I and Tom</span>. Это правило вежливости, а не грамматики: фраза с <span class="mono">I and Tom</span> понятна, но звучит невежливо.' }
+  ],
+  forms: { p: '<b>Tom and I</b> went home.', n: '<b>My wife and I</b> don\'t smoke.', q: 'Did she call <b>Tom and me</b>?' },
+  markers: ['Tom and I', 'Tom and me', 'вычеркнуть второго', 'my wife and me', 'себя — последним'],
+  ex: [
+    { en: '<i class="v">Tom and I</i> went to the cinema.', ru: 'Том и я ходили в кино.' },
+    { en: 'He invited <i class="v">my wife and me</i>.', ru: 'Он пригласил мою жену и меня.' },
+    { en: 'This is between <i class="v">you and me</i>.', ru: 'Это между нами.', nb: 'после предлога between — me' },
+    { en: 'Anna and <i class="v">he</i> work together.', ru: 'Анна и он работают вместе.', nb: '«он» не изменилось — he' }
+  ]
+},
+{
+  id: 'p-ru', zone: 'acc', level: 2, idx: 6,
+  name: 'Когда русский подводит', core: 'у неё есть · мне нужно · ему нравится',
+  thesis: 'Проверяйте смысл, а не слова',
+  short: 'русский подводит',
+  fig: {
+    rows: [
+      { l: 'Русский',    ru: 'У <b>неё</b> есть машина.' },
+      { l: 'Английский', tr: [['nom','She'],['rest','has'],['rest','a car'],['end','.']] },
+      { l: 'Русский',    ru: '<b>Мне</b> нужна <b>она</b>.' },
+      { l: 'Английский', tr: [['nom','I'],['rest','need'],['acc','her'],['end','.']] },
+      { l: 'Русский',    ru: '<b>Ему</b> нравится <b>она</b>.' },
+      { l: 'Английский', tr: [['nom','He'],['rest','likes'],['acc','her'],['end','.']] }
+    ],
+    cap: 'В русском изменяется то слово, которое стоит не на «делающем» месте. Английский смотрит на то, кто на самом деле делает.'
+  },
+  lead: 'Проверка «изменилось ли русское слово?» работает, пока английское предложение построено так же, как русское: «Я вижу её» → <span class="mono">I see her</span>. Но у некоторых русских фраз <b>другое устройство</b>: человек, который чувствует, нуждается или владеет, стоит в них в изменённой форме. В английском он всё равно «тот, кто делает» — и это <span class="mono">I, he, she</span>.',
+  blocks: [
+    { kind: 'key', h: 'Как поступить',
+      p: 'Сначала спросите себя: <b>кто в английском предложении действует?</b> Того и ставим перед глаголом — в форме <span class="mono">I / he / she / we / they</span>. Всё, что стоит после глагола, получает вторую форму.<br>Если сомневаетесь, держите под рукой подсказку по месту: перед глаголом — первая форма, после глагола или предлога — вторая.' },
+    { kind: 'plain', h: 'У меня есть · у неё есть',
+      p: '«У неё есть машина»: «неё» изменилось, но по-английски она просто <i>имеет</i> машину — <span class="mono">She has a car</span>.<br>«У нас нет времени» → <span class="mono">We don\'t have time</span>. «У них большой дом» → <span class="mono">They have a big house</span>.' },
+    { kind: 'plain', h: 'Мне нужно · ему хочется',
+      p: '«Мне нужна помощь» → <span class="mono">I need help</span>. «Ей нужно идти» → <span class="mono">She needs to go</span>. «Ему хочется кофе» → <span class="mono">He wants coffee</span>. «Мне кажется» → <span class="mono">I think</span>.' },
+    { kind: 'trap', h: 'Нравится: русский и английский меняются местами',
+      p: '«Он мне нравится»: по-русски «он» не изменилось, а «мне» изменилось. Проверка подсказывает <span class="mono">He likes me</span>, но так получится «я ему нравлюсь». Русский глагол «нравиться» устроен наоборот: действует тот, кто нравится. Английское <span class="mono">like</span> — действие того, кому нравится:<br>«Он мне нравится» → <span class="mono yes">I like him</span> · «Ей нравится он» → <span class="mono yes">She likes him</span>' },
+    { kind: 'plain', h: 'Это я · это она',
+      p: '«Кто там? — Это я». По-русски «я» стоит как в словаре, а по-английски в живой речи ответят <span class="mono">It\'s me</span>. Так же <span class="mono">It\'s her</span>, <span class="mono">That\'s him</span> и в коротком ответе <span class="mono">Who wants tea? — Me!</span><br>Формально правильно <span class="mono">It is I</span>, но звучит книжно и почти не встречается. Это одно из немногих мест, где после глагола <span class="mono">be</span> ставят вторую форму.' },
+    { kind: 'plain', h: 'Что запомнить',
+      p: 'Русская проверка — не плохая: в обычных предложениях («вижу её», «дал ей», «с ней») она срабатывает мгновенно. Просто помните, где она сбивается — там, где русская фраза построена иначе, чем английская, — и тогда выручит подсказка по месту.' }
+  ],
+  forms: { p: '<b>She</b> has a car. · I like <b>him</b>.', n: '<b>She</b> doesn\'t like <b>him</b>.', q: 'Do <b>you</b> like <b>her</b>?' },
+  markers: ['у неё есть', 'мне нужно', 'ему нравится', 'ей хочется', 'это я → It\'s me', 'сначала: кто действует?'],
+  ex: [
+    { en: '<i class="v">She</i> has a car.', ru: 'У неё есть машина.', nb: '«неё» изменилось, но она — тот, кто имеет' },
+    { en: '<i class="v">I</i> like <i class="v">him</i>.', ru: 'Он мне нравится.', nb: '«он» и «мне» поменялись ролями' },
+    { en: '<i class="v">She</i> needs <i class="v">us</i>.', ru: 'Мы ей нужны.', nb: 'нуждается она — она и стоит перед глаголом' },
+    { en: 'Who is it? — It\'s <i class="v">me</i>.', ru: 'Кто там? — Это я.', nb: 'после be в живой речи — me' }
+  ]
+},
+{
+  id: 'p-poss', zone: 'pos', level: 3, idx: 7,
+  name: 'Чей? my · your · his · her · its · our · their', core: 'my · your · his · her · its · our · their + существительное',
+  thesis: 'Стоит перед существительным и отвечает на «чей?»',
+  short: 'чей?',
+  fig: {
+    rows: [
+      { l: 'Русский',    ru: '<b>Моя</b> мама · <b>мой</b> дом · <b>моё</b> окно' },
+      { l: 'Английский', tr: [['pos','my'],['rest','mother'],['end','·'],['pos','my'],['rest','house'],['end','·'],['pos','my'],['rest','window']] },
+      { l: 'Русский',    ru: '<b>Её</b> книга · <b>его</b> книга · <b>их</b> книга' },
+      { l: 'Английский', tr: [['pos','her'],['rest','book'],['end','·'],['pos','his'],['rest','book'],['end','·'],['pos','their'],['rest','book']] }
+    ],
+    cap: 'Русское слово меняется по роду предмета — мой, моя, моё. Английское зависит только от владельца: my всегда остаётся my.'
+  },
+  lead: 'Отдельная тема — не «кто» и не «кого», а <b>«чей?»</b>. Это третий набор слов: <span class="mono">my, your, his, her, its, our, their</span>. Они стоят перед существительным: <span class="mono">my book</span>, <span class="mono">her friend</span>. Смешивать их с <span class="mono">me, him, her</span> не нужно: вопрос здесь другой.',
+  blocks: [
+    { kind: 'key', h: 'Семь слов — на семерых владельцев',
+      p: 'я → <span class="mono">my</span> · ты / вы → <span class="mono">your</span> · он → <span class="mono">his</span> · она → <span class="mono">her</span> · вещь → <span class="mono">its</span> · мы → <span class="mono">our</span> · они → <span class="mono">their</span>' },
+    { kind: 'plain', h: 'Что меняется в русском, но не в английском',
+      p: 'По-русски «мой» меняется по роду и числу: мой дом, моя мама, моё окно, мои друзья. По-английски выбор зависит только от того, <b>кому принадлежит</b>, а не от того, что принадлежит: <span class="mono">my house, my mother, my window, my friends</span>.' },
+    { kind: 'plain', h: 'Как проверить',
+      p: 'Задайте вопрос «чей?». Если на него отвечает местоимение, это третий набор.<br>«<b>Чья</b> книга? — Её» → <span class="mono">her book</span>. «<b>Чей</b> дом? — Наш» → <span class="mono">our house</span>.' },
+    { kind: 'trap', h: 'Ловушка: me или him перед существительным',
+      p: '<span class="mono no">me book</span>, <span class="mono no">him car</span> → <span class="mono yes">my book</span>, <span class="mono yes">his car</span>.<br>Перед существительным, которому кто-то принадлежит, ставят третий набор.' },
+    { kind: 'trap', h: 'Ловушка: its и it\'s',
+      p: '<span class="mono">its</span> отвечает на «чей?»: <span class="mono">The cat is washing its paws</span>. А <span class="mono">it\'s</span> — сокращение от <span class="mono">it is</span>: <span class="mono">It\'s cold</span>. Апостроф ставится только там, где можно развернуть фразу в «it is» или «it has».' },
+    { kind: 'plain', h: 'Когда существительного нет: mine, yours',
+      p: 'Если книги в предложении уже нет — «Эта книга моя», — вместо <span class="mono">my</span> ставят <span class="mono">mine</span>: <span class="mono">This book is mine</span>. Остальные: <span class="mono">yours, his, hers, ours, theirs</span>. У <span class="mono">his</span> форма та же.' }
+  ],
+  forms: { p: 'This is <b>my</b> book. · <b>Their</b> house is big.', n: 'It isn\'t <b>our</b> car.', q: 'Is this <b>your</b> bag? · Where is <b>her</b> phone?' },
+  markers: ['чей?', 'перед существительным', 'my · your · his · her · its · our · their', 'мой · моя · моё → my', 'mine · yours — без существительного'],
+  ex: [
+    { en: 'This is <i class="v">my</i> mother.', ru: 'Это моя мама.', nb: 'мой · моя · моё — всегда my' },
+    { en: '<i class="v">Her</i> brother lives in Berlin.', ru: 'Её брат живёт в Берлине.', nb: '«её» отвечает на «чей?»' },
+    { en: 'We love <i class="v">our</i> city.', ru: 'Мы любим наш город.' },
+    { en: 'The cat is washing <i class="v">its</i> paws.', ru: 'Кот умывает лапы.', nb: 'владелец — кот, поэтому its' }
+  ]
+},
+{
+  id: 'p-his', zone: 'pos', level: 3, idx: 8,
+  name: 'Его, её, их: him или his', core: 'him / his · her / her · them / their',
+  thesis: 'Один вопрос решает: «кого?» или «чей?»',
+  short: 'его · её · их',
+  fig: {
+    rows: [
+      { l: 'Русский',    ru: 'Я вижу <b>его</b> (кого?) · это <b>его</b> книга (чья?)' },
+      { l: 'Английский', tr: [['nom','I'],['rest','see'],['acc','him'],['end','·'],['rest','this is'],['pos','his'],['rest','book']] },
+      { l: 'Русский',    ru: 'Я вижу <b>её</b> (кого?) · это <b>её</b> книга (чья?)' },
+      { l: 'Английский', tr: [['nom','I'],['rest','see'],['acc','her'],['end','·'],['rest','this is'],['pos','her'],['rest','book']] },
+      { l: 'Русский',    ru: 'Я вижу <b>их</b> (кого?) · это <b>их</b> книга (чья?)' },
+      { l: 'Английский', tr: [['nom','I'],['rest','see'],['acc','them'],['end','·'],['rest','this is'],['pos','their'],['rest','book']] }
+    ],
+    cap: 'Русское «его» одно, а английских слов два: «кого?» — him, «чей?» — his. У «её» оба английских слова совпали.'
+  },
+  lead: 'В русском одно слово «его» работает в двух ролях: «Я вижу <b>его</b>» и «<b>его</b> книга». В английском для этих ролей <b>разные слова</b>: <span class="mono">him</span> и <span class="mono">his</span>. Чтобы не ошибиться, достаточно одного вопроса.',
+  blocks: [
+    { kind: 'key', h: 'Вопрос «кого?» или «чей?»',
+      p: 'Задайте вопрос к русскому слову.<br>«Я вижу его» → вижу <b>кого</b>? → <span class="mono">I see <b>him</b></span>.<br>«Это его книга» → <b>чья</b> книга? → <span class="mono">This is <b>his</b> book</span>.' },
+    { kind: 'plain', h: 'Три пары',
+      p: 'он: «его» (кого?) → <span class="mono">him</span> · «его» (чей?) → <span class="mono">his</span><br>она: «её» (кого?) → <span class="mono">her</span> · «её» (чей?) → <span class="mono">her</span> — <i>совпало</i><br>они: «их» (кого?) → <span class="mono">them</span> · «их» (чей?) → <span class="mono">their</span>' },
+    { kind: 'plain', h: 'Её — самая удобная пара',
+      p: '«Её книга» — <span class="mono">her book</span>, как и «вижу её» — <span class="mono">I see her</span>: слово одно и по-русски, и по-английски. А вот «его книга» — не <span class="mono">him book</span>, а <span class="mono">his book</span>.' },
+    { kind: 'trap', h: 'Ловушка: him book и I see his',
+      p: '<span class="mono no">him book</span>, <span class="mono no">them house</span> → <span class="mono yes">his book</span>, <span class="mono yes">their house</span><br>И наоборот: <span class="mono no">I see his</span> → <span class="mono yes">I see him</span> — вопрос «кого?» требует him.' },
+    { kind: 'plain', h: '«Свой» зависит от того, кто действует',
+      p: 'Русское «свой» значит «принадлежащий тому, кто делает». По-английски слова «свой» нет, и берём слово для того, кто действует:<br>«Я люблю <b>свою</b> жену» → <span class="mono">I love <b>my</b> wife</span><br>«Он любит <b>свою</b> жену» → <span class="mono">He loves <b>his</b> wife</span><br>«Они любят <b>свой</b> город» → <span class="mono">They love <b>their</b> city</span>' }
+  ],
+  forms: { p: 'I see <b>him</b>. · This is <b>his</b> book.', n: 'I don\'t see <b>them</b>. · It isn\'t <b>their</b> house.', q: 'Do you know <b>him</b>? · Is it <b>his</b> bag?' },
+  markers: ['кого? → him · her · them', 'чей? → his · her · their', 'его: him или his', 'её: her в обеих ролях', 'их: them или their', 'свой → по тому, кто действует'],
+  ex: [
+    { en: 'I know <i class="v">him</i>.', ru: 'Я знаю его.', nb: 'кого? → him' },
+    { en: 'I know <i class="v">his</i> sister.', ru: 'Я знаю его сестру.', nb: 'чью? → his' },
+    { en: 'We often visit <i class="v">them</i>.', ru: 'Мы часто навещаем их.', nb: 'кого? → them' },
+    { en: 'We often visit <i class="v">their</i> house.', ru: 'Мы часто бываем в их доме.', nb: 'чей? → their' },
+    { en: 'She loves <i class="v">her</i> job.', ru: 'Она любит свою работу.', nb: '«свою» — по тому, кто действует' }
+  ]
+}
+];
+
+/* ── дуэли ── */
+const PDUELS = [
+  {
+    q: 'She или her? — изменилось ли слово',
+    a: { z: 'nom', n: 'She · не изменилось', tr: [['nom','She'],['rest','reads'],['end','.']],
+         en: '<i class="v">She</i> reads.', ru: 'Она читает.', why: '«Она» осталась как в словаре — значит, she. Она стоит перед глаголом: она делает.' },
+    b: { z: 'acc', n: 'Her · изменилось', tr: [['nom','I'],['rest','see'],['acc','her'],['end','.']],
+         en: 'I see <i class="v">her</i>.', ru: 'Я вижу её.', why: '«Она» превратилась в «её». Изменилось в русском — изменилось и в английском. Стоит после глагола.' },
+    r: 'Сравните русские слова: «она» и «её». Если слово то же, что в словаре, — she. Если другое — her.'
+  },
+  {
+    q: 'Him или his? — кого или чей',
+    a: { z: 'acc', n: 'Him · кого?', tr: [['nom','I'],['rest','know'],['acc','him'],['end','.']],
+         en: 'I know <i class="v">him</i>.', ru: 'Я знаю его.', why: 'Знаю кого? Его. Слово заменяет человека и стоит после глагола.' },
+    b: { z: 'pos', n: 'His · чей?', tr: [['nom','I'],['rest','know'],['pos','his'],['rest','sister'],['end','.']],
+         en: 'I know <i class="v">his</i> sister.', ru: 'Я знаю его сестру.', why: 'Чью сестру? Его. Слово отвечает на «чей?» и стоит перед существительным.' },
+    r: 'Русское «его» одно, поэтому задайте вопрос: «кого?» — him, «чей?» — his.'
+  },
+  {
+    q: 'Tom and I или Tom and me?',
+    a: { z: 'nom', n: 'Tom and I · они делают', tr: [['rest','Tom'],['rest','and'],['nom','I'],['rest','called'],['acc','her'],['end','.']],
+         en: '<i class="v">Tom and I</i> called her.', ru: 'Том и я позвонили ей.', why: 'Вычеркните Тома: «я позвонил» → I. Значит, Tom and I.' },
+    b: { z: 'acc', n: 'Tom and me · им звонят', tr: [['nom','She'],['rest','called'],['rest','Tom'],['rest','and'],['acc','me'],['end','.']],
+         en: 'She called <i class="v">Tom and me</i>.', ru: 'Она позвонила Тому и мне.', why: 'Вычеркните Тома: «позвонила мне» → me. Значит, Tom and me.' },
+    r: 'Уберите второго человека и посмотрите, что осталось: I called или called me. Имя соседа выбор не меняет.'
+  },
+  {
+    q: 'Her или it? — человек или вещь',
+    a: { z: 'acc', n: 'Her · человек', tr: [['nom','I'],['rest','can\'t find'],['acc','her'],['end','.']],
+         en: 'Where is Anna? I can\'t find <i class="v">her</i>.', ru: 'Где Анна? Я не могу найти её.', why: 'Анна — человек, русское «её» превращается в her.' },
+    b: { z: 'same', n: 'It · вещь', tr: [['nom','I'],['rest','can\'t find'],['same','it'],['end','.']],
+         en: 'Where is the key? I can\'t find <i class="v">it</i>.', ru: 'Где ключ? Я не могу найти его.', why: 'Ключ — вещь. По-русски «его», но предметы по-английски — только it.' },
+    r: 'Спросите себя: человек это или вещь? Вещь — всегда it, какой бы род у неё ни был в русском.'
+  },
+  {
+    q: 'I like him или He likes me?',
+    a: { z: 'nom', n: 'I like him · он мне нравится', tr: [['nom','I'],['rest','like'],['acc','him'],['end','.']],
+         en: '<i class="v">I</i> like <i class="v">him</i>.', ru: 'Он мне нравится.', why: 'Чувствует тот, кому нравится, — это «я». «Я» стоит перед like, значит I; тот, кто нравится, стоит после — him.' },
+    b: { z: 'acc', n: 'He likes me · я ему нравлюсь', tr: [['nom','He'],['rest','likes'],['acc','me'],['end','.']],
+         en: '<i class="v">He</i> likes <i class="v">me</i>.', ru: 'Я ему нравлюсь.', why: 'Здесь чувствует он: он стоит перед likes, значит he. «Я» оказалось после глагола — me.' },
+    r: 'Не переводите по словам: «нравится» в русском работает наоборот. Спросите, кто чувствует, — он и стоит перед глаголом.'
+  }
+];
+</script>
+<script>
+/* ═══════════════════════════════════════════════════════════
+   ЗАДАНИЯ · МЕСТОИМЕНИЯ
+   Верный ответ стоит на разных местах, чтобы его нельзя было угадать по порядку.
+   ═══════════════════════════════════════════════════════════ */
+const PDRILLS = {
+
+'p-test': [
+  Q('«Она читает книгу.»',
+    ['Her reads a book.', 'Слово «она» не изменилось — значит, и английское слово остаётся в первой форме. Her здесь не подходит.'],
+    ['+She reads a book.', '«Она» осталась как в словаре, и английское слово не меняется: she.'],
+    ['Hers reads a book.', 'Hers — «её», принадлежащая ей вещь. К тому, кто читает, отношения не имеет.']),
+  Q('«Я вижу её.»',
+    ['I see she.', '«Она» превратилась в «её» — слово изменилось, значит, нужна вторая форма.'],
+    ['I see hers.', 'Hers — это «её» в значении «принадлежащее ей». Мы видим саму женщину, а не её вещь.'],
+    ['+I see her.', '«Её» — изменённая форма «она», и английское слово меняется так же: her.']),
+  Q('«Я дал ей книгу.»',
+    ['I gave she a book.', '«Ей» — изменённая форма, значит, нужно her, а не she.'],
+    ['+I gave her a book.', '«Ей» изменилось, и английское слово тоже: she → her.'],
+    ['I gave a book she.', 'Порядок слов нарушен: слово «ей» не ставят в самый конец.']),
+  Q('«Мы живём в Лондоне.»',
+    ['+We live in London.', '«Мы» не изменилось — остаётся we.'],
+    ['Us live in London.', 'Us — это «нас», «нам»: изменённая форма. А «мы» осталось как в словаре.'],
+    ['Our live in London.', 'Our отвечает на вопрос «чей?» («наш»). Тот, кто живёт, — это «мы».']),
+  Q('«Он смотрит на нас.»',
+    ['He looks at we.', '«Нас» — изменённая форма слова «мы», значит, нужно us.'],
+    ['Him looks at us.', '«Он» осталось как в словаре — должен быть he. А «нас» → us передано верно.'],
+    ['+He looks at us.', '«Он» не изменилось → he. «Мы» изменилось в «нас» → us.']),
+  Q('I went with ___ yesterday. (с ней)',
+    ['she', '«С ней» — слово изменилось, а she — форма «как в словаре».'],
+    ['+her', '«Ней» — изменённая форма «она», в английском — her.'],
+    ['hers', 'Hers — «её» без существительного, о вещи. Здесь речь о самой женщине.']),
+  Q('___ live in Moscow. («Они»)',
+    ['+They', '«Они» не изменилось — остаётся they.'],
+    ['Them', 'Them — это «их», «им»: изменённая форма.'],
+    ['Their', 'Their отвечает на «чей?» («их»). Тот, кто живёт, — это «они».']),
+  Q('She gave ___ a present. («нам»)',
+    ['we', '«Нам» — изменённая форма «мы», значит, нужно us.'],
+    ['our', 'Our — «наш», отвечает на вопрос «чей?». А «нам» — это «кому?».'],
+    ['+us', '«Нам» изменилось, и английское слово тоже: we → us.']),
+  Q('«Они знают меня.»',
+    ['They know I.', '«Меня» — изменённая форма слова «я», нужно me.'],
+    ['+They know me.', '«Они» не изменилось → they. «Я» изменилось в «меня» → me.'],
+    ['Them know me.', '«Они» осталось как в словаре — должно быть they.']),
+  Q('«Мы звоним им каждый день.»',
+    ['We call they every day.', '«Им» — изменённая форма слова «они», нужно them.'],
+    ['Us call them every day.', '«Мы» осталось как в словаре — должно быть we.'],
+    ['+We call them every day.', '«Мы» не изменилось → we. «Они» изменилось в «им» → them.'])
+],
+
+'p-nom': [
+  Q('«Читаю книгу.» (по-русски «я» не сказано)',
+    ['Read a book.', 'В английском ячейка «кто» заполнена всегда, даже если русский её не называет.'],
+    ['+I read a book.', 'Пропущенное «я» в английском возвращается — I.'],
+    ['Me read a book.', 'Me — это «меня», «мне». А тот, кто читает, — «я».']),
+  Q('___ works in a bank. («Он»)',
+    ['+He', '«Он» не изменилось, стоит перед глаголом — he.'],
+    ['Him', 'Him — «его», «ему»: форма для того, на кого направлено действие.'],
+    ['His', 'His отвечает на «чей?». Работает он сам.']),
+  Q('___ are my friends. («Они»)',
+    ['Them', 'Them — «их», «им». А «они» осталось как в словаре.'],
+    ['+They', '«Они» перед глаголом, слово не изменилось — they.'],
+    ['Their', 'Their — «их» в значении «чей?». Здесь «они» делают, а не владеют.']),
+  Q('Yesterday ___ called him. («я»)',
+    ['i', 'I — единственное местоимение, которое пишется с заглавной буквы всегда.'],
+    ['+I', '«Я» перед глаголом — I, и пишется оно с большой буквы.'],
+    ['me', 'Me — «меня», «мне». А звонил «я».']),
+  Q('«Она танцует лучше всех.»',
+    ['+She dances best.', '«Она» → she, а с she глагол в настоящем получает -s.'],
+    ['Her dances best.', 'Her — «её», «ей». Танцует она сама, слово в словаре не менялось.'],
+    ['She dance best.', 'Местоимение выбрано верно, но с she в настоящем глагол забирает -s.']),
+  Q('___ aren\'t ready yet. («Мы»)',
+    ['Us', 'Us — «нас», «нам». А «мы» не изменилось.'],
+    ['Our', 'Our — «наш». Тут мы не владеем, а делаем.'],
+    ['+We', '«Мы» перед глаголом, слово не изменилось — we.']),
+  Q('«Они не говорят по-французски.»',
+    ['+They don\'t speak French.', '«Они» не изменилось → they, а к do цепляется not.'],
+    ['Them don\'t speak French.', 'Them — «их», «им». «Они» — это they.'],
+    ['They doesn\'t speak French.', 'Местоимение верное, но с they нужно do, а не does.']),
+  Q('Ask Anna. ___ knows the answer. («Она»)',
+    ['Her', 'Her — «её», «ей». «Она» осталась как в словаре.'],
+    ['+She', '«Она» перед глаголом, слово не менялось — she.'],
+    ['Hers', 'Hers — «её» без существительного. К «кто знает» отношения не имеет.']),
+  Q('«Он дома?»',
+    ['Is him at home?', 'Him — «его», «ему». Спрашиваем о том, кто, а не о том, на кого направлено.'],
+    ['Is his at home?', 'His — «его» в значении «чей?».'],
+    ['+Is he at home?', '«Он» не изменилось → he. Be выходит вперёд, he остаётся после него.']),
+  Q('«Я не знаю.»',
+    ['+I don\'t know.', '«Я» не изменилось → I, а not цепляется к do.'],
+    ['Me don\'t know.', 'Me — «меня», «мне». «Я» осталось как в словаре.'],
+    ['I not know.', 'Местоимение верное, но not не цепляется к обычному глаголу напрямую.'])
+],
+
+'p-acc': [
+  Q('«Он любит меня.»',
+    ['He loves I.', '«Меня» — изменённая форма слова «я», значит, нужно me.'],
+    ['+He loves me.', '«Он» не изменилось → he. «Я» изменилось в «меня» → me.'],
+    ['Him loves me.', '«Он» осталось как в словаре — должно быть he.']),
+  Q('Give ___ the book. («ему»)',
+    ['he', '«Ему» — изменённая форма слова «он», нужно him.'],
+    ['his', 'His отвечает на «чей?» («его»). А «ему» — это «кому?».'],
+    ['+him', '«Ему» изменилось, и английское тоже: he → him.']),
+  Q('«Мы говорили о ней.»',
+    ['We talked about she.', '«Ней» — изменённая форма. После about всегда вторая форма.'],
+    ['+We talked about her.', '«Ней» изменилось → her. После предлога about — вторая форма.'],
+    ['We talked about hers.', 'Hers — о вещи, которая ей принадлежит. Говорили о самой женщине.']),
+  Q('She helps ___ every day. («нам»)',
+    ['+us', '«Нам» — изменённая форма слова «мы», значит, us.'],
+    ['we', 'We — «мы». А «нам» изменилось.'],
+    ['our', 'Our отвечает на «чей?». А «нам» — это «кому?».']),
+  Q('«Он дал им деньги.»',
+    ['+He gave them money.', '«Он» → he, «им» (изменилось) → them.'],
+    ['He gave they money.', '«Им» — изменённая форма слова «они», нужно them.'],
+    ['Him gave them money.', '«Он» осталось как в словаре — he.']),
+  Q('Can you help ___? («меня»)',
+    ['I', '«Меня» — изменённая форма. После глагола help — me.'],
+    ['+me', '«Меня» изменилось, и английское слово тоже: I → me.'],
+    ['my', 'My отвечает на «чей?». А «меня» — это «кого?».']),
+  Q('This is for ___. («для неё»)',
+    ['+her', '«Неё» изменилось, после предлога for — вторая форма: her.'],
+    ['she', 'She — форма «как в словаре». После предлога так нельзя.'],
+    ['hers', 'Hers — вещь, принадлежащая ей. Здесь речь о самой женщине.']),
+  Q('We often visit ___. («их»)',
+    ['they', '«Их» — изменённая форма слова «они», значит, them.'],
+    ['their', 'Their отвечает на «чей?». А «навещаем их» — это «кого?».'],
+    ['+them', '«Их» изменилось → them. Стоит после глагола.']),
+  Q('Call ___ tomorrow. («ему»)',
+    ['+him', '«Ему» изменилось, стоит после глагола — him.'],
+    ['he', 'He — форма «как в словаре». После глагола нужна вторая.'],
+    ['his', 'His отвечает на «чей?». А «позвони ему» — это «кому?».']),
+  Q('«Я говорил с ним.»',
+    ['I talked with he.', '«Ним» — изменённая форма. После with всегда вторая форма.'],
+    ['+I talked with him.', '«С ним» — об одном человеке, форма после with — him.'],
+    ['I talked with them.', 'Them — это «с ними», о нескольких людях. «С ним» — об одном.'])
+],
+
+'p-same': [
+  Q('«Ты прав.»',
+    ['Your are right.', 'Your — «твой», отвечает на «чей?». А прав «ты».'],
+    ['You is right.', 'Местоимение верное, но с you глагол be всегда are, даже когда речь об одном человеке.'],
+    ['+You are right.', 'У «ты» и «вы» одно английское слово — you.']),
+  Q('«Я вижу тебя.»',
+    ['I see your.', 'Your — «твой». Мы видим человека, а не его вещь.'],
+    ['I see yours.', 'Yours — «твоё» без существительного. Мы видим самого человека.'],
+    ['+I see you.', '«Тебя» изменилось, но у you форма одна на все случаи.']),
+  Q('«Где ключ? Он на столе.»',
+    ['Where is the key? He is on the table.', 'Ключ — вещь. По-русски «он», но предметы по-английски — it.'],
+    ['+Where is the key? It is on the table.', 'Вещь по-английски всегда it, как бы она ни называлась по-русски.'],
+    ['Where is the key? Him is on the table.', 'Him — изменённая форма слова «он», к тому же для людей, не для вещей.']),
+  Q('«Я люблю свою машину. Она быстрая.»',
+    ['I love my car. She is fast.', 'Машина — «она» только в русском. В английском предметы — it.'],
+    ['I love my car. Her is fast.', 'Her — изменённая форма слова «она», к тому же о человеке.'],
+    ['+I love my car. It is fast.', 'Предмет — it, род из русского не переносится.']),
+  Q('«Я не могу найти её (книгу).»',
+    ['+I can\'t find it.', 'Книга — вещь, значит, it.'],
+    ['I can\'t find her.', 'Her — о человеке. Книга — вещь, а вещи по-английски it.'],
+    ['I can\'t find she.', 'She — форма «как в словаре», а здесь нужна вторая, да и вещь это it.']),
+  Q('«Холодно.»',
+    ['Is cold.', 'Ячейка «кто» должна быть заполнена всегда, даже если в русском ничего нет.'],
+    ['He is cold.', 'He — человек. О погоде говорят it.'],
+    ['+It is cold.', 'Ни глагола, ни «кто» в русском нет — английский подставляет it и is.']),
+  Q('«Мы вам позвоним.»',
+    ['We will call yours.', 'Yours — «ваше» без существительного. Звонят человеку, а не вещи.'],
+    ['We will call your.', 'Your отвечает на «чей?». А «вам» — это «кому?».'],
+    ['+We will call you.', '«Вам» изменилось, но you для всех случаев одно.']),
+  Q('«Письмо пришло вчера. Я его прочитал.»',
+    ['The letter came yesterday. I read him.', 'Him — для людей. Письмо — вещь, значит, it.'],
+    ['+The letter came yesterday. I read it.', 'Письмо — вещь, поэтому it, как бы оно ни называлось по-русски.'],
+    ['The letter came yesterday. I read he.', 'He — это «он» в словаре. После глагола нужна вторая форма, а для вещи — it.']),
+  Q('«Вы можете мне помочь?»',
+    ['Can your help me?', 'Your отвечает на «чей?». Помочь можете вы.'],
+    ['+Can you help me?', '«Вы» — you, и «меня» → me.'],
+    ['Can yours help me?', 'Yours — «ваше» без существительного. К «вы» отношения не имеет.']),
+  Q('«Идея хорошая. Она мне нравится.»',
+    ['The idea is good. I like him.', 'Him — для человека. Идея — вещь.'],
+    ['+The idea is good. I like it.', 'Идея — вещь, значит, it, хотя по-русски «она».'],
+    ['The idea is good. I like her.', 'Her — для человека. Идея по-английски it.'])
+],
+
+'p-pair': [
+  Q('___ went to the cinema. («Том и я»)',
+    ['Tom and me', '«Я» не изменилось. Вычеркните Тома: «me went» не бывает.'],
+    ['+Tom and I', 'Вычеркните Тома: «я пошёл» → I went. Значит, Tom and I.'],
+    ['I and Tom', 'Грамматически понятно, но себя принято называть последним.']),
+  Q('She called ___. («Тому и мне»)',
+    ['+Tom and me', 'Вычеркните Тома: «позвонила мне» → called me.'],
+    ['Tom and I', 'Вычеркните Тома: «called I» не бывает. После глагола — me.'],
+    ['Tom and my', 'My отвечает на «чей?». А «позвонила мне» — это «кому?».']),
+  Q('Anna and ___ work together. («Анна и он»)',
+    ['him', 'Вычеркните Анну: «him works» не бывает.'],
+    ['his', 'His отвечает на «чей?». А работает он сам.'],
+    ['+he', '«Он» не изменилось, стоит перед глаголом — he.']),
+  Q('He invited my wife and ___. («меня»)',
+    ['I', 'Вычеркните жену: «invited I» не бывает. После глагола — me.'],
+    ['my', 'My отвечает на «чей?». А пригласили меня.'],
+    ['+me', 'Вычеркните жену: «invited me». Значит, my wife and me.']),
+  Q('This is between you and ___. («между нами»)',
+    ['I', 'После предлога between всегда вторая форма.'],
+    ['+me', 'После предлога — me, хотя рядом стоит другой человек.'],
+    ['my', 'My отвечает на «чей?». А тут «между тобой и мной».']),
+  Q('«Мы с сестрой живём вместе.»',
+    ['Me and my sister live together.', '«Я» не изменилось — значит, I. Кроме того, себя принято называть последним.'],
+    ['My sister and me live together.', 'Вычеркните сестру: «me live» не бывает.'],
+    ['+My sister and I live together.', 'Вычеркните сестру: «I live». Значит, my sister and I.']),
+  Q('She sent a message to John and ___. («Джону и мне»)',
+    ['+me', 'После предлога to — вторая форма. Вычеркните Джона: «to me».'],
+    ['I', 'После предлога «I» не ставят, даже если рядом имя.'],
+    ['mine', 'Mine — «моё» без существительного. Тут нужен сам человек.']),
+  Q('«Он позвонил Тому и мне.»',
+    ['He called Tom and I.', '«Мне» изменилось: нужна вторая форма. Вычеркните Тома: «called I» не бывает.'],
+    ['+He called Tom and me.', 'Вычеркните Тома: «called me». Значит, Tom and me.'],
+    ['Him called Tom and me.', '«Он» осталось как в словаре — должно быть he.']),
+  Q('«Том и я пошли домой.» Какой вариант правильный и вежливый?',
+    ['I and Tom went home.', 'Понятно, но себя принято называть последним.'],
+    ['+Tom and I went home.', 'Вычеркните Тома: «I went home». Себя называют последним.'],
+    ['Tom and me went home.', 'Вычеркните Тома: «me went» не бывает.']),
+  Q('«Она пригласила нас с Томом.»',
+    ['She invited Tom and I.', 'После глагола — вторая форма: «invited me». Значит, Tom and me.'],
+    ['She invited we and Tom.', 'We — форма «как в словаре», а после глагола нужна вторая.'],
+    ['+She invited Tom and me.', 'Вычеркните Тома: «invited me». Значит, Tom and me.'])
+],
+
+'p-ru': [
+  Q('«У неё есть собака.»',
+    ['Her has a dog.', '«Неё» изменилось, но по-английски она просто имеет собаку — she. Русская проверка здесь сбивается.'],
+    ['She have a dog.', 'Местоимение верное, но с she глагол have превращается в has.'],
+    ['+She has a dog.', 'Человек «имеет» — он тот, кто делает, значит, she.']),
+  Q('«Мне нужна помощь.»',
+    ['+I need help.', 'Нуждается «я», хотя по-русски стоит «мне». В английском тот, кто нуждается, — I.'],
+    ['Me need help.', '«Мне» изменилось, но по-английски нуждающийся — тот, кто делает. Значит, I.'],
+    ['My need help.', 'My отвечает на «чей?». Здесь «я» нуждается.']),
+  Q('«Он мне нравится.»',
+    ['He likes me.', 'Так получится «я ему нравлюсь». Нравится — действие того, кому нравится.'],
+    ['+I like him.', 'Чувствует «я» — оно перед глаголом. Тот, кто нравится, — после: him.'],
+    ['Him likes I.', 'Обе формы стоят не на своих местах: перед глаголом — I, после — him.']),
+  Q('«Ей нравится он.»',
+    ['+She likes him.', 'Чувствует она — она перед глаголом. Он — после глагола: him.'],
+    ['Her likes he.', 'Обе формы стоят не на своих местах: she перед глаголом, him — после.'],
+    ['He likes her.', 'Так получится «ему нравится она». Нужно наоборот.']),
+  Q('«У нас нет времени.»',
+    ['Us don\'t have time.', '«Нас» изменилось, но по-английски владельца времени — «мы» — то есть we.'],
+    ['+We don\'t have time.', 'Тот, у кого нет времени, — это «мы», он и стоит перед глаголом.'],
+    ['Our don\'t have time.', 'Our отвечает на «чей?». Владеем мы, а не владеем нами.']),
+  Q('Кто там? — ___. («Это я.»)',
+    ['It\'s my.', 'My отвечает на «чей?». Нужно слово для самого человека.'],
+    ['It\'s mine.', 'Mine — вещь, принадлежащая мне. Здесь отвечает сам человек.'],
+    ['+It\'s me.', 'В живой речи после be ставят вторую форму: It\'s me.']),
+  Q('«Нам хочется спать.»',
+    ['Us want to sleep.', '«Нам» изменилось, но по-английски хочет тот, кто делает — we.'],
+    ['Our want to sleep.', 'Our отвечает на «чей?». Хотим мы.'],
+    ['+We want to sleep.', 'Тот, кому хочется, по-английски — подлежащее: we.']),
+  Q('«Мы ей нужны.»',
+    ['We need her.', 'Так получится «нам нужна она». А нужны мы ей, то есть нуждается она.'],
+    ['+She needs us.', 'Нуждается она — она перед глаголом. Мы — после: us.'],
+    ['Her needs we.', 'Обе формы стоят не на своих местах.']),
+  Q('«Им нужен отпуск.»',
+    ['Them need a holiday.', '«Им» изменилось, но по-английски нуждается тот, кто делает, — they.'],
+    ['+They need a holiday.', 'Нуждающийся — подлежащее, значит, they.'],
+    ['Their need a holiday.', 'Their отвечает на «чей?». А нуждаются они.']),
+  Q('«Я ей нравлюсь.»',
+    ['I like her.', 'Так получится «она мне нравится». А нравлюсь я ей, то есть чувствует она.'],
+    ['+She likes me.', 'Чувствует она — она перед глаголом, а «я» — после глагола: me.'],
+    ['Her likes me.', '«Ей» изменилось, но чувствует она — значит, she.'])
+],
+
+'p-poss': [
+  Q('«Это моя мама.»',
+    ['+This is my mother.', 'Отвечает на «чей?» — my. Слово не меняется по роду.'],
+    ['This is me mother.', 'Me — «меня», «мне». Перед существительным ставят слово для вопроса «чей?».'],
+    ['This is mine mother.', 'Mine стоит без существительного. Перед ним — my.']),
+  Q('«Её брат живёт в Берлине.»',
+    ['She brother lives in Berlin.', 'She — «она». Перед существительным ставят слово для вопроса «чей?».'],
+    ['+Her brother lives in Berlin.', 'Чей брат? Её — her. У her и «кого?», и «чей?» совпали.'],
+    ['Hers brother lives in Berlin.', 'Hers стоит без существительного. Перед братом — her.']),
+  Q('«Мы любим наш город.»',
+    ['We love us city.', 'Us — «нас». Перед существительным ставят слово для «чей?».'],
+    ['We love ours city.', 'Ours стоит без существительного. Перед городом — our.'],
+    ['+We love our city.', 'Чей город? Наш — our.']),
+  Q('This is ___ car. («его»)',
+    ['he', 'He — «он». Перед существительным ставят слово для «чей?».'],
+    ['him', 'Him — «кого?». А тут «чья машина?».'],
+    ['+his', 'Чья машина? Его — his.']),
+  Q('The dog is washing ___ paws.',
+    ['it\'s', 'It\'s — сокращение от it is, а нам нужно слово для «чьи?».'],
+    ['+its', 'Чьи лапы? Собаки — its. Апострофа нет: это не it is.'],
+    ['it', 'It — это «оно» само по себе. Нужно слово для «чьи?».']),
+  Q('«Эта книга моя.»',
+    ['This book is my.', 'Если существительного после слова нет — ставят mine.'],
+    ['+This book is mine.', 'После слова нет существительного — mine.'],
+    ['This book is me.', 'Me — это «меня». «Моя» — mine.']),
+  Q('«Их дом большой.»',
+    ['Them house is big.', 'Them — «их» в значении «кого?». А здесь «чей дом?».'],
+    ['They house is big.', 'They — «они». Перед существительным нужно слово для «чей?».'],
+    ['+Their house is big.', 'Чей дом? Их — their.']),
+  Q('«Это твои друзья?»',
+    ['Are these you friends?', 'You — «ты» или «тебя». Перед существительным ставят слово для «чей?».'],
+    ['+Are these your friends?', 'Чьи друзья? Твои — your. Слово не меняется по числу.'],
+    ['Are these yours friends?', 'Yours стоит без существительного. Перед friends — your.']),
+  Q('___ really cold today.',
+    ['+It\'s', 'It\'s = it is. Погода и время всегда с it.'],
+    ['Its', 'Its отвечает на «чей?». А нам нужно it is.'],
+    ['It', 'Без is предложение остаётся без глагола.']),
+  Q('My room is small, but ___ is big. («твоя»)',
+    ['your', 'Your стоит перед существительным. После слова его нет — нужна форма yours.'],
+    ['+yours', 'Существительного после слова нет, значит, yours.'],
+    ['you', 'You — «ты». Нам нужно слово для «чей?».'])
+],
+
+'p-his': [
+  Q('«Я знаю его.»',
+    ['I know his.', 'His отвечает на «чей?». Знаем мы кого? Его — him.'],
+    ['+I know him.', 'Знаем кого? Его. Вопрос «кого?» — him.'],
+    ['I know he.', 'He — форма «как в словаре». После глагола нужна вторая.']),
+  Q('«Я знаю его сестру.»',
+    ['I know him sister.', 'Him — «кого?». А сестра чья? Его.'],
+    ['I know he sister.', 'He — «он». Перед существительным ставят слово для «чей?».'],
+    ['+I know his sister.', 'Чья сестра? Его — his. Вопрос «чей?».']),
+  Q('«Мы часто навещаем их.»',
+    ['+We often visit them.', 'Навещаем кого? Их — them.'],
+    ['We often visit their.', 'Their отвечает на «чей?». Навещаем мы людей.'],
+    ['We often visit they.', 'They — «они». После глагола нужна вторая форма.']),
+  Q('«Это их дом.»',
+    ['This is them house.', 'Them — «кого?». А дом чей? Их — their.'],
+    ['This is theirs house.', 'Theirs стоит без существительного. Перед house — their.'],
+    ['+This is their house.', 'Чей дом? Их — their.']),
+  Q('«Я люблю свою работу.»',
+    ['I love her job.', 'Her — чужая работа, «её». «Свою» значит «мою», когда любит «я».'],
+    ['+I love my job.', '«Свою» зависит от того, кто действует. Любит «я» — значит, my.'],
+    ['I love mine job.', 'Mine стоит без существительного. Перед job — my.']),
+  Q('«Он любит свою жену.»',
+    ['He loves my wife.', 'My — это «моя». Любит он, значит, «свою» — его.'],
+    ['+He loves his wife.', '«Свою» зависит от того, кто действует. Любит «он» — значит, his.'],
+    ['He loves him wife.', 'Him — «кого?». А жена чья? Его — his.']),
+  Q('She is my sister. I love ___. («её»)',
+    ['+her', 'Любим кого? Её — her.'],
+    ['hers', 'Hers — «её» без существительного, о вещи. Любим саму сестру.'],
+    ['she', 'She — форма «как в словаре». После глагола нужна вторая.']),
+  Q('She is my sister. I love ___ cat. («её»)',
+    ['she', 'She — «она». Перед существительным ставят слово для «чей?».'],
+    ['+her', 'Чей кот? Её — her. Слово совпало с her в роли «кого?».'],
+    ['hers', 'Hers стоит без существительного. Перед cat — her.']),
+  Q('«Они любят свой город.»',
+    ['They love them city.', 'Them — «кого?». А город чей? Их — their.'],
+    ['+They love their city.', '«Свой» зависит от того, кто действует. Любят «они» — значит, their.'],
+    ['They love his city.', 'His — это «его». Любят «они», значит, «свой» — их.']),
+  Q('Where is Tom? I can\'t find ___. («его»)',
+    ['his', 'His отвечает на «чей?». Ищем мы кого? Его — him.'],
+    ['+him', 'Ищем кого? Его. Вопрос «кого?» — him.'],
+    ['he', 'He — форма «как в словаре». После глагола нужна вторая.'])
+]
+
+};
+
+/* ═══════════════ ОБЩИЙ ТРЕНАЖЁР · МЕСТОИМЕНИЯ ═══════════════ */
+const QUIZ_P = [
+  Q('«Мы знаем её.»',
+    ['We know she.', '«Её» — изменённая форма слова «она», значит, her.'],
+    ['+We know her.', '«Мы» не изменилось → we. «Она» изменилось в «её» → her.'],
+    ['Us know her.', '«Мы» осталось как в словаре — we.']),
+  Q('Tell ___ the truth. («им»)',
+    ['+them', '«Им» изменилось → them.'],
+    ['they', '«Им» — изменённая форма слова «они», значит, them.'],
+    ['their', 'Their отвечает на «чей?». А «им» — это «кому?».']),
+  Q('___ is a teacher. («Он»)',
+    ['Him', 'Him — «его», «ему». А «он» не изменилось.'],
+    ['His', 'His отвечает на «чей?». Учителем является он сам.'],
+    ['+He', '«Он» не изменилось, стоит перед глаголом — he.']),
+  Q('«Мы живём рядом.»',
+    ['+We live nearby.', '«Мы» не изменилось — we.'],
+    ['Us live nearby.', 'Us — «нас», «нам». А «мы» осталось как в словаре.'],
+    ['Our live nearby.', 'Our отвечает на «чей?». Тут мы делаем.']),
+  Q('Thank ___. («его»)',
+    ['he', 'He — форма «как в словаре». После глагола нужна вторая.'],
+    ['his', 'His отвечает на «чей?». А благодарим мы кого? Его.'],
+    ['+him', 'Благодарим кого? Его — him.']),
+  Q('«Я позвонил им вчера.»',
+    ['I called they yesterday.', '«Им» — изменённая форма, значит, them.'],
+    ['+I called them yesterday.', '«Я» → I, «им» (изменилось) → them.'],
+    ['I called their yesterday.', 'Their отвечает на «чей?». А «им» — это «кому?».']),
+  Q('«Я вижу вас.»',
+    ['I see your.', 'Your — «ваш». Мы видим самих людей, а не их вещь.'],
+    ['I see yours.', 'Yours — «ваше» без существительного. Мы видим самих людей.'],
+    ['+I see you.', '«Вас» изменилось, но у you форма одна на все случаи.']),
+  Q('«Ручка на столе. Она синяя.»',
+    ['The pen is on the table. She is blue.', 'Ручка — вещь. По-русски «она», но предметы по-английски — it.'],
+    ['+The pen is on the table. It is blue.', 'Вещь по-английски всегда it, как бы она ни называлась по-русски.'],
+    ['The pen is on the table. Her is blue.', 'Her — изменённая форма слова «она», и только для человека.']),
+  Q('«Мы с братом играли в футбол.»',
+    ['+My brother and I played football.', 'Вычеркните брата: «I played». Себя называют последним.'],
+    ['My brother and me played football.', 'Вычеркните брата: «me played» не бывает.'],
+    ['My brother and my played football.', 'My отвечает на «чей?». Играли мы с братом.']),
+  Q('Mum made a cake for Anna and ___. («для Анны и меня»)',
+    ['I', 'После предлога for — вторая форма: «for me».'],
+    ['+me', 'Вычеркните Анну: «for me». Значит, Anna and me.'],
+    ['my', 'My отвечает на «чей?». А «для меня» — это «для кого?».']),
+  Q('«У них новая машина.»',
+    ['Them have a new car.', '«Них» изменилось, но по-английски владелец — тот, кто делает: they.'],
+    ['+They have a new car.', 'Владелец — подлежащее, значит, they.'],
+    ['Their have a new car.', 'Their отвечает на «чей?». Владеют они.']),
+  Q('«Мне нравится она.»',
+    ['+I like her.', 'Чувствует «я» — оно перед глаголом. Та, кто нравится, — после: her.'],
+    ['She likes me.', 'Так получится «я ей нравлюсь». А нравится она мне.'],
+    ['Me likes she.', 'Обе формы стоят не на своих местах.']),
+  Q('«Это его телефон.»',
+    ['This is him phone.', 'Him — «кого?». А телефон чей? Его — his.'],
+    ['+This is his phone.', 'Чей телефон? Его — his.'],
+    ['This is he phone.', 'He — «он». Перед существительным ставят слово для «чей?».']),
+  Q('«Где наши ключи?»',
+    ['Where are us keys?', 'Us — «нас». Перед существительным ставят слово для «чей?».'],
+    ['+Where are our keys?', 'Чьи ключи? Наши — our. Слово не меняется по числу.'],
+    ['Where are ours keys?', 'Ours стоит без существительного. Перед keys — our.']),
+  Q('«Я знаю её брата.»',
+    ['I know she brother.', 'She — «она». Перед существительным ставят слово для «чей?».'],
+    ['I know hers brother.', 'Hers стоит без существительного. Перед brother — her.'],
+    ['+I know her brother.', 'Чей брат? Её — her.']),
+  Q('«Они любят свою собаку.»',
+    ['+They love their dog.', '«Свою» зависит от того, кто действует. Любят «они» — значит, their.'],
+    ['They love them dog.', 'Them — «кого?». А собака чья? Их — their.'],
+    ['They love my dog.', 'My — это «моя». Любят они, значит, «свою» — их.'])
+];
+</script>
+<script>
+/* ═══════════════════════════════════════════════════════════
    ТРЕНАЖЁР · один компонент на все блоки заданий
    Показывает по одному вопросу. После ответа — разбор:
    почему верный вариант верный и чем плох выбранный.
@@ -4381,7 +5465,14 @@ function makeQuiz(root, questions, opts) {
     el.bar.style.width = (i / questions.length * 100) + '%';
     el.score.textContent = `${score} верно`;
     el.q.innerHTML = q.s.split('___').join('<u></u>');
-    el.opts.innerHTML = q.o.map((o, k) => `<button data-k="${k}">${o.t}</button>`).join('');
+    /* в данных верный вариант может стоять где угодно — порядок на экране каждый раз новый,
+       а в data-k остаётся номер варианта в задании */
+    const order = q.o.map((o, k) => k);
+    for (let n = order.length - 1; n > 0; n--) {
+      const m = Math.floor(Math.random() * (n + 1));
+      [order[n], order[m]] = [order[m], order[n]];
+    }
+    el.opts.innerHTML = order.map(k => `<button data-k="${k}">${q.o[k].t}</button>`).join('');
     el.fb.innerHTML = '';
     el.next.hidden = true;
     el.again.hidden = true;
@@ -4395,7 +5486,8 @@ function makeQuiz(root, questions, opts) {
 
     const q = questions[i], pick = +b.dataset.k;
     const right = q.o.findIndex(o => o.ok);
-    [...el.opts.children].forEach((btn, k) => {
+    [...el.opts.children].forEach(btn => {
+      const k = +btn.dataset.k;
       btn.disabled = true;
       if (k === right) btn.classList.add('right');
       else if (k === pick) btn.classList.add('wrong');
@@ -4709,16 +5801,19 @@ function plainSentence(tr) {
     .reduce((acc, [role, text]) => role === 'end' ? acc + text : (acc ? acc + ' ' : '') + text, '');
 }
 
-renderRoadmap('s-road', SLEVELS, S, {
-  pid: 's',
-  drills: SDRILLS,
-  kindLabel: it => it.short.toUpperCase(),
-  figure: it => `<figure class="sfig"><div class="sfig__rows">${it.fig.rows.map(r => `
+/* схема станции: строки «русский / английский» из ячеек — общая для «Основы» и «Местоимений» */
+const sFigure = it => `<figure class="sfig"><div class="sfig__rows">${it.fig.rows.map(r => `
       <div class="sfig__row">
         <span class="sfig__lbl">${r.l}</span>
         ${r.tr ? `<div class="train">${trainHTML(r.tr)}</div>` : `<div class="sfig__ru">${r.ru}</div>`}
       </div>`).join('')}
-    </div><figcaption>${it.fig.cap}</figcaption></figure>`
+    </div><figcaption>${it.fig.cap}</figcaption></figure>`;
+
+renderRoadmap('s-road', SLEVELS, S, {
+  pid: 's',
+  drills: SDRILLS,
+  kindLabel: it => it.short.toUpperCase(),
+  figure: sFigure
 });
 
 renderDuels('sDuels', SDUELS, tr => `<div class="train">${trainHTML(tr)}</div>`);
@@ -4782,6 +5877,54 @@ buType.addEventListener('click', e => { const b = e.target.closest('button'); if
 renderBuild();
 
 /* ═══════════════════════════════════════════════════════════
+   ВКЛАДКА «МЕСТОИМЕНИЯ»
+   ═══════════════════════════════════════════════════════════ */
+renderRoadmap('p-road', PLEVELS, P, {
+  pid: 'p',
+  drills: PDRILLS,
+  kindLabel: it => it.short.toUpperCase(),
+  figure: sFigure
+});
+
+renderDuels('pDuels', PDUELS, tr => `<div class="train">${trainHTML(tr)}</div>`);
+makeQuiz(document.getElementById('pQuiz'), QUIZ_P, { title: 'Вопрос' });
+
+document.getElementById('pSheetBody').innerHTML = PERSONS.map(p => `
+  <tr>
+    <td class="nm"><b>${p.t}</b></td>
+    <td class="fm"><code>${p.nom}</code><span class="tx">${p.nomRu}</span></td>
+    <td class="fm"><code>${p.acc}</code><span class="tx">${p.accRu}</span></td>
+    <td class="fm"><code>${p.pos}</code><span class="tx">${p.posRu}</span></td>
+    <td class="ex">${p.ex}</td>
+  </tr>`).join('');
+
+/* ── конструктор местоимения: слово × вид, ячейки узнаются по роли ── */
+const pb = { who: 'she', form: 'acc' };
+const pbWho = document.getElementById('pbWho');
+const pbForm = document.getElementById('pbForm');
+const pbTrain = document.getElementById('pbTrain');
+
+pbWho.innerHTML = PERSONS.map(p => `<button data-v="${p.key}" aria-pressed="false">${p.t}</button>`).join('');
+document.getElementById('pbRoles').innerHTML = PROLES.map(r =>
+  `<span class="r-${r.r}"><i></i>${r.t}${r.i ? ` <em>· ${r.i}</em>` : ''}</span>`).join('');
+
+function renderPron() {
+  const p = PERSONS.find(x => x.key === pb.who);
+  const cell = PB[pb.who][pb.form];
+  pbWho.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === pb.who)));
+  pbForm.innerHTML = PB_FORMS.map(f => `<button data-v="${f.key}" aria-pressed="${f.key === pb.form}">${f.t}<i>${f.key === 'nom' ? p.nomRu : p.accRu}</i></button>`).join('');
+  /* <b> в самом предложении — это выделенное слово; свой <b> в .bu__ru занят подписью */
+  const ru = cell.ru.replace(/<b>/g, `<span class="hl r-${pb.form}">`).replace(/<\/b>/g, '</span>');
+  document.getElementById('pbRu').innerHTML = `<b>ПО-РУССКИ</b>«${ru}»`;
+  flipTrain(pbTrain, trainHTML(cell.tr));
+  document.getElementById('pbSchema').textContent = 'Проверка: ' + cell.s;
+  document.getElementById('pbNote').innerHTML = PB[pb.who].note;
+}
+pbWho.addEventListener('click', e => { const b = e.target.closest('button'); if (b) { pb.who = b.dataset.v; renderPron(); } });
+pbForm.addEventListener('click', e => { const b = e.target.closest('button'); if (b) { pb.form = b.dataset.v; renderPron(); } });
+renderPron();
+
+/* ═══════════════════════════════════════════════════════════
    НАВИГАЦИЯ: вкладки, оглавление, меню, точки, прогресс
    ═══════════════════════════════════════════════════════════ */
 const TABDEF = {
@@ -4823,6 +5966,19 @@ const TABDEF = {
       { id: 'c-duels', n: 'Сравнение типов', s: 'Пять пар, в которых путаются все', e: 'Разбор' },
       { id: 'c-quiz', n: 'Общая проверка', s: '14 предложений на все типы', e: 'Тренажёр' },
       { id: 'c-sheet', n: 'Шпаргалка', s: 'Все типы одной таблицей', e: 'Итог' }
+    ]
+  },
+  pron: {
+    panel: 'tab-pron', toc: 'pToc', items: P, total: 8,
+    nav: [
+      { id: 'p-algo', n: 'Что спрашивать у себя', s: 'Три вопроса к любому местоимению', e: 'Старт' },
+      { id: 'p-system', n: 'Две формы', s: 'Конструктор местоимения', e: 'Уровень 0' },
+      { id: 'p-lvl1', n: 'Две формы', s: 'Проверка по-русски, I и me', e: 'Уровень 1' },
+      { id: 'p-lvl2', n: 'Особые случаи', s: 'you, it, двое, нравится', e: 'Уровень 2' },
+      { id: 'p-lvl3', n: 'Чей?', s: 'my, his, her, their', e: 'Уровень 3' },
+      { id: 'p-duels', n: 'Сравнение форм', s: 'Пять пар, которые путают', e: 'Разбор' },
+      { id: 'p-quiz', n: 'Общая проверка', s: '16 предложений вперемешку', e: 'Тренажёр' },
+      { id: 'p-sheet', n: 'Шпаргалка', s: 'Все слова одной таблицей', e: 'Итог' }
     ]
   }
 };
@@ -4879,13 +6035,20 @@ function moveInk() {
   tabsInk.style.width = active.offsetWidth + 'px';
   tabsInk.style.transform = `translateX(${active.offsetLeft - 3}px)`;
 }
+/* на узком экране панель вкладок прокручивается — активную вкладку подводим в видимую часть */
+function revealTab() {
+  const tabsEl = tabsInk.parentElement;
+  const active = tabBtns.find(b => b.getAttribute('aria-selected') === 'true');
+  if (!active || tabsEl.scrollWidth <= tabsEl.clientWidth) return;
+  tabsEl.scrollLeft = active.offsetLeft - (tabsEl.clientWidth - active.offsetWidth) / 2;
+}
 function setTab(name, scroll) {
   tab = name;
   tabBtns.forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === name)));
   Object.keys(TABDEF).forEach(k => {
     document.getElementById(TABDEF[k].panel).hidden = (k !== name);
   });
-  moveInk(); fillDots(); fillMenu(); paint();
+  moveInk(); revealTab(); fillDots(); fillMenu(); paint();
   if (scroll !== false) window.scrollTo({ top: 0, behavior: motionOK() ? 'smooth' : 'auto' });
 }
 tabBtns.forEach(b => b.addEventListener('click', () => setTab(b.dataset.tab)));
@@ -4901,7 +6064,7 @@ let done = new Set();
 try { done = new Set(JSON.parse(localStorage.getItem(KEY) || '[]')); } catch (e) { done = new Set(); }
 
 function paint() {
-  const all = S.concat(T, C);
+  const all = S.concat(T, C, P);
   all.forEach(x => {
     const on = done.has(x.id);
     const st = document.getElementById(x.id);
@@ -4964,6 +6127,7 @@ function tabForHash(h) {
   if (!id) return null;
   if (S.some(x => x.id === id) || id.indexOf('s-') === 0) return 'sentence';
   if (C.some(c => c.id === id) || id.indexOf('c-') === 0) return 'cond';
+  if (P.some(x => x.id === id) || id.indexOf('p-') === 0) return 'pron';
   if (T.some(t => t.id === id) || id.indexOf('t-') === 0) return 'tenses';
   return null;
 }
@@ -4975,8 +6139,9 @@ document.addEventListener('click', e => {
 });
 
 setTab(tabForHash(location.hash) || 'sentence', false);
-requestAnimationFrame(moveInk);
-if (document.fonts && document.fonts.ready) document.fonts.ready.then(moveInk);
+/* шрифт догружается и меняет ширину кнопок — ползунок и прокрутку панели пересчитываем заново */
+requestAnimationFrame(() => { moveInk(); revealTab(); });
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { moveInk(); revealTab(); });
 if (location.hash) {
   const target = document.getElementById(location.hash.slice(1));
   if (target) requestAnimationFrame(() => { target.scrollIntoView(); syncToTop(); });

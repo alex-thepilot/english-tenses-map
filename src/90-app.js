@@ -35,7 +35,14 @@ function makeQuiz(root, questions, opts) {
     el.bar.style.width = (i / questions.length * 100) + '%';
     el.score.textContent = `${score} верно`;
     el.q.innerHTML = q.s.split('___').join('<u></u>');
-    el.opts.innerHTML = q.o.map((o, k) => `<button data-k="${k}">${o.t}</button>`).join('');
+    /* в данных верный вариант может стоять где угодно — порядок на экране каждый раз новый,
+       а в data-k остаётся номер варианта в задании */
+    const order = q.o.map((o, k) => k);
+    for (let n = order.length - 1; n > 0; n--) {
+      const m = Math.floor(Math.random() * (n + 1));
+      [order[n], order[m]] = [order[m], order[n]];
+    }
+    el.opts.innerHTML = order.map(k => `<button data-k="${k}">${q.o[k].t}</button>`).join('');
     el.fb.innerHTML = '';
     el.next.hidden = true;
     el.again.hidden = true;
@@ -49,7 +56,8 @@ function makeQuiz(root, questions, opts) {
 
     const q = questions[i], pick = +b.dataset.k;
     const right = q.o.findIndex(o => o.ok);
-    [...el.opts.children].forEach((btn, k) => {
+    [...el.opts.children].forEach(btn => {
+      const k = +btn.dataset.k;
       btn.disabled = true;
       if (k === right) btn.classList.add('right');
       else if (k === pick) btn.classList.add('wrong');
@@ -363,16 +371,19 @@ function plainSentence(tr) {
     .reduce((acc, [role, text]) => role === 'end' ? acc + text : (acc ? acc + ' ' : '') + text, '');
 }
 
-renderRoadmap('s-road', SLEVELS, S, {
-  pid: 's',
-  drills: SDRILLS,
-  kindLabel: it => it.short.toUpperCase(),
-  figure: it => `<figure class="sfig"><div class="sfig__rows">${it.fig.rows.map(r => `
+/* схема станции: строки «русский / английский» из ячеек — общая для «Основы» и «Местоимений» */
+const sFigure = it => `<figure class="sfig"><div class="sfig__rows">${it.fig.rows.map(r => `
       <div class="sfig__row">
         <span class="sfig__lbl">${r.l}</span>
         ${r.tr ? `<div class="train">${trainHTML(r.tr)}</div>` : `<div class="sfig__ru">${r.ru}</div>`}
       </div>`).join('')}
-    </div><figcaption>${it.fig.cap}</figcaption></figure>`
+    </div><figcaption>${it.fig.cap}</figcaption></figure>`;
+
+renderRoadmap('s-road', SLEVELS, S, {
+  pid: 's',
+  drills: SDRILLS,
+  kindLabel: it => it.short.toUpperCase(),
+  figure: sFigure
 });
 
 renderDuels('sDuels', SDUELS, tr => `<div class="train">${trainHTML(tr)}</div>`);
@@ -436,6 +447,54 @@ buType.addEventListener('click', e => { const b = e.target.closest('button'); if
 renderBuild();
 
 /* ═══════════════════════════════════════════════════════════
+   ВКЛАДКА «МЕСТОИМЕНИЯ»
+   ═══════════════════════════════════════════════════════════ */
+renderRoadmap('p-road', PLEVELS, P, {
+  pid: 'p',
+  drills: PDRILLS,
+  kindLabel: it => it.short.toUpperCase(),
+  figure: sFigure
+});
+
+renderDuels('pDuels', PDUELS, tr => `<div class="train">${trainHTML(tr)}</div>`);
+makeQuiz(document.getElementById('pQuiz'), QUIZ_P, { title: 'Вопрос' });
+
+document.getElementById('pSheetBody').innerHTML = PERSONS.map(p => `
+  <tr>
+    <td class="nm"><b>${p.t}</b></td>
+    <td class="fm"><code>${p.nom}</code><span class="tx">${p.nomRu}</span></td>
+    <td class="fm"><code>${p.acc}</code><span class="tx">${p.accRu}</span></td>
+    <td class="fm"><code>${p.pos}</code><span class="tx">${p.posRu}</span></td>
+    <td class="ex">${p.ex}</td>
+  </tr>`).join('');
+
+/* ── конструктор местоимения: слово × вид, ячейки узнаются по роли ── */
+const pb = { who: 'she', form: 'acc' };
+const pbWho = document.getElementById('pbWho');
+const pbForm = document.getElementById('pbForm');
+const pbTrain = document.getElementById('pbTrain');
+
+pbWho.innerHTML = PERSONS.map(p => `<button data-v="${p.key}" aria-pressed="false">${p.t}</button>`).join('');
+document.getElementById('pbRoles').innerHTML = PROLES.map(r =>
+  `<span class="r-${r.r}"><i></i>${r.t}${r.i ? ` <em>· ${r.i}</em>` : ''}</span>`).join('');
+
+function renderPron() {
+  const p = PERSONS.find(x => x.key === pb.who);
+  const cell = PB[pb.who][pb.form];
+  pbWho.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === pb.who)));
+  pbForm.innerHTML = PB_FORMS.map(f => `<button data-v="${f.key}" aria-pressed="${f.key === pb.form}">${f.t}<i>${f.key === 'nom' ? p.nomRu : p.accRu}</i></button>`).join('');
+  /* <b> в самом предложении — это выделенное слово; свой <b> в .bu__ru занят подписью */
+  const ru = cell.ru.replace(/<b>/g, `<span class="hl r-${pb.form}">`).replace(/<\/b>/g, '</span>');
+  document.getElementById('pbRu').innerHTML = `<b>ПО-РУССКИ</b>«${ru}»`;
+  flipTrain(pbTrain, trainHTML(cell.tr));
+  document.getElementById('pbSchema').textContent = 'Проверка: ' + cell.s;
+  document.getElementById('pbNote').innerHTML = PB[pb.who].note;
+}
+pbWho.addEventListener('click', e => { const b = e.target.closest('button'); if (b) { pb.who = b.dataset.v; renderPron(); } });
+pbForm.addEventListener('click', e => { const b = e.target.closest('button'); if (b) { pb.form = b.dataset.v; renderPron(); } });
+renderPron();
+
+/* ═══════════════════════════════════════════════════════════
    НАВИГАЦИЯ: вкладки, оглавление, меню, точки, прогресс
    ═══════════════════════════════════════════════════════════ */
 const TABDEF = {
@@ -477,6 +536,19 @@ const TABDEF = {
       { id: 'c-duels', n: 'Сравнение типов', s: 'Пять пар, в которых путаются все', e: 'Разбор' },
       { id: 'c-quiz', n: 'Общая проверка', s: '14 предложений на все типы', e: 'Тренажёр' },
       { id: 'c-sheet', n: 'Шпаргалка', s: 'Все типы одной таблицей', e: 'Итог' }
+    ]
+  },
+  pron: {
+    panel: 'tab-pron', toc: 'pToc', items: P, total: 8,
+    nav: [
+      { id: 'p-algo', n: 'Что спрашивать у себя', s: 'Три вопроса к любому местоимению', e: 'Старт' },
+      { id: 'p-system', n: 'Две формы', s: 'Конструктор местоимения', e: 'Уровень 0' },
+      { id: 'p-lvl1', n: 'Две формы', s: 'Проверка по-русски, I и me', e: 'Уровень 1' },
+      { id: 'p-lvl2', n: 'Особые случаи', s: 'you, it, двое, нравится', e: 'Уровень 2' },
+      { id: 'p-lvl3', n: 'Чей?', s: 'my, his, her, their', e: 'Уровень 3' },
+      { id: 'p-duels', n: 'Сравнение форм', s: 'Пять пар, которые путают', e: 'Разбор' },
+      { id: 'p-quiz', n: 'Общая проверка', s: '16 предложений вперемешку', e: 'Тренажёр' },
+      { id: 'p-sheet', n: 'Шпаргалка', s: 'Все слова одной таблицей', e: 'Итог' }
     ]
   }
 };
@@ -533,13 +605,20 @@ function moveInk() {
   tabsInk.style.width = active.offsetWidth + 'px';
   tabsInk.style.transform = `translateX(${active.offsetLeft - 3}px)`;
 }
+/* на узком экране панель вкладок прокручивается — активную вкладку подводим в видимую часть */
+function revealTab() {
+  const tabsEl = tabsInk.parentElement;
+  const active = tabBtns.find(b => b.getAttribute('aria-selected') === 'true');
+  if (!active || tabsEl.scrollWidth <= tabsEl.clientWidth) return;
+  tabsEl.scrollLeft = active.offsetLeft - (tabsEl.clientWidth - active.offsetWidth) / 2;
+}
 function setTab(name, scroll) {
   tab = name;
   tabBtns.forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === name)));
   Object.keys(TABDEF).forEach(k => {
     document.getElementById(TABDEF[k].panel).hidden = (k !== name);
   });
-  moveInk(); fillDots(); fillMenu(); paint();
+  moveInk(); revealTab(); fillDots(); fillMenu(); paint();
   if (scroll !== false) window.scrollTo({ top: 0, behavior: motionOK() ? 'smooth' : 'auto' });
 }
 tabBtns.forEach(b => b.addEventListener('click', () => setTab(b.dataset.tab)));
@@ -555,7 +634,7 @@ let done = new Set();
 try { done = new Set(JSON.parse(localStorage.getItem(KEY) || '[]')); } catch (e) { done = new Set(); }
 
 function paint() {
-  const all = S.concat(T, C);
+  const all = S.concat(T, C, P);
   all.forEach(x => {
     const on = done.has(x.id);
     const st = document.getElementById(x.id);
@@ -618,6 +697,7 @@ function tabForHash(h) {
   if (!id) return null;
   if (S.some(x => x.id === id) || id.indexOf('s-') === 0) return 'sentence';
   if (C.some(c => c.id === id) || id.indexOf('c-') === 0) return 'cond';
+  if (P.some(x => x.id === id) || id.indexOf('p-') === 0) return 'pron';
   if (T.some(t => t.id === id) || id.indexOf('t-') === 0) return 'tenses';
   return null;
 }
@@ -629,8 +709,9 @@ document.addEventListener('click', e => {
 });
 
 setTab(tabForHash(location.hash) || 'sentence', false);
-requestAnimationFrame(moveInk);
-if (document.fonts && document.fonts.ready) document.fonts.ready.then(moveInk);
+/* шрифт догружается и меняет ширину кнопок — ползунок и прокрутку панели пересчитываем заново */
+requestAnimationFrame(() => { moveInk(); revealTab(); });
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { moveInk(); revealTab(); });
 if (location.hash) {
   const target = document.getElementById(location.hash.slice(1));
   if (target) requestAnimationFrame(() => { target.scrollIntoView(); syncToTop(); });

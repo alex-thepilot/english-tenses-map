@@ -7,6 +7,7 @@
       <button role="tab" data-tab="sentence" aria-selected="true" aria-controls="tab-sentence">Основа</button>
       <button role="tab" data-tab="tenses" aria-selected="false" aria-controls="tab-tenses">Времена</button>
       <button role="tab" data-tab="cond" aria-selected="false" aria-controls="tab-cond">Условные</button>
+      <button role="tab" data-tab="pron" aria-selected="false" aria-controls="tab-pron">Местоимения</button>
     </div>
 
     <div class="dots__wrap">
@@ -710,6 +711,213 @@
           <tr><th>Тип</th><th>Формула</th><th>Сигнал</th><th>Пример</th></tr>
         </thead>
         <tbody id="cSheetBody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<div class="tabpanel" id="tab-pron" role="tabpanel" hidden>
+<!-- ══════════════════ ГЕРОЙ · МЕСТОИМЕНИЯ ══════════════════ -->
+<header class="hero" id="p-hero">
+  <div class="wrap">
+    <div class="eyebrow">Правило третье · she или her · he или his</div>
+    <h1>Русский уже знает,<br>где <span class="tri">she</span>, а где <span class="tri">her</span>.</h1>
+    <p class="hero__sub">
+      Выбор между <span class="mono">she</span> и <span class="mono">her</span> кажется случайным, пока не заметишь:
+      в русском такая же разница уже есть — «она» и «её». Мы её просто не замечаем.
+      Переведите предложение на русский и посмотрите на местоимение: <b>не изменилось — не меняется и английское,
+      изменилось — меняется и оно</b>.
+    </p>
+    <div class="hero__meta">
+      <span class="pill">8 станций</span>
+      <span class="pill">конструктор местоимения</span>
+      <span class="pill">80 заданий с разбором</span>
+      <span class="pill">5 дуэлей</span>
+      <span class="pill">16 вопросов в общей проверке</span>
+    </div>
+
+    <div class="slotdemo" role="img" aria-label="Пример: «Она читает книгу» — слово «она» не изменилось, по-английски she. «Я вижу её» — «она» превратилась в «её», по-английски her">
+      <span class="lbl">Русский</span>
+      <span class="chip r-nom">Она</span><span class="chip r-rest">читает</span><span class="chip r-rest">книгу</span>
+      <span class="lbl">Английский</span>
+      <span class="chip r-nom">She</span><span class="chip r-rest">reads</span><span class="chip r-rest">a book</span>
+      <span class="lbl">Русский</span>
+      <span class="chip r-nom">Я</span><span class="chip r-rest">вижу</span><span class="chip r-acc fill">её</span>
+      <span class="lbl">Английский</span>
+      <span class="chip r-nom">I</span><span class="chip r-rest">see</span><span class="chip r-acc fill">her</span>
+      <span class="cap">«Она» осталась как в словаре — <b>she</b>. «Она» превратилась в «её» — <b>her</b>.</span>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════════════ ОГЛАВЛЕНИЕ ══════════════════ -->
+<section class="sect toc" id="p-toc">
+  <div class="wrap">
+    <div class="sect__head" style="margin-bottom:0">
+      <div class="eyebrow">Оглавление</div>
+      <h2>С чего начать</h2>
+      <p>Можно идти маршрутом сверху вниз, а можно прыгнуть сразу в нужный блок — страница при этом листается как обычно.</p>
+    </div>
+    <div class="toc__g" id="pToc"></div>
+  </div>
+</section>
+
+<!-- ══════════════════ ЧТО СПРАШИВАТЬ У СЕБЯ ══════════════════ -->
+<section class="sect" id="p-algo">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Что спрашивать у себя</div>
+      <h2>Три вопроса к любому местоимению</h2>
+      <p>Они работают для всех: от «я» и «меня» до «нас» и «их». Первого вопроса обычно хватает.</p>
+    </div>
+
+    <ol class="steps">
+      <li>
+        <b>ВОПРОС 01</b>
+        <h4>Изменилось ли русское слово?</h4>
+        <p>Не изменилось («она», «он», «мы») — берём <span class="mono">I, he, she, we, they</span>. Изменилось («её», «ему», «нас») — берём <span class="mono">me, him, her, us, them</span>.</p>
+      </li>
+      <li>
+        <b>ВОПРОС 02</b>
+        <h4>Где слово стоит в английском предложении?</h4>
+        <p>Перед глаголом — тот, кто делает: <span class="mono">She reads</span>. После глагола или предлога — тот, на кого направлено: <span class="mono">I see her</span>, <span class="mono">with her</span>. Это запасной ход на случай, если русская фраза устроена иначе.</p>
+        <a class="goto" href="#p-ru">Когда русский подводит →</a>
+      </li>
+      <li>
+        <b>ВОПРОС 03</b>
+        <h4>Это человек или вещь?</h4>
+        <p>Для вещи слова <span class="mono">he, she, him, her</span> не годятся — только <span class="mono">it</span>, даже если по-русски «он» или «она».</p>
+      </li>
+    </ol>
+
+    <figure class="dia">
+      <div>
+        <svg viewBox="0 0 700 290" role="img" aria-label="Главное правило: если русское местоимение не изменилось, например «она», по-английски первая форма she; если изменилось, например «её», по-английски вторая форма her">
+          <rect class="box" x="225" y="12" width="250" height="42" rx="11"/>
+          <text class="t" x="350" y="38" text-anchor="middle">Русское местоимение</text>
+
+          <path class="ln" d="M350 54 V 88 H 175 V 108" marker-end="url(#pah)"/>
+          <path class="ln" d="M350 88 H 525 V 108" marker-end="url(#pah)"/>
+          <text class="t-lbl" x="360" y="76">оно изменилось?</text>
+          <text class="t-lbl" x="163" y="104" text-anchor="end">нет · «она»</text>
+          <text class="t-lbl" x="537" y="104">да · «её»</text>
+
+          <rect x="40" y="112" width="270" height="62" rx="12" style="fill:var(--present-soft);stroke:var(--present);stroke-width:1.8"/>
+          <text class="t-m" x="175" y="139" text-anchor="middle" style="fill:var(--present)">I · he · she · we · they</text>
+          <text class="t-s" x="175" y="161" text-anchor="middle">кто делает · перед глаголом</text>
+
+          <rect x="390" y="112" width="270" height="62" rx="12" style="fill:var(--future-soft);stroke:var(--future);stroke-width:1.8"/>
+          <text class="t-m" x="525" y="139" text-anchor="middle" style="fill:var(--future)">me · him · her · us · them</text>
+          <text class="t-s" x="525" y="161" text-anchor="middle">на кого направлено · после глагола</text>
+
+          <text class="t-m" x="175" y="202" text-anchor="middle">She reads.</text>
+          <text class="t-m" x="525" y="202" text-anchor="middle">I see her.</text>
+
+          <line x1="60" y1="228" x2="640" y2="228" style="stroke:var(--line);stroke-dasharray:4 4"/>
+          <text class="t" x="350" y="258" text-anchor="middle">Исключения: you и it — у них одна форма на все случаи</text>
+          <text class="t-lbl" x="350" y="278" text-anchor="middle">и «чей?» — отдельная тема, my · his · their</text>
+          <defs>
+            <marker id="pah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 z" fill="currentColor"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+      <figcaption>Правило одной развилкой. Русское слово подсказывает форму: изменилось оно или нет — столько же меняется и английское.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ══════════════════ МЕХАНИКА ══════════════════ -->
+<section class="sect" id="p-system">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Уровень 0 · механика</div>
+      <h2>У каждого местоимения две формы — как и в русском</h2>
+      <p>
+        Выберите русское слово и посмотрите, в каком виде оно стоит в предложении. Если оно <b>осталось как в словаре</b>,
+        английское слово тоже не меняется. Если <b>изменилось</b> — меняется и английское.
+      </p>
+    </div>
+
+    <div class="bu" id="pBuild">
+      <div class="bu__top"><span class="eyebrow">Конструктор местоимения</span><span class="bu__hint">выберите слово и его вид — ячейки перестроятся</span></div>
+      <div class="bu__ctl">
+        <div class="bu__grp">
+          <span class="eyebrow">1 · Какое слово в русском?</span>
+          <div class="seg" id="pbWho"></div>
+        </div>
+        <div class="bu__grp">
+          <span class="eyebrow">2 · В каком виде оно в предложении?</span>
+          <div class="seg" id="pbForm"></div>
+        </div>
+      </div>
+      <div class="bu__out">
+        <div class="bu__ru" id="pbRu"></div>
+        <div class="train bu__train" id="pbTrain" aria-live="polite"></div>
+        <div class="bu__schema" id="pbSchema"></div>
+        <p class="bu__note" id="pbNote"></p>
+      </div>
+      <div class="roles" id="pbRoles"></div>
+    </div>
+
+    <div class="callout key" style="margin-top:30px;max-width:66ch">
+      <h4>Отдельная тема: «чей?»</h4>
+      <p>
+        Слова <span class="mono">my, your, his, her, our, their</span> отвечают на вопрос «чей?» и стоят перед существительным.
+        Они вынесены в отдельный уровень, чтобы не смешиваться с двумя формами выше: русское «его» бывает и «кого?»,
+        и «чей?», а в английском это разные слова.
+      </p>
+      <a class="goto" href="#p-lvl3">К теме «чей?» →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ МАРШРУТ ══════════════════ -->
+<main class="wrap">
+  <div class="roadmap" id="p-road"></div>
+</main>
+
+<!-- ══════════════════ ДУЭЛИ ══════════════════ -->
+<section class="sect" id="p-duels">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Разбор полётов</div>
+      <h2>Пять пар, которые путают чаще всего</h2>
+      <p>Два похожих предложения рядом и один признак, по которому их разводят.</p>
+    </div>
+    <div class="duels" id="pDuels"></div>
+  </div>
+</section>
+
+<!-- ══════════════════ ТРЕНАЖЁР ══════════════════ -->
+<section class="sect" id="p-quiz">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Общая проверка</div>
+      <h2>Шестнадцать предложений — по два на каждую станцию</h2>
+      <p>Вперемешку и без подсказок. После ответа появляется разбор: почему верный вариант верный и чем плох выбранный.</p>
+    </div>
+    <div class="drill z-present" id="pQuiz"></div>
+  </div>
+</section>
+
+<!-- ══════════════════ ШПАРГАЛКА ══════════════════ -->
+<section class="sect" id="p-sheet">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">На один экран</div>
+      <h2>Шпаргалка</h2>
+      <p>По строкам — русское слово, по столбцам — в каком виде оно встретилось в русской фразе.</p>
+    </div>
+    <div class="sheet">
+      <table>
+        <thead>
+          <tr><th>Слово</th><th>Как в словаре · кто?</th><th>Изменилось · кого?</th><th>Чей?</th><th>Пример</th></tr>
+        </thead>
+        <tbody id="pSheetBody"></tbody>
       </table>
     </div>
   </div>

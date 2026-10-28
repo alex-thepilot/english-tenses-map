@@ -443,6 +443,29 @@
 #s-sheet td.ex { font-family: var(--f-mono); font-size: .8rem; white-space: nowrap; }
 #s-sheet td.nm b { color: var(--text); }
 
+/* ═══════════════ ВКЛАДКА «МЕСТОИМЕНИЯ» ═══════════════ */
+/* зоны: цвет кодирует форму местоимения */
+.z-nom  { --zone: var(--present); --zone-soft: var(--present-soft); }
+.z-acc  { --zone: var(--future);  --zone-soft: var(--future-soft); }
+.z-pos  { --zone: var(--past);    --zone-soft: var(--past-soft); }
+.z-same { --zone: var(--text-mute); --zone-soft: var(--surface-2); }
+
+/* роли слов: «как в словаре», «изменилось», «чей?», «не меняется» */
+.r-nom  { --rc: var(--present); --rs: var(--present-soft); }
+.r-acc  { --rc: var(--future);  --rs: var(--future-soft); }
+.r-pos  { --rc: var(--past);    --rs: var(--past-soft); }
+.r-same { --rc: var(--text-dim); --rs: var(--surface-2); }
+
+/* выделенное слово в русском предложении конструктора */
+.bu__ru .hl { font-weight: 700; color: var(--rc); }
+
+/* шпаргалка местоимений: пять столбцов */
+#p-sheet table { min-width: 820px; }
+#p-sheet td.ex { font-family: var(--f-mono); font-size: .8rem; white-space: nowrap; }
+#p-sheet td.nm b { color: var(--text); }
+#p-sheet td.fm code { white-space: nowrap; }
+#p-sheet .tx { display: block; margin-top: 3px; font-size: .74rem; color: var(--text-mute); }
+
 /* панель с тремя вкладками на узких экранах */
 @media (max-width: 900px) {
   .topbar__in { gap: 10px; padding: 8px 14px; }
@@ -465,4 +488,10 @@
   .dots__wrap { gap: 6px; }
   .tabs button { font-size: .64rem; padding: 6px 6px; }
   .menu__btn { padding: 8px 8px; }
+}
+
+/* четыре вкладки не влезают в 320px — панель вкладок прокручивается по горизонтали */
+@media (max-width: 560px) {
+  .tabs { flex-shrink: 1; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+  .tabs::-webkit-scrollbar { display: none; }
 }

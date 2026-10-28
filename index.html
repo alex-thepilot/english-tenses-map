@@ -609,7 +609,8 @@ td.ex { color: var(--text-dim); }
 .menu__sep { height: 1px; background: var(--line-soft); margin: 6px 9px; }
 
 /* ═══════════════ ОГЛАВЛЕНИЕ В НАЧАЛЕ ВКЛАДКИ ═══════════════ */
-.toc { margin-top: 40px; }
+/* оглавление идёт сразу за героем: .sect даёт 74px сверху, их с отступом героя хватало на 170px пустоты */
+.toc { margin-top: 0; padding-top: 22px; }
 .toc__g {
   margin-top: 18px; display: grid; gap: 10px;
   grid-template-columns: repeat(auto-fill, minmax(196px, 1fr));

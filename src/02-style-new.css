@@ -460,12 +460,39 @@
 /* выделенное слово в русском предложении конструктора */
 .bu__ru .hl { font-weight: 700; color: var(--rc); }
 
+/* герои «Местоимений» и «Степеней»: на телефоне подпись уходит на свою строку,
+   а три ячейки делят ширину поровну и переносят слова — иначе уезжают за экран */
+@media (max-width: 480px) {
+  #p-hero .slotdemo, #d-hero .slotdemo { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  #p-hero .slotdemo .lbl, #d-hero .slotdemo .lbl { grid-column: 1 / -1; padding: 6px 0 0; }
+  #p-hero .slotdemo .chip, #d-hero .slotdemo .chip { white-space: normal; text-align: center; padding: 8px 6px; }
+}
+
 /* шпаргалка местоимений: пять столбцов */
 #p-sheet table { min-width: 820px; }
 #p-sheet td.ex { font-family: var(--f-mono); font-size: .8rem; white-space: nowrap; }
 #p-sheet td.nm b { color: var(--text); }
 #p-sheet td.fm code { white-space: nowrap; }
 #p-sheet .tx { display: block; margin-top: 3px; font-size: .74rem; color: var(--text-mute); }
+
+/* ═══════════════ ВКЛАДКА «СТЕПЕНИ» ═══════════════ */
+/* зоны: цвет кодирует способ образования */
+.z-er   { --zone: var(--present); --zone-soft: var(--present-soft); }
+.z-more { --zone: var(--future);  --zone-soft: var(--future-soft); }
+.z-irr  { --zone: var(--past);    --zone-soft: var(--past-soft); }
+
+/* роли слов: окончание, more, особая форма, само слово */
+.r-er   { --rc: var(--present); --rs: var(--present-soft); }
+.r-more { --rc: var(--future);  --rs: var(--future-soft); }
+.r-irr  { --rc: var(--past);    --rs: var(--past-soft); }
+.r-base { --rc: var(--text);    --rs: var(--surface-2); }
+
+/* шпаргалка степеней: пять столбцов */
+#d-sheet table { min-width: 820px; }
+#d-sheet td.ex { font-size: .84rem; color: var(--text-dim); }
+#d-sheet td.nm b { color: var(--text); }
+#d-sheet td.fm code { white-space: nowrap; }
+#d-sheet .tx { display: block; margin-top: 3px; font-size: .74rem; color: var(--text-mute); }
 
 /* панель с тремя вкладками на узких экранах */
 @media (max-width: 900px) {

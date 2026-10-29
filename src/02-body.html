@@ -8,6 +8,7 @@
       <button role="tab" data-tab="tenses" aria-selected="false" aria-controls="tab-tenses">Времена</button>
       <button role="tab" data-tab="cond" aria-selected="false" aria-controls="tab-cond">Условные</button>
       <button role="tab" data-tab="pron" aria-selected="false" aria-controls="tab-pron">Местоимения</button>
+      <button role="tab" data-tab="deg" aria-selected="false" aria-controls="tab-deg">Степени</button>
     </div>
 
     <div class="dots__wrap">
@@ -918,6 +919,210 @@
           <tr><th>Слово</th><th>Как в словаре · кто?</th><th>Изменилось · кого?</th><th>Чей?</th><th>Пример</th></tr>
         </thead>
         <tbody id="pSheetBody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<div class="tabpanel" id="tab-deg" role="tabpanel" hidden>
+<!-- ══════════════════ ГЕРОЙ · СТЕПЕНИ ══════════════════ -->
+<header class="hero" id="d-hero">
+  <div class="wrap">
+    <div class="eyebrow">Правило четвёртое · сравнительная и превосходная степень</div>
+    <h1>Короткое слово — <span class="tri">-er</span>,<br>длинное — <span class="tri">more</span>.</h1>
+    <p class="hero__sub">
+      Эти две степени нужны, когда мы <b>сравниваем</b> («выше», «красивее») или говорим, что кто-то <b>самый</b>
+      («самый высокий», «самый красивый»). Сравнительная — окончание <span class="mono">er</span>,
+      превосходная — <span class="mono">the</span> и окончание <span class="mono">est</span>:
+      <span class="mono">bigger</span>, <span class="mono">the biggest</span>. Но иногда вместо окончания ставят
+      <span class="mono">more</span> и <span class="mono">the most</span>. Выбрать помогает <b>русский слух</b>:
+      если с окончанием слово звучит ужасно, нужен more.
+    </p>
+    <div class="hero__meta">
+      <span class="pill">8 станций</span>
+      <span class="pill">конструктор степеней</span>
+      <span class="pill">80 заданий с разбором</span>
+      <span class="pill">5 дуэлей</span>
+      <span class="pill">16 вопросов в общей проверке</span>
+    </div>
+
+    <div class="slotdemo" role="img" aria-label="Пример: «Том выше Бена» — короткое слово, окончание: Tom is taller than Ben. «Она красивее меня» — длинное слово, окончание звучит ужасно: She is more beautiful than me">
+      <span class="lbl">Русский</span>
+      <span class="chip r-base">Том</span><span class="chip r-er fill">выше</span><span class="chip r-base">Бена</span>
+      <span class="lbl">Английский</span>
+      <span class="chip r-base">Tom is</span><span class="chip r-er fill">taller</span><span class="chip r-base">than Ben</span>
+      <span class="lbl">Русский</span>
+      <span class="chip r-base">Она</span><span class="chip r-more fill">красивее</span><span class="chip r-base">меня</span>
+      <span class="lbl">Английский</span>
+      <span class="chip r-base">She is</span><span class="chip r-more fill">more beautiful</span><span class="chip r-base">than me</span>
+      <span class="cap">«Таллер» звучит нормально — окончание. «Бьютифулер» звучит ужасно — <b>more</b>.</span>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════════════ ОГЛАВЛЕНИЕ ══════════════════ -->
+<section class="sect toc" id="d-toc">
+  <div class="wrap">
+    <div class="sect__head" style="margin-bottom:0">
+      <div class="eyebrow">Оглавление</div>
+      <h2>С чего начать</h2>
+      <p>Можно идти маршрутом сверху вниз, а можно прыгнуть сразу в нужный блок — страница при этом листается как обычно.</p>
+    </div>
+    <div class="toc__g" id="dToc"></div>
+  </div>
+</section>
+
+<!-- ══════════════════ ЧТО СПРАШИВАТЬ У СЕБЯ ══════════════════ -->
+<section class="sect" id="d-algo">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Что спрашивать у себя</div>
+      <h2>Три вопроса к любому прилагательному</h2>
+      <p>Они помогают выбрать форму для любого слова — от <span class="mono">tall</span> до <span class="mono">comfortable</span>.</p>
+    </div>
+
+    <ol class="steps">
+      <li>
+        <b>ВОПРОС 01</b>
+        <h4>Сравниваем или называем самого?</h4>
+        <p>Сравниваем («выше», «красивее») — сравнительная: <span class="mono">taller than</span>, <span class="mono">more beautiful than</span>. Называем самого («самый высокий») — превосходная: <span class="mono">the tallest</span>, <span class="mono">the most beautiful</span>.</p>
+      </li>
+      <li>
+        <b>ВОПРОС 02</b>
+        <h4>Слово короткое?</h4>
+        <p>Да — только окончание: <span class="mono">tall → taller → the tallest</span>. Слово длинное или составное — смотрим на следующий вопрос.</p>
+      </li>
+      <li>
+        <b>ВОПРОС 03</b>
+        <h4>Окончание звучит нормально?</h4>
+        <p>Примерьте его на слух. «Таллер» звучит нормально — оставляем. «Бьютифулер» звучит ужасно — тогда <span class="mono">more</span> или <span class="mono">the most</span>, и окончание уже не добавляем.</p>
+      </li>
+    </ol>
+
+    <div class="callout trap" style="margin-top:28px;max-width:66ch">
+      <h4>Исключения: пять слов меняются целиком</h4>
+      <p><span class="mono">good → better → the best</span>, <span class="mono">bad → worse → the worst</span> и ещё три слова: far, little, many / much. Слух тут не поможет — их просто нужно запомнить.</p>
+      <a class="goto" href="#d-irr">К исключениям →</a>
+    </div>
+
+    <figure class="dia">
+      <div>
+        <svg viewBox="0 0 700 290" role="img" aria-label="Развилка: если окончание звучит нормально, как в taller, берём окончание; если звучит ужасно, как в beautifuler, берём more и слово не меняем">
+          <rect class="box" x="225" y="12" width="250" height="42" rx="11"/>
+          <text class="t" x="350" y="38" text-anchor="middle">Прилагательное</text>
+
+          <path class="ln" d="M350 54 V 88 H 175 V 108" marker-end="url(#dah)"/>
+          <path class="ln" d="M350 88 H 525 V 108" marker-end="url(#dah)"/>
+          <text class="t-lbl" x="360" y="76">окончание звучит нормально?</text>
+          <text class="t-lbl" x="163" y="104" text-anchor="end">да · «таллер»</text>
+          <text class="t-lbl" x="537" y="104">нет · «бьютифулер»</text>
+
+          <rect x="40" y="112" width="270" height="62" rx="12" style="fill:var(--present-soft);stroke:var(--present);stroke-width:1.8"/>
+          <text class="t-m" x="175" y="139" text-anchor="middle" style="fill:var(--present)">-er · the …-est</text>
+          <text class="t-s" x="175" y="161" text-anchor="middle">короткие слова</text>
+
+          <rect x="390" y="112" width="270" height="62" rx="12" style="fill:var(--future-soft);stroke:var(--future);stroke-width:1.8"/>
+          <text class="t-m" x="525" y="139" text-anchor="middle" style="fill:var(--future)">more · the most</text>
+          <text class="t-s" x="525" y="161" text-anchor="middle">длинные и составные слова</text>
+
+          <text class="t-m" x="175" y="202" text-anchor="middle">taller · the tallest</text>
+          <text class="t-m" x="525" y="202" text-anchor="middle">more beautiful · the most beautiful</text>
+
+          <line x1="60" y1="228" x2="640" y2="228" style="stroke:var(--line);stroke-dasharray:4 4"/>
+          <text class="t" x="350" y="258" text-anchor="middle">Окончание и more вместе не ставят — выбираем одно</text>
+          <text class="t-lbl" x="350" y="278" text-anchor="middle">исключения: good → better, bad → worse</text>
+          <defs>
+            <marker id="dah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 z" fill="currentColor"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+      <figcaption>Правило одной развилкой. Слух решает, окончание или more; слово при этом либо получает окончание, либо остаётся как есть.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ══════════════════ МЕХАНИКА ══════════════════ -->
+<section class="sect" id="d-system">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Уровень 0 · механика</div>
+      <h2>Выберите слово — и посмотрите, что с ним происходит</h2>
+      <p>
+        Для каждого слова конструктор показывает <b>примерку на слух</b> и итог. Короткие слова получают окончание,
+        длинные остаются как есть, а исключения меняются целиком.
+      </p>
+    </div>
+
+    <div class="bu" id="dBuild">
+      <div class="bu__top"><span class="eyebrow">Конструктор степеней</span><span class="bu__hint">выберите слово и степень — ячейки перестроятся</span></div>
+      <div class="bu__ctl">
+        <div class="bu__grp">
+          <span class="eyebrow">1 · Какое слово?</span>
+          <div class="seg" id="dbWord"></div>
+        </div>
+        <div class="bu__grp">
+          <span class="eyebrow">2 · Какая степень?</span>
+          <div class="seg" id="dbDeg"></div>
+        </div>
+      </div>
+      <div class="bu__out">
+        <div class="bu__ru" id="dbRu"></div>
+        <div class="train bu__train" id="dbTrain" aria-live="polite"></div>
+        <div class="bu__schema" id="dbSchema"></div>
+        <p class="bu__note" id="dbNote"></p>
+      </div>
+      <div class="roles" id="dbRoles"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ МАРШРУТ ══════════════════ -->
+<main class="wrap">
+  <div class="roadmap" id="d-road"></div>
+</main>
+
+<!-- ══════════════════ ДУЭЛИ ══════════════════ -->
+<section class="sect" id="d-duels">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Разбор полётов</div>
+      <h2>Пять пар, которые путают чаще всего</h2>
+      <p>Два похожих предложения рядом и один признак, по которому их разводят.</p>
+    </div>
+    <div class="duels" id="dDuels"></div>
+  </div>
+</section>
+
+<!-- ══════════════════ ТРЕНАЖЁР ══════════════════ -->
+<section class="sect" id="d-quiz">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Общая проверка</div>
+      <h2>Шестнадцать предложений — по два на каждую станцию</h2>
+      <p>Вперемешку и без подсказок. После ответа появляется разбор: почему верный вариант верный и чем плох выбранный.</p>
+    </div>
+    <div class="drill z-present" id="dQuiz"></div>
+  </div>
+</section>
+
+<!-- ══════════════════ ШПАРГАЛКА ══════════════════ -->
+<section class="sect" id="d-sheet">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">На один экран</div>
+      <h2>Шпаргалка</h2>
+      <p>Девять слов, на которых видны все способы образования: окончание, more и особые формы.</p>
+    </div>
+    <div class="sheet">
+      <table>
+        <thead>
+          <tr><th>Слово</th><th>Что делаем</th><th>Сравнительная</th><th>Превосходная</th><th>Что происходит</th></tr>
+        </thead>
+        <tbody id="dSheetBody"></tbody>
       </table>
     </div>
   </div>

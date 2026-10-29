@@ -495,6 +495,54 @@ pbForm.addEventListener('click', e => { const b = e.target.closest('button'); if
 renderPron();
 
 /* ═══════════════════════════════════════════════════════════
+   ВКЛАДКА «СТЕПЕНИ»
+   ═══════════════════════════════════════════════════════════ */
+renderRoadmap('d-road', DLEVELS, D, {
+  pid: 'd',
+  drills: DDRILLS,
+  kindLabel: it => it.short.toUpperCase(),
+  figure: sFigure
+});
+
+renderDuels('dDuels', DDUELS, tr => `<div class="train">${trainHTML(tr)}</div>`);
+makeQuiz(document.getElementById('dQuiz'), QUIZ_D, { title: 'Вопрос' });
+
+document.getElementById('dSheetBody').innerHTML = DADJ.map(a => `
+  <tr class="z-${a.type}">
+    <td class="nm"><b>${a.base}</b><span class="tx">${a.ru}</span></td>
+    <td class="ex">${DTYPES[a.type]}</td>
+    <td class="fm"><code>${a.cmp}</code></td>
+    <td class="fm"><code>${a.type === 'more' ? a.sup : 'the ' + a.sup}</code></td>
+    <td class="ex">${a.note}</td>
+  </tr>`).join('');
+
+/* ── конструктор степеней: слово × степень, роли ячеек — по способу образования ── */
+const db = { word: 'beautiful', deg: 'c' };
+const dbWord = document.getElementById('dbWord');
+const dbDeg = document.getElementById('dbDeg');
+const dbTrain = document.getElementById('dbTrain');
+
+dbWord.innerHTML = DADJ.map(a => `<button data-v="${a.key}" aria-pressed="false">${a.base}<i>${a.ru}</i></button>`).join('');
+dbDeg.innerHTML = DB_DEGREES.map(d => `<button data-v="${d.key}" aria-pressed="false">${d.t}<i>${d.i}</i></button>`).join('');
+document.getElementById('dbRoles').innerHTML = DROLES.map(r =>
+  `<span class="r-${r.r}"><i></i>${r.t}${r.i ? ` <em>· ${r.i}</em>` : ''}</span>`).join('');
+
+function renderDeg() {
+  const a = DADJ.find(x => x.key === db.word);
+  dbWord.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === db.word)));
+  dbDeg.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === db.deg)));
+  /* <b> в самом предложении — выделенное слово; свой <b> в .bu__ru занят подписью */
+  const ru = a.s[db.deg].ru.replace(/<b>/g, `<span class="hl r-${a.type}">`).replace(/<\/b>/g, '</span>');
+  document.getElementById('dbRu').innerHTML = `<b>ПО-РУССКИ</b>«${ru}»`;
+  flipTrain(dbTrain, trainHTML(degTrain(a, db.deg)));
+  document.getElementById('dbSchema').textContent = 'Проверка на слух: ' + a.ear;
+  document.getElementById('dbNote').innerHTML = a.note;
+}
+dbWord.addEventListener('click', e => { const b = e.target.closest('button'); if (b) { db.word = b.dataset.v; renderDeg(); } });
+dbDeg.addEventListener('click', e => { const b = e.target.closest('button'); if (b) { db.deg = b.dataset.v; renderDeg(); } });
+renderDeg();
+
+/* ═══════════════════════════════════════════════════════════
    НАВИГАЦИЯ: вкладки, оглавление, меню, точки, прогресс
    ═══════════════════════════════════════════════════════════ */
 const TABDEF = {
@@ -549,6 +597,19 @@ const TABDEF = {
       { id: 'p-duels', n: 'Сравнение форм', s: 'Пять пар, которые путают', e: 'Разбор' },
       { id: 'p-quiz', n: 'Общая проверка', s: '16 предложений вперемешку', e: 'Тренажёр' },
       { id: 'p-sheet', n: 'Шпаргалка', s: 'Все слова одной таблицей', e: 'Итог' }
+    ]
+  },
+  deg: {
+    panel: 'tab-deg', toc: 'dToc', items: D, total: 8,
+    nav: [
+      { id: 'd-algo', n: 'Что спрашивать у себя', s: 'Три вопроса к любому слову', e: 'Старт' },
+      { id: 'd-system', n: 'Конструктор степеней', s: 'Слово, примерка на слух, итог', e: 'Уровень 0' },
+      { id: 'd-lvl1', n: 'Две степени', s: 'Окончание или more', e: 'Уровень 1' },
+      { id: 'd-lvl2', n: 'Особые случаи', s: 'happier, better, than и the', e: 'Уровень 2' },
+      { id: 'd-lvl3', n: 'Тонкости', s: 'as … as, less, much', e: 'Уровень 3' },
+      { id: 'd-duels', n: 'Сравнение форм', s: 'Пять пар, которые путают', e: 'Разбор' },
+      { id: 'd-quiz', n: 'Общая проверка', s: '16 предложений вперемешку', e: 'Тренажёр' },
+      { id: 'd-sheet', n: 'Шпаргалка', s: 'Девять слов одной таблицей', e: 'Итог' }
     ]
   }
 };
@@ -634,7 +695,7 @@ let done = new Set();
 try { done = new Set(JSON.parse(localStorage.getItem(KEY) || '[]')); } catch (e) { done = new Set(); }
 
 function paint() {
-  const all = S.concat(T, C, P);
+  const all = S.concat(T, C, P, D);
   all.forEach(x => {
     const on = done.has(x.id);
     const st = document.getElementById(x.id);
@@ -698,6 +759,7 @@ function tabForHash(h) {
   if (S.some(x => x.id === id) || id.indexOf('s-') === 0) return 'sentence';
   if (C.some(c => c.id === id) || id.indexOf('c-') === 0) return 'cond';
   if (P.some(x => x.id === id) || id.indexOf('p-') === 0) return 'pron';
+  if (D.some(x => x.id === id) || id.indexOf('d-') === 0) return 'deg';
   if (T.some(t => t.id === id) || id.indexOf('t-') === 0) return 'tenses';
   return null;
 }

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Интерактивная методичка по английской грамматике: как строится предложение, все 12 времён, условные предложения и местоимения. Роадмапы, живые схемы, конструкторы и 420 заданий с объяснением каждого ответа.">
+<meta name="description" content="Интерактивная методичка по английской грамматике: как строится предложение, все 12 времён, условные предложения, местоимения и степени сравнения. Роадмапы, живые схемы, конструкторы и 516 заданий с объяснением каждого ответа.">
 <meta name="color-scheme" content="dark light">
 <meta name="theme-color" content="#0A1213" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#ECF0EE" media="(prefers-color-scheme: light)">
@@ -1007,12 +1007,39 @@ td.ex { color: var(--text-dim); }
 /* выделенное слово в русском предложении конструктора */
 .bu__ru .hl { font-weight: 700; color: var(--rc); }
 
+/* герои «Местоимений» и «Степеней»: на телефоне подпись уходит на свою строку,
+   а три ячейки делят ширину поровну и переносят слова — иначе уезжают за экран */
+@media (max-width: 480px) {
+  #p-hero .slotdemo, #d-hero .slotdemo { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  #p-hero .slotdemo .lbl, #d-hero .slotdemo .lbl { grid-column: 1 / -1; padding: 6px 0 0; }
+  #p-hero .slotdemo .chip, #d-hero .slotdemo .chip { white-space: normal; text-align: center; padding: 8px 6px; }
+}
+
 /* шпаргалка местоимений: пять столбцов */
 #p-sheet table { min-width: 820px; }
 #p-sheet td.ex { font-family: var(--f-mono); font-size: .8rem; white-space: nowrap; }
 #p-sheet td.nm b { color: var(--text); }
 #p-sheet td.fm code { white-space: nowrap; }
 #p-sheet .tx { display: block; margin-top: 3px; font-size: .74rem; color: var(--text-mute); }
+
+/* ═══════════════ ВКЛАДКА «СТЕПЕНИ» ═══════════════ */
+/* зоны: цвет кодирует способ образования */
+.z-er   { --zone: var(--present); --zone-soft: var(--present-soft); }
+.z-more { --zone: var(--future);  --zone-soft: var(--future-soft); }
+.z-irr  { --zone: var(--past);    --zone-soft: var(--past-soft); }
+
+/* роли слов: окончание, more, особая форма, само слово */
+.r-er   { --rc: var(--present); --rs: var(--present-soft); }
+.r-more { --rc: var(--future);  --rs: var(--future-soft); }
+.r-irr  { --rc: var(--past);    --rs: var(--past-soft); }
+.r-base { --rc: var(--text);    --rs: var(--surface-2); }
+
+/* шпаргалка степеней: пять столбцов */
+#d-sheet table { min-width: 820px; }
+#d-sheet td.ex { font-size: .84rem; color: var(--text-dim); }
+#d-sheet td.nm b { color: var(--text); }
+#d-sheet td.fm code { white-space: nowrap; }
+#d-sheet .tx { display: block; margin-top: 3px; font-size: .74rem; color: var(--text-mute); }
 
 /* панель с тремя вкладками на узких экранах */
 @media (max-width: 900px) {
@@ -1056,6 +1083,7 @@ td.ex { color: var(--text-dim); }
       <button role="tab" data-tab="tenses" aria-selected="false" aria-controls="tab-tenses">Времена</button>
       <button role="tab" data-tab="cond" aria-selected="false" aria-controls="tab-cond">Условные</button>
       <button role="tab" data-tab="pron" aria-selected="false" aria-controls="tab-pron">Местоимения</button>
+      <button role="tab" data-tab="deg" aria-selected="false" aria-controls="tab-deg">Степени</button>
     </div>
 
     <div class="dots__wrap">
@@ -1966,6 +1994,210 @@ td.ex { color: var(--text-dim); }
           <tr><th>Слово</th><th>Как в словаре · кто?</th><th>Изменилось · кого?</th><th>Чей?</th><th>Пример</th></tr>
         </thead>
         <tbody id="pSheetBody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<div class="tabpanel" id="tab-deg" role="tabpanel" hidden>
+<!-- ══════════════════ ГЕРОЙ · СТЕПЕНИ ══════════════════ -->
+<header class="hero" id="d-hero">
+  <div class="wrap">
+    <div class="eyebrow">Правило четвёртое · сравнительная и превосходная степень</div>
+    <h1>Короткое слово — <span class="tri">-er</span>,<br>длинное — <span class="tri">more</span>.</h1>
+    <p class="hero__sub">
+      Эти две степени нужны, когда мы <b>сравниваем</b> («выше», «красивее») или говорим, что кто-то <b>самый</b>
+      («самый высокий», «самый красивый»). Сравнительная — окончание <span class="mono">er</span>,
+      превосходная — <span class="mono">the</span> и окончание <span class="mono">est</span>:
+      <span class="mono">bigger</span>, <span class="mono">the biggest</span>. Но иногда вместо окончания ставят
+      <span class="mono">more</span> и <span class="mono">the most</span>. Выбрать помогает <b>русский слух</b>:
+      если с окончанием слово звучит ужасно, нужен more.
+    </p>
+    <div class="hero__meta">
+      <span class="pill">8 станций</span>
+      <span class="pill">конструктор степеней</span>
+      <span class="pill">80 заданий с разбором</span>
+      <span class="pill">5 дуэлей</span>
+      <span class="pill">16 вопросов в общей проверке</span>
+    </div>
+
+    <div class="slotdemo" role="img" aria-label="Пример: «Том выше Бена» — короткое слово, окончание: Tom is taller than Ben. «Она красивее меня» — длинное слово, окончание звучит ужасно: She is more beautiful than me">
+      <span class="lbl">Русский</span>
+      <span class="chip r-base">Том</span><span class="chip r-er fill">выше</span><span class="chip r-base">Бена</span>
+      <span class="lbl">Английский</span>
+      <span class="chip r-base">Tom is</span><span class="chip r-er fill">taller</span><span class="chip r-base">than Ben</span>
+      <span class="lbl">Русский</span>
+      <span class="chip r-base">Она</span><span class="chip r-more fill">красивее</span><span class="chip r-base">меня</span>
+      <span class="lbl">Английский</span>
+      <span class="chip r-base">She is</span><span class="chip r-more fill">more beautiful</span><span class="chip r-base">than me</span>
+      <span class="cap">«Таллер» звучит нормально — окончание. «Бьютифулер» звучит ужасно — <b>more</b>.</span>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════════════ ОГЛАВЛЕНИЕ ══════════════════ -->
+<section class="sect toc" id="d-toc">
+  <div class="wrap">
+    <div class="sect__head" style="margin-bottom:0">
+      <div class="eyebrow">Оглавление</div>
+      <h2>С чего начать</h2>
+      <p>Можно идти маршрутом сверху вниз, а можно прыгнуть сразу в нужный блок — страница при этом листается как обычно.</p>
+    </div>
+    <div class="toc__g" id="dToc"></div>
+  </div>
+</section>
+
+<!-- ══════════════════ ЧТО СПРАШИВАТЬ У СЕБЯ ══════════════════ -->
+<section class="sect" id="d-algo">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Что спрашивать у себя</div>
+      <h2>Три вопроса к любому прилагательному</h2>
+      <p>Они помогают выбрать форму для любого слова — от <span class="mono">tall</span> до <span class="mono">comfortable</span>.</p>
+    </div>
+
+    <ol class="steps">
+      <li>
+        <b>ВОПРОС 01</b>
+        <h4>Сравниваем или называем самого?</h4>
+        <p>Сравниваем («выше», «красивее») — сравнительная: <span class="mono">taller than</span>, <span class="mono">more beautiful than</span>. Называем самого («самый высокий») — превосходная: <span class="mono">the tallest</span>, <span class="mono">the most beautiful</span>.</p>
+      </li>
+      <li>
+        <b>ВОПРОС 02</b>
+        <h4>Слово короткое?</h4>
+        <p>Да — только окончание: <span class="mono">tall → taller → the tallest</span>. Слово длинное или составное — смотрим на следующий вопрос.</p>
+      </li>
+      <li>
+        <b>ВОПРОС 03</b>
+        <h4>Окончание звучит нормально?</h4>
+        <p>Примерьте его на слух. «Таллер» звучит нормально — оставляем. «Бьютифулер» звучит ужасно — тогда <span class="mono">more</span> или <span class="mono">the most</span>, и окончание уже не добавляем.</p>
+      </li>
+    </ol>
+
+    <div class="callout trap" style="margin-top:28px;max-width:66ch">
+      <h4>Исключения: пять слов меняются целиком</h4>
+      <p><span class="mono">good → better → the best</span>, <span class="mono">bad → worse → the worst</span> и ещё три слова: far, little, many / much. Слух тут не поможет — их просто нужно запомнить.</p>
+      <a class="goto" href="#d-irr">К исключениям →</a>
+    </div>
+
+    <figure class="dia">
+      <div>
+        <svg viewBox="0 0 700 290" role="img" aria-label="Развилка: если окончание звучит нормально, как в taller, берём окончание; если звучит ужасно, как в beautifuler, берём more и слово не меняем">
+          <rect class="box" x="225" y="12" width="250" height="42" rx="11"/>
+          <text class="t" x="350" y="38" text-anchor="middle">Прилагательное</text>
+
+          <path class="ln" d="M350 54 V 88 H 175 V 108" marker-end="url(#dah)"/>
+          <path class="ln" d="M350 88 H 525 V 108" marker-end="url(#dah)"/>
+          <text class="t-lbl" x="360" y="76">окончание звучит нормально?</text>
+          <text class="t-lbl" x="163" y="104" text-anchor="end">да · «таллер»</text>
+          <text class="t-lbl" x="537" y="104">нет · «бьютифулер»</text>
+
+          <rect x="40" y="112" width="270" height="62" rx="12" style="fill:var(--present-soft);stroke:var(--present);stroke-width:1.8"/>
+          <text class="t-m" x="175" y="139" text-anchor="middle" style="fill:var(--present)">-er · the …-est</text>
+          <text class="t-s" x="175" y="161" text-anchor="middle">короткие слова</text>
+
+          <rect x="390" y="112" width="270" height="62" rx="12" style="fill:var(--future-soft);stroke:var(--future);stroke-width:1.8"/>
+          <text class="t-m" x="525" y="139" text-anchor="middle" style="fill:var(--future)">more · the most</text>
+          <text class="t-s" x="525" y="161" text-anchor="middle">длинные и составные слова</text>
+
+          <text class="t-m" x="175" y="202" text-anchor="middle">taller · the tallest</text>
+          <text class="t-m" x="525" y="202" text-anchor="middle">more beautiful · the most beautiful</text>
+
+          <line x1="60" y1="228" x2="640" y2="228" style="stroke:var(--line);stroke-dasharray:4 4"/>
+          <text class="t" x="350" y="258" text-anchor="middle">Окончание и more вместе не ставят — выбираем одно</text>
+          <text class="t-lbl" x="350" y="278" text-anchor="middle">исключения: good → better, bad → worse</text>
+          <defs>
+            <marker id="dah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 z" fill="currentColor"/>
+            </marker>
+          </defs>
+        </svg>
+      </div>
+      <figcaption>Правило одной развилкой. Слух решает, окончание или more; слово при этом либо получает окончание, либо остаётся как есть.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ══════════════════ МЕХАНИКА ══════════════════ -->
+<section class="sect" id="d-system">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Уровень 0 · механика</div>
+      <h2>Выберите слово — и посмотрите, что с ним происходит</h2>
+      <p>
+        Для каждого слова конструктор показывает <b>примерку на слух</b> и итог. Короткие слова получают окончание,
+        длинные остаются как есть, а исключения меняются целиком.
+      </p>
+    </div>
+
+    <div class="bu" id="dBuild">
+      <div class="bu__top"><span class="eyebrow">Конструктор степеней</span><span class="bu__hint">выберите слово и степень — ячейки перестроятся</span></div>
+      <div class="bu__ctl">
+        <div class="bu__grp">
+          <span class="eyebrow">1 · Какое слово?</span>
+          <div class="seg" id="dbWord"></div>
+        </div>
+        <div class="bu__grp">
+          <span class="eyebrow">2 · Какая степень?</span>
+          <div class="seg" id="dbDeg"></div>
+        </div>
+      </div>
+      <div class="bu__out">
+        <div class="bu__ru" id="dbRu"></div>
+        <div class="train bu__train" id="dbTrain" aria-live="polite"></div>
+        <div class="bu__schema" id="dbSchema"></div>
+        <p class="bu__note" id="dbNote"></p>
+      </div>
+      <div class="roles" id="dbRoles"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ МАРШРУТ ══════════════════ -->
+<main class="wrap">
+  <div class="roadmap" id="d-road"></div>
+</main>
+
+<!-- ══════════════════ ДУЭЛИ ══════════════════ -->
+<section class="sect" id="d-duels">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Разбор полётов</div>
+      <h2>Пять пар, которые путают чаще всего</h2>
+      <p>Два похожих предложения рядом и один признак, по которому их разводят.</p>
+    </div>
+    <div class="duels" id="dDuels"></div>
+  </div>
+</section>
+
+<!-- ══════════════════ ТРЕНАЖЁР ══════════════════ -->
+<section class="sect" id="d-quiz">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Общая проверка</div>
+      <h2>Шестнадцать предложений — по два на каждую станцию</h2>
+      <p>Вперемешку и без подсказок. После ответа появляется разбор: почему верный вариант верный и чем плох выбранный.</p>
+    </div>
+    <div class="drill z-present" id="dQuiz"></div>
+  </div>
+</section>
+
+<!-- ══════════════════ ШПАРГАЛКА ══════════════════ -->
+<section class="sect" id="d-sheet">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">На один экран</div>
+      <h2>Шпаргалка</h2>
+      <p>Девять слов, на которых видны все способы образования: окончание, more и особые формы.</p>
+    </div>
+    <div class="sheet">
+      <table>
+        <thead>
+          <tr><th>Слово</th><th>Что делаем</th><th>Сравнительная</th><th>Превосходная</th><th>Что происходит</th></tr>
+        </thead>
+        <tbody id="dSheetBody"></tbody>
       </table>
     </div>
   </div>
@@ -5430,6 +5662,840 @@ const QUIZ_P = [
 </script>
 <script>
 /* ═══════════════════════════════════════════════════════════
+   СТЕПЕНИ СРАВНЕНИЯ · taller, more beautiful, the best
+   Цвет кодирует способ образования:
+   бирюза — окончание (-er / -est), перивинкл — слово more / the most,
+   охра — особая форма (better, worse), серый — помощники (the, than, as).
+   Ячейки: [роль, текст, флаги] — роли: er, more, irr, same, base, rest, end.
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── слова для конструктора и шпаргалки ──
+   type: er — окончание, more — more / the most, irr — особая форма.
+   s.c / s.s — предложения: pre + форма + post, ru с <b> вокруг выделенного слова */
+const DADJ = [
+  { key: 'tall', base: 'tall', ru: 'высокий', type: 'er', cmp: 'taller', sup: 'tallest',
+    ear: 'tall + er = taller — «таллер» звучит нормально → окончание',
+    note: 'Короткое слово: добавляем окончание, больше ничего менять не нужно.',
+    s: { c: { ru: 'Том <b>выше</b> Бена.', pre: 'Tom is', post: 'Ben' },
+         s: { ru: 'Том — <b>самый высокий</b> в классе.', pre: 'Tom is', post: 'in the class' } } },
+  { key: 'big', base: 'big', ru: 'большой', type: 'er', cmp: 'bigger', sup: 'biggest',
+    ear: 'big + er = bigger — «биггер» звучит нормально → окончание',
+    note: 'Одна гласная и одна согласная: согласная удваивается — bigger, the biggest.',
+    s: { c: { ru: 'Этот дом <b>больше</b> того.', pre: 'This house is', post: 'that one' },
+         s: { ru: 'Это <b>самый большой</b> дом в городе.', pre: 'This is', post: 'house in the town' } } },
+  { key: 'nice', base: 'nice', ru: 'приятный', type: 'er', cmp: 'nicer', sup: 'nicest',
+    ear: 'nice + er = nicer — «найсер» звучит нормально → окончание',
+    note: 'Слово уже кончается на e — добавляем только r и st.',
+    s: { c: { ru: 'Сегодня <b>приятнее</b>, чем вчера.', pre: 'Today is', post: 'yesterday' },
+         s: { ru: 'Это <b>самый приятный</b> день недели.', pre: 'It is', post: 'day of the week' } } },
+  { key: 'happy', base: 'happy', ru: 'счастливый', type: 'er', cmp: 'happier', sup: 'happiest',
+    ear: 'happy + er = happier — «хэппиер» звучит нормально → окончание',
+    note: 'На конце y — меняем её на i и добавляем окончание.',
+    s: { c: { ru: 'Анна <b>счастливее</b> Тома.', pre: 'Anna is', post: 'Tom' },
+         s: { ru: 'Анна — <b>самая счастливая</b> в группе.', pre: 'Anna is', post: 'in the group' } } },
+  { key: 'beautiful', base: 'beautiful', ru: 'красивый', type: 'more', cmp: 'more beautiful', sup: 'the most beautiful',
+    ear: 'beautiful + er = beautifuler — «бьютифулер» звучит ужасно → more',
+    note: 'Слово остаётся как есть: слева встаёт more или the most. Окончание уже не добавляем.',
+    s: { c: { ru: 'Это платье <b>красивее</b> того.', pre: 'This dress is', post: 'that one' },
+         s: { ru: 'Это <b>самое красивое</b> платье в магазине.', pre: 'This is', post: 'dress in the shop' } } },
+  { key: 'interesting', base: 'interesting', ru: 'интересный', type: 'more', cmp: 'more interesting', sup: 'the most interesting',
+    ear: 'interesting + er = interestinger — «интерестингер» звучит ужасно → more',
+    note: 'Длинное слово: слово не трогаем, слева ставим more или the most.',
+    s: { c: { ru: 'Эта книга <b>интереснее</b> фильма.', pre: 'This book is', post: 'the film' },
+         s: { ru: 'Это <b>самая интересная</b> книга в библиотеке.', pre: 'This is', post: 'book in the library' } } },
+  { key: 'expensive', base: 'expensive', ru: 'дорогой', type: 'more', cmp: 'more expensive', sup: 'the most expensive',
+    ear: 'expensive + er = expensiver — «экспенсивер» звучит ужасно → more',
+    note: 'Длинное слово: слово не трогаем, слева ставим more или the most.',
+    s: { c: { ru: 'Эта машина <b>дороже</b> той.', pre: 'This car is', post: 'that one' },
+         s: { ru: 'Это <b>самая дорогая</b> машина в салоне.', pre: 'This is', post: 'car in the showroom' } } },
+  { key: 'good', base: 'good', ru: 'хороший', type: 'irr', cmp: 'better', sup: 'best',
+    ear: 'исключение: на слух не проверить, форму просто запоминаем',
+    note: 'Слово меняется целиком: good → better → the best. Окончание не нужно.',
+    s: { c: { ru: 'Этот фильм <b>лучше</b> того.', pre: 'This film is', post: 'that one' },
+         s: { ru: 'Это <b>лучший</b> фильм года.', pre: 'This is', post: 'film of the year' } } },
+  { key: 'bad', base: 'bad', ru: 'плохой', type: 'irr', cmp: 'worse', sup: 'worst',
+    ear: 'исключение: на слух не проверить, форму просто запоминаем',
+    note: 'Слово меняется целиком: bad → worse → the worst. Окончание не нужно.',
+    s: { c: { ru: 'Погода <b>хуже</b>, чем вчера.', pre: 'The weather is', post: 'yesterday' },
+         s: { ru: 'Это <b>худший</b> день недели.', pre: 'It is', post: 'day of the week' } } }
+];
+
+const DTYPES = { er: 'окончание', more: 'more / the most', irr: 'особая форма' };
+
+const DB_DEGREES = [
+  { key: 'c', t: 'Сравнительная', i: '«выше», «красивее»' },
+  { key: 's', t: 'Превосходная',  i: '«самый высокий»' }
+];
+
+/* предложение конструктора: роли ячеек берутся из способа образования слова */
+function degTrain(a, deg) {
+  const s = a.s[deg], isC = deg === 'c';
+  let form;
+  if (a.type === 'more') form = [['more', isC ? 'more' : 'the most'], ['base', a.base]];
+  else if (isC)          form = [[a.type, a.cmp]];
+  else                   form = [['same', 'the'], [a.type, a.sup]];
+  return isC
+    ? [['rest', s.pre]].concat(form, [['same', 'than'], ['rest', s.post], ['end', '.']])
+    : [['rest', s.pre]].concat(form, [['rest', s.post], ['end', '.']]);
+}
+
+const DROLES = [
+  { r: 'er',   t: 'Окончание', i: '-er · -est' },
+  { r: 'more', t: 'More', i: 'more · the most' },
+  { r: 'irr',  t: 'Особая форма', i: 'better · worse' },
+  { r: 'same', t: 'Помощник', i: 'the · than' },
+  { r: 'base', t: 'Само слово', i: 'не меняется рядом с more' },
+  { r: 'rest', t: 'Остальные слова', i: '' }
+];
+
+/* ── уровни маршрута ── */
+const DLEVELS = [
+  { n: 1, title: 'Две степени', code: 'сравниваем · самый', ru: 'Главное правило',
+    txt: 'Первый этаж — сама идея и главный лайфхак. Сравнительная степень отвечает на вопрос «кто больше, чем кто-то», превосходная — «кто самый». У каждой два пути: окончание или слово <span class="mono">more</span> / <span class="mono">the most</span>. Выбирает между ними <b>русский слух</b>.' },
+  { n: 2, title: 'Особые случаи', code: 'happier · better · than · the', ru: 'Где легко ошибиться',
+    txt: 'Второй этаж. Слова на -y и двусложные, пять слов-исключений и две мелкие детали, которые забывают чаще всего: <span class="mono">than</span> и <span class="mono">the</span>.' },
+  { n: 3, title: 'Тонкости', code: 'as … as · less · much', ru: 'Для уверенной речи',
+    txt: 'Верхний этаж. Когда степени сравнения нет, как её усилить, и что делать с наречиями. Ничего нового учить не нужно — это те же слова в других ролях.' }
+];
+
+/* ── станции ── */
+const D = [
+{
+  id: 'd-test', zone: 'er', level: 1, idx: 1,
+  name: 'Проверка на слух', core: 'tall → taller · beautiful → more beautiful',
+  thesis: 'Звучит плохо — ставим more',
+  short: 'на слух',
+  fig: {
+    rows: [
+      { l: 'Короткое', tr: [['base','tall'],['end','→'],['er','taller'],['end','·'],['same','the'],['er','tallest']] },
+      { l: 'Длинное',  tr: [['base','beautiful'],['end','→'],['more','more beautiful'],['end','·'],['more','the most beautiful']] },
+      { l: 'Ошибка',   tr: [['er','beautifuler','bad'],['end','·'],['er','beautifulest','bad']] }
+    ],
+    cap: 'Добавьте окончание и прислушайтесь. «Таллер» звучит нормально, «бьютифулер» — ужасно. Значит, здесь берём more.'
+  },
+  lead: 'Сравнительная и превосходная степени нужны, когда мы <b>сравниваем</b> («выше», «красивее») или хотим сказать, что кто-то или что-то <b>самый</b> («самый высокий», «самый красивый»). Способов два: приделать окончание или поставить слово. Какой выбрать — подскажет русский слух.',
+  blocks: [
+    { kind: 'key', h: 'Лайфхак: примерьте окончание на слух',
+      p: 'Добавьте к слову <span class="mono">er</span> или <span class="mono">est</span> и произнесите по-русски. Если звучит нормально — <span class="mono">taller</span> («таллер»), — оставляем окончание.<br>Если звучит очень плохо — <span class="mono">beautifuler</span> («бьютифулер»), <span class="mono">beautifulest</span> («бьютифулест»), — значит, это точно <span class="mono">more</span> или <span class="mono">the most</span>. Тогда окончание уже не добавляем.' },
+    { kind: 'plain', h: 'Короткое или длинное',
+      p: 'Короткое слово вроде <span class="mono">tall</span> — только окончание. Длинное или составное, как <span class="mono">beautiful</span> («full of beauty», то есть «полный красоты»), — <span class="mono">more</span> и <span class="mono">the most</span>.' },
+    { kind: 'plain', h: 'Две степени',
+      p: 'Сравниваем: <span class="mono">bigger</span> — больше. Называем самого: <span class="mono">the biggest</span> — самый большой. У превосходной степени всегда стоит <span class="mono">the</span>.' },
+    { kind: 'trap', h: 'Ловушка: окончание и more вместе',
+      p: '<span class="mono no">more bigger</span>, <span class="mono no">the most tallest</span> → <span class="mono yes">bigger</span>, <span class="mono yes">the tallest</span><br>Одно из двух: либо окончание, либо more.' }
+  ],
+  forms: { p: 'Tom is <b>taller</b> than Ben.', n: 'Tom isn\'t <b>taller</b> than Ben.', q: 'Is Tom <b>taller</b> than Ben?' },
+  markers: ['сравниваем', 'самый', 'than', 'the …est', 'звучит ужасно → more'],
+  ex: [
+    { en: 'Tom is <i class="v">taller</i> than Ben.', ru: 'Том выше Бена.', nb: 'короткое слово — окончание' },
+    { en: 'Tom is <i class="v">the tallest</i> in the class.', ru: 'Том самый высокий в классе.', nb: 'самый — the и est' },
+    { en: 'This dress is <i class="v">more beautiful</i> than that one.', ru: 'Это платье красивее того.', nb: '«бьютифулер» звучит ужасно — more' },
+    { en: 'This is <i class="v">the most beautiful</i> dress in the shop.', ru: 'Это самое красивое платье в магазине.' }
+  ]
+},
+{
+  id: 'd-short', zone: 'er', level: 1, idx: 2,
+  name: 'Короткие слова: -er и -est', core: 'tall → taller → the tallest',
+  thesis: 'Короткое слово — только окончание',
+  short: 'короткие',
+  fig: {
+    rows: [
+      { l: 'Русский',    ru: 'Том <b>выше</b> Бена.' },
+      { l: 'Английский', tr: [['rest','Tom is'],['er','taller'],['same','than'],['rest','Ben'],['end','.']] },
+      { l: 'Русский',    ru: 'Том — <b>самый высокий</b>.' },
+      { l: 'Английский', tr: [['rest','Tom is'],['same','the'],['er','tallest'],['end','.']] }
+    ],
+    cap: 'Сравнительная — окончание -er и слово than. Превосходная — слово the и окончание -est.'
+  },
+  lead: 'Слово из одного слога — <span class="mono">tall, old, fast, long, small, cold</span> — обходится без помощников: добавляем окончание, и готово. «Примерять на слух» тут даже не нужно: <span class="mono">taller</span> и <span class="mono">the tallest</span> звучат нормально всегда.',
+  blocks: [
+    { kind: 'key', h: 'Схема',
+      p: 'сравнительная: слово + <span class="mono">er</span> (+ <span class="mono">than</span>)<br>превосходная: <span class="mono">the</span> + слово + <span class="mono">est</span><br><span class="mono">old → older → the oldest</span> · <span class="mono">fast → faster → the fastest</span>' },
+    { kind: 'plain', h: 'Слово уже кончается на -e',
+      p: 'Добавляем только <span class="mono">r</span> и <span class="mono">st</span>: <span class="mono">nice → nicer → the nicest</span>, <span class="mono">large → larger → the largest</span>.' },
+    { kind: 'plain', h: 'Одна гласная и одна согласная — согласная удваивается',
+      p: '<span class="mono">big → bigger → the biggest</span> · <span class="mono">hot → hotter → the hottest</span> · <span class="mono">thin → thinner → the thinnest</span><br>Иначе слово прочиталось бы по-другому: <span class="mono">biger</span> звучало бы как «байгер».' },
+    { kind: 'trap', h: 'Ловушка: more у короткого слова',
+      p: '<span class="mono no">more tall</span>, <span class="mono no">the most fast</span> → <span class="mono yes">taller</span>, <span class="mono yes">the fastest</span><br>Короткому слову more не нужен.' }
+  ],
+  forms: { p: 'My dog is <b>older</b> than yours.', n: 'It isn\'t <b>the biggest</b> room.', q: 'Who is <b>the fastest</b>?' },
+  markers: ['один слог', '+er · +est', 'nice → nicer', 'big → bigger', 'the …est'],
+  ex: [
+    { en: 'My brother is <i class="v">older</i> than me.', ru: 'Мой брат старше меня.' },
+    { en: 'This is <i class="v">the fastest</i> car.', ru: 'Это самая быстрая машина.' },
+    { en: 'Today is <i class="v">nicer</i> than yesterday.', ru: 'Сегодня приятнее, чем вчера.', nb: 'e уже есть — добавляем только r' },
+    { en: 'This is <i class="v">the biggest</i> house in the town.', ru: 'Это самый большой дом в городе.', nb: 'согласная g удвоилась' }
+  ]
+},
+{
+  id: 'd-long', zone: 'more', level: 1, idx: 3,
+  name: 'Длинные слова: more и the most', core: 'more beautiful → the most beautiful',
+  thesis: 'Длинное слово не трогаем — слева ставим more',
+  short: 'длинные',
+  fig: {
+    rows: [
+      { l: 'Русский',    ru: 'Это платье <b>красивее</b> того.' },
+      { l: 'Английский', tr: [['rest','This dress is'],['more','more'],['base','beautiful'],['same','than'],['rest','that one'],['end','.']] },
+      { l: 'Русский',    ru: 'Это <b>самое красивое</b> платье.' },
+      { l: 'Английский', tr: [['rest','This is'],['more','the most'],['base','beautiful'],['rest','dress'],['end','.']] }
+    ],
+    cap: 'Само слово остаётся как есть. Слева от него встаёт more (сравнительная) или the most (превосходная).'
+  },
+  lead: 'Слова побольше — <span class="mono">beautiful, interesting, expensive, dangerous</span> — окончание не выдерживают: «бьютифулер» звучит ужасно. Вместо окончания слева от слова встаёт <span class="mono">more</span> или <span class="mono">the most</span>, а само слово не меняется.',
+  blocks: [
+    { kind: 'key', h: 'Какие это слова',
+      p: 'Те самые, у которых окончание звучит плохо. Это длинные слова (<span class="mono">interesting, expensive, comfortable</span>) и слова из нескольких частей, как <span class="mono">beautiful</span> — «full of beauty», то есть красота + <span class="mono">ful</span>. К такому слову третью часть уже не прицепишь.' },
+    { kind: 'plain', h: 'Схема',
+      p: 'сравнительная: <span class="mono">more</span> + слово (+ <span class="mono">than</span>)<br>превосходная: <span class="mono">the most</span> + слово<br><span class="mono">beautiful → more beautiful → the most beautiful</span>' },
+    { kind: 'trap', h: 'Ловушка: more и окончание вместе',
+      p: '<span class="mono no">more beautifuler</span>, <span class="mono no">the most beautifulest</span> → <span class="mono yes">more beautiful</span>, <span class="mono yes">the most beautiful</span><br>Слово остаётся таким, каким было.' }
+  ],
+  forms: { p: 'This book is <b>more interesting</b> than the film.', n: 'It isn\'t <b>the most expensive</b> car.', q: 'Is it <b>more dangerous</b>?' },
+  markers: ['длинное слово', 'несколько частей', 'more …', 'the most …', 'слово не меняется'],
+  ex: [
+    { en: 'This book is <i class="v">more interesting</i> than the film.', ru: 'Эта книга интереснее фильма.' },
+    { en: 'It is <i class="v">the most expensive</i> car in the showroom.', ru: 'Это самая дорогая машина в салоне.' },
+    { en: 'Skiing is <i class="v">more dangerous</i> than walking.', ru: 'Лыжи опаснее ходьбы.' },
+    { en: 'She is <i class="v">the most beautiful</i> girl here.', ru: 'Она самая красивая девушка здесь.' }
+  ]
+},
+{
+  id: 'd-y', zone: 'er', level: 2, idx: 4,
+  name: 'Слова на -y и двусложные', core: 'happy → happier · clever → cleverer / more clever',
+  thesis: 'Слово на -y меняет y на i, остальные — на слух',
+  short: 'двусложные',
+  fig: {
+    rows: [
+      { l: 'Русский',    ru: 'Анна <b>счастливее</b> Тома.' },
+      { l: 'Английский', tr: [['rest','Anna is'],['er','happier'],['same','than'],['rest','Tom'],['end','.']] },
+      { l: 'Русский',    ru: 'Анна — <b>самая счастливая</b>.' },
+      { l: 'Английский', tr: [['rest','Anna is'],['same','the'],['er','happiest'],['end','.']] }
+    ],
+    cap: 'Буква y на конце превращается в i, и только после этого идёт окончание.'
+  },
+  lead: 'Двусложные слова — серединка. Если слово кончается на <span class="mono">-y</span> (<span class="mono">happy, easy, busy, funny, heavy</span>), примерка проходит легко: <span class="mono">happier</span> и <span class="mono">the happiest</span> звучат нормально. Остальные двусложные решаются на слух.',
+  blocks: [
+    { kind: 'key', h: 'y → i',
+      p: '<span class="mono">happy → happier → the happiest</span><br><span class="mono">easy → easier → the easiest</span><br><span class="mono">busy → busier → the busiest</span>' },
+    { kind: 'plain', h: 'Остальные двусложные — на слух',
+      p: 'У <span class="mono">clever, quiet, simple, narrow</span> правильны оба варианта: <span class="mono">cleverer</span> и <span class="mono">more clever</span>, <span class="mono">quieter</span> и <span class="mono">more quiet</span>. Если сомневаетесь, <span class="mono">more</span> надёжнее — он не подведёт.' },
+    { kind: 'plain', h: 'Слова на -ful, -ous, -ing, -ed',
+      p: 'Они почти всегда берут more: <span class="mono">careful, famous, boring, tired</span> → <span class="mono">more famous</span>, <span class="mono">more tired</span>. Окончание у них звучит хуже всего.' },
+    { kind: 'trap', h: 'Ловушка: happyer',
+      p: '<span class="mono no">happyer</span>, <span class="mono no">the happyest</span> → <span class="mono yes">happier</span>, <span class="mono yes">the happiest</span><br>Y перед окончанием всегда превращается в i.' }
+  ],
+  forms: { p: 'Anna is <b>happier</b> than Tom.', n: 'This test isn\'t <b>easier</b> than that one.', q: 'Is Anna <b>the happiest</b>?' },
+  markers: ['-y → -ier', '-y → -iest', 'двусложные — на слух', '-ful → more', '-ous → more'],
+  ex: [
+    { en: 'Anna is <i class="v">happier</i> than Tom.', ru: 'Анна счастливее Тома.' },
+    { en: 'This is <i class="v">the easiest</i> test.', ru: 'Это самый лёгкий тест.', nb: 'easy → easi-' },
+    { en: 'This street is <i class="v">busier</i> than ours.', ru: 'Эта улица оживлённее нашей.' },
+    { en: 'He is <i class="v">more famous</i> than his brother.', ru: 'Он известнее своего брата.', nb: '-ous — лучше more' }
+  ]
+},
+{
+  id: 'd-irr', zone: 'irr', level: 2, idx: 5,
+  name: 'Исключения: good → better', core: 'good · bad · far · little · many → …',
+  thesis: 'Эти слова просто запоминаем',
+  short: 'исключения',
+  fig: {
+    rows: [
+      { l: 'good',        tr: [['base','good'],['end','→'],['irr','better'],['end','·'],['same','the'],['irr','best']] },
+      { l: 'bad',         tr: [['base','bad'],['end','→'],['irr','worse'],['end','·'],['same','the'],['irr','worst']] },
+      { l: 'far',         tr: [['base','far'],['end','→'],['irr','farther'],['end','·'],['same','the'],['irr','farthest']] },
+      { l: 'little',      tr: [['base','little'],['end','→'],['irr','less'],['end','·'],['same','the'],['irr','least']] },
+      { l: 'many · much', tr: [['base','many'],['end','→'],['irr','more'],['end','·'],['same','the'],['irr','most']] }
+    ],
+    cap: 'Окончание тут не приклеивается: слово меняется целиком.'
+  },
+  lead: 'Несколько самых частых слов меняются сами по себе. Ни окончание, ни <span class="mono">more</span> им не нужны. Их немного, но встречаются они постоянно, поэтому проще выучить их как готовые пары.',
+  blocks: [
+    { kind: 'key', h: 'Пять пар',
+      p: '<span class="mono">good → better → the best</span><br><span class="mono">bad → worse → the worst</span><br><span class="mono">far → farther → the farthest</span><br><span class="mono">little → less → the least</span><br><span class="mono">many / much → more → the most</span>' },
+    { kind: 'trap', h: 'Ловушка: gooder и more good',
+      p: '<span class="mono no">gooder</span>, <span class="mono no">more good</span>, <span class="mono no">more better</span> → <span class="mono yes">better</span><br><span class="mono no">badder</span>, <span class="mono no">more bad</span> → <span class="mono yes">worse</span>' },
+    { kind: 'plain', h: 'Far — farther и further',
+      p: 'Про расстояние подходят обе формы. В переносном смысле — только <span class="mono">further</span>: <span class="mono">further information</span> — «дополнительная информация».' },
+    { kind: 'plain', h: 'More о количестве — это другое more',
+      p: '<span class="mono">more water</span>, <span class="mono">more books</span> — «больше воды», «больше книг». Это степень слов <span class="mono">many</span> и <span class="mono">much</span>, а не тот <span class="mono">more</span>, что стоит перед длинными прилагательными.' }
+  ],
+  forms: { p: 'This film is <b>better</b> than that one.', n: 'It isn\'t <b>the worst</b> day.', q: 'Is this <b>the best</b> way?' },
+  markers: ['good → better', 'bad → worse', 'far → farther', 'little → less', 'many · much → more'],
+  ex: [
+    { en: 'This film is <i class="v">better</i> than that one.', ru: 'Этот фильм лучше того.' },
+    { en: 'It was <i class="v">the worst</i> day of my life.', ru: 'Это был худший день в моей жизни.' },
+    { en: 'I need <i class="v">more</i> time.', ru: 'Мне нужно больше времени.', nb: 'more о количестве, а не перед прилагательным' },
+    { en: 'The station is <i class="v">farther</i> than the shop.', ru: 'Вокзал дальше, чем магазин.' }
+  ]
+},
+{
+  id: 'd-than', zone: 'same', level: 2, idx: 6,
+  name: 'Than и the: две мелкие детали', core: 'taller than · the tallest in',
+  thesis: 'Сравниваем — than, выделяем — the',
+  short: 'than и the',
+  fig: {
+    rows: [
+      { l: 'Русский',    ru: 'Том выше <b>Бена</b>.' },
+      { l: 'Английский', tr: [['rest','Tom is'],['er','taller'],['same','than'],['rest','Ben'],['end','.']] },
+      { l: 'Русский',    ru: 'Том самый высокий <b>в классе</b>.' },
+      { l: 'Английский', tr: [['rest','Tom is'],['same','the'],['er','tallest'],['same','in'],['rest','the class'],['end','.']] }
+    ],
+    cap: 'Сравнительная ждёт «чем кто?» — слово than. Превосходная ждёт «среди кого?» — слова in или of.'
+  },
+  lead: 'Две мелкие детали, которые легко забыть: после сравнительной степени стоит <span class="mono">than</span> («чем»), а перед превосходной — <span class="mono">the</span>.',
+  blocks: [
+    { kind: 'key', h: 'Than — это «чем»',
+      p: '«Том выше, <b>чем</b> Бен» → <span class="mono">Tom is taller <b>than</b> Ben</span>. Than нужен, когда называем, с кем сравниваем.' },
+    { kind: 'plain', h: 'The и «среди кого»',
+      p: 'Превосходная всегда с <span class="mono">the</span>: <span class="mono">the tallest</span>. А «среди кого» добавляется словом <span class="mono">in</span> (место, группа: <span class="mono">in the class</span>, <span class="mono">in London</span>) или <span class="mono">of</span> (набор: <span class="mono">of all</span>, <span class="mono">of the three</span>).' },
+    { kind: 'plain', h: 'Than и местоимение',
+      p: 'После than стоит вторая форма: <span class="mono">taller than me</span>, <span class="mono">older than him</span>. Как выбирать форму — на вкладке «Местоимения».<br><a class="goto" href="#p-hero">К местоимениям →</a>' },
+    { kind: 'trap', h: 'Ловушка: then вместо than',
+      p: '<span class="mono no">taller then Ben</span> → <span class="mono yes">taller than Ben</span> — then значит «потом».<br><span class="mono no">the taller than Ben</span> → <span class="mono yes">taller than Ben</span> — у сравнительной степени the не ставят.' }
+  ],
+  forms: { p: 'Tom is taller <b>than</b> Ben.', n: 'Tom isn\'t <b>the</b> tallest in the class.', q: 'Who is <b>the</b> tallest in the class?' },
+  markers: ['than — чем', 'then — потом', 'the + превосходная', 'in + место', 'of + набор'],
+  ex: [
+    { en: 'She is older <i class="v">than</i> me.', ru: 'Она старше меня.' },
+    { en: 'He is the tallest <i class="v">in</i> the class.', ru: 'Он самый высокий в классе.' },
+    { en: 'This is the cheapest <i class="v">of</i> all.', ru: 'Это самое дешёвое из всех.' },
+    { en: 'It is bigger <i class="v">than</i> I thought.', ru: 'Это больше, чем я думал.', nb: 'после than может идти целая фраза' }
+  ]
+},
+{
+  id: 'd-as', zone: 'same', level: 3, idx: 7,
+  name: 'Равенство и «меньше»: as … as · less', core: 'as tall as · less interesting',
+  thesis: 'Когда степени нет, слово остаётся как есть',
+  short: 'as … as',
+  fig: {
+    rows: [
+      { l: 'Русский',    ru: 'Том <b>такой же высокий, как</b> Бен.' },
+      { l: 'Английский', tr: [['rest','Tom is'],['same','as'],['base','tall'],['same','as'],['rest','Ben'],['end','.']] },
+      { l: 'Русский',    ru: 'Эта книга <b>менее интересная</b>.' },
+      { l: 'Английский', tr: [['rest','This book is'],['more','less'],['base','interesting'],['same','than'],['rest','that one'],['end','.']] }
+    ],
+    cap: 'Слово остаётся в обычной форме — вокруг него встают as … as или less.'
+  },
+  lead: 'Ещё два способа сравнить: сказать, что оба одинаковы, или что кто-то <b>меньше</b>. Прилагательное в обоих случаях остаётся как есть.',
+  blocks: [
+    { kind: 'key', h: 'as … as — «такой же, как»',
+      p: '<span class="mono">Tom is as tall as Ben.</span> Слово стоит в обычной форме, а вокруг него два as.<br>Отрицание: <span class="mono">Tom isn\'t as tall as Ben</span> — «не такой высокий, как Бен», то есть ниже.' },
+    { kind: 'plain', h: 'less — зеркальное more',
+      p: '<span class="mono">less interesting</span> — менее интересный, <span class="mono">the least interesting</span> — наименее интересный. Чаще всего встречается с длинными словами. С короткими обычно говорят иначе: <span class="mono">not as tall as</span>.' },
+    { kind: 'trap', h: 'Ловушка: -er после as',
+      p: '<span class="mono no">as taller as</span> → <span class="mono yes">as tall as</span><br>Когда одинаково, степени сравнения нет, и слово остаётся в обычной форме.' }
+  ],
+  forms: { p: 'Tom is <b>as tall as</b> Ben.', n: 'Tom isn\'t <b>as tall as</b> Ben.', q: 'Is Tom <b>as tall as</b> Ben?' },
+  markers: ['as … as', 'not as … as', 'less', 'the least', 'слово без изменений'],
+  ex: [
+    { en: 'Tom is <i class="v">as tall as</i> Ben.', ru: 'Том такой же высокий, как Бен.' },
+    { en: 'This phone is <i class="v">not as expensive as</i> that one.', ru: 'Этот телефон не такой дорогой, как тот.' },
+    { en: 'This flat is <i class="v">less expensive</i> than that one.', ru: 'Эта квартира менее дорогая, чем та.' },
+    { en: 'It is <i class="v">the least interesting</i> book.', ru: 'Это наименее интересная книга.' }
+  ]
+},
+{
+  id: 'd-adv', zone: 'more', level: 3, idx: 8,
+  name: 'Усилители и наречия', core: 'much taller · more slowly',
+  thesis: 'Усилить можно, но не через very',
+  short: 'усилители',
+  fig: {
+    rows: [
+      { l: 'Русский',    ru: 'Том <b>намного выше</b> Бена.' },
+      { l: 'Английский', tr: [['rest','Tom is'],['same','much'],['er','taller'],['same','than'],['rest','Ben'],['end','.']] },
+      { l: 'Русский',    ru: 'Она ходит <b>медленнее</b>.' },
+      { l: 'Английский', tr: [['rest','She walks'],['more','more'],['base','slowly'],['end','.']] }
+    ],
+    cap: 'Much и a lot усиливают сравнительную степень, а very — нет. Наречия на -ly берут more.'
+  },
+  lead: 'Два последних штриха. Сравнение можно <b>усилить</b>: «намного выше». А ещё степени сравнения бывают у <b>наречий</b>, не только у прилагательных: «быстрее», «медленнее».',
+  blocks: [
+    { kind: 'key', h: 'Усилители: much, a lot, a bit',
+      p: '<span class="mono">much taller</span> — намного выше · <span class="mono">a lot more expensive</span> — гораздо дороже · <span class="mono">a bit older</span> — чуть старше.' },
+    { kind: 'trap', h: 'Ловушка: very перед сравнительной',
+      p: '<span class="mono no">very taller</span> → <span class="mono yes">much taller</span><br>Very усиливает обычную форму (<span class="mono">very tall</span>), а сравнительной нужны much или a lot.' },
+    { kind: 'plain', h: 'Наречия',
+      p: 'Короткие наречия ведут себя как короткие прилагательные: <span class="mono">fast → faster → the fastest</span>, <span class="mono">hard → harder</span>, <span class="mono">early → earlier</span>.<br>Наречия на <span class="mono">-ly</span> берут more: <span class="mono">slowly → more slowly</span>, <span class="mono">carefully → more carefully</span>.' },
+    { kind: 'plain', h: 'Well — как good',
+      p: '<span class="mono">well → better → the best</span>: <span class="mono">He sings better than me.</span>' }
+  ],
+  forms: { p: 'He drives <b>more carefully</b> than me.', n: 'She doesn\'t run <b>faster</b> than him.', q: 'Who runs <b>the fastest</b>?' },
+  markers: ['much · a lot', 'a bit', 'very — нельзя', '-ly → more', 'well → better'],
+  ex: [
+    { en: 'Tom is <i class="v">much</i> taller than Ben.', ru: 'Том намного выше Бена.' },
+    { en: 'This is <i class="v">a lot</i> more expensive.', ru: 'Это гораздо дороже.' },
+    { en: 'She walks <i class="v">more slowly</i> than me.', ru: 'Она ходит медленнее меня.' },
+    { en: 'He sings <i class="v">better</i> than me.', ru: 'Он поёт лучше меня.', nb: 'well → better' }
+  ]
+}
+];
+
+/* ── дуэли ── */
+const DDUELS = [
+  {
+    q: 'Taller или more beautiful? — на слух',
+    a: { z: 'er', n: 'Короткое → окончание', tr: [['rest','Tom is'],['er','taller'],['same','than'],['rest','Ben'],['end','.']],
+         en: 'Tom is <i class="v">taller</i> than Ben.', ru: 'Том выше Бена.', why: '«Таллер» звучит нормально, слово короткое — берём окончание.' },
+    b: { z: 'more', n: 'Длинное → more', tr: [['rest','This dress is'],['more','more'],['base','beautiful'],['same','than'],['rest','that one'],['end','.']],
+         en: 'This dress is <i class="v">more beautiful</i> than that one.', ru: 'Это платье красивее того.', why: '«Бьютифулер» звучит ужасно — слово длинное, ставим more.' },
+    r: 'Примерьте окончание на слух. Звучит нормально — окончание, звучит ужасно — more.'
+  },
+  {
+    q: 'Bigger или nicer? — что делать с буквами',
+    a: { z: 'er', n: 'big · согласная удваивается', tr: [['rest','This house is'],['er','bigger'],['same','than'],['rest','that one'],['end','.']],
+         en: 'This house is <i class="v">bigger</i> than that one.', ru: 'Этот дом больше того.', why: 'Одна гласная и одна согласная — согласная удваивается: biggest, bigger.' },
+    b: { z: 'er', n: 'nice · e уже есть', tr: [['rest','Today is'],['er','nicer'],['same','than'],['rest','yesterday'],['end','.']],
+         en: 'Today is <i class="v">nicer</i> than yesterday.', ru: 'Сегодня приятнее, чем вчера.', why: 'Слово уже кончается на e — добавляем только r.' },
+    r: 'Одна гласная и одна согласная в конце — удваиваем. Слово на -e — добавляем только r или st.'
+  },
+  {
+    q: 'Better или faster? — исключение или нет',
+    a: { z: 'irr', n: 'good · особая форма', tr: [['rest','This film is'],['irr','better'],['same','than'],['rest','that one'],['end','.']],
+         en: 'This film is <i class="v">better</i> than that one.', ru: 'Этот фильм лучше того.', why: 'Good меняется целиком. Gooder не бывает — форму просто запоминаем.' },
+    b: { z: 'er', n: 'fast · обычное слово', tr: [['rest','This car is'],['er','faster'],['same','than'],['rest','that one'],['end','.']],
+         en: 'This car is <i class="v">faster</i> than that one.', ru: 'Эта машина быстрее той.', why: 'Fast — обычное короткое слово, и окончание ему подходит.' },
+    r: 'Пять слов запомните как пары: good, bad, far, little, many и much. Остальные следуют правилу.'
+  },
+  {
+    q: 'Than или the? — сравниваем или выделяем',
+    a: { z: 'same', n: 'Сравниваем → than', tr: [['rest','Tom is'],['er','taller'],['same','than'],['rest','Ben'],['end','.']],
+         en: 'Tom is taller <i class="v">than</i> Ben.', ru: 'Том выше Бена.', why: 'Мы называем, с кем сравниваем, — нужен than. The здесь не ставят.' },
+    b: { z: 'same', n: 'Выделяем самого → the', tr: [['rest','Tom is'],['same','the'],['er','tallest'],['same','in'],['rest','the class'],['end','.']],
+         en: 'Tom is <i class="v">the</i> tallest in the class.', ru: 'Том самый высокий в классе.', why: 'Мы выделяем одного среди многих — нужен the, а «среди кого» добавляет in или of.' },
+    r: 'Сравниваем с кем-то — than. Называем самого — the и in или of.'
+  },
+  {
+    q: 'Much или very? — усилитель',
+    a: { z: 'same', n: 'Much → сравнительная', tr: [['rest','Tom is'],['same','much'],['er','taller'],['same','than'],['rest','Ben'],['end','.']],
+         en: 'Tom is <i class="v">much</i> taller than Ben.', ru: 'Том намного выше Бена.', why: 'Much усиливает сравнительную степень.' },
+    b: { z: 'same', n: 'Very → обычная форма', tr: [['rest','Tom is'],['same','very'],['base','tall'],['end','.']],
+         en: 'Tom is <i class="v">very</i> tall.', ru: 'Том очень высокий.', why: 'Very усиливает слово в обычной форме, без сравнения.' },
+    r: 'Very — для обычной формы, much и a lot — для сравнительной. Very taller — ошибка.'
+  }
+];
+</script>
+<script>
+/* ═══════════════════════════════════════════════════════════
+   ЗАДАНИЯ · СТЕПЕНИ СРАВНЕНИЯ
+   ═══════════════════════════════════════════════════════════ */
+const DDRILLS = {
+
+'d-test': [
+  Q('Tom is ___ than Ben. (tall)',
+    ['+taller', 'Короткое слово, «таллер» звучит нормально — берём окончание.'],
+    ['more tall', 'Короткому слову more не нужен: ему хватает окончания.'],
+    ['tallest', 'Tallest — превосходная степень, а после than нужна сравнительная.']),
+  Q('This dress is ___ than that one. (beautiful)',
+    ['+more beautiful', '«Бьютифулер» звучит ужасно, значит, берём more и слово не трогаем.'],
+    ['beautifuler', 'Попробуйте произнести: «бьютифулер» звучит очень плохо. В таких случаях ставят more.'],
+    ['more beautifuler', 'Окончание и more вместе не ставят — достаточно одного more.']),
+  Q('«Это самая высокая башня.»',
+    ['+This is the tallest tower.', 'Слово короткое, берём the и окончание est.'],
+    ['This is the most tall tower.', 'Короткому слову the most не нужен: хватает окончания.'],
+    ['This is tallest tower.', 'У превосходной степени нужен the.']),
+  Q('Как правильно: expensive в сравнительной степени?',
+    ['expensiver', '«Экспенсивер» звучит ужасно — это сигнал, что нужно more.'],
+    ['+more expensive', 'Слово длинное, окончание звучит плохо — ставим more перед ним.'],
+    ['most expensive', 'Most — это превосходная степень, а нам нужна сравнительная.']),
+  Q('This is ___ film I know. (interesting)',
+    ['the interestingest', '«Интерестингест» звучит ужасно — значит, берём the most.'],
+    ['most interesting', 'У превосходной степени перед most стоит the.'],
+    ['+the most interesting', 'Длинное слово: the most и слово без изменений.']),
+  Q('My bag is ___ than yours. (small)',
+    ['more small', 'Короткому слову more не нужен.'],
+    ['+smaller', '«Смоллер» звучит нормально, слово короткое — окончание.'],
+    ['smallest', 'Smallest — превосходная, а после than нужна сравнительная.']),
+  Q('This is ___ street in the city. (dangerous)',
+    ['the dangerousest', '«Дэйнджерусест» звучит ужасно — нужен the most.'],
+    ['+the most dangerous', 'Длинное слово: the most перед ним, слово не меняется.'],
+    ['the more dangerous', 'The more — не превосходная степень. Нужно the most.']),
+  Q('This soup is ___ than that one. (cold)',
+    ['more cold', 'Короткому слову more не нужен.'],
+    ['the coldest', 'The coldest — превосходная, а после than нужна сравнительная.'],
+    ['+colder', '«Колдер» звучит нормально, слово короткое — окончание.']),
+  Q('«Он самый старший.»',
+    ['He is the most old.', 'Короткому слову the most не нужен.'],
+    ['+He is the oldest.', 'Короткое слово: the и окончание est.'],
+    ['He is the olderest.', 'Olderest — смесь двух степеней. Нужно the oldest.']),
+  Q('Какая пара верна?',
+    ['difficult → difficulter · fast → more fast', 'Всё наоборот: длинному слову нужен more, а короткому — окончание.'],
+    ['difficult → more difficult · fast → more fast', 'Fast — короткое слово, ему more не нужен.'],
+    ['+difficult → more difficult · fast → faster', 'Длинное слово — more, короткое — окончание.'])
+],
+
+'d-short': [
+  Q('My brother is ___ than me. (old)',
+    ['+older', 'Короткое слово: добавляем -er.'],
+    ['more old', 'Короткому слову more не нужен.'],
+    ['oldest', 'Oldest — превосходная. После than нужна сравнительная.']),
+  Q('This is ___ car in the shop. (fast)',
+    ['the most fast', 'Короткому слову the most не нужен.'],
+    ['+the fastest', 'Короткое слово: the и окончание est.'],
+    ['fastest', 'У превосходной степени нужен the.']),
+  Q('Today is ___ than yesterday. (nice)',
+    ['niceer', 'Слово уже кончается на e, поэтому добавляем только r.'],
+    ['more nice', 'Короткому слову more не нужен.'],
+    ['+nicer', 'Слово уже кончается на e — добавляем только r.']),
+  Q('This is ___ house in the town. (big)',
+    ['+the biggest', 'Одна гласная и одна согласная: согласная удваивается.'],
+    ['the bigest', 'Согласную нужно удвоить: biggest.'],
+    ['the most big', 'Короткому слову the most не нужен.']),
+  Q('It is ___ today than yesterday. (hot)',
+    ['hoter', 'Согласную нужно удвоить: hotter.'],
+    ['+hotter', 'Одна гласная и одна согласная: согласная удваивается.'],
+    ['more hot', 'Короткому слову more не нужен.']),
+  Q('This room is ___ than that one. (large)',
+    ['largeer', 'Слово уже кончается на e, поэтому добавляем только r.'],
+    ['more large', 'Короткому слову more не нужен.'],
+    ['+larger', 'Слово уже кончается на e — добавляем только r.']),
+  Q('«Эта улица длиннее.»',
+    ['This street is more long.', 'Короткому слову more не нужен.'],
+    ['+This street is longer.', 'Короткое слово: окончание -er.'],
+    ['This street is longest.', 'Longest — превосходная степень, а здесь сравнение.']),
+  Q('He is ___ boy in the class. (thin)',
+    ['the thinest', 'Согласную нужно удвоить: thinnest.'],
+    ['the most thin', 'Короткому слову the most не нужен.'],
+    ['+the thinnest', 'Одна гласная и одна согласная: согласная удваивается.']),
+  Q('My sister is ___ than me. (young)',
+    ['+younger', 'Короткое слово: окончание -er.'],
+    ['youngger', 'Здесь удваивать нечего: слово кончается на две согласные.'],
+    ['more young', 'Короткому слову more не нужен.']),
+  Q('«Самая холодная зима.»',
+    ['the colder winter', 'The colder — не превосходная степень.'],
+    ['the most cold winter', 'Короткому слову the most не нужен.'],
+    ['+the coldest winter', 'Короткое слово: the и окончание est.'])
+],
+
+'d-long': [
+  Q('This book is ___ than the film. (interesting)',
+    ['+more interesting', 'Длинное слово: more перед ним, слово не меняется.'],
+    ['interestinger', '«Интерестингер» звучит ужасно — значит, нужен more.'],
+    ['the most interesting', 'The most — превосходная, а здесь сравнение.']),
+  Q('It is ___ place in the city. (beautiful)',
+    ['the beautifulest', '«Бьютифулест» звучит ужасно — нужен the most.'],
+    ['+the most beautiful', 'Длинное слово: the most и слово без изменений.'],
+    ['the more beautiful', 'The more — не превосходная степень. Нужно the most.']),
+  Q('Skiing is ___ than walking. (dangerous)',
+    ['dangerouser', '«Дэйнджерусер» звучит ужасно — нужен more.'],
+    ['the most dangerous', 'The most — превосходная, а здесь сравнение.'],
+    ['+more dangerous', 'Длинное слово: more перед ним, слово не меняется.']),
+  Q('«Эта машина дороже.»',
+    ['This car is expensiver.', '«Экспенсивер» звучит ужасно — нужен more.'],
+    ['This car is more expensiver.', 'Окончание и more вместе не ставят.'],
+    ['+This car is more expensive.', 'Длинное слово: more и слово без изменений.']),
+  Q('This is ___ test of all. (difficult)',
+    ['the difficultest', '«Дификалтест» звучит ужасно — нужен the most.'],
+    ['most difficult', 'У превосходной степени перед most стоит the.'],
+    ['+the most difficult', 'Длинное слово: the most и слово без изменений.']),
+  Q('She is ___ than her sister. (careful)',
+    ['carefuler', '«Кэйрфулер» звучит ужасно — слово составное (care + ful), нужен more.'],
+    ['+more careful', 'Составное слово: more перед ним, слово не меняется.'],
+    ['the more careful', 'The у сравнительной степени не ставят.']),
+  Q('«Это самый удобный диван.»',
+    ['This is the comfortablest sofa.', 'Слово длинное, окончание звучит ужасно — нужен the most.'],
+    ['This is the most comfortabler sofa.', 'Окончание и the most вместе не ставят.'],
+    ['+This is the most comfortable sofa.', 'Длинное слово: the most и слово без изменений.']),
+  Q('The film is ___ than the book. (boring)',
+    ['boringer', '«Борингер» звучит ужасно — у слов на -ing нужен more.'],
+    ['+more boring', 'Слово на -ing: more перед ним, слово не меняется.'],
+    ['more boringer', 'Окончание и more вместе не ставят.']),
+  Q('«Здоровье важнее денег.»',
+    ['Health is importanter than money.', '«Импортантер» звучит ужасно — нужен more.'],
+    ['+Health is more important than money.', 'Длинное слово: more и слово без изменений.'],
+    ['Health is most important than money.', 'Most — превосходная степень, а здесь сравнение.']),
+  Q('He is ___ person I know. (famous)',
+    ['the famousest', '«Фэймусест» звучит ужасно — нужен the most.'],
+    ['famousest', 'Окончание звучит ужасно, и the нет.'],
+    ['+the most famous', 'Слово на -ous: the most и слово без изменений.'])
+],
+
+'d-y': [
+  Q('Anna is ___ than Tom. (happy)',
+    ['happyer', 'Перед окончанием y превращается в i.'],
+    ['+happier', 'На конце y — меняем её на i и добавляем -er.'],
+    ['the happier', 'The у сравнительной степени не ставят.']),
+  Q('This is ___ test of all. (easy)',
+    ['the easyest', 'Перед окончанием y превращается в i.'],
+    ['the most easiest', 'Окончание и the most вместе не ставят.'],
+    ['+the easiest', 'Y превращается в i, и добавляется -est.']),
+  Q('This street is ___ than ours. (busy)',
+    ['busyer', 'Перед окончанием y превращается в i.'],
+    ['+busier', 'Y превращается в i, и добавляется -er.'],
+    ['more busyer', 'Окончание и more вместе не ставят.']),
+  Q('He is ___ than his brother. (funny)',
+    ['+funnier', 'Y превращается в i, и добавляется -er.'],
+    ['funnyer', 'Перед окончанием y превращается в i.'],
+    ['the funnier', 'The у сравнительной степени не ставят.']),
+  Q('My bag is ___ than yours. (heavy)',
+    ['heavyer', 'Перед окончанием y превращается в i.'],
+    ['heavieer', 'Достаточно заменить y на i: heavier.'],
+    ['+heavier', 'Y превращается в i, и добавляется -er.']),
+  Q('She is ___ girl in the class. (pretty)',
+    ['the prettyest', 'Перед окончанием y превращается в i.'],
+    ['+the prettiest', 'Y превращается в i, и добавляется -est.'],
+    ['the most pretty', 'У слов на -y обычно ставят окончание, а не the most.']),
+  Q('He is ___ than his brother. (famous)',
+    ['famouser', '«Фэймусер» звучит ужасно: слова на -ous берут more.'],
+    ['+more famous', 'Слово на -ous: more и слово без изменений.'],
+    ['famousier', 'Менять тут нечего: окончание звучит ужасно, нужен more.']),
+  Q('He looks ___ than yesterday. (tired)',
+    ['tireder', '«Тайрдер» звучит плохо: слова на -ed берут more.'],
+    ['tiredder', 'Удваивать тут нечего, слово на -ed берёт more.'],
+    ['+more tired', 'Слово на -ed: more и слово без изменений.']),
+  Q('«Сегодня облачнее, чем вчера.»',
+    ['Today is cloudyer than yesterday.', 'Перед окончанием y превращается в i.'],
+    ['+Today is cloudier than yesterday.', 'Y превращается в i, и добавляется -er.'],
+    ['Today is more cloudyer than yesterday.', 'Окончание и more вместе не ставят.']),
+  Q('Какая пара верна?',
+    ['easy → more easy · careful → carefuler', 'У слова на -y нужно менять y на i, а у careful — ставить more.'],
+    ['easy → easyer · careful → more careful', 'У easy y превращается в i: easier.'],
+    ['+easy → easier · careful → more careful', 'У слова на -y y → i, а у составного слова — more.'])
+],
+
+'d-irr': [
+  Q('This film is ___ than that one. (good)',
+    ['gooder', 'У good своя форма: better.'],
+    ['more good', 'У good своя форма: better. Ни окончание, ни more не нужны.'],
+    ['+better', 'Good меняется целиком: good → better.']),
+  Q('It was ___ day of my life. (bad)',
+    ['the baddest', 'У bad своя форма: the worst.'],
+    ['+the worst', 'Bad меняется целиком: bad → worse → the worst.'],
+    ['the most bad', 'У bad своя форма: the worst.']),
+  Q('Today is ___ than yesterday. (bad)',
+    ['+worse', 'Bad меняется целиком: bad → worse.'],
+    ['badder', 'У bad своя форма: worse.'],
+    ['more bad', 'У bad своя форма: worse.']),
+  Q('I need ___ time. (much)',
+    ['mucher', 'У much своя форма: more.'],
+    ['+more', 'Much → more: это степень слова «много».'],
+    ['most', 'Most — превосходная, а здесь просто «больше».']),
+  Q('This is ___ film of the year. (good)',
+    ['the goodest', 'У good своя форма: best.'],
+    ['+the best', 'Good → better → the best.'],
+    ['the most good', 'У good своя форма: best.']),
+  Q('The station is ___ than the shop. (far)',
+    ['farer', 'У far своя форма: farther.'],
+    ['more far', 'У far своя форма: farther.'],
+    ['+farther', 'Far → farther → the farthest.']),
+  Q('I have ___ money than you. (little)',
+    ['littler', 'У little своя форма: less.'],
+    ['+less', 'Little → less → the least.'],
+    ['more little', 'У little своя форма: less.']),
+  Q('«Он поёт лучше меня.»',
+    ['He sings gooder than me.', 'У good своя форма: better.'],
+    ['He sings more well than me.', 'У well своя форма: better.'],
+    ['+He sings better than me.', 'Well → better → the best.']),
+  Q('She has ___ books than me. (many)',
+    ['manyer', 'У many своя форма: more.'],
+    ['mucher', 'У many своя форма: more.'],
+    ['+more', 'Many → more → the most.']),
+  Q('Какая пара верна?',
+    ['bad → worser → the worstest', 'Worse и worst уже содержат всё: добавлять ничего не нужно.'],
+    ['bad → more bad → the most bad', 'У bad свои формы: worse и the worst.'],
+    ['+bad → worse → the worst', 'Bad меняется целиком.'])
+],
+
+'d-than': [
+  Q('Tom is taller ___ Ben.',
+    ['then', 'Then значит «потом». «Чем» — than.'],
+    ['+than', 'Than — это «чем»: так называют того, с кем сравниваем.'],
+    ['that', 'That — «тот» или «что». Для сравнения нужен than.']),
+  Q('He is ___ tallest boy in the class.',
+    ['more', 'More не ставят перед словом с окончанием est.'],
+    ['than', 'Than нужен после сравнительной степени, а здесь превосходная.'],
+    ['+the', 'У превосходной степени всегда стоит the.']),
+  Q('She is older ___ me.',
+    ['+than', 'Than — «чем». После него стоит вторая форма местоимения: me.'],
+    ['then', 'Then значит «потом». «Чем» — than.'],
+    ['from', 'From — «от». Для сравнения нужен than.']),
+  Q('This is the biggest house ___ the town.',
+    ['than', 'Than нужен после сравнительной, а здесь превосходная.'],
+    ['+in', 'In называет место или группу: «в городе», «в классе».'],
+    ['at', 'At — это «в точке», так про город не говорят.']),
+  Q('It is the cheapest ___ all.',
+    ['+of', 'Of называет набор: «из всех», «из трёх».'],
+    ['in', 'In называет место или группу, а «из всех» — of all.'],
+    ['than', 'Than нужен после сравнительной, а здесь превосходная.']),
+  Q('Какое предложение верно?',
+    ['Tom is the taller than Ben.', 'У сравнительной степени the не ставят.'],
+    ['Tom is taller then Ben.', 'Then значит «потом». «Чем» — than.'],
+    ['+Tom is taller than Ben.', 'Сравнительная степень, а после неё than.']),
+  Q('This is ___ best film of the year.',
+    ['a', 'У превосходной степени стоит the.'],
+    ['+the', 'У превосходной степени всегда стоит the.'],
+    ['than', 'Than нужен после сравнительной степени.']),
+  Q('It is bigger ___ I thought.',
+    ['then', 'Then значит «потом». «Чем» — than.'],
+    ['that', 'That — «что». Для сравнения нужен than.'],
+    ['+than', 'После than может идти целая фраза: «чем я думал».']),
+  Q('«Он самый высокий из троих.»',
+    ['He is the tallest in the three.', 'Набор называют через of: of the three.'],
+    ['He is taller of the three.', 'Для «самого» нужна превосходная степень: the tallest.'],
+    ['+He is the tallest of the three.', 'Превосходная степень и of, ведь это набор.']),
+  Q('«Она старше меня.»',
+    ['She is older that me.', 'That — «тот». Для сравнения нужен than.'],
+    ['+She is older than me.', 'Сравнительная степень, затем than и вторая форма местоимения.'],
+    ['She is older from me.', 'From — «от». Для сравнения нужен than.'])
+],
+
+'d-as': [
+  Q('Tom is ___ tall as Ben.',
+    ['than', 'Than нужен после сравнительной степени. «Такой же» — as … as.'],
+    ['more', 'Более не нужно: слово здесь остаётся в обычной форме.'],
+    ['+as', 'As … as — «такой же, как». Первое as стоит перед словом.']),
+  Q('This phone is not ___ expensive as that one.',
+    ['+as', 'Not as … as — «не такой … как».'],
+    ['more', 'More превратил бы фразу в сравнение, а нам нужно as … as.'],
+    ['than', 'Than нужен после сравнительной степени.']),
+  Q('«Том такой же высокий, как Бен.»',
+    ['Tom is as taller as Ben.', 'Слово остаётся в обычной форме, окончание не нужно.'],
+    ['+Tom is as tall as Ben.', 'As … as, слово в обычной форме.'],
+    ['Tom is taller as Ben.', 'После taller нужен than. Для «такой же» — as … as.']),
+  Q('This flat is ___ expensive than that one. («менее»)',
+    ['least', 'Least — превосходная степень, а здесь сравнение.'],
+    ['lesser', 'Lesser — другое слово, для этой фразы нужен less.'],
+    ['+less', 'Less — зеркальное more: «менее».']),
+  Q('It is ___ interesting book. («наименее»)',
+    ['the less', 'The less — сравнительная. Для «наименее» нужен the least.'],
+    ['less the', 'Порядок слов: the стоит первым.'],
+    ['+the least', 'The least — зеркальное the most: «наименее».']),
+  Q('She is as ___ as her mother. (beautiful)',
+    ['more beautiful', 'More перед словом превратил бы это в сравнение. Нужен as … as.'],
+    ['beautifuler', 'После as слово остаётся в обычной форме.'],
+    ['+beautiful', 'После as слово не меняется.']),
+  Q('He isn\'t as ___ as me. (fast)',
+    ['faster', 'После as слово остаётся в обычной форме.'],
+    ['+fast', 'После as слово не меняется.'],
+    ['fastest', 'После as слово остаётся в обычной форме.']),
+  Q('Tom runs as ___ as Ben. (fast)',
+    ['+fast', 'После as наречие не меняется.'],
+    ['faster', 'После as слово остаётся в обычной форме.'],
+    ['more fast', 'После as слово остаётся в обычной форме.']),
+  Q('This test is ___ difficult than the last one. («менее»)',
+    ['+less', 'Less — зеркальное more: «менее».'],
+    ['least', 'Least — превосходная степень, а здесь сравнение.'],
+    ['lesser', 'Lesser — другое слово, для этой фразы нужен less.']),
+  Q('«Эта книга не такая интересная, как та.»',
+    ['This book is not as more interesting as that one.', 'После as слово остаётся в обычной форме, more не нужен.'],
+    ['+This book is not as interesting as that one.', 'Not as … as, слово не меняется.'],
+    ['This book is not interesting than that one.', 'Для «такая же» нужны два as, а не than.'])
+],
+
+'d-adv': [
+  Q('Tom is ___ taller than Ben. («намного»)',
+    ['very', 'Very не сочетается со сравнительной степенью.'],
+    ['+much', 'Much усиливает сравнительную степень.'],
+    ['most', 'Most — превосходная степень.']),
+  Q('This is ___ more expensive. («гораздо»)',
+    ['very', 'Very не сочетается со сравнительной степенью.'],
+    ['so', 'So тут не подходит: «гораздо» — a lot или much.'],
+    ['+a lot', 'A lot усиливает сравнительную степень.']),
+  Q('«Она ходит медленнее.»',
+    ['She walks slowlier.', 'Наречия на -ly берут more.'],
+    ['+She walks more slowly.', 'Наречие на -ly: more и слово без изменений.'],
+    ['She walks the most slowly.', 'The most — превосходная степень.']),
+  Q('He drives ___ than me. (carefully)',
+    ['carefullier', 'Наречия на -ly берут more.'],
+    ['+more carefully', 'Наречие на -ly: more и слово без изменений.'],
+    ['the more carefully', 'The у сравнительной степени не ставят.']),
+  Q('She runs ___ than me. (fast)',
+    ['more fast', 'Короткое наречие берёт окончание.'],
+    ['+faster', 'Fast — короткое слово: окончание -er.'],
+    ['fastlier', 'У fast нет -ly: окончание -er.']),
+  Q('He sings ___ than me. (well)',
+    ['weller', 'У well своя форма: better.'],
+    ['+better', 'Well → better → the best.'],
+    ['more well', 'У well своя форма: better.']),
+  Q('«Он пришёл раньше меня.»',
+    ['He came more early than me.', 'Early — слово на -y: early → earlier.'],
+    ['+He came earlier than me.', 'Early → earlier: y превращается в i.'],
+    ['He came the earliest than me.', 'The earliest — превосходная степень.']),
+  Q('It is ___ colder today. («чуть-чуть»)',
+    ['very', 'Very не сочетается со сравнительной степенью.'],
+    ['+a bit', 'A bit — «чуть-чуть», усиливает сравнительную степень.'],
+    ['the most', 'The most — превосходная степень.']),
+  Q('«Он очень высокий.»',
+    ['He is very taller.', 'Very не сочетается со сравнительной степенью.'],
+    ['He is much tall.', 'Much усиливает сравнительную степень, а не обычную форму.'],
+    ['+He is very tall.', 'Very усиливает слово в обычной форме.']),
+  Q('She speaks ___ than him. (quickly)',
+    ['quicklier', 'Наречия на -ly берут more.'],
+    ['most quickly', 'Most — превосходная, и ей нужно the.'],
+    ['+more quickly', 'Наречие на -ly: more и слово без изменений.'])
+]
+
+};
+
+/* ═══════════════ ОБЩИЙ ТРЕНАЖЁР · СТЕПЕНИ СРАВНЕНИЯ ═══════════════ */
+const QUIZ_D = [
+  Q('This sofa is ___ than that one. (comfortable)',
+    ['comfortabler', '«Камфортаблер» звучит ужасно — нужен more.'],
+    ['+more comfortable', 'Длинное слово: more и слово без изменений.'],
+    ['the comfortable', 'Здесь нужна сравнительная степень: диван сравнивают с другим.']),
+  Q('«Это самое быстрое такси.»',
+    ['This is the most fast taxi.', 'Короткому слову the most не нужен.'],
+    ['This is fastest taxi.', 'У превосходной степени нужен the.'],
+    ['+This is the fastest taxi.', 'Короткое слово: the и окончание est.']),
+  Q('The river is ___ than the lake. (long)',
+    ['more long', 'Короткому слову more не нужен.'],
+    ['+longer', 'Короткое слово: окончание -er.'],
+    ['the longest', 'The longest — превосходная, а здесь сравнение.']),
+  Q('It is ___ day of the year. (hot)',
+    ['the hotest', 'Согласную нужно удвоить: hottest.'],
+    ['the most hot', 'Короткому слову the most не нужен.'],
+    ['+the hottest', 'Одна гласная и одна согласная: согласная удваивается.']),
+  Q('«Это самый опасный район.»',
+    ['This is the dangerousest area.', '«Дэйнджерусест» звучит ужасно — нужен the most.'],
+    ['+This is the most dangerous area.', 'Длинное слово: the most и слово без изменений.'],
+    ['This is the more dangerous area.', 'The more — не превосходная степень.']),
+  Q('English is ___ than I thought. (difficult)',
+    ['difficulter', '«Дификалтер» звучит ужасно — нужен more.'],
+    ['the most difficult', 'The most — превосходная, а здесь сравнение.'],
+    ['+more difficult', 'Длинное слово: more и слово без изменений.']),
+  Q('My room is ___ than yours. (messy)',
+    ['messyer', 'Перед окончанием y превращается в i.'],
+    ['more messyer', 'Окончание и more вместе не ставят.'],
+    ['+messier', 'Y превращается в i, и добавляется -er.']),
+  Q('This is ___ joke I know. (funny)',
+    ['the funnyest', 'Перед окончанием y превращается в i.'],
+    ['+the funniest', 'Y превращается в i, и добавляется -est.'],
+    ['the most funny', 'У слов на -y обычно ставят окончание.']),
+  Q('This is ___ idea so far. (good)',
+    ['the goodest', 'У good своя форма: best.'],
+    ['the most good', 'У good своя форма: best.'],
+    ['+the best', 'Good → better → the best.']),
+  Q('I have ___ friends than you. (many)',
+    ['manier', 'У many своя форма: more.'],
+    ['+more', 'Many → more → the most.'],
+    ['mucher', 'У many своя форма: more.']),
+  Q('It is warmer today ___ yesterday.',
+    ['then', 'Then значит «потом». «Чем» — than.'],
+    ['that', 'That — «тот». Для сравнения нужен than.'],
+    ['+than', 'Than — «чем»: с чем сравниваем.']),
+  Q('She is ___ youngest in the family.',
+    ['a', 'У превосходной степени стоит the.'],
+    ['than', 'Than нужен после сравнительной степени.'],
+    ['+the', 'У превосходной степени всегда стоит the.']),
+  Q('Ben is not as ___ as Tom. (tall)',
+    ['taller', 'После as слово остаётся в обычной форме.'],
+    ['+tall', 'Not as … as: слово не меняется.'],
+    ['the tallest', 'После as слово остаётся в обычной форме.']),
+  Q('This film is ___ interesting than the book. («менее»)',
+    ['+less', 'Less — зеркальное more: «менее».'],
+    ['least', 'Least — превосходная степень, а здесь сравнение.'],
+    ['lesser', 'Lesser — другое слово, нужен less.']),
+  Q('It is ___ cheaper here. («намного»)',
+    ['very', 'Very не сочетается со сравнительной степенью.'],
+    ['most', 'Most — превосходная степень.'],
+    ['+much', 'Much усиливает сравнительную степень.']),
+  Q('He works ___ than me. (hard)',
+    ['more hard', 'Hard — короткое слово, окончание -er.'],
+    ['hardlier', 'У hard нет -ly: окончание -er.'],
+    ['+harder', 'Короткое слово: окончание -er.'])
+];
+</script>
+<script>
+/* ═══════════════════════════════════════════════════════════
    ТРЕНАЖЁР · один компонент на все блоки заданий
    Показывает по одному вопросу. После ответа — разбор:
    почему верный вариант верный и чем плох выбранный.
@@ -5926,6 +6992,54 @@ pbForm.addEventListener('click', e => { const b = e.target.closest('button'); if
 renderPron();
 
 /* ═══════════════════════════════════════════════════════════
+   ВКЛАДКА «СТЕПЕНИ»
+   ═══════════════════════════════════════════════════════════ */
+renderRoadmap('d-road', DLEVELS, D, {
+  pid: 'd',
+  drills: DDRILLS,
+  kindLabel: it => it.short.toUpperCase(),
+  figure: sFigure
+});
+
+renderDuels('dDuels', DDUELS, tr => `<div class="train">${trainHTML(tr)}</div>`);
+makeQuiz(document.getElementById('dQuiz'), QUIZ_D, { title: 'Вопрос' });
+
+document.getElementById('dSheetBody').innerHTML = DADJ.map(a => `
+  <tr class="z-${a.type}">
+    <td class="nm"><b>${a.base}</b><span class="tx">${a.ru}</span></td>
+    <td class="ex">${DTYPES[a.type]}</td>
+    <td class="fm"><code>${a.cmp}</code></td>
+    <td class="fm"><code>${a.type === 'more' ? a.sup : 'the ' + a.sup}</code></td>
+    <td class="ex">${a.note}</td>
+  </tr>`).join('');
+
+/* ── конструктор степеней: слово × степень, роли ячеек — по способу образования ── */
+const db = { word: 'beautiful', deg: 'c' };
+const dbWord = document.getElementById('dbWord');
+const dbDeg = document.getElementById('dbDeg');
+const dbTrain = document.getElementById('dbTrain');
+
+dbWord.innerHTML = DADJ.map(a => `<button data-v="${a.key}" aria-pressed="false">${a.base}<i>${a.ru}</i></button>`).join('');
+dbDeg.innerHTML = DB_DEGREES.map(d => `<button data-v="${d.key}" aria-pressed="false">${d.t}<i>${d.i}</i></button>`).join('');
+document.getElementById('dbRoles').innerHTML = DROLES.map(r =>
+  `<span class="r-${r.r}"><i></i>${r.t}${r.i ? ` <em>· ${r.i}</em>` : ''}</span>`).join('');
+
+function renderDeg() {
+  const a = DADJ.find(x => x.key === db.word);
+  dbWord.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === db.word)));
+  dbDeg.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === db.deg)));
+  /* <b> в самом предложении — выделенное слово; свой <b> в .bu__ru занят подписью */
+  const ru = a.s[db.deg].ru.replace(/<b>/g, `<span class="hl r-${a.type}">`).replace(/<\/b>/g, '</span>');
+  document.getElementById('dbRu').innerHTML = `<b>ПО-РУССКИ</b>«${ru}»`;
+  flipTrain(dbTrain, trainHTML(degTrain(a, db.deg)));
+  document.getElementById('dbSchema').textContent = 'Проверка на слух: ' + a.ear;
+  document.getElementById('dbNote').innerHTML = a.note;
+}
+dbWord.addEventListener('click', e => { const b = e.target.closest('button'); if (b) { db.word = b.dataset.v; renderDeg(); } });
+dbDeg.addEventListener('click', e => { const b = e.target.closest('button'); if (b) { db.deg = b.dataset.v; renderDeg(); } });
+renderDeg();
+
+/* ═══════════════════════════════════════════════════════════
    НАВИГАЦИЯ: вкладки, оглавление, меню, точки, прогресс
    ═══════════════════════════════════════════════════════════ */
 const TABDEF = {
@@ -5980,6 +7094,19 @@ const TABDEF = {
       { id: 'p-duels', n: 'Сравнение форм', s: 'Пять пар, которые путают', e: 'Разбор' },
       { id: 'p-quiz', n: 'Общая проверка', s: '16 предложений вперемешку', e: 'Тренажёр' },
       { id: 'p-sheet', n: 'Шпаргалка', s: 'Все слова одной таблицей', e: 'Итог' }
+    ]
+  },
+  deg: {
+    panel: 'tab-deg', toc: 'dToc', items: D, total: 8,
+    nav: [
+      { id: 'd-algo', n: 'Что спрашивать у себя', s: 'Три вопроса к любому слову', e: 'Старт' },
+      { id: 'd-system', n: 'Конструктор степеней', s: 'Слово, примерка на слух, итог', e: 'Уровень 0' },
+      { id: 'd-lvl1', n: 'Две степени', s: 'Окончание или more', e: 'Уровень 1' },
+      { id: 'd-lvl2', n: 'Особые случаи', s: 'happier, better, than и the', e: 'Уровень 2' },
+      { id: 'd-lvl3', n: 'Тонкости', s: 'as … as, less, much', e: 'Уровень 3' },
+      { id: 'd-duels', n: 'Сравнение форм', s: 'Пять пар, которые путают', e: 'Разбор' },
+      { id: 'd-quiz', n: 'Общая проверка', s: '16 предложений вперемешку', e: 'Тренажёр' },
+      { id: 'd-sheet', n: 'Шпаргалка', s: 'Девять слов одной таблицей', e: 'Итог' }
     ]
   }
 };
@@ -6065,7 +7192,7 @@ let done = new Set();
 try { done = new Set(JSON.parse(localStorage.getItem(KEY) || '[]')); } catch (e) { done = new Set(); }
 
 function paint() {
-  const all = S.concat(T, C, P);
+  const all = S.concat(T, C, P, D);
   all.forEach(x => {
     const on = done.has(x.id);
     const st = document.getElementById(x.id);
@@ -6129,6 +7256,7 @@ function tabForHash(h) {
   if (S.some(x => x.id === id) || id.indexOf('s-') === 0) return 'sentence';
   if (C.some(c => c.id === id) || id.indexOf('c-') === 0) return 'cond';
   if (P.some(x => x.id === id) || id.indexOf('p-') === 0) return 'pron';
+  if (D.some(x => x.id === id) || id.indexOf('d-') === 0) return 'deg';
   if (T.some(t => t.id === id) || id.indexOf('t-') === 0) return 'tenses';
   return null;
 }

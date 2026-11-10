@@ -36,6 +36,7 @@ cat <<'HEAD'
 HEAD
   cat $S/01-style.css
   cat $S/02-style-new.css
+  cat $S/03-home.css
   echo '</style>'
   echo '</head>'
   echo '<body>'

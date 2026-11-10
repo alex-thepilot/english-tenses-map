@@ -4,7 +4,8 @@
 
     <div class="tabs" role="tablist" aria-label="Разделы грамматики">
       <span class="tabs__ink" id="tabsInk"></span>
-      <button role="tab" data-tab="sentence" aria-selected="true" aria-controls="tab-sentence">Основа</button>
+      <button role="tab" id="homeTab" data-tab="home" aria-selected="true" aria-controls="tab-home">Главная</button>
+      <button role="tab" data-tab="sentence" aria-selected="false" aria-controls="tab-sentence">Основа</button>
       <button role="tab" data-tab="tenses" aria-selected="false" aria-controls="tab-tenses">Времена</button>
       <button role="tab" data-tab="cond" aria-selected="false" aria-controls="tab-cond">Условные</button>
       <button role="tab" data-tab="pron" aria-selected="false" aria-controls="tab-pron">Местоимения</button>
@@ -39,7 +40,98 @@
   </div>
 </nav>
 
-<div class="tabpanel" id="tab-sentence" role="tabpanel">
+<main class="tabpanel home" id="tab-home" role="tabpanel" aria-labelledby="homeTab">
+  <div class="home-stack">
+  <div class="home-stack__card">
+  <header class="home-hero wrap" id="home-top">
+    <div class="home-hero__copy">
+      <p class="eyebrow">Карта английской грамматики</p>
+      <h1>Английская грамматика <em>на пальцах</em></h1>
+      <p class="home-hero__lead">Разберись, почему англичане говорят именно так, и собери свою фразу. От первого вопроса до времён и пассива — через знакомые русские примеры.</p>
+      <div class="home-actions">
+        <a class="home-primary" href="#home-course">Посмотреть программу <span aria-hidden="true">↘</span></a>
+        <a class="home-secondary" href="#s-hero">Открыть первый урок <span aria-hidden="true">→</span></a>
+      </div>
+      <p class="home-facts">6 разделов <span>·</span> 588 заданий с разбором в методичке</p>
+    </div>
+    <div class="home-example">
+      <div class="home-example__label"><span>ПОДСКАЗКА ИЗ УРОКА</span><span>CONDITIONALS</span></div>
+      <h2 class="home-example__title">Якобы да кабы</h2>
+      <p class="home-example__note">Увидел два «бы»? Спроси себя: я представляю, что было бы <strong>сейчас</strong>, или прокручиваю то, чего не случилось <strong>тогда</strong>?</p>
+      <div class="home-example__pair">
+        <p><strong>Сейчас.</strong> Если <strong>бы</strong> у меня было время, я <strong>бы</strong> позвонил.</p>
+        <p lang="en">If I <b>had</b> time, I <b>would call</b>.</p>
+      </div>
+      <div class="home-example__pair">
+        <p><strong>Вчера.</strong> Если <strong>бы</strong> у меня вчера было время, я <strong>бы</strong> позвонил.</p>
+        <p lang="en">If I <b>had had</b> time yesterday, I <b>would have called</b>.</p>
+      </div>
+      <a href="#c-algo">Разобрать условные предложения <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <section class="home-letter wrap" aria-labelledby="home-letter-title">
+    <h2 id="home-letter-title">Привет, мой друг.</h2>
+    <div>
+      <p>Я долго думал о том, почему люди бросают английский, даже когда очень хотят на нём говорить. Иногда на объяснение одного правила уходит столько новых терминов, что уже забываешь, какую фразу хотел сказать.</p>
+      <p>Поэтому я сделал методичку, по которой сам хотел бы учиться. Сначала берём знакомую русскую фразу. Смотрим, что мы хотим сказать. Потом собираем английский вариант и сразу пробуем его в деле. Если ты уже начинал учить язык, но запутался в правилах, или только берёшься за грамматику, начни с одной темы и посмотри, подходит ли тебе такой подход.</p>
+    </div>
+  </section>
+  </div>
+
+  <div class="home-stack__card">
+  <section class="home-section wrap" id="home-course">
+    <div class="home-section__head">
+      <p class="eyebrow">Содержание</p>
+      <h2>Выбери, с чего начать</h2>
+      <p>Если начинаешь с нуля, иди по порядку. Если путаешься в конкретной теме, открой её сразу.</p>
+    </div>
+    <div class="home-grid">
+      <a class="home-card" href="#s-hero"><span class="home-card__num">01</span><span class="home-card__name">Основа</span><span class="home-card__text">Как собрать фразу, когда нужен <i>to be</i> и почему в вопросе помощник встаёт первым.</span><span class="home-card__arrow" aria-hidden="true">↗</span></a>
+      <a class="home-card" href="#t-hero"><span class="home-card__num">02</span><span class="home-card__name">Времена</span><span class="home-card__text">Одна карта вместо двенадцати отдельных таблиц. Выбери, когда и как происходит действие.</span><span class="home-card__arrow" aria-hidden="true">↗</span></a>
+      <a class="home-card" href="#c-hero"><span class="home-card__num">03</span><span class="home-card__name">Условные предложения</span><span class="home-card__text">Как сказать «если» и «если бы» о будущем, настоящем и прошлом.</span><span class="home-card__arrow" aria-hidden="true">↗</span></a>
+      <a class="home-card" href="#p-hero"><span class="home-card__num">04</span><span class="home-card__name">Местоимения</span><span class="home-card__text">Почему «она» превращается в <i>she</i> или <i>her</i> и как выбрать нужное слово.</span><span class="home-card__arrow" aria-hidden="true">↗</span></a>
+      <a class="home-card" href="#d-hero"><span class="home-card__num">05</span><span class="home-card__name">Степени сравнения</span><span class="home-card__text">Как сказать «выше», «красивее» и «самый красивый».</span><span class="home-card__arrow" aria-hidden="true">↗</span></a>
+      <a class="home-card" href="#v-hero"><span class="home-card__num">06</span><span class="home-card__name">Пассив</span><span class="home-card__text">Как сказать «меня пригласили», «письмо отправили» или «результаты объявят».</span><span class="home-card__arrow" aria-hidden="true">↗</span></a>
+    </div>
+  </section>
+  </div>
+
+  <div class="home-stack__card">
+  <section class="home-section wrap" id="home-guide">
+    <div class="home-section__head">
+      <p class="eyebrow">Как заниматься</p>
+      <h2>Одна тема за раз</h2>
+    </div>
+    <ol class="home-route">
+      <li><span>01</span><h3>Прочитай станцию</h3><p>Начни с короткого правила и пары примеров с переводом.</p></li>
+      <li><span>02</span><h3>Собери свою фразу</h3><p>В конструкторе меняй форму и смотри, какие слова переставляются или добавляются.</p></li>
+      <li><span>03</span><h3>Проверь себя</h3><p>В заданиях увидишь, почему подходит правильный вариант. Если ошибёшься, разберёшь и свой ответ. Готовую станцию можно отметить как изученную.</p></li>
+    </ol>
+  </section>
+  </div>
+
+  <div class="home-stack__card">
+  <section class="home-practice wrap" id="home-practice">
+    <div class="home-practice__inner">
+      <div>
+        <p class="eyebrow">Выдаётся отдельно</p>
+        <h2>Дополнительный тренажёр</h2>
+        <p>Отдельный HTML-файл на 1 500 заданий. Подойдёт для домашней работы и повторения. В смешанных наборах сначала решаешь задачу, а затем читаешь разбор. Во «Временах» можно также выбрать одно время и потренировать его отдельно.</p>
+      </div>
+      <div class="home-practice__num" aria-hidden="true">1 500<span>заданий</span></div>
+    </div>
+  </section>
+
+  <footer class="home-footer wrap">
+    <p>Начни с одной фразы.</p>
+    <a class="home-primary" href="#s-hero">Перейти к основе <span aria-hidden="true">→</span></a>
+  </footer>
+  </div>
+  </div>
+</main>
+
+<div class="tabpanel" id="tab-sentence" role="tabpanel" hidden>
 <!-- ══════════════════ ГЕРОЙ · ОСНОВА ══════════════════ -->
 <header class="hero" id="s-hero">
   <div class="wrap">

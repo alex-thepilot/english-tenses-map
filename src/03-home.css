@@ -1,0 +1,104 @@
+/* Главная использует те же цвета и шрифты, что и уроки. */
+.home { --home-accent: var(--present); padding: 14px 0 32px; }
+.home a { color: inherit; text-decoration: none; }
+.home [id] { scroll-margin-top: 76px; }
+.home-stack {
+  max-width: calc(var(--wrap) + 32px); margin-inline: auto;
+  padding-inline: clamp(8px, 1.5vw, 16px); display: grid; gap: 20px;
+  isolation: isolate;
+}
+.home-stack__card {
+  position: sticky;
+  top: min(var(--stack-top, 72px), calc(100dvh - var(--stack-card-height, 0px) - 12px));
+  background: var(--bg); border: 1px solid var(--line); border-radius: clamp(16px, 3vw, 28px);
+  box-shadow: 0 -12px 32px -20px rgba(0, 0, 0, .62);
+}
+.home-stack__card:nth-child(even) { background: var(--surface); }
+.home-stack__card:last-child {
+  min-height: calc(100dvh - var(--stack-top, 72px) - 24px);
+  display: flex; flex-direction: column; justify-content: center;
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-stack__card { position: relative; top: auto; }
+  .home-stack__card:last-child { min-height: 0; }
+}
+.home-hero {
+  display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); align-items: center;
+  gap: clamp(28px, 5vw, 74px); padding-top: clamp(32px, 5vw, 70px); padding-bottom: clamp(34px, 6vw, 72px);
+}
+.home .eyebrow { color: var(--home-accent); font-weight: 700; }
+.home h1, .home h2, .home-card__name {
+  font-family: var(--f-display); font-weight: 800; letter-spacing: -.045em; line-height: 1.12;
+}
+.home h1 { font-size: clamp(2.15rem, 5.35vw, 4.85rem); margin: 18px 0 22px; }
+.home h1 em { color: var(--home-accent); font-style: normal; display: block; }
+.home h2 { font-size: clamp(1.6rem, 3.5vw, 2.75rem); }
+.home-hero__lead { font-size: clamp(1rem, 2vw, 1.2rem); color: var(--text-dim); max-width: 49ch; line-height: 1.6; }
+.home-actions { display: flex; flex-wrap: wrap; gap: 10px 20px; margin-top: 24px; }
+.home .home-primary, .home .home-secondary {
+  display: inline-flex; align-items: center; justify-content: center; gap: 12px; padding: 11px 16px;
+  min-height: 44px; border-radius: 11px; font-weight: 700;
+}
+.home .home-primary { background: var(--home-accent); color: var(--bg); }
+.home .home-secondary { border: 1px solid var(--line); }
+.home .home-primary:hover { filter: brightness(1.1); }
+.home .home-secondary:hover { border-color: var(--home-accent); }
+.home-facts { margin-top: 18px; color: var(--text-dim); font-size: .83rem; }
+.home-facts span { color: var(--home-accent); margin: 0 4px; }
+
+.home-example {
+  position: relative; padding: clamp(19px, 3.2vw, 38px);
+  background: radial-gradient(ellipse at 100% 0%, var(--present-soft), transparent 68%), var(--surface);
+  border: 1px solid var(--line); border-radius: 23px; box-shadow: var(--shadow);
+}
+.home-example__label { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px 12px; font: .72rem var(--f-mono); color: var(--text-dim); letter-spacing: .08em; }
+.home .home-example__title { margin-top: 14px; font-size: clamp(1.5rem, 2.7vw, 2.05rem); }
+.home-example__pair { margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--line); }
+.home-example__pair p:first-child { color: var(--text-dim); }
+.home-example__pair [lang="en"] { margin-top: 5px; font-family: var(--f-mono); font-size: clamp(1rem, 2vw, 1.48rem); }
+.home-example__pair [lang="en"] b { color: var(--home-accent); }
+.home-example__note { margin: 14px 0 20px; color: var(--text-dim); line-height: 1.55; }
+.home-example a { display: inline-block; margin-top: 16px; color: var(--home-accent); font-weight: 700; font-size: .9rem; }
+.home-example a:hover { text-decoration: underline; }
+
+.home-letter { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 18px 32px; padding-bottom: clamp(36px, 6vw, 70px); }
+.home-letter p { color: var(--text-dim); line-height: 1.65; max-width: 65ch; }
+.home-letter p + p { margin-top: 12px; }
+.home-section { padding-block: clamp(27px, 5vw, 60px); }
+.home-section__head .eyebrow, .home-practice .eyebrow { margin-bottom: 10px; }
+.home-section__head > p:last-child { color: var(--text-dim); margin-top: 12px; }
+.home-grid, .home-route { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 23px; }
+.home-card {
+  position: relative; display: flex; flex-direction: column; gap: 9px; min-height: 154px;
+  padding: 17px 36px 19px 18px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface);
+}
+.home-card:hover { border-color: var(--home-accent); background: var(--surface-2); }
+.home-card__num, .home-route li > span { color: var(--home-accent); font: 700 .75rem var(--f-mono); }
+.home-card__name { font-size: clamp(1rem, 1.6vw, 1.28rem); }
+.home-card__text, .home-route p { color: var(--text-dim); line-height: 1.5; font-size: .94rem; }
+.home-card__arrow { position: absolute; top: 15px; right: 16px; color: var(--home-accent); }
+.home-route { padding: 0; list-style: none; }
+.home-route li { border-top: 1px solid var(--line); padding: 13px 14px 0 0; }
+.home-route h3 { margin: 6px 0; font-size: 1.07rem; }
+.home-practice { padding-top: clamp(27px, 5vw, 60px); }
+.home-practice__inner {
+  display: flex; gap: 20px; align-items: center; justify-content: space-between;
+  padding: clamp(19px, 3.5vw, 38px); border-radius: 17px; border: 1px solid var(--line); background: var(--present-soft);
+}
+.home-practice__inner p:last-child { max-width: 68ch; margin-top: 12px; color: var(--text-dim); line-height: 1.55; }
+.home-practice__num { flex-shrink: 0; color: var(--home-accent); font: 800 clamp(2.2rem, 6vw, 4.5rem)/1 var(--f-display); letter-spacing: -.06em; }
+.home-practice__num span { display: block; font: .8rem var(--f-mono); letter-spacing: .08em; text-align: right; margin-top: 6px; }
+.home-footer { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; padding-top: 28px; padding-bottom: 35px; }
+.home-footer p { font-weight: 700; }
+@media (max-width: 860px) {
+  .home-grid, .home-route { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 680px) {
+  .home-hero, .home-letter { grid-template-columns: 1fr; }
+  .home-example { max-width: 520px; }
+  .home-practice__num { display: none; }
+}
+@media (max-width: 450px) {
+  .home-grid, .home-route { grid-template-columns: 1fr; }
+  .home-card { min-height: auto; }
+}

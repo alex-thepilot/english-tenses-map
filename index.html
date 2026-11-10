@@ -1070,6 +1070,110 @@ td.ex { color: var(--text-dim); }
   .tabs { flex-shrink: 1; min-width: 0; overflow-x: auto; scrollbar-width: none; }
   .tabs::-webkit-scrollbar { display: none; }
 }
+/* Главная использует те же цвета и шрифты, что и уроки. */
+.home { --home-accent: var(--present); padding: 14px 0 32px; }
+.home a { color: inherit; text-decoration: none; }
+.home [id] { scroll-margin-top: 76px; }
+.home-stack {
+  max-width: calc(var(--wrap) + 32px); margin-inline: auto;
+  padding-inline: clamp(8px, 1.5vw, 16px); display: grid; gap: 20px;
+  isolation: isolate;
+}
+.home-stack__card {
+  position: sticky;
+  top: min(var(--stack-top, 72px), calc(100dvh - var(--stack-card-height, 0px) - 12px));
+  background: var(--bg); border: 1px solid var(--line); border-radius: clamp(16px, 3vw, 28px);
+  box-shadow: 0 -12px 32px -20px rgba(0, 0, 0, .62);
+}
+.home-stack__card:nth-child(even) { background: var(--surface); }
+.home-stack__card:last-child {
+  min-height: calc(100dvh - var(--stack-top, 72px) - 24px);
+  display: flex; flex-direction: column; justify-content: center;
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-stack__card { position: relative; top: auto; }
+  .home-stack__card:last-child { min-height: 0; }
+}
+.home-hero {
+  display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); align-items: center;
+  gap: clamp(28px, 5vw, 74px); padding-top: clamp(32px, 5vw, 70px); padding-bottom: clamp(34px, 6vw, 72px);
+}
+.home .eyebrow { color: var(--home-accent); font-weight: 700; }
+.home h1, .home h2, .home-card__name {
+  font-family: var(--f-display); font-weight: 800; letter-spacing: -.045em; line-height: 1.12;
+}
+.home h1 { font-size: clamp(2.15rem, 5.35vw, 4.85rem); margin: 18px 0 22px; }
+.home h1 em { color: var(--home-accent); font-style: normal; display: block; }
+.home h2 { font-size: clamp(1.6rem, 3.5vw, 2.75rem); }
+.home-hero__lead { font-size: clamp(1rem, 2vw, 1.2rem); color: var(--text-dim); max-width: 49ch; line-height: 1.6; }
+.home-actions { display: flex; flex-wrap: wrap; gap: 10px 20px; margin-top: 24px; }
+.home .home-primary, .home .home-secondary {
+  display: inline-flex; align-items: center; justify-content: center; gap: 12px; padding: 11px 16px;
+  min-height: 44px; border-radius: 11px; font-weight: 700;
+}
+.home .home-primary { background: var(--home-accent); color: var(--bg); }
+.home .home-secondary { border: 1px solid var(--line); }
+.home .home-primary:hover { filter: brightness(1.1); }
+.home .home-secondary:hover { border-color: var(--home-accent); }
+.home-facts { margin-top: 18px; color: var(--text-dim); font-size: .83rem; }
+.home-facts span { color: var(--home-accent); margin: 0 4px; }
+
+.home-example {
+  position: relative; padding: clamp(19px, 3.2vw, 38px);
+  background: radial-gradient(ellipse at 100% 0%, var(--present-soft), transparent 68%), var(--surface);
+  border: 1px solid var(--line); border-radius: 23px; box-shadow: var(--shadow);
+}
+.home-example__label { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px 12px; font: .72rem var(--f-mono); color: var(--text-dim); letter-spacing: .08em; }
+.home .home-example__title { margin-top: 14px; font-size: clamp(1.5rem, 2.7vw, 2.05rem); }
+.home-example__pair { margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--line); }
+.home-example__pair p:first-child { color: var(--text-dim); }
+.home-example__pair [lang="en"] { margin-top: 5px; font-family: var(--f-mono); font-size: clamp(1rem, 2vw, 1.48rem); }
+.home-example__pair [lang="en"] b { color: var(--home-accent); }
+.home-example__note { margin: 14px 0 20px; color: var(--text-dim); line-height: 1.55; }
+.home-example a { display: inline-block; margin-top: 16px; color: var(--home-accent); font-weight: 700; font-size: .9rem; }
+.home-example a:hover { text-decoration: underline; }
+
+.home-letter { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 18px 32px; padding-bottom: clamp(36px, 6vw, 70px); }
+.home-letter p { color: var(--text-dim); line-height: 1.65; max-width: 65ch; }
+.home-letter p + p { margin-top: 12px; }
+.home-section { padding-block: clamp(27px, 5vw, 60px); }
+.home-section__head .eyebrow, .home-practice .eyebrow { margin-bottom: 10px; }
+.home-section__head > p:last-child { color: var(--text-dim); margin-top: 12px; }
+.home-grid, .home-route { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 23px; }
+.home-card {
+  position: relative; display: flex; flex-direction: column; gap: 9px; min-height: 154px;
+  padding: 17px 36px 19px 18px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface);
+}
+.home-card:hover { border-color: var(--home-accent); background: var(--surface-2); }
+.home-card__num, .home-route li > span { color: var(--home-accent); font: 700 .75rem var(--f-mono); }
+.home-card__name { font-size: clamp(1rem, 1.6vw, 1.28rem); }
+.home-card__text, .home-route p { color: var(--text-dim); line-height: 1.5; font-size: .94rem; }
+.home-card__arrow { position: absolute; top: 15px; right: 16px; color: var(--home-accent); }
+.home-route { padding: 0; list-style: none; }
+.home-route li { border-top: 1px solid var(--line); padding: 13px 14px 0 0; }
+.home-route h3 { margin: 6px 0; font-size: 1.07rem; }
+.home-practice { padding-top: clamp(27px, 5vw, 60px); }
+.home-practice__inner {
+  display: flex; gap: 20px; align-items: center; justify-content: space-between;
+  padding: clamp(19px, 3.5vw, 38px); border-radius: 17px; border: 1px solid var(--line); background: var(--present-soft);
+}
+.home-practice__inner p:last-child { max-width: 68ch; margin-top: 12px; color: var(--text-dim); line-height: 1.55; }
+.home-practice__num { flex-shrink: 0; color: var(--home-accent); font: 800 clamp(2.2rem, 6vw, 4.5rem)/1 var(--f-display); letter-spacing: -.06em; }
+.home-practice__num span { display: block; font: .8rem var(--f-mono); letter-spacing: .08em; text-align: right; margin-top: 6px; }
+.home-footer { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; padding-top: 28px; padding-bottom: 35px; }
+.home-footer p { font-weight: 700; }
+@media (max-width: 860px) {
+  .home-grid, .home-route { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 680px) {
+  .home-hero, .home-letter { grid-template-columns: 1fr; }
+  .home-example { max-width: 520px; }
+  .home-practice__num { display: none; }
+}
+@media (max-width: 450px) {
+  .home-grid, .home-route { grid-template-columns: 1fr; }
+  .home-card { min-height: auto; }
+}
 </style>
 </head>
 <body>
@@ -1079,7 +1183,8 @@ td.ex { color: var(--text-dim); }
 
     <div class="tabs" role="tablist" aria-label="Разделы грамматики">
       <span class="tabs__ink" id="tabsInk"></span>
-      <button role="tab" data-tab="sentence" aria-selected="true" aria-controls="tab-sentence">Основа</button>
+      <button role="tab" id="homeTab" data-tab="home" aria-selected="true" aria-controls="tab-home">Главная</button>
+      <button role="tab" data-tab="sentence" aria-selected="false" aria-controls="tab-sentence">Основа</button>
       <button role="tab" data-tab="tenses" aria-selected="false" aria-controls="tab-tenses">Времена</button>
       <button role="tab" data-tab="cond" aria-selected="false" aria-controls="tab-cond">Условные</button>
       <button role="tab" data-tab="pron" aria-selected="false" aria-controls="tab-pron">Местоимения</button>
@@ -1114,7 +1219,98 @@ td.ex { color: var(--text-dim); }
   </div>
 </nav>
 
-<div class="tabpanel" id="tab-sentence" role="tabpanel">
+<main class="tabpanel home" id="tab-home" role="tabpanel" aria-labelledby="homeTab">
+  <div class="home-stack">
+  <div class="home-stack__card">
+  <header class="home-hero wrap" id="home-top">
+    <div class="home-hero__copy">
+      <p class="eyebrow">Карта английской грамматики</p>
+      <h1>Английская грамматика <em>на пальцах</em></h1>
+      <p class="home-hero__lead">Разберись, почему англичане говорят именно так, и собери свою фразу. От первого вопроса до времён и пассива — через знакомые русские примеры.</p>
+      <div class="home-actions">
+        <a class="home-primary" href="#home-course">Посмотреть программу <span aria-hidden="true">↘</span></a>
+        <a class="home-secondary" href="#s-hero">Открыть первый урок <span aria-hidden="true">→</span></a>
+      </div>
+      <p class="home-facts">6 разделов <span>·</span> 588 заданий с разбором в методичке</p>
+    </div>
+    <div class="home-example">
+      <div class="home-example__label"><span>ПОДСКАЗКА ИЗ УРОКА</span><span>CONDITIONALS</span></div>
+      <h2 class="home-example__title">Якобы да кабы</h2>
+      <p class="home-example__note">Увидел два «бы»? Спроси себя: я представляю, что было бы <strong>сейчас</strong>, или прокручиваю то, чего не случилось <strong>тогда</strong>?</p>
+      <div class="home-example__pair">
+        <p><strong>Сейчас.</strong> Если <strong>бы</strong> у меня было время, я <strong>бы</strong> позвонил.</p>
+        <p lang="en">If I <b>had</b> time, I <b>would call</b>.</p>
+      </div>
+      <div class="home-example__pair">
+        <p><strong>Вчера.</strong> Если <strong>бы</strong> у меня вчера было время, я <strong>бы</strong> позвонил.</p>
+        <p lang="en">If I <b>had had</b> time yesterday, I <b>would have called</b>.</p>
+      </div>
+      <a href="#c-algo">Разобрать условные предложения <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <section class="home-letter wrap" aria-labelledby="home-letter-title">
+    <h2 id="home-letter-title">Привет, мой друг.</h2>
+    <div>
+      <p>Я долго думал о том, почему люди бросают английский, даже когда очень хотят на нём говорить. Иногда на объяснение одного правила уходит столько новых терминов, что уже забываешь, какую фразу хотел сказать.</p>
+      <p>Поэтому я сделал методичку, по которой сам хотел бы учиться. Сначала берём знакомую русскую фразу. Смотрим, что мы хотим сказать. Потом собираем английский вариант и сразу пробуем его в деле. Если ты уже начинал учить язык, но запутался в правилах, или только берёшься за грамматику, начни с одной темы и посмотри, подходит ли тебе такой подход.</p>
+    </div>
+  </section>
+  </div>
+
+  <div class="home-stack__card">
+  <section class="home-section wrap" id="home-course">
+    <div class="home-section__head">
+      <p class="eyebrow">Содержание</p>
+      <h2>Выбери, с чего начать</h2>
+      <p>Если начинаешь с нуля, иди по порядку. Если путаешься в конкретной теме, открой её сразу.</p>
+    </div>
+    <div class="home-grid">
+      <a class="home-card" href="#s-hero"><span class="home-card__num">01</span><span class="home-card__name">Основа</span><span class="home-card__text">Как собрать фразу, когда нужен <i>to be</i> и почему в вопросе помощник встаёт первым.</span><span class="home-card__arrow" aria-hidden="true">↗</span></a>
+      <a class="home-card" href="#t-hero"><span class="home-card__num">02</span><span class="home-card__name">Времена</span><span class="home-card__text">Одна карта вместо двенадцати отдельных таблиц. Выбери, когда и как происходит действие.</span><span class="home-card__arrow" aria-hidden="true">↗</span></a>
+      <a class="home-card" href="#c-hero"><span class="home-card__num">03</span><span class="home-card__name">Условные предложения</span><span class="home-card__text">Как сказать «если» и «если бы» о будущем, настоящем и прошлом.</span><span class="home-card__arrow" aria-hidden="true">↗</span></a>
+      <a class="home-card" href="#p-hero"><span class="home-card__num">04</span><span class="home-card__name">Местоимения</span><span class="home-card__text">Почему «она» превращается в <i>she</i> или <i>her</i> и как выбрать нужное слово.</span><span class="home-card__arrow" aria-hidden="true">↗</span></a>
+      <a class="home-card" href="#d-hero"><span class="home-card__num">05</span><span class="home-card__name">Степени сравнения</span><span class="home-card__text">Как сказать «выше», «красивее» и «самый красивый».</span><span class="home-card__arrow" aria-hidden="true">↗</span></a>
+      <a class="home-card" href="#v-hero"><span class="home-card__num">06</span><span class="home-card__name">Пассив</span><span class="home-card__text">Как сказать «меня пригласили», «письмо отправили» или «результаты объявят».</span><span class="home-card__arrow" aria-hidden="true">↗</span></a>
+    </div>
+  </section>
+  </div>
+
+  <div class="home-stack__card">
+  <section class="home-section wrap" id="home-guide">
+    <div class="home-section__head">
+      <p class="eyebrow">Как заниматься</p>
+      <h2>Одна тема за раз</h2>
+    </div>
+    <ol class="home-route">
+      <li><span>01</span><h3>Прочитай станцию</h3><p>Начни с короткого правила и пары примеров с переводом.</p></li>
+      <li><span>02</span><h3>Собери свою фразу</h3><p>В конструкторе меняй форму и смотри, какие слова переставляются или добавляются.</p></li>
+      <li><span>03</span><h3>Проверь себя</h3><p>В заданиях увидишь, почему подходит правильный вариант. Если ошибёшься, разберёшь и свой ответ. Готовую станцию можно отметить как изученную.</p></li>
+    </ol>
+  </section>
+  </div>
+
+  <div class="home-stack__card">
+  <section class="home-practice wrap" id="home-practice">
+    <div class="home-practice__inner">
+      <div>
+        <p class="eyebrow">Выдаётся отдельно</p>
+        <h2>Дополнительный тренажёр</h2>
+        <p>Отдельный HTML-файл на 1 500 заданий. Подойдёт для домашней работы и повторения. В смешанных наборах сначала решаешь задачу, а затем читаешь разбор. Во «Временах» можно также выбрать одно время и потренировать его отдельно.</p>
+      </div>
+      <div class="home-practice__num" aria-hidden="true">1 500<span>заданий</span></div>
+    </div>
+  </section>
+
+  <footer class="home-footer wrap">
+    <p>Начни с одной фразы.</p>
+    <a class="home-primary" href="#s-hero">Перейти к основе <span aria-hidden="true">→</span></a>
+  </footer>
+  </div>
+  </div>
+</main>
+
+<div class="tabpanel" id="tab-sentence" role="tabpanel" hidden>
 <!-- ══════════════════ ГЕРОЙ · ОСНОВА ══════════════════ -->
 <header class="hero" id="s-hero">
   <div class="wrap">
@@ -7427,6 +7623,14 @@ renderPassiveBuild();
    НАВИГАЦИЯ: вкладки, оглавление, меню, точки, прогресс
    ═══════════════════════════════════════════════════════════ */
 const TABDEF = {
+  home: {
+    panel: 'tab-home', items: [],
+    nav: [
+      { id: 'home-course', n: 'Программа', e: 'Содержание' },
+      { id: 'home-guide', n: 'Как заниматься', e: 'Маршрут' },
+      { id: 'home-practice', n: 'Дополнительный тренажёр', e: 'Практика' }
+    ]
+  },
   sentence: {
     panel: 'tab-sentence', toc: 'sToc', items: S, total: 8,
     nav: [
@@ -7507,11 +7711,24 @@ const TABDEF = {
   }
 };
 
-let tab = 'sentence';
+let tab = 'home';
+if (window.ResizeObserver) {
+  const stack = document.querySelector('.home-stack');
+  const topbar = document.querySelector('.topbar');
+  const measureStack = new ResizeObserver(entries => {
+    for (const { target } of entries) {
+      if (target === topbar) stack.style.setProperty('--stack-top', topbar.offsetHeight + 12 + 'px');
+      else target.style.setProperty('--stack-card-height', target.offsetHeight + 'px');
+    }
+  });
+  measureStack.observe(topbar);
+  stack.querySelectorAll('.home-stack__card').forEach(card => measureStack.observe(card));
+}
 
 /* оглавление в начале вкладки */
 Object.keys(TABDEF).forEach(k => {
   const d = TABDEF[k];
+  if (!d.toc) return;
   document.getElementById(d.toc).innerHTML = d.nav.map(s =>
     `<a href="#${s.id}"><i>${s.e}</i><b>${s.n}</b><span>${s.s}</span></a>`).join('');
 });
@@ -7575,7 +7792,12 @@ function setTab(name, scroll) {
   moveInk(); revealTab(); fillDots(); fillMenu(); paint();
   if (scroll !== false) window.scrollTo({ top: 0, behavior: motionOK() ? 'smooth' : 'auto' });
 }
-tabBtns.forEach(b => b.addEventListener('click', () => setTab(b.dataset.tab)));
+tabBtns.forEach(b => b.addEventListener('click', () => {
+  const name = b.dataset.tab;
+  const hash = '#' + TABDEF[name].panel;
+  if (location.hash !== hash) history.pushState(null, '', hash);
+  setTab(name);
+}));
 window.addEventListener('resize', moveInk);
 /* ширина кнопок меняется и без resize — например, когда догружается шрифт */
 if (window.ResizeObserver) new ResizeObserver(moveInk).observe(document.querySelector('.tabs'));
@@ -7588,7 +7810,7 @@ let done = new Set();
 try { done = new Set(JSON.parse(localStorage.getItem(KEY) || '[]')); } catch (e) { done = new Set(); }
 
 function paint() {
-  const all = S.concat(T, C, P, D);
+  const all = S.concat(T, C, P, D, V);
   all.forEach(x => {
     const on = done.has(x.id);
     const st = document.getElementById(x.id);
@@ -7603,6 +7825,8 @@ function paint() {
   document.querySelectorAll('.mx-c').forEach(c => c.classList.toggle('done', done.has(c.dataset.id)));
 
   const d = TABDEF[tab];
+  document.getElementById('progN').closest('.prog').hidden = tab === 'home';
+  if (tab === 'home') return;
   const n = d.items.filter(x => done.has(x.id)).length;
   document.getElementById('progFill').style.width = (n / d.total * 100) + '%';
   document.getElementById('progN').textContent = `${n}/${d.total}`;
@@ -7649,6 +7873,9 @@ document.getElementById('tgl').addEventListener('click', () => {
 function tabForHash(h) {
   const id = h.replace('#', '');
   if (!id) return null;
+  const panel = Object.keys(TABDEF).find(k => TABDEF[k].panel === id);
+  if (panel) return panel;
+  if (id.startsWith('home-')) return 'home';
   if (S.some(x => x.id === id) || id.indexOf('s-') === 0) return 'sentence';
   if (C.some(c => c.id === id) || id.indexOf('c-') === 0) return 'cond';
   if (P.some(x => x.id === id) || id.indexOf('p-') === 0) return 'pron';
@@ -7659,19 +7886,24 @@ function tabForHash(h) {
 }
 document.addEventListener('click', e => {
   const a = e.target.closest('a[href^="#"]');
-  if (!a) return;
+  if (!a || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
   const want = tabForHash(a.getAttribute('href'));
   if (want && want !== tab) setTab(want, false);
 });
 
-setTab(tabForHash(location.hash) || 'sentence', false);
-/* шрифт догружается и меняет ширину кнопок — ползунок и прокрутку панели пересчитываем заново */
-requestAnimationFrame(() => { moveInk(); revealTab(); });
-if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { moveInk(); revealTab(); });
-if (location.hash) {
+function openHashTab() {
+  const name = tabForHash(location.hash) || 'home';
+  if (name !== tab || document.getElementById(TABDEF[name].panel).hidden) setTab(name, false);
   const target = document.getElementById(location.hash.slice(1));
   if (target) requestAnimationFrame(() => { target.scrollIntoView(); syncToTop(); });
 }
+
+setTab(tabForHash(location.hash) || 'home', false);
+window.addEventListener('hashchange', openHashTab);
+/* шрифт догружается и меняет ширину кнопок — ползунок и прокрутку панели пересчитываем заново */
+requestAnimationFrame(() => { moveInk(); revealTab(); });
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { moveInk(); revealTab(); });
+if (location.hash) openHashTab();
 </script>
 </body>
 </html>

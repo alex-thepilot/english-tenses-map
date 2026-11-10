@@ -587,6 +587,14 @@ renderPassiveBuild();
    НАВИГАЦИЯ: вкладки, оглавление, меню, точки, прогресс
    ═══════════════════════════════════════════════════════════ */
 const TABDEF = {
+  home: {
+    panel: 'tab-home', items: [],
+    nav: [
+      { id: 'home-course', n: 'Программа', e: 'Содержание' },
+      { id: 'home-guide', n: 'Как заниматься', e: 'Маршрут' },
+      { id: 'home-practice', n: 'Дополнительный тренажёр', e: 'Практика' }
+    ]
+  },
   sentence: {
     panel: 'tab-sentence', toc: 'sToc', items: S, total: 8,
     nav: [
@@ -667,11 +675,24 @@ const TABDEF = {
   }
 };
 
-let tab = 'sentence';
+let tab = 'home';
+if (window.ResizeObserver) {
+  const stack = document.querySelector('.home-stack');
+  const topbar = document.querySelector('.topbar');
+  const measureStack = new ResizeObserver(entries => {
+    for (const { target } of entries) {
+      if (target === topbar) stack.style.setProperty('--stack-top', topbar.offsetHeight + 12 + 'px');
+      else target.style.setProperty('--stack-card-height', target.offsetHeight + 'px');
+    }
+  });
+  measureStack.observe(topbar);
+  stack.querySelectorAll('.home-stack__card').forEach(card => measureStack.observe(card));
+}
 
 /* оглавление в начале вкладки */
 Object.keys(TABDEF).forEach(k => {
   const d = TABDEF[k];
+  if (!d.toc) return;
   document.getElementById(d.toc).innerHTML = d.nav.map(s =>
     `<a href="#${s.id}"><i>${s.e}</i><b>${s.n}</b><span>${s.s}</span></a>`).join('');
 });
@@ -735,7 +756,12 @@ function setTab(name, scroll) {
   moveInk(); revealTab(); fillDots(); fillMenu(); paint();
   if (scroll !== false) window.scrollTo({ top: 0, behavior: motionOK() ? 'smooth' : 'auto' });
 }
-tabBtns.forEach(b => b.addEventListener('click', () => setTab(b.dataset.tab)));
+tabBtns.forEach(b => b.addEventListener('click', () => {
+  const name = b.dataset.tab;
+  const hash = '#' + TABDEF[name].panel;
+  if (location.hash !== hash) history.pushState(null, '', hash);
+  setTab(name);
+}));
 window.addEventListener('resize', moveInk);
 /* ширина кнопок меняется и без resize — например, когда догружается шрифт */
 if (window.ResizeObserver) new ResizeObserver(moveInk).observe(document.querySelector('.tabs'));
@@ -748,7 +774,7 @@ let done = new Set();
 try { done = new Set(JSON.parse(localStorage.getItem(KEY) || '[]')); } catch (e) { done = new Set(); }
 
 function paint() {
-  const all = S.concat(T, C, P, D);
+  const all = S.concat(T, C, P, D, V);
   all.forEach(x => {
     const on = done.has(x.id);
     const st = document.getElementById(x.id);
@@ -763,6 +789,8 @@ function paint() {
   document.querySelectorAll('.mx-c').forEach(c => c.classList.toggle('done', done.has(c.dataset.id)));
 
   const d = TABDEF[tab];
+  document.getElementById('progN').closest('.prog').hidden = tab === 'home';
+  if (tab === 'home') return;
   const n = d.items.filter(x => done.has(x.id)).length;
   document.getElementById('progFill').style.width = (n / d.total * 100) + '%';
   document.getElementById('progN').textContent = `${n}/${d.total}`;
@@ -809,6 +837,9 @@ document.getElementById('tgl').addEventListener('click', () => {
 function tabForHash(h) {
   const id = h.replace('#', '');
   if (!id) return null;
+  const panel = Object.keys(TABDEF).find(k => TABDEF[k].panel === id);
+  if (panel) return panel;
+  if (id.startsWith('home-')) return 'home';
   if (S.some(x => x.id === id) || id.indexOf('s-') === 0) return 'sentence';
   if (C.some(c => c.id === id) || id.indexOf('c-') === 0) return 'cond';
   if (P.some(x => x.id === id) || id.indexOf('p-') === 0) return 'pron';
@@ -819,16 +850,21 @@ function tabForHash(h) {
 }
 document.addEventListener('click', e => {
   const a = e.target.closest('a[href^="#"]');
-  if (!a) return;
+  if (!a || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
   const want = tabForHash(a.getAttribute('href'));
   if (want && want !== tab) setTab(want, false);
 });
 
-setTab(tabForHash(location.hash) || 'sentence', false);
-/* шрифт догружается и меняет ширину кнопок — ползунок и прокрутку панели пересчитываем заново */
-requestAnimationFrame(() => { moveInk(); revealTab(); });
-if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { moveInk(); revealTab(); });
-if (location.hash) {
+function openHashTab() {
+  const name = tabForHash(location.hash) || 'home';
+  if (name !== tab || document.getElementById(TABDEF[name].panel).hidden) setTab(name, false);
   const target = document.getElementById(location.hash.slice(1));
   if (target) requestAnimationFrame(() => { target.scrollIntoView(); syncToTop(); });
 }
+
+setTab(tabForHash(location.hash) || 'home', false);
+window.addEventListener('hashchange', openHashTab);
+/* шрифт догружается и меняет ширину кнопок — ползунок и прокрутку панели пересчитываем заново */
+requestAnimationFrame(() => { moveInk(); revealTab(); });
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { moveInk(); revealTab(); });
+if (location.hash) openHashTab();

@@ -542,6 +542,47 @@ dbWord.addEventListener('click', e => { const b = e.target.closest('button'); if
 dbDeg.addEventListener('click', e => { const b = e.target.closest('button'); if (b) { db.deg = b.dataset.v; renderDeg(); } });
 renderDeg();
 
+/* Пассив: те же ячейки, что в конструкторе предложения. */
+renderRoadmap('v-road', VLEVELS, V, {
+  pid: 'v', drills: VDRILLS, kindLabel: item => item.short,
+  figure: item => item.fig ? sFigure(item) : ''
+});
+renderDuels('vDuels', VDUELS);
+makeQuiz(document.getElementById('vQuiz'), QUIZ_V, { title: 'Вопрос' });
+
+const vBuildTime = document.getElementById('vBuildTime');
+const vBuildType = document.getElementById('vBuildType');
+const vBuildTrain = document.getElementById('vBuildTrain');
+const vBuildRu = document.getElementById('vBuildRu');
+const vBuildExamples = [
+  { aux: 'is', tail: '', time: 'every day', ru: ['Эту комнату убирают каждый день.', 'Эту комнату не убирают каждый день.', 'Эту комнату убирают каждый день?'] },
+  { aux: 'was', tail: '', time: 'yesterday', ru: ['Эту комнату убрали вчера.', 'Эту комнату не убрали вчера.', 'Эту комнату убрали вчера?'] },
+  { aux: 'will', tail: 'be ', time: 'tomorrow', ru: ['Эту комнату уберут завтра.', 'Эту комнату не уберут завтра.', 'Эту комнату уберут завтра?'] }
+];
+
+function renderPassiveBuild() {
+  const time = vBuildTime.querySelector('[aria-pressed="true"]').dataset.v;
+  const type = vBuildType.querySelector('[aria-pressed="true"]').dataset.v;
+  const example = vBuildExamples[time];
+  const question = type === 'q';
+  const subject = ['subj', question ? 'this room' : 'This room'];
+  const auxText = question ? example.aux[0].toUpperCase() + example.aux.slice(1) : example.aux;
+  const aux = ['aux', type === 'n' ? auxText + ' not' : auxText];
+  const row = question ? [aux, subject] : [subject, aux];
+  row.push(['verb', example.tail + 'cleaned'], ['rest', example.time], ['end', question ? '?' : '.']);
+  vBuildRu.textContent = example.ru['pnq'.indexOf(type)];
+  flipTrain(vBuildTrain, trainHTML(row));
+}
+
+[vBuildTime, vBuildType].forEach(group => group.addEventListener('click', event => {
+  const button = event.target.closest('button[data-v]');
+  if (!button) return;
+  group.querySelector('[aria-pressed="true"]').setAttribute('aria-pressed', 'false');
+  button.setAttribute('aria-pressed', 'true');
+  renderPassiveBuild();
+}));
+renderPassiveBuild();
+
 /* ═══════════════════════════════════════════════════════════
    НАВИГАЦИЯ: вкладки, оглавление, меню, точки, прогресс
    ═══════════════════════════════════════════════════════════ */
@@ -597,6 +638,18 @@ const TABDEF = {
       { id: 'p-duels', n: 'Сравнение форм', s: 'Пять пар, которые путают', e: 'Разбор' },
       { id: 'p-quiz', n: 'Общая проверка', s: '16 предложений вперемешку', e: 'Тренажёр' },
       { id: 'p-sheet', n: 'Шпаргалка', s: 'Все слова одной таблицей', e: 'Итог' }
+    ]
+  },
+  passive: {
+    panel: 'tab-passive', toc: 'vToc', items: V, total: V.length,
+    nav: [
+      { id: 'v-system', n: 'Конструктор', s: 'Время, вопрос и отрицание', e: 'Старт' },
+      { id: 'v-lvl1', n: 'Что с ним сделали?', s: 'Выбираем, про кого говорим', e: 'Уровень 1' },
+      { id: 'v-lvl2', n: 'Нет, вопрос и автор', s: 'Not, порядок слов и by', e: 'Уровень 2' },
+      { id: 'v-lvl3', n: 'Сейчас, уже и можно', s: 'Being, been и can be', e: 'Уровень 3' },
+      { id: 'v-duels', n: 'Сравнение форм', s: 'Три пары', e: 'Разбор' },
+      { id: 'v-quiz', n: 'Общая проверка', s: '12 предложений', e: 'Тренажёр' },
+      { id: 'v-sheet', n: 'Шпаргалка', s: 'Формы одной таблицей', e: 'Итог' }
     ]
   },
   deg: {
@@ -760,6 +813,7 @@ function tabForHash(h) {
   if (C.some(c => c.id === id) || id.indexOf('c-') === 0) return 'cond';
   if (P.some(x => x.id === id) || id.indexOf('p-') === 0) return 'pron';
   if (D.some(x => x.id === id) || id.indexOf('d-') === 0) return 'deg';
+  if (id.indexOf('v-') === 0) return 'passive';
   if (T.some(t => t.id === id) || id.indexOf('t-') === 0) return 'tenses';
   return null;
 }

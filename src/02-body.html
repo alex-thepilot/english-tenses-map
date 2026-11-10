@@ -9,6 +9,7 @@
       <button role="tab" data-tab="cond" aria-selected="false" aria-controls="tab-cond">Условные</button>
       <button role="tab" data-tab="pron" aria-selected="false" aria-controls="tab-pron">Местоимения</button>
       <button role="tab" data-tab="deg" aria-selected="false" aria-controls="tab-deg">Степени</button>
+      <button role="tab" data-tab="passive" aria-selected="false" aria-controls="tab-passive">Пассив</button>
     </div>
 
     <div class="dots__wrap">
@@ -1128,6 +1129,116 @@
   </div>
 </section>
 
+</div>
+
+<div class="tabpanel" id="tab-passive" role="tabpanel" hidden>
+<header class="hero" id="v-hero">
+  <div class="wrap">
+    <div class="eyebrow">Пассив · Passive Voice</div>
+    <h1>Что с ним <span class="tri">сделали?</span></h1>
+    <p class="hero__sub">«Они пригласили меня» — <b>They invited me</b>. «Меня пригласили» — <b>I was invited</b>. По-английски тоже можно начать с того, с кем это произошло. Дальше ставим <b>be и третью форму глагола</b>.</p>
+    <div class="hero__meta">
+      <span class="pill">6 станций</span>
+      <span class="pill">конструктор фразы</span>
+      <span class="pill">72 задания с разбором</span>
+    </div>
+  </div>
+</header>
+
+<section class="sect toc" id="v-toc">
+  <div class="wrap">
+    <div class="sect__head" style="margin-bottom:0">
+      <div class="eyebrow">Оглавление</div>
+      <h2>С чего начать</h2>
+      <p>Начните с конструктора или перейдите к нужной части.</p>
+    </div>
+    <div class="toc__g" id="vToc"></div>
+  </div>
+</section>
+
+<section class="sect" id="v-system">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Конструктор</div>
+      <h2>Убирают, убрали, уберут</h2>
+      <p>Выберите время и вид фразы. Следите, куда переезжает помощник и где появляется <span class="mono">not</span>.</p>
+    </div>
+    <div class="bu">
+      <div class="bu__ctrl">
+        <div>
+          <div class="eyebrow">Когда</div>
+          <div class="seg" id="vBuildTime" role="group" aria-label="Время">
+            <button type="button" data-v="0" aria-pressed="true">Каждый день</button>
+            <button type="button" data-v="1" aria-pressed="false">Вчера</button>
+            <button type="button" data-v="2" aria-pressed="false">Завтра</button>
+          </div>
+        </div>
+        <div>
+          <div class="eyebrow">Вид фразы</div>
+          <div class="seg" id="vBuildType" role="group" aria-label="Вид фразы">
+            <button type="button" data-v="p" aria-pressed="true">Утверждение</button>
+            <button type="button" data-v="n" aria-pressed="false">Отрицание</button>
+            <button type="button" data-v="q" aria-pressed="false">Вопрос</button>
+          </div>
+        </div>
+      </div>
+      <div class="bu__out">
+        <div class="bu__ru" id="vBuildRu"></div>
+        <div class="train bu__train" id="vBuildTrain" aria-live="polite"></div>
+        <div class="bu__note"><b>cleaned</b> остаётся третьей формой во всех вариантах.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main class="wrap"><div class="roadmap" id="v-road"></div></main>
+
+<section class="sect" id="v-duels">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Разбор полётов</div>
+      <h2>Три пары, которые легко спутать</h2>
+    </div>
+    <div class="duels" id="vDuels"></div>
+  </div>
+</section>
+
+<section class="sect" id="v-quiz">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Общая проверка</div>
+      <h2>Двенадцать предложений</h2>
+      <p>Выберите вариант. После ответа появится разбор.</p>
+    </div>
+    <div class="drill z-present" id="vQuiz"></div>
+  </div>
+</section>
+
+<section class="sect" id="v-sheet">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">На один экран</div>
+      <h2>Шпаргалка</h2>
+      <p>Начните с того, с кем это сделали. В конце поставьте третью форму глагола.</p>
+    </div>
+    <div class="sheet">
+      <table>
+        <thead><tr><th>Что хотим сказать</th><th>Как собрать</th><th>Пример</th></tr></thead>
+        <tbody>
+          <tr><td>Убирают каждый день</td><td><code>am / is / are + V3</code></td><td>This room is cleaned every day.</td></tr>
+          <tr><td>Убрали вчера</td><td><code>was / were + V3</code></td><td>This room was cleaned yesterday.</td></tr>
+          <tr><td>Уберут завтра</td><td><code>will be + V3</code></td><td>This room will be cleaned tomorrow.</td></tr>
+          <tr><td>Не уберут</td><td>Первый помощник + <code>not</code></td><td>This room will not be cleaned.</td></tr>
+          <tr><td>Уберут?</td><td>Первый помощник вперёд</td><td>Will this room be cleaned?</td></tr>
+          <tr><td>Кто написал</td><td><code>by</code> + кто сделал</td><td>The book was written by Chekhov.</td></tr>
+          <tr><td>Ремонтируют прямо сейчас</td><td><code>am / is / are + being + V3</code></td><td>The bridge is being repaired.</td></tr>
+          <tr><td>Уже продали</td><td><code>have / has + been + V3</code></td><td>The tickets have been sold.</td></tr>
+          <tr><td>Могут доставить</td><td><code>can be + V3</code></td><td>The parcel can be delivered tomorrow.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
 </div>
 
 <button class="totop" id="totop" aria-label="Вернуться в начало страницы">

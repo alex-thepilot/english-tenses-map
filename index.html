@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Интерактивная методичка по английской грамматике: как строится предложение, все 12 времён, условные предложения, местоимения и степени сравнения. Роадмапы, живые схемы, конструкторы и 516 заданий с объяснением каждого ответа.">
+<meta name="description" content="Интерактивная методичка по английской грамматике: основа предложения, 12 времён, условные предложения, местоимения, степени сравнения и пассив. Схемы, конструкторы и 588 заданий с разбором.">
 <meta name="color-scheme" content="dark light">
 <meta name="theme-color" content="#0A1213" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#ECF0EE" media="(prefers-color-scheme: light)">
@@ -1084,6 +1084,7 @@ td.ex { color: var(--text-dim); }
       <button role="tab" data-tab="cond" aria-selected="false" aria-controls="tab-cond">Условные</button>
       <button role="tab" data-tab="pron" aria-selected="false" aria-controls="tab-pron">Местоимения</button>
       <button role="tab" data-tab="deg" aria-selected="false" aria-controls="tab-deg">Степени</button>
+      <button role="tab" data-tab="passive" aria-selected="false" aria-controls="tab-passive">Пассив</button>
     </div>
 
     <div class="dots__wrap">
@@ -2205,11 +2206,122 @@ td.ex { color: var(--text-dim); }
 
 </div>
 
+<div class="tabpanel" id="tab-passive" role="tabpanel" hidden>
+<header class="hero" id="v-hero">
+  <div class="wrap">
+    <div class="eyebrow">Пассив · Passive Voice</div>
+    <h1>Что с ним <span class="tri">сделали?</span></h1>
+    <p class="hero__sub">«Они пригласили меня» — <b>They invited me</b>. «Меня пригласили» — <b>I was invited</b>. По-английски тоже можно начать с того, с кем это произошло. Дальше ставим <b>be и третью форму глагола</b>.</p>
+    <div class="hero__meta">
+      <span class="pill">6 станций</span>
+      <span class="pill">конструктор фразы</span>
+      <span class="pill">72 задания с разбором</span>
+    </div>
+  </div>
+</header>
+
+<section class="sect toc" id="v-toc">
+  <div class="wrap">
+    <div class="sect__head" style="margin-bottom:0">
+      <div class="eyebrow">Оглавление</div>
+      <h2>С чего начать</h2>
+      <p>Начните с конструктора или перейдите к нужной части.</p>
+    </div>
+    <div class="toc__g" id="vToc"></div>
+  </div>
+</section>
+
+<section class="sect" id="v-system">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Конструктор</div>
+      <h2>Убирают, убрали, уберут</h2>
+      <p>Выберите время и вид фразы. Следите, куда переезжает помощник и где появляется <span class="mono">not</span>.</p>
+    </div>
+    <div class="bu">
+      <div class="bu__ctrl">
+        <div>
+          <div class="eyebrow">Когда</div>
+          <div class="seg" id="vBuildTime" role="group" aria-label="Время">
+            <button type="button" data-v="0" aria-pressed="true">Каждый день</button>
+            <button type="button" data-v="1" aria-pressed="false">Вчера</button>
+            <button type="button" data-v="2" aria-pressed="false">Завтра</button>
+          </div>
+        </div>
+        <div>
+          <div class="eyebrow">Вид фразы</div>
+          <div class="seg" id="vBuildType" role="group" aria-label="Вид фразы">
+            <button type="button" data-v="p" aria-pressed="true">Утверждение</button>
+            <button type="button" data-v="n" aria-pressed="false">Отрицание</button>
+            <button type="button" data-v="q" aria-pressed="false">Вопрос</button>
+          </div>
+        </div>
+      </div>
+      <div class="bu__out">
+        <div class="bu__ru" id="vBuildRu"></div>
+        <div class="train bu__train" id="vBuildTrain" aria-live="polite"></div>
+        <div class="bu__note"><b>cleaned</b> остаётся третьей формой во всех вариантах.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main class="wrap"><div class="roadmap" id="v-road"></div></main>
+
+<section class="sect" id="v-duels">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Разбор полётов</div>
+      <h2>Три пары, которые легко спутать</h2>
+    </div>
+    <div class="duels" id="vDuels"></div>
+  </div>
+</section>
+
+<section class="sect" id="v-quiz">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Общая проверка</div>
+      <h2>Двенадцать предложений</h2>
+      <p>Выберите вариант. После ответа появится разбор.</p>
+    </div>
+    <div class="drill z-present" id="vQuiz"></div>
+  </div>
+</section>
+
+<section class="sect" id="v-sheet">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">На один экран</div>
+      <h2>Шпаргалка</h2>
+      <p>Начните с того, с кем это сделали. В конце поставьте третью форму глагола.</p>
+    </div>
+    <div class="sheet">
+      <table>
+        <thead><tr><th>Что хотим сказать</th><th>Как собрать</th><th>Пример</th></tr></thead>
+        <tbody>
+          <tr><td>Убирают каждый день</td><td><code>am / is / are + V3</code></td><td>This room is cleaned every day.</td></tr>
+          <tr><td>Убрали вчера</td><td><code>was / were + V3</code></td><td>This room was cleaned yesterday.</td></tr>
+          <tr><td>Уберут завтра</td><td><code>will be + V3</code></td><td>This room will be cleaned tomorrow.</td></tr>
+          <tr><td>Не уберут</td><td>Первый помощник + <code>not</code></td><td>This room will not be cleaned.</td></tr>
+          <tr><td>Уберут?</td><td>Первый помощник вперёд</td><td>Will this room be cleaned?</td></tr>
+          <tr><td>Кто написал</td><td><code>by</code> + кто сделал</td><td>The book was written by Chekhov.</td></tr>
+          <tr><td>Ремонтируют прямо сейчас</td><td><code>am / is / are + being + V3</code></td><td>The bridge is being repaired.</td></tr>
+          <tr><td>Уже продали</td><td><code>have / has + been + V3</code></td><td>The tickets have been sold.</td></tr>
+          <tr><td>Могут доставить</td><td><code>can be + V3</code></td><td>The parcel can be delivered tomorrow.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+</div>
+
 <button class="totop" id="totop" aria-label="Вернуться в начало страницы">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <path d="M12 19V5M5 12l7-7 7 7"/>
   </svg>
 </button>
+
 <script>
 /* ═══════════════════════════════════════════════════════════
    ХЕЛПЕР ДЛЯ ЗАДАНИЙ
@@ -6495,6 +6607,237 @@ const QUIZ_D = [
 ];
 </script>
 <script>
+const VLEVELS = [
+  { n: 1, title: 'Что с ним сделали?', code: 'be + V3', ru: 'Основа',
+    txt: 'Выберите, про кого или про что говорите, и соберите фразу в настоящем, прошедшем или будущем.' },
+  { n: 2, title: 'Нет, вопрос и автор', code: 'not · ? · by', ru: 'Собираем фразу',
+    txt: 'Переставьте помощника для вопроса, добавьте not для отрицания или назовите того, кто это сделал.' },
+  { n: 3, title: 'Действие сейчас, результат и возможность', code: 'being · been · can be', ru: 'Дальше',
+    txt: 'Потренируйтесь говорить о процессе, готовом результате и о том, что можно сделать.' }
+];
+
+const V = [
+  {
+    id: 'v-focus', zone: 'present', level: 1, idx: 1, short: 'Фокус',
+    name: 'Кто сделал? Что с ним сделали?', core: 'They invited me. → I was invited.',
+    thesis: 'Начинаем с того, про кого хотим рассказать',
+    lead: '«Они пригласили меня» начинается с тех, кто пригласил. «Меня пригласили» начинается с человека, с которым это произошло. В английском можно сделать тот же выбор.',
+    fig: {
+      rows: [
+        { l: 'Кто сделал?', tr: [['subj','They'],['verb','invited'],['rest','me'],['end','.']] },
+        { l: 'Что со мной сделали?', tr: [['subj','I'],['aux','was'],['verb','invited'],['end','.']] }
+      ],
+      cap: 'По-русски «меня», по-английски на первом месте I. Связка was invited говорит, что приглашение получил я.'
+    },
+    blocks: [
+      { kind: 'key', h: 'Спросите «что с ним сделали?»', p: '«Нам заплатили», «окно разбили», «посылку доставили». Мы уже знаем, про кого или про что говорим. Ставим это слово первым и добавляем <b>be + третью форму глагола</b>.' },
+      { kind: 'trap', h: 'Что меняет was', p: '<b>I invited Anna</b> — я пригласил Анну. <b>I was invited</b> — меня пригласили. Для второго смысла нужны оба слова: <b>was invited</b>.' }
+    ],
+    forms: { p: 'I <b>was invited</b>.', n: 'I <b>wasn’t invited</b>.', q: '<b>Was</b> I <b>invited</b>?' },
+    markers: ['меня пригласили', 'нам сказали', 'окно разбили'],
+    ex: [
+      { en: 'The window was broken.', ru: 'Окно разбили.' },
+      { en: 'We were told to wait outside.', ru: 'Нам сказали подождать снаружи.' },
+      { en: 'I was invited to the wedding.', ru: 'Меня пригласили на свадьбу.' }
+    ]
+  },
+  {
+    id: 'v-time', zone: 'present', level: 1, idx: 2, short: 'Время',
+    name: 'Убирают, убрали, уберут', core: 'is cleaned · was cleaned · will be cleaned',
+    thesis: 'Время меняется, третья форма остаётся',
+    lead: 'Берём одну комнату. «Её убирают каждый день» — <b>is cleaned</b>. «Её убрали вчера» — <b>was cleaned</b>. «Её уберут завтра» — <b>will be cleaned</b>.',
+    blocks: [
+      { kind: 'key', h: 'Подберите be под время и количество', p: 'С одной комнатой <b>is / was</b>, с несколькими <b>are / were</b>. С <b>I</b> сейчас будет <b>am</b>, в прошлом <b>was</b>. С <b>you</b> — <b>are / were</b>. Для будущего у всех одна связка <b>will be</b>.' },
+      { kind: 'trap', h: 'Берём третье слово в ряду', p: 'У обычных глаголов подойдёт форма с <b>-ed</b>: <b>cleaned</b>, <b>invited</b>. У неправильных берём третью форму: <b>write — wrote — written</b>, <b>send — sent — sent</b>, <b>break — broke — broken</b>.' }
+    ],
+    forms: { p: 'The room <b>will be cleaned</b>.', n: 'The room <b>won’t be cleaned</b>.', q: '<b>Will</b> the room <b>be cleaned</b>?' },
+    markers: ['every day', 'yesterday', 'tomorrow'],
+    ex: [
+      { en: 'These rooms are cleaned every day.', ru: 'Эти комнаты убирают каждый день.' },
+      { en: 'The letter was written yesterday.', ru: 'Письмо написали вчера.' },
+      { en: 'The tickets will be sent tomorrow.', ru: 'Билеты отправят завтра.' }
+    ]
+  },
+  {
+    id: 'v-neg', zone: 'future', level: 2, idx: 3, short: 'Отрицание',
+    name: 'Как сказать «не сделали»', core: 'первый помощник + not',
+    thesis: 'Not стоит сразу после первого помощника',
+    lead: '«Комнату убрали» — <b>was cleaned</b>. «Комнату не убрали» — <b>was not cleaned</b>. Добавьте <b>not</b> сразу после первого помощника.',
+    blocks: [
+      { kind: 'key', h: 'С will работает то же правило', p: '<b>will be cleaned → will not be cleaned</b>. Первым стоит <b>will</b>, после него и ставим <b>not</b>.' },
+      { kind: 'plain', h: 'Как это сокращают в разговоре', p: '<b>is not → isn’t</b>, <b>were not → weren’t</b>, <b>will not → won’t</b>. После сокращения остальные слова остаются на месте.' }
+    ],
+    forms: { p: 'The bike <b>was repaired</b>.', n: 'The bike <b>wasn’t repaired</b>.', q: '<b>Was</b> the bike <b>repaired</b>?' },
+    markers: ['isn’t', 'weren’t', 'won’t be'],
+    ex: [
+      { en: 'My name wasn’t printed on the ticket.', ru: 'Моё имя не напечатали на билете.' },
+      { en: 'The rooms aren’t cleaned on Sundays.', ru: 'Комнаты не убирают по воскресеньям.' },
+      { en: 'The room won’t be cleaned tomorrow.', ru: 'Комнату не уберут завтра.' }
+    ]
+  },
+  {
+    id: 'v-question', zone: 'future', level: 2, idx: 4, short: 'Вопрос',
+    name: 'Как спросить «сделали?»', core: 'первый помощник → кто / что → остальное',
+    thesis: 'Первый помощник переезжает вперёд',
+    lead: '«Письмо отправили» — <b>The letter was sent</b>. «Письмо отправили?» — <b>Was the letter sent?</b> В начало переехало только <b>was</b>.',
+    blocks: [
+      { kind: 'key', h: 'Если есть will, вперёд идёт will', p: '<b>The room will be cleaned</b> → <b>Will the room be cleaned?</b> Слово <b>be</b> остаётся рядом с <b>cleaned</b>.' },
+      { kind: 'plain', h: 'Когда, почему, где', p: 'Поставьте вопросительное слово перед помощником: <b>When was the letter sent?</b> — «Когда отправили письмо?»' },
+      { kind: 'trap', h: 'Помощник уже есть', p: 'Для <b>Was the letter sent?</b> дополнительный <b>did</b> не нужен.' }
+    ],
+    forms: { p: 'The results <b>will be announced</b>.', n: 'The results <b>won’t be announced</b>.', q: 'When <b>will</b> the results <b>be announced</b>?' },
+    markers: ['Was …?', 'When was …?', 'Where will … be?'],
+    ex: [
+      { en: 'Were you invited to the wedding?', ru: 'Тебя пригласили на свадьбу?' },
+      { en: 'Why was the flight canceled?', ru: 'Почему отменили рейс?' },
+      { en: 'Where will the meeting be held?', ru: 'Где проведут встречу?' }
+    ]
+  },
+  {
+    id: 'v-by', zone: 'ask', level: 2, idx: 5, short: 'Кем',
+    name: 'Как добавить «кем»', core: '… by Chekhov',
+    thesis: 'Хотите назвать автора — добавьте by',
+    lead: '«Книгу написал Чехов» можно сказать через книгу: <b>The book was written by Chekhov.</b> Слово <b>by</b> вводит того, кто это сделал.',
+    blocks: [
+      { kind: 'key', h: 'By можно опустить', p: '<b>My bike was stolen</b> — «У меня украли велосипед». Главное здесь то, что случилось с велосипедом. Кто его украл, мы можем не знать.' },
+      { kind: 'plain', h: 'Кем и чем', p: 'Когда называем того, кто сделал, берём <b>by</b>: <b>by my sister</b>. Когда называем инструмент, обычно берём <b>with</b>: <b>with a knife</b> — ножом.' }
+    ],
+    forms: { p: 'It <b>was painted</b> by Maya.', n: 'It <b>wasn’t painted</b> by Maya.', q: '<b>Was</b> it <b>painted</b> by Maya?' },
+    markers: ['by Chekhov', 'by my sister', 'with a knife'],
+    ex: [
+      { en: 'The photo was taken by my sister.', ru: 'Фото сделала моя сестра.' },
+      { en: 'The bread was cut with a knife.', ru: 'Хлеб нарезали ножом.' },
+      { en: 'English is spoken here.', ru: 'Здесь говорят по-английски.' }
+    ]
+  },
+  {
+    id: 'v-extra', zone: 'future', level: 3, idx: 6, short: 'Другие формы',
+    name: 'Прямо сейчас, уже и можно', core: 'is being · has been · can be + V3',
+    thesis: 'Смысл подсказывает, каким будет be',
+    lead: 'Возьмём одну посылку. Её доставляют сейчас — <b>is being delivered</b>. Уже доставили — <b>has been delivered</b>. Могут доставить — <b>can be delivered</b>.',
+    blocks: [
+      { kind: 'key', h: 'Процесс, результат, возможность', p: 'Для процесса сейчас берём <b>am / is / are + being</b>. Для результата к настоящему моменту — <b>have / has + been</b>. После <b>can</b>, <b>must</b> и <b>should</b> ставим обычное <b>be</b>. Во всех случаях в конце остаётся третья форма.' },
+      { kind: 'plain', h: 'Вопрос и отрицание работают по знакомой схеме', p: '<b>Has</b> the package been delivered? — «Посылку доставили?» <b>The package hasn’t been delivered.</b> — «Посылку ещё не доставили».' }
+    ],
+    forms: { p: 'The package <b>has been delivered</b>.', n: 'The package <b>hasn’t been delivered</b>.', q: '<b>Has</b> the package <b>been delivered</b>?' },
+    markers: ['right now', 'already', 'yet', 'can / must / should'],
+    ex: [
+      { en: 'The bridge is being repaired.', ru: 'Мост сейчас ремонтируют.' },
+      { en: 'The tickets have already been sold.', ru: 'Билеты уже продали.' },
+      { en: 'The package can be delivered tomorrow.', ru: 'Посылку могут доставить завтра.' }
+    ]
+  }
+];
+
+const VDUELS = [
+  { q: 'Я пригласил или меня пригласили?',
+    a: { z: 'present', n: 'Я сделал', en: 'I invited Anna.', ru: 'Я пригласил Анну.', why: 'Начинаем с того, кто пригласил.' },
+    b: { z: 'future', n: 'Со мной сделали', en: 'I was invited.', ru: 'Меня пригласили.', why: 'Начинаем с того, кого пригласили.' },
+    r: 'Спросите, I здесь приглашает или получает приглашение.' },
+  { q: 'Обычно ремонтируют или прямо сейчас?',
+    a: { z: 'present', n: 'Обычно', en: 'Bikes are repaired here.', ru: 'Здесь ремонтируют велосипеды.', why: 'Говорим, чем здесь занимаются.' },
+    b: { z: 'future', n: 'Сейчас', en: 'The bike is being repaired.', ru: 'Велосипед сейчас ремонтируют.', why: 'Ремонт идёт в этот момент.' },
+    r: 'Для процесса в данный момент добавляем being.' },
+  { q: 'Вчера доставили или уже доставили?',
+    a: { z: 'past', n: 'Вчера', en: 'The package was delivered yesterday.', ru: 'Посылку доставили вчера.', why: 'Назван день в прошлом.' },
+    b: { z: 'present', n: 'Уже', en: 'The package has been delivered.', ru: 'Посылку уже доставили.', why: 'Важен результат сейчас.' },
+    r: 'Вчера указывает, когда это случилось. Уже сообщает, что результат есть.' }
+];
+</script>
+<script>
+/* В каждой строке после предложения идут три пары «ответ, пояснение».
+   Знак + отмечает верный вариант, как и в других вкладках. */
+const VDRILLS = {
+  'v-focus': [
+    Q('«Меня пригласили». ___ invited.', ['+I was','I стоит первым, а was invited означает «меня пригласили».'], ['Me was','Me — форма для «меня» после глагола. Здесь первым стоит I.'], ['I','I invited означает «я пригласил».']),
+    Q('«Кто-то разбил окно». Someone ___ the window.', ['+broke','Someone — тот, кто разбил. Здесь подходит broke.'], ['was broken','Was broken описывало бы того или то, что разбили.'], ['were broken','С someone даже в пассиве понадобилось бы was.']),
+    Q('«Нам заплатили». We ___ paid yesterday.', ['+were','Деньги получили мы. С we в прошедшем ставим were paid.'], ['was','С we нужна форма were.'], ['did','Did paid не строит пассив.']),
+    Q('«Мы заплатили за обед». We ___ for lunch.', ['+paid','Мы сами заплатили, поэтому говорим We paid.'], ['were paid','We were paid означает «нам заплатили».'], ['paid us','Us поменяло бы смысл: заплатили нам.']),
+    Q('«Его позвали внутрь». ___ called inside.', ['+He was','He стоит первым, was called говорит, что позвали его.'], ['Him was','В начале нужно he. Him ставится после глагола или предлога.'], ['He','He called означает, что позвал он сам.']),
+    Q('«Посылку доставили в полдень». The parcel ___ at noon.', ['+was delivered','Рассказываем о том, что сделали с посылкой.'], ['delivered it','Тогда получилось бы, что посылка что-то доставила.'], ['were delivered','Посылка одна, поэтому was.']),
+    Q('«Я отправил письмо». I ___ the letter.', ['+sent','Я сам отправил письмо.'], ['was sent','I was sent означает «меня отправили».'], ['was send','После was в пассиве нужна третья форма sent.']),
+    Q('«Нас предупредили заранее». ___ warned in advance.', ['+We were','Предупредили нас. Первым ставим we, затем were warned.'], ['Us were','В начале на этом месте нужна форма we.'], ['We','We warned означало бы, что предупредили мы.']),
+    Q('«Дверь открыли в восемь». The door ___ at eight.', ['+was opened','Кто-то открыл дверь. Дверь ставим первой и говорим was opened.'], ['was open','Это «дверь была открыта» как состояние, без указания на само открытие.'], ['was opening','Это описание процесса, в котором дверь открывалась.']),
+    Q('«Собака съела бутерброд». The dog ___ the sandwich.', ['+ate','Собака сделала это сама, поэтому ate.'], ['was eaten','Was eaten означало бы, что съели собаку.'], ['was ate','Для пассива нужна третья форма eaten.'])
+  ],
+  'v-time': [
+    Q('This hall ___ every morning.', ['+is cleaned','Зал один, и уборка регулярная.'], ['are cleaned','С одним залом нужна форма is.'], ['is clean','Это «зал чистый», а здесь речь о регулярной уборке.']),
+    Q('These windows ___ every Friday.', ['+are washed','Окон несколько, поэтому are washed.'], ['is washed','С несколькими окнами нужна форма are.'], ['are wash','После are нужна третья форма washed.']),
+    Q('The lights ___ last night.', ['+were turned off','Огней несколько, last night относит событие в прошлое.'], ['was turned off','С lights нужна форма were.'], ['are turned off','Are относится к настоящему, а здесь last night.']),
+    Q('The note ___ yesterday.', ['+was written','Вчерашнее событие. Третья форма write — written.'], ['was wrote','Wrote — вторая форма. После was берём written.'], ['is written','Is не подходит для завершённого события вчера.']),
+    Q('All the forms ___ tomorrow.', ['+will be checked','В будущем подходит will be + checked.'], ['will checked','После will нужно be, затем checked.'], ['will be check','После be берём третью форму checked.']),
+    Q('The old bridge ___ in 1980.', ['+was built','Мост один, и назван год в прошлом.'], ['was build','После was нужна третья форма built.'], ['were built','Мост один, поэтому was.']),
+    Q('The prize ___ next week.', ['+will be given','Приз вручат в будущем. Третья форма give — given.'], ['will be gave','Gave — вторая форма, а нужна given.'], ['will give','Тогда сам приз что-то вручит.']),
+    Q('I ___ for this work every month.', ['+am paid','С I в настоящем берём am.'], ['is paid','Is ставим с he, she, it.'], ['am pay','После am нужна третья форма paid.']),
+    Q('You ___ a new badge when you joined last year.', ['+were given','С you в прошлом используем were, затем given.'], ['was given','С you форма прошедшего — were.'], ['were gave','Gave — вторая форма, а нужна given.']),
+    Q('The keys ___ in the drawer yesterday.', ['+were found','Ключей несколько, а found — третья форма find.'], ['was found','С keys нужна форма were.'], ['were find','После were ставим found.'])
+  ],
+  'v-neg': [
+    Q('«Имя не напечатали». The name ___ on the ticket.', ['+was not printed','После was ставим not, затем printed.'], ['did not printed','После did нужна начальная форма, а для этого смысла — was not printed.'], ['was printed not','Not идёт сразу после was.']),
+    Q('«Посылку завтра не доставят». The parcel ___ tomorrow.', ['+will not be delivered','Ставим not после will. Be и delivered остаются на месте.'], ['will be not delivered','В обычном отрицании not стоит после will.'], ['won’t delivered','После won’t нужно be.']),
+    Q('«Этот вход не используют». This entrance ___.', ['+isn’t used','Isn’t — это is not. Затем ставим used.'], ['doesn’t used','Doesn’t не строит пассив, а после него также не может стоять used.'], ['aren’t used','Вход один, поэтому isn’t.']),
+    Q('«Двери не заперли вчера». The doors ___ yesterday.', ['+weren’t locked','С doors нужно were not или weren’t.'], ['wasn’t locked','Дверей несколько, поэтому weren’t.'], ['weren’t lock','После weren’t нужна третья форма locked.']),
+    Q('«Письмо не отправили». The letter ___.', ['+wasn’t sent','Wasn’t sent — письмо не отправили.'], ['wasn’t send','Третья форма send — sent.'], ['didn’t sent','После didn’t нужна начальная форма, а для пассива здесь нужно wasn’t.']),
+    Q('«Тебя не предупредили». You ___ about the change.', ['+weren’t told','С you берём weren’t и третью форму told.'], ['wasn’t told','С you нужна форма weren’t.'], ['weren’t tell','После weren’t нужна третья форма told.']),
+    Q('«Цены не поднимут». The prices ___ this month.', ['+won’t be raised','Won’t заменяет will not. За ним остаётся be raised.'], ['won’t raised','После won’t в пассиве нужно be.'], ['will be raised','Это утверждение, что цены поднимут.']),
+    Q('«Столики здесь не бронируют». Tables ___ here.', ['+aren’t reserved','С tables в настоящем подходит are not.'], ['isn’t reserved','С tables нужна форма aren’t.'], ['aren’t reserve','После aren’t берём reserved.']),
+    Q('«Мне не заплатили в пятницу». I ___ on Friday.', ['+wasn’t paid','В прошлом с I ставим was not и paid.'], ['weren’t paid','С I здесь нужно wasn’t.'], ['wasn’t pay','Нужна третья форма paid.']),
+    Q('«Мост в следующем году не построят». The bridge ___ next year.', ['+will not be built','Not стоит после will, а третья форма build — built.'], ['will not be build','После be нужна третья форма built.'], ['will not built','Между not и built нужно be.'])
+  ],
+  'v-question': [
+    Q('___ the letter sent yesterday?', ['+Was','Первым ставим was.'], ['Did','В пассиве уже есть помощник was.'], ['Were','Письмо одно, поэтому was.']),
+    Q('___ the rooms cleaned every morning?', ['+Are','Комнат несколько, и речь о привычном порядке.'], ['Is','Комнат несколько, поэтому are.'], ['Do','В пассивном вопросе здесь переставляем are.']),
+    Q('___ the bike be repaired tomorrow?', ['+Will','Вперёд переезжает will, а be остаётся перед repaired.'], ['Will be','Be уже стоит в предложении.'], ['Was','Слово tomorrow указывает на будущее.']),
+    Q('When ___ the window broken?', ['+was','После When ставим was, затем the window.'], ['did','После did нельзя собрать пассив без be.'], ['were','Окно одно, поэтому was.']),
+    Q('Why ___ the lights turned off last night?', ['+were','Lights во множественном числе, событие было вчера вечером.'], ['was','Огней несколько, поэтому were.'], ['are','Last night указывает на прошлое.']),
+    Q('Where ___ the meeting be held next week?', ['+will','Вопросительное слово стоит первым, за ним идёт will.'], ['will be','Be уже стоит перед held.'], ['is','Здесь речь о будущем и уже дано be.']),
+    Q('«Тебя пригласили?» ___ you invited?', ['+Were','С you в прошедшем вопрос начинается с Were.'], ['Was','С you нужна форма were.'], ['Did','Вопрос строится с were, а invited остаётся в третьей форме.']),
+    Q('___ this cheese made locally?', ['+Is','С cheese в настоящем ставим is.'], ['Are','Cheese здесь употребляется в единственном числе.'], ['Does','Вопрос уже строится с is.']),
+    Q('«Когда опубликуют результаты?» ___ the results be published?', ['+When will','Сначала When, потом will.'], ['Will when','When должно стоять первым.'], ['When were','Were относится к прошлому, а здесь будущее.']),
+    Q('How ___ the boxes packed for shipping?', ['+are','После How выносим are перед the boxes.'], ['is','С boxes нужна форма are.'], ['do','В пассиве здесь уже нужен помощник are.'])
+  ],
+  'v-by': [
+    Q('The story was written ___ Chekhov.', ['+by','By называет автора.'], ['with','With здесь подошло бы для инструмента.'], ['from','From указывает источник или отправную точку, а здесь нужен автор.']),
+    Q('The bread was cut ___ a knife.', ['+with','Нож — инструмент. Используем with.'], ['by','By называет того, кто резал, а здесь указан нож.'], ['to','To не обозначает инструмент.']),
+    Q('«Фото сделала моя сестра». The photo was taken ___ my sister.', ['+by','Сестра сделала фото. By называет того, кто это сделал.'], ['with','With my sister означало бы «вместе с сестрой».'], ['at','At может назвать место или время, а здесь нужен автор фото.']),
+    Q('«У меня украли велосипед». My bike ___.', ['+was stolen','Фраза уже закончена. Можно не говорить, кто украл велосипед.'], ['was stole','Третья форма steal — stolen.'], ['was stolen by','После by нужно назвать того, кто это сделал.']),
+    Q('«Раму сделал мой дедушка». The frame was made ___ my grandfather.', ['+by','Дедушка сделал раму.'], ['with','With my grandfather означало бы «вместе с дедушкой».'], ['into','Into может показать, во что что-то превратили. Здесь указан мастер.']),
+    Q('The names were written ___ a black pen.', ['+with','Ручка — инструмент, используем with.'], ['by','By подошло бы к тому, кто писал.'], ['for','For обозначило бы, для кого или для чего, а не чем написали.']),
+    Q('The song was recorded ___ a local band.', ['+by','Группа записала песню. By вводит исполнителя действия.'], ['from','From могло бы назвать источник, а здесь указано, кто записал песню.'], ['at','At вводило бы место записи, а не группу.']),
+    Q('«Здесь говорят по-английски». English ___ here.', ['+is spoken','Можно сообщить, какой язык здесь используют, без уточнения, кто говорит.'], ['is spoke','Третья форма speak — spoken.'], ['is spoken by','Here указывает место. После by пришлось бы назвать людей.']),
+    Q('The door was opened ___ a spare key.', ['+with','Запасной ключ — то, чем открыли дверь.'], ['by','Здесь назван инструмент, а не тот, кто открыл.'], ['at','At не отвечает на вопрос «чем открыли?».']),
+    Q('«Роспись сделали два местных художника». The mural was painted ___ two local artists.', ['+by','Художники выполнили работу. Перед ними ставим by.'], ['with','With могло бы означать «вместе с», а здесь называем авторов.'], ['to','To не называет автора работы.'])
+  ],
+  'v-extra': [
+    Q('Look! The bridge ___ right now.', ['+is being repaired','Ремонт идёт прямо сейчас. Нужны is being и repaired.'], ['has been repaired','Тогда ремонт уже закончился бы.'], ['is being repair','После being нужна третья форма repaired.']),
+    Q('The tickets ___ already. There are none left.', ['+have been sold','Все билеты уже продали, это видно по результату.'], ['are being sold','Это означало бы, что продажа ещё идёт.'], ['have been sell','Третья форма sell — sold.']),
+    Q('The parcel can ___ tomorrow.', ['+be delivered','После can ставим be и третью форму delivered.'], ['is delivered','После can форма is не подходит.'], ['be deliver','После be здесь нужна третья форма delivered.']),
+    Q('___ the package been delivered yet?', ['+Has','Has выносим вперёд, а been delivered остаётся.'], ['Is','Is не соединяется с been в этой форме.'], ['Does','В таком вопросе вперёд выходит has.']),
+    Q('The walls ___ painted at the moment.', ['+are being','Стены красят сейчас. С walls нужно are being.'], ['has been','Has не согласуется с walls и не описывает текущий процесс.'], ['are been','Для процесса после are ставим being.']),
+    Q('The door must ___ before closing time.', ['+be locked','После must берём be и locked.'], ['is locked','После must нужна начальная форма be.'], ['be lock','После be здесь нужна третья форма locked.']),
+    Q('The report ___ yet, so we’re still waiting.', ['+hasn’t been sent','Hasn’t been sent сообщает, что результата пока нет.'], ['has been sent','Это значило бы, что отчёт уже отправили.'], ['hasn’t being sent','После hasn’t нужна форма been.']),
+    Q('The bike is ___ repaired right now.', ['+being','Being показывает, что ремонт идёт сейчас.'], ['been','Been употребили бы после has или have.'], ['be','После is для такого процесса нужна форма being.']),
+    Q('These files should ___ in a safe place.', ['+be kept','После should берём be, затем kept.'], ['are kept','После should нельзя ставить are.'], ['be keep','Третья форма keep — kept.']),
+    Q('___ the documents been signed?', ['+Have','С documents нужен have. В вопросе он стоит первым.'], ['Has','Документов несколько, поэтому have.'], ['Are','С are можно было бы спросить о процессе через being.'])
+  ]
+};
+
+const QUIZ_V = [
+  Q('«Мне дали ключ». ___ given a key.', ['+I was','Ключ получил я. Начинаем с I и добавляем was given.'], ['Me was','На первом месте здесь нужна форма I.'], ['I','I given не образует полного предложения.']),
+  Q('The students ___ the chairs before class.', ['+moved','Стулья передвинули сами ученики.'], ['were moved','Это означало бы, что передвинули учеников.'], ['was moved','Was не подходит к students во множественном числе.']),
+  Q('The invitations ___ last Friday.', ['+were sent','Приглашений несколько, а last Friday указывает на прошлое.'], ['was sent','С invitations нужна форма were.'], ['were send','После were берём третью форму sent.']),
+  Q('The new timetable ___ tomorrow.', ['+will be posted','Расписание опубликуют завтра. Нужны will be и posted.'], ['will posted','Пропущено be.'], ['will be post','После be нужна третья форма posted.']),
+  Q('«Лифт вчера не починили». The lift ___ yesterday.', ['+wasn’t fixed','Отрицание в прошлом: was not + fixed.'], ['was fixed','Это утверждение, что лифт починили.'], ['wasn’t fix','После wasn’t здесь нужна третья форма fixed.']),
+  Q('«Работы в пятницу не проверят». The papers ___ on Friday.', ['+won’t be checked','После won’t остаются be и checked.'], ['will be checked','Это утверждение, а нужно отрицание.'], ['won’t checked','В пассиве после won’t здесь нужно be.']),
+  Q('When ___ the museum built?', ['+was','После When ставим was. Музей один.'], ['were','С museum нужна форма was.'], ['did','Для пассивного вопроса здесь уже есть was.']),
+  Q('___ the results be announced on Monday?', ['+Will','Первым ставим will. Be остаётся перед announced.'], ['Will be','Так be оказалось бы в вопросе дважды.'], ['Were','Для будущего с be нужен will.']),
+  Q('The picture was drawn ___ a child.', ['+by','By называет того, кто нарисовал.'], ['with','With указывало бы на инструмент или совместную работу.'], ['to','To здесь не вводит автора.']),
+  Q('The rope was cut ___ scissors.', ['+with','Ножницы — инструмент.'], ['by','Здесь указано, чем резали, а не кто резал.'], ['for','For обозначило бы назначение, а не инструмент.']),
+  Q('Please wait. The floor ___ right now.', ['+is being cleaned','Пол моют прямо сейчас.'], ['has been cleaned','Это означало бы, что пол уже вымыли.'], ['is been cleaned','Для процесса после is нужно being.']),
+  Q('The forms ___ already, so you can pick them up.', ['+have been signed','Подписи уже стоят, и бланки можно забрать.'], ['are being signed','Это означало бы, что бланки ещё подписывают.'], ['has been signed','С forms во множественном числе нужно have.'])
+];
+</script>
+<script>
 /* ═══════════════════════════════════════════════════════════
    ТРЕНАЖЁР · один компонент на все блоки заданий
    Показывает по одному вопросу. После ответа — разбор:
@@ -7039,6 +7382,47 @@ dbWord.addEventListener('click', e => { const b = e.target.closest('button'); if
 dbDeg.addEventListener('click', e => { const b = e.target.closest('button'); if (b) { db.deg = b.dataset.v; renderDeg(); } });
 renderDeg();
 
+/* Пассив: те же ячейки, что в конструкторе предложения. */
+renderRoadmap('v-road', VLEVELS, V, {
+  pid: 'v', drills: VDRILLS, kindLabel: item => item.short,
+  figure: item => item.fig ? sFigure(item) : ''
+});
+renderDuels('vDuels', VDUELS);
+makeQuiz(document.getElementById('vQuiz'), QUIZ_V, { title: 'Вопрос' });
+
+const vBuildTime = document.getElementById('vBuildTime');
+const vBuildType = document.getElementById('vBuildType');
+const vBuildTrain = document.getElementById('vBuildTrain');
+const vBuildRu = document.getElementById('vBuildRu');
+const vBuildExamples = [
+  { aux: 'is', tail: '', time: 'every day', ru: ['Эту комнату убирают каждый день.', 'Эту комнату не убирают каждый день.', 'Эту комнату убирают каждый день?'] },
+  { aux: 'was', tail: '', time: 'yesterday', ru: ['Эту комнату убрали вчера.', 'Эту комнату не убрали вчера.', 'Эту комнату убрали вчера?'] },
+  { aux: 'will', tail: 'be ', time: 'tomorrow', ru: ['Эту комнату уберут завтра.', 'Эту комнату не уберут завтра.', 'Эту комнату уберут завтра?'] }
+];
+
+function renderPassiveBuild() {
+  const time = vBuildTime.querySelector('[aria-pressed="true"]').dataset.v;
+  const type = vBuildType.querySelector('[aria-pressed="true"]').dataset.v;
+  const example = vBuildExamples[time];
+  const question = type === 'q';
+  const subject = ['subj', question ? 'this room' : 'This room'];
+  const auxText = question ? example.aux[0].toUpperCase() + example.aux.slice(1) : example.aux;
+  const aux = ['aux', type === 'n' ? auxText + ' not' : auxText];
+  const row = question ? [aux, subject] : [subject, aux];
+  row.push(['verb', example.tail + 'cleaned'], ['rest', example.time], ['end', question ? '?' : '.']);
+  vBuildRu.textContent = example.ru['pnq'.indexOf(type)];
+  flipTrain(vBuildTrain, trainHTML(row));
+}
+
+[vBuildTime, vBuildType].forEach(group => group.addEventListener('click', event => {
+  const button = event.target.closest('button[data-v]');
+  if (!button) return;
+  group.querySelector('[aria-pressed="true"]').setAttribute('aria-pressed', 'false');
+  button.setAttribute('aria-pressed', 'true');
+  renderPassiveBuild();
+}));
+renderPassiveBuild();
+
 /* ═══════════════════════════════════════════════════════════
    НАВИГАЦИЯ: вкладки, оглавление, меню, точки, прогресс
    ═══════════════════════════════════════════════════════════ */
@@ -7094,6 +7478,18 @@ const TABDEF = {
       { id: 'p-duels', n: 'Сравнение форм', s: 'Пять пар, которые путают', e: 'Разбор' },
       { id: 'p-quiz', n: 'Общая проверка', s: '16 предложений вперемешку', e: 'Тренажёр' },
       { id: 'p-sheet', n: 'Шпаргалка', s: 'Все слова одной таблицей', e: 'Итог' }
+    ]
+  },
+  passive: {
+    panel: 'tab-passive', toc: 'vToc', items: V, total: V.length,
+    nav: [
+      { id: 'v-system', n: 'Конструктор', s: 'Время, вопрос и отрицание', e: 'Старт' },
+      { id: 'v-lvl1', n: 'Что с ним сделали?', s: 'Выбираем, про кого говорим', e: 'Уровень 1' },
+      { id: 'v-lvl2', n: 'Нет, вопрос и автор', s: 'Not, порядок слов и by', e: 'Уровень 2' },
+      { id: 'v-lvl3', n: 'Сейчас, уже и можно', s: 'Being, been и can be', e: 'Уровень 3' },
+      { id: 'v-duels', n: 'Сравнение форм', s: 'Три пары', e: 'Разбор' },
+      { id: 'v-quiz', n: 'Общая проверка', s: '12 предложений', e: 'Тренажёр' },
+      { id: 'v-sheet', n: 'Шпаргалка', s: 'Формы одной таблицей', e: 'Итог' }
     ]
   },
   deg: {
@@ -7257,6 +7653,7 @@ function tabForHash(h) {
   if (C.some(c => c.id === id) || id.indexOf('c-') === 0) return 'cond';
   if (P.some(x => x.id === id) || id.indexOf('p-') === 0) return 'pron';
   if (D.some(x => x.id === id) || id.indexOf('d-') === 0) return 'deg';
+  if (id.indexOf('v-') === 0) return 'passive';
   if (T.some(t => t.id === id) || id.indexOf('t-') === 0) return 'tenses';
   return null;
 }

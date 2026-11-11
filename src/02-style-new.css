@@ -3,10 +3,11 @@
 .tabs {
   display: flex; gap: 2px; padding: 3px; border-radius: 12px;
   background: var(--surface-2); border: 1px solid var(--line-soft);
-  position: relative; flex-shrink: 0;
+  position: relative; flex-shrink: 1; min-width: 0; overflow-x: auto;
+  scrollbar-width: thin; scrollbar-color: var(--text-mute) transparent;
 }
 .tabs button {
-  position: relative; z-index: 1;
+  position: relative; z-index: 1; flex: 0 0 auto;
   font-family: var(--f-display); font-weight: 600; font-size: .76rem; letter-spacing: -.01em;
   padding: 6px 14px; border-radius: 9px; color: var(--text-mute); white-space: nowrap;
   transition: color .22s;
@@ -84,7 +85,6 @@
   font-style: normal; font-family: var(--f-mono); font-size: .64rem; letter-spacing: .12em;
   color: var(--zone); text-transform: uppercase;
 }
-
 /* ═══════════════ КНОПКА «НАВЕРХ» ═══════════════ */
 .totop {
   position: fixed; right: 22px; bottom: 22px; z-index: 80;
@@ -516,10 +516,4 @@
   .dots__wrap { gap: 6px; }
   .tabs button { font-size: .64rem; padding: 6px 6px; }
   .menu__btn { padding: 8px 8px; }
-}
-
-/* четыре вкладки не влезают в 320px — панель вкладок прокручивается по горизонтали */
-@media (max-width: 560px) {
-  .tabs { flex-shrink: 1; min-width: 0; overflow-x: auto; scrollbar-width: none; }
-  .tabs::-webkit-scrollbar { display: none; }
 }

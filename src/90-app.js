@@ -583,6 +583,45 @@ function renderPassiveBuild() {
 }));
 renderPassiveBuild();
 
+renderRoadmap('a-road', ALEVELS, A, {
+  pid: 'a', drills: ADRILLS, kindLabel: item => item.short,
+  figure: () => ''
+});
+renderDuels('aDuels', ADUELS);
+makeQuiz(document.getElementById('aQuiz'), QUIZ_A, { title: 'Вопрос' });
+
+const articleScenes = [
+  { ru: 'Мне нужна чашка. Подойдёт любая.', head: 'I need', article: 'a', noun: 'cup', note: 'Нужна одна чашка из многих. Cup начинается с согласного звука.' },
+  { ru: 'Чашка у чайника чистая.', head: '', article: 'The', noun: 'cup', tail: 'by the kettle is clean', note: 'Слова «у чайника» показывают, какая именно чашка.' },
+  { ru: 'Я коллекционирую чашки.', head: 'I collect', article: '', noun: 'cups', note: 'Речь о чашках во множественном числе без уточнения.' },
+  { ru: 'Мне нужна пустая чашка. Подойдёт любая пустая.', head: 'I need', article: 'an', noun: 'empty cup', note: 'Сразу после артикля стоит empty. Первый звук гласный, поэтому an.' },
+  { ru: 'Я ищу свою чашку.', head: 'I’m looking for', article: 'my', noun: 'cup', note: 'My уже говорит, чья чашка. Перед ним артикль не нужен.' }
+];
+const aBuild = document.getElementById('aBuild');
+const aBuildTrain = document.getElementById('aBuildTrain');
+const aBuildRu = document.getElementById('aBuildRu');
+const aBuildNote = document.getElementById('aBuildNote');
+
+function renderArticleBuild(button) {
+  const scene = articleScenes[button.dataset.v];
+  aBuild.querySelector('[aria-pressed="true"]').setAttribute('aria-pressed', 'false');
+  button.setAttribute('aria-pressed', 'true');
+  const row = [];
+  if (scene.head) row.push(['rest', scene.head]);
+  if (scene.article) row.push(['aux', scene.article]);
+  row.push(['subj', scene.noun]);
+  if (scene.tail) row.push(['verb', scene.tail]);
+  row.push(['end', '.']);
+  aBuildRu.textContent = scene.ru;
+  aBuildNote.textContent = scene.note;
+  flipTrain(aBuildTrain, trainHTML(row));
+}
+aBuild.addEventListener('click', event => {
+  const button = event.target.closest('button[data-v]');
+  if (button) renderArticleBuild(button);
+});
+renderArticleBuild(aBuild.querySelector('[aria-pressed="true"]'));
+
 /* ═══════════════════════════════════════════════════════════
    НАВИГАЦИЯ: вкладки, оглавление, меню, точки, прогресс
    ═══════════════════════════════════════════════════════════ */
@@ -646,6 +685,18 @@ const TABDEF = {
       { id: 'p-duels', n: 'Сравнение форм', s: 'Пять пар, которые путают', e: 'Разбор' },
       { id: 'p-quiz', n: 'Общая проверка', s: '16 предложений вперемешку', e: 'Тренажёр' },
       { id: 'p-sheet', n: 'Шпаргалка', s: 'Все слова одной таблицей', e: 'Итог' }
+    ]
+  },
+  articles: {
+    panel: 'tab-articles', toc: 'aToc', items: A, total: A.length,
+    nav: [
+      { id: 'a-system', n: 'Конструктор', s: 'Меняем ситуацию', e: 'Старт' },
+      { id: 'a-lvl1', n: 'Один из многих', s: 'A и an на слух', e: 'Уровень 1' },
+      { id: 'a-lvl2', n: 'Та самая вещь', s: 'Когда понятно, о чём речь', e: 'Уровень 2' },
+      { id: 'a-lvl3', n: 'Без артикля', s: 'В целом, my, this и числа', e: 'Уровень 3' },
+      { id: 'a-duels', n: 'Сравнение форм', s: 'Три пары', e: 'Разбор' },
+      { id: 'a-quiz', n: 'Общая проверка', s: '12 предложений', e: 'Тренажёр' },
+      { id: 'a-sheet', n: 'Шпаргалка', s: 'Как выбрать за несколько секунд', e: 'Итог' }
     ]
   },
   passive: {
@@ -753,7 +804,7 @@ function setTab(name, scroll) {
   Object.keys(TABDEF).forEach(k => {
     document.getElementById(TABDEF[k].panel).hidden = (k !== name);
   });
-  moveInk(); revealTab(); fillDots(); fillMenu(); paint();
+  fillDots(); fillMenu(); paint(); moveInk(); revealTab();
   if (scroll !== false) window.scrollTo({ top: 0, behavior: motionOK() ? 'smooth' : 'auto' });
 }
 tabBtns.forEach(b => b.addEventListener('click', () => {
@@ -762,6 +813,21 @@ tabBtns.forEach(b => b.addEventListener('click', () => {
   if (location.hash !== hash) history.pushState(null, '', hash);
   setTab(name);
 }));
+tabsInk.parentElement.addEventListener('keydown', event => {
+  const index = tabBtns.indexOf(event.target);
+  if (index < 0) return;
+  const last = tabBtns.length - 1;
+  const next = {
+    ArrowLeft: index === 0 ? last : index - 1,
+    ArrowRight: index === last ? 0 : index + 1,
+    Home: 0,
+    End: last
+  }[event.key];
+  if (next === undefined) return;
+  event.preventDefault();
+  tabBtns[next].focus({ preventScroll: true });
+  tabBtns[next].click();
+});
 window.addEventListener('resize', moveInk);
 /* ширина кнопок меняется и без resize — например, когда догружается шрифт */
 if (window.ResizeObserver) new ResizeObserver(moveInk).observe(document.querySelector('.tabs'));
@@ -774,7 +840,7 @@ let done = new Set();
 try { done = new Set(JSON.parse(localStorage.getItem(KEY) || '[]')); } catch (e) { done = new Set(); }
 
 function paint() {
-  const all = S.concat(T, C, P, D, V);
+  const all = S.concat(T, C, P, D, V, A);
   all.forEach(x => {
     const on = done.has(x.id);
     const st = document.getElementById(x.id);
@@ -845,6 +911,7 @@ function tabForHash(h) {
   if (P.some(x => x.id === id) || id.indexOf('p-') === 0) return 'pron';
   if (D.some(x => x.id === id) || id.indexOf('d-') === 0) return 'deg';
   if (id.indexOf('v-') === 0) return 'passive';
+  if (id.startsWith('a-')) return 'articles';
   if (T.some(t => t.id === id) || id.indexOf('t-') === 0) return 'tenses';
   return null;
 }

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Интерактивная методичка по английской грамматике: основа предложения, 12 времён, условные предложения, местоимения, степени сравнения и пассив. Схемы, конструкторы и 588 заданий с разбором.">
+<meta name="description" content="Интерактивная методичка по английской грамматике: основа предложения, 12 времён, условные предложения, местоимения, степени сравнения, пассив и артикли. Схемы, конструкторы и 660 заданий с разбором.">
 <meta name="color-scheme" content="dark light">
 <meta name="theme-color" content="#0A1213" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#ECF0EE" media="(prefers-color-scheme: light)">
@@ -551,10 +551,11 @@ td.ex { color: var(--text-dim); }
 .tabs {
   display: flex; gap: 2px; padding: 3px; border-radius: 12px;
   background: var(--surface-2); border: 1px solid var(--line-soft);
-  position: relative; flex-shrink: 0;
+  position: relative; flex-shrink: 1; min-width: 0; overflow-x: auto;
+  scrollbar-width: thin; scrollbar-color: var(--text-mute) transparent;
 }
 .tabs button {
-  position: relative; z-index: 1;
+  position: relative; z-index: 1; flex: 0 0 auto;
   font-family: var(--f-display); font-weight: 600; font-size: .76rem; letter-spacing: -.01em;
   padding: 6px 14px; border-radius: 9px; color: var(--text-mute); white-space: nowrap;
   transition: color .22s;
@@ -632,7 +633,6 @@ td.ex { color: var(--text-dim); }
   font-style: normal; font-family: var(--f-mono); font-size: .64rem; letter-spacing: .12em;
   color: var(--zone); text-transform: uppercase;
 }
-
 /* ═══════════════ КНОПКА «НАВЕРХ» ═══════════════ */
 .totop {
   position: fixed; right: 22px; bottom: 22px; z-index: 80;
@@ -1065,12 +1065,6 @@ td.ex { color: var(--text-dim); }
   .tabs button { font-size: .64rem; padding: 6px 6px; }
   .menu__btn { padding: 8px 8px; }
 }
-
-/* четыре вкладки не влезают в 320px — панель вкладок прокручивается по горизонтали */
-@media (max-width: 560px) {
-  .tabs { flex-shrink: 1; min-width: 0; overflow-x: auto; scrollbar-width: none; }
-  .tabs::-webkit-scrollbar { display: none; }
-}
 /* Главная использует те же цвета и шрифты, что и уроки. */
 .home { --home-accent: var(--present); padding: 14px 0 32px; }
 .home a { color: inherit; text-decoration: none; }
@@ -1191,6 +1185,7 @@ td.ex { color: var(--text-dim); }
       <button role="tab" data-tab="pron" aria-selected="false" aria-controls="tab-pron">Местоимения</button>
       <button role="tab" data-tab="deg" aria-selected="false" aria-controls="tab-deg">Степени</button>
       <button role="tab" data-tab="passive" aria-selected="false" aria-controls="tab-passive">Пассив</button>
+      <button role="tab" id="articlesTab" data-tab="articles" aria-selected="false" aria-controls="tab-articles">Артикли</button>
     </div>
 
     <div class="dots__wrap">
@@ -1232,21 +1227,21 @@ td.ex { color: var(--text-dim); }
         <a class="home-primary" href="#home-course">Посмотреть программу <span aria-hidden="true">↘</span></a>
         <a class="home-secondary" href="#s-hero">Открыть первый урок <span aria-hidden="true">→</span></a>
       </div>
-      <p class="home-facts">6 разделов <span>·</span> 588 заданий с разбором в методичке</p>
+      <p class="home-facts">7 разделов <span>·</span> 660 заданий с разбором в методичке</p>
     </div>
     <div class="home-example">
-      <div class="home-example__label"><span>ПОДСКАЗКА ИЗ УРОКА</span><span>CONDITIONALS</span></div>
-      <h2 class="home-example__title">Якобы да кабы</h2>
-      <p class="home-example__note">Увидел два «бы»? Спроси себя: я представляю, что было бы <strong>сейчас</strong>, или прокручиваю то, чего не случилось <strong>тогда</strong>?</p>
+      <div class="home-example__label"><span>ПОДСКАЗКА ИЗ УРОКА</span><span>АРТИКЛИ</span></div>
+      <h2 class="home-example__title"><span lang="en">THE 5</span> — та самая «пятёрка»</h2>
+      <p class="home-example__note">BMW использует надпись <strong>THE 5</strong> для пятой серии. Запомни это ощущение: <strong>с <span lang="en">the</span> собеседник понимает, о чём именно речь</strong>.</p>
       <div class="home-example__pair">
-        <p><strong>Сейчас.</strong> Если <strong>бы</strong> у меня было время, я <strong>бы</strong> позвонил.</p>
-        <p lang="en">If I <b>had</b> time, I <b>would call</b>.</p>
+        <p>Я увидел на улице BMW. Ты пока не знаешь, какую.</p>
+        <p lang="en">I saw <b>a</b> BMW outside.</p>
       </div>
       <div class="home-example__pair">
-        <p><strong>Вчера.</strong> Если <strong>бы</strong> у меня вчера было время, я <strong>бы</strong> позвонил.</p>
-        <p lang="en">If I <b>had had</b> time yesterday, I <b>would have called</b>.</p>
+        <p>Та BMW была синяя. Теперь понятно, о какой машине я говорю.</p>
+        <p lang="en"><b>The</b> BMW was blue.</p>
       </div>
-      <a href="#c-algo">Разобрать условные предложения <span aria-hidden="true">↗</span></a>
+      <a href="#a-known">Разобрать артикль <span lang="en">the</span> <span aria-hidden="true">↗</span></a>
     </div>
   </header>
 
@@ -1273,6 +1268,7 @@ td.ex { color: var(--text-dim); }
       <a class="home-card" href="#p-hero"><span class="home-card__num">04</span><span class="home-card__name">Местоимения</span><span class="home-card__text">Почему «она» превращается в <i>she</i> или <i>her</i> и как выбрать нужное слово.</span><span class="home-card__arrow" aria-hidden="true">↗</span></a>
       <a class="home-card" href="#d-hero"><span class="home-card__num">05</span><span class="home-card__name">Степени сравнения</span><span class="home-card__text">Как сказать «выше», «красивее» и «самый красивый».</span><span class="home-card__arrow" aria-hidden="true">↗</span></a>
       <a class="home-card" href="#v-hero"><span class="home-card__num">06</span><span class="home-card__name">Пассив</span><span class="home-card__text">Как сказать «меня пригласили», «письмо отправили» или «результаты объявят».</span><span class="home-card__arrow" aria-hidden="true">↗</span></a>
+      <a class="home-card" href="#a-hero"><span class="home-card__num">07</span><span class="home-card__name">Артикли</span><span class="home-card__text">Как выбрать между <i>a</i>, <i>an</i>, <i>the</i> и фразой без артикля.</span><span class="home-card__arrow" aria-hidden="true">↗</span></a>
     </div>
   </section>
   </div>
@@ -2506,6 +2502,104 @@ td.ex { color: var(--text-dim); }
           <tr><td>Ремонтируют прямо сейчас</td><td><code>am / is / are + being + V3</code></td><td>The bridge is being repaired.</td></tr>
           <tr><td>Уже продали</td><td><code>have / has + been + V3</code></td><td>The tickets have been sold.</td></tr>
           <tr><td>Могут доставить</td><td><code>can be + V3</code></td><td>The parcel can be delivered tomorrow.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+</div>
+
+<div class="tabpanel" id="tab-articles" role="tabpanel" aria-labelledby="articlesTab" hidden>
+<header class="hero" id="a-hero">
+  <div class="wrap">
+    <div class="eyebrow">Артикли · a, an, the</div>
+    <h1>Любой или <span class="tri">тот самый</span>?</h1>
+    <p class="hero__sub">«Открой окно». Если подойдёт любое, скажи <b>Open a window</b>. Если вы оба понимаете, какое окно открыть, скажи <b>Open the window</b>. А когда речь о вещах вообще, артикль часто можно оставить пустым.</p>
+    <div class="hero__meta">
+      <span class="pill">6 станций</span>
+      <span class="pill">конструктор</span>
+      <span class="pill">72 задания с разбором</span>
+    </div>
+  </div>
+</header>
+
+<section class="sect toc" id="a-toc">
+  <div class="wrap">
+    <div class="sect__head" style="margin-bottom:0">
+      <div class="eyebrow">Оглавление</div>
+      <h2>С чего начать</h2>
+      <p>Попробуй конструктор или открой нужную станцию.</p>
+    </div>
+    <div class="toc__g" id="aToc"></div>
+  </div>
+</section>
+
+<section class="sect" id="a-system">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Конструктор</div>
+      <h2>Меняется ситуация, меняется артикль</h2>
+      <p>Выбери, что хочешь сказать, и посмотри, что появится перед словом.</p>
+    </div>
+    <div class="bu">
+      <div class="bu__ctl">
+        <div class="bu__grp">
+          <div class="eyebrow">Что имеешь в виду</div>
+          <div class="seg" id="aBuild" role="group" aria-label="Ситуация">
+            <button type="button" data-v="0" aria-pressed="true">Любая чашка</button>
+            <button type="button" data-v="1" aria-pressed="false">Чашка у чайника</button>
+            <button type="button" data-v="2" aria-pressed="false">Чашки в целом</button>
+            <button type="button" data-v="3" aria-pressed="false">Пустая чашка</button>
+            <button type="button" data-v="4" aria-pressed="false">Моя чашка</button>
+          </div>
+        </div>
+      </div>
+      <div class="bu__out">
+        <div class="bu__ru" id="aBuildRu"></div>
+        <div class="train bu__train" id="aBuildTrain" aria-live="polite"></div>
+        <p class="bu__note" id="aBuildNote"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main class="wrap"><div class="roadmap" id="a-road"></div></main>
+
+<section class="sect" id="a-duels">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Разбор полётов</div>
+      <h2>Три пары, которые легко спутать</h2>
+    </div>
+    <div class="duels" id="aDuels"></div>
+  </div>
+</section>
+
+<section class="sect" id="a-quiz">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Общая проверка</div>
+      <h2>Двенадцать предложений</h2>
+      <p>Выбери подходящий вариант. Знак «—» означает, что пропуск нужно оставить пустым.</p>
+    </div>
+    <div class="drill z-present" id="aQuiz"></div>
+  </div>
+</section>
+
+<section class="sect" id="a-sheet">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">На один экран</div>
+      <h2>Шпаргалка</h2>
+    </div>
+    <div class="sheet">
+      <table>
+        <thead><tr><th>Что имею в виду</th><th>Что ставлю</th><th>Как это звучит</th></tr></thead>
+        <tbody>
+          <tr><td>Понятно, какой именно</td><td><code>the</code></td><td>The cup by the kettle is clean.</td></tr>
+          <tr><td>Один предмет из многих</td><td><code>a / an</code></td><td>I need a cup. I need an empty cup.</td></tr>
+          <tr><td>Вещи в целом или без уточнения</td><td>Без артикля</td><td>I collect cups. I need water.</td></tr>
+          <tr><td>Уже сказано «моя» или «эта»</td><td><code>my / this</code></td><td>This cup is mine. Where is my cup?</td></tr>
         </tbody>
       </table>
     </div>
@@ -6942,6 +7036,138 @@ const VDUELS = [
 ];
 </script>
 <script>
+const ALEVELS = [
+  { n: 1, ru: 'Один предмет', title: 'Один из многих', code: 'a / an',
+    txt: 'Начнём с одного предмета и научимся выбирать a или an на слух.' },
+  { n: 2, ru: 'Какой именно', title: 'Та самая вещь', code: 'the',
+    txt: 'Посмотрим, как собеседник понимает, о какой именно вещи мы говорим.' },
+  { n: 3, ru: 'Без артикля', title: 'Когда слово уже понятно', code: '— · my · this',
+    txt: 'Разберём, когда оставлять слово без артикля и когда перед ним уже есть my, this или другое подходящее слово.' }
+];
+
+const A = [
+  {
+    id: 'a-one', zone: 'present', level: 1, idx: 1, short: 'Один из многих',
+    name: 'Подойдёт одна из многих', core: 'a pen · an apple',
+    thesis: 'Мне нужна одна ручка. Какая подойдёт',
+    lead: '<b>I need a pen.</b> По-русски просто «мне нужна ручка». По-английски <b>a</b> показывает, что нужна одна ручка и собеседнику не нужно угадывать, какая именно.',
+    blocks: [
+      { kind: 'key', h: 'Попробуй сказать «один»', p: 'Одна ручка, одна чашка, один билет. Эти вещи можно посчитать. Если говорим об одной из них и слушателю не нужно её опознавать, подойдёт <b>a</b> или <b>an</b>.' },
+      { kind: 'plain', h: 'Кто ты по профессии?', p: '<b>She’s a doctor.</b> Врач — одна из профессий. По-русски хватает «она врач», а по-английски перед <b>doctor</b> ставим <b>a</b>.' },
+      { kind: 'trap', h: 'Воду считаем бутылками', p: '<b>I need water</b> — нужна вода. <b>I need a bottle of water</b> — нужна одна бутылка воды. Здесь <b>a</b> относится к бутылке.' }
+    ],
+    forms: { p: 'I need <b>a</b> pen.', n: 'I don’t need <b>a</b> pen.', q: 'Do you have <b>a</b> pen?' },
+    markers: ['один из многих', 'подойдёт любой', 'профессия'],
+    ex: [
+      { en: 'Can I borrow a pencil?', ru: 'Можно одолжить карандаш?' },
+      { en: 'My sister is a nurse.', ru: 'Моя сестра медсестра.' },
+      { en: 'I’d like a glass of water.', ru: 'Я бы хотел стакан воды.' }
+    ]
+  },
+  {
+    id: 'a-sound', zone: 'present', level: 1, idx: 2, short: 'На слух',
+    name: 'A или an? Слушаем первый звук', core: 'a university · an hour',
+    thesis: 'Произнеси следующее слово',
+    lead: '<b>A</b> и <b>an</b> означают одно и то же. Перед гласным звуком говорим <b>an</b>, перед согласным — <b>a</b>.',
+    blocks: [
+      { kind: 'key', h: 'Слушай звук, с которого начинаешь', p: 'В <b>hour</b> буква h молчит, поэтому <b>an hour</b>. В <b>university</b> в начале слышится «й», поэтому <b>a university</b>.' },
+      { kind: 'plain', h: 'Если перед вещью есть описание', p: 'Слушай первое слово после артикля. <b>An apple</b>, но <b>a green apple</b>. <b>A book</b>, но <b>an old book</b>.' }
+    ],
+    forms: { p: 'I have <b>an</b> idea.', n: 'I don’t have <b>an</b> answer.', q: 'Do you have <b>a</b> minute?' },
+    markers: ['a green apple', 'an old book', 'an hour'],
+    ex: [
+      { en: 'We waited for an hour.', ru: 'Мы ждали час.' },
+      { en: 'She studies at a university.', ru: 'Она учится в университете.' },
+      { en: 'He drives an electric car.', ru: 'Он ездит на электромобиле.' }
+    ]
+  },
+  {
+    id: 'a-known', zone: 'future', level: 2, idx: 3, short: 'Понятно, какой',
+    name: 'The — та самая вещь', core: 'Open the window.',
+    thesis: 'Собеседник понимает, о чём речь',
+    lead: 'У BMW на странице пятой серии крупно написано <b>THE 5</b>. По-русски можно обыграть это как «та самая пятёрка». Сохрани это ощущение для обычной речи. <b>The</b> подсказывает, что собеседник может понять, о чём именно речь. <a href="https://www.bmw.co.uk/en/all-models/5-series/saloon/bmw-5-series-saloon-overview.html">Посмотреть пример у BMW</a>.',
+    blocks: [
+      { kind: 'key', h: 'Можем показать пальцем', p: 'Сидим за столом. <b>Pass me the salt.</b> Соль легко найти, хотя о ней до этого не говорили.' },
+      { kind: 'plain', h: 'Можем уточнить словами', p: '<b>The bag by the door is mine.</b> Слова <b>by the door</b> помогают понять, какую сумку я имею в виду.' },
+      { kind: 'plain', h: 'Один, несколько или вода', p: 'Подходит <b>the book on my desk</b>, <b>the books on my desk</b> и <b>the water in this bottle</b>. В каждом случае ясно, про что говорим.' }
+    ],
+    forms: { p: '<b>The</b> window is open.', n: '<b>The</b> window isn’t open.', q: 'Can you open <b>the</b> window?' },
+    markers: ['та самая', 'понятно из ситуации', 'есть уточнение'],
+    ex: [
+      { en: 'Turn off the light, please.', ru: 'Выключи свет, пожалуйста.', nb: 'в комнате понятно, какой свет' },
+      { en: 'The keys on the table are yours.', ru: 'Ключи на столе твои.' },
+      { en: 'The water in this bottle is cold.', ru: 'Вода в этой бутылке холодная.' }
+    ]
+  },
+  {
+    id: 'a-story', zone: 'future', level: 2, idx: 4, short: 'Знакомая вещь',
+    name: 'В рассказе было a, стало the', core: 'I saw a dog. The dog followed me.',
+    thesis: 'Сначала знакомлю, потом возвращаюсь',
+    lead: '<b>I saw a dog near the shop.</b> Ты увидел вполне конкретную собаку, но слушатель ещё о ней не знает. <b>The dog followed me home.</b> Теперь вы оба понимаете, про какую собаку идёт речь.',
+    blocks: [
+      { kind: 'key', h: 'Сверься с тем, что знает слушатель', p: 'Первое упоминание обычно знакомит с вещью, второе возвращает к ней. Но если вещь уже ясна из ситуации, можно сразу сказать <b>the</b>, как в <b>Open the window</b> в комнате с одним окном.' },
+      { kind: 'plain', h: 'Если появился ещё один предмет', p: '<b>I bought a book. The book was for my sister. Then I bought a book for myself.</b> Последнее <b>a book</b> вводит другую книгу.' }
+    ],
+    forms: { p: 'I saw <b>a</b> dog.', n: '<b>The</b> dog didn’t bark.', q: 'Was <b>the</b> dog friendly?' },
+    markers: ['вводим в рассказ', 'возвращаемся к тому же', 'другой предмет'],
+    ex: [
+      { en: 'I bought a book. The book is on my desk.', ru: 'Я купил книгу. Книга у меня на столе.' },
+      { en: 'She found an earring. The earring was under the sofa.', ru: 'Она нашла серьгу. Серьга лежала под диваном.' }
+    ]
+  },
+  {
+    id: 'a-zero', zone: 'past', level: 3, idx: 5, short: 'В целом',
+    name: 'Собаки вообще, вода без уточнения', core: 'dogs · water · the dogs next door',
+    thesis: 'Для книг вообще не нужно искать одну книгу',
+    lead: '<b>I like dogs.</b> Я люблю собак в целом. <b>I like the dogs next door.</b> Мне нравятся конкретные собаки у соседей.',
+    blocks: [
+      { kind: 'key', h: 'Вещи во множественном числе', p: '<b>I read books.</b> Читаю книги. <b>I bought apples.</b> Купил яблоки. Здесь мы не уточняем, какие именно книги или яблоки. В заданиях выбери «—», чтобы оставить пропуск пустым.' },
+      { kind: 'plain', h: 'То, что обычно не считаем поштучно', p: '<b>I need water.</b> Просто нужна вода. <b>The water in this bottle is cold.</b> Теперь речь о воде в этой бутылке.' },
+      { kind: 'trap', h: 'С одной вещью проверь, что стоит перед ней', p: 'Скажи <b>a book</b>, <b>the book</b>, <b>my book</b> или <b>this book</b>. В такой фразе одного <b>book</b> обычно мало.' }
+    ],
+    forms: { p: 'I like <b>coffee</b>.', n: 'I don’t drink <b>coffee</b>.', q: 'Do you drink <b>coffee</b>?' },
+    markers: ['вообще', 'без уточнения', 'вода · кофе · музыка'],
+    ex: [
+      { en: 'Children need sleep.', ru: 'Детям нужен сон.' },
+      { en: 'We bought tomatoes.', ru: 'Мы купили помидоры.' },
+      { en: 'The coffee in this cup is cold.', ru: 'Кофе в этой чашке холодный.' }
+    ]
+  },
+  {
+    id: 'a-other', zone: 'past', level: 3, idx: 6, short: 'My и this',
+    name: 'Моя книга, эта книга, две книги', core: 'my book · this book · two books',
+    thesis: 'Перед словом уже есть подсказка',
+    lead: 'Сравни <b>a book</b>, <b>the book</b>, <b>my book</b> и <b>this book</b>. Когда уже сказал «моя» или «эта», ещё один артикль туда не ставим.',
+    blocks: [
+      { kind: 'key', h: 'Скажи «моя книга» целиком', p: '<b>My book</b> — моя книга. <b>This book</b> — эта книга. <b>Those books</b> — те книги. Перед <b>my</b>, <b>this</b> и <b>those</b> артикль не нужен.' },
+      { kind: 'plain', h: 'С числом есть два смысла', p: '<b>I bought two books.</b> Я купил две книги. <b>The two books on the shelf are mine.</b> Две книги на полке — мои. Во втором случае ясно, какие именно две книги.' }
+    ],
+    forms: { p: 'I found <b>my</b> keys.', n: 'I can’t find <b>my</b> keys.', q: 'Where are <b>my</b> keys?' },
+    markers: ['my · your · her', 'this · those', 'two books · the two books'],
+    ex: [
+      { en: 'Is this your jacket?', ru: 'Это твоя куртка?' },
+      { en: 'I like those shoes.', ru: 'Мне нравятся те туфли.' },
+      { en: 'The three chairs by the window are free.', ru: 'Три стула у окна свободны.' }
+    ]
+  }
+];
+
+const ADUELS = [
+  { q: 'Открыть любое окно или то самое?',
+    a: { z: 'present', n: 'Одно из окон', en: 'Open a window.', ru: 'Открой какое-нибудь окно.', why: 'В комнате душно. Подойдёт любое окно.' },
+    b: { z: 'future', n: 'Понятно, какое', en: 'Open the window.', ru: 'Открой окно.', why: 'В комнате одно окно. Оба понимают, о каком речь.' },
+    r: 'Спроси, может ли собеседник понять, какое окно открыть.' },
+  { q: 'Собаки вообще или собаки по соседству?',
+    a: { z: 'past', n: 'В целом', en: 'I like dogs.', ru: 'Я люблю собак.', why: 'Говорю о собаках вообще.' },
+    b: { z: 'future', n: 'Конкретные собаки', en: 'I like the dogs next door.', ru: 'Мне нравятся собаки у соседей.', why: 'Понятно, каких именно собак я имею в виду.' },
+    r: 'Со множественным числом тоже ставим the, если понятно, о каких именно вещах или животных речь.' },
+  { q: 'A или an, если дальше есть описание?',
+    a: { z: 'present', n: 'Слышится согласный', en: 'a green apple', ru: 'зелёное яблоко', why: 'Сразу после артикля звучит green.' },
+    b: { z: 'future', n: 'Слышится гласный', en: 'an apple', ru: 'яблоко', why: 'Сразу после артикля звучит apple.' },
+    r: 'Слушай первый звук слова, которое стоит сразу после артикля.' }
+];
+</script>
+<script>
 /* В каждой строке после предложения идут три пары «ответ, пояснение».
    Знак + отмечает верный вариант, как и в других вкладках. */
 const VDRILLS = {
@@ -7032,6 +7258,127 @@ const QUIZ_V = [
   Q('The rope was cut ___ scissors.', ['+with','Ножницы — инструмент.'], ['by','Здесь указано, чем резали, а не кто резал.'], ['for','For обозначило бы назначение, а не инструмент.']),
   Q('Please wait. The floor ___ right now.', ['+is being cleaned','Пол моют прямо сейчас.'], ['has been cleaned','Это означало бы, что пол уже вымыли.'], ['is been cleaned','Для процесса после is нужно being.']),
   Q('The forms ___ already, so you can pick them up.', ['+have been signed','Подписи уже стоят, и бланки можно забрать.'], ['are being signed','Это означало бы, что бланки ещё подписывают.'], ['has been signed','С forms во множественном числе нужно have.'])
+];
+</script>
+<script>
+/* Вариант «—» означает, что пропуск оставляем пустым. */
+function articleDrill(prompt, answer, why, first, firstWhy, second, secondWhy) {
+  const startsSentence = /(?:^|[.!?]\s+)___/.test(prompt);
+  const option = text => startsSentence ? text[0].toUpperCase() + text.slice(1) : text;
+  return Q(prompt, ['+' + option(answer), why], [option(first), firstWhy], [option(second), secondWhy]);
+}
+
+function articleSound(prompt, answer, word, sound) {
+  const opposite = answer === 'an' ? 'a' : 'an';
+  const explanation = 'Сразу после артикля стоит ' + word + '. Первый звук — ' + sound + '.';
+  return articleDrill(prompt, answer, explanation + ' Поэтому ' + answer + '.',
+    opposite, explanation + ' Здесь нужен ' + answer + '.',
+    '—', 'Речь об одном предмете. Перед ним здесь нужен a или an.');
+}
+
+const ADRILLS = {
+  'a-one': [
+    ['Мне нужен карандаш, любой', 'I need ___ pencil.', 'pencil', 'a'],
+    ['Можно взять любой свободный стул?', 'Can I take ___ chair?', 'chair', 'a'],
+    ['Купи блокнот, любой подойдёт', 'Buy ___ notebook, please.', 'notebook', 'a'],
+    ['Моя тётя инженер', 'My aunt is ___ engineer.', 'engineer', 'an'],
+    ['Его брат водитель', 'His brother is ___ driver.', 'driver', 'a'],
+    ['Нам нужен один волонтёр', 'We need ___ volunteer.', 'volunteer', 'a'],
+    ['Она ищет какую-нибудь квартиру', 'She’s looking for ___ apartment.', 'apartment', 'an'],
+    ['Налей мне стакан молока', 'Pour me ___ glass of milk.', 'glass', 'a'],
+    ['Он попросил коробку, любую', 'He asked for ___ box.', 'box', 'a'],
+    ['Мне бы одно яблоко', 'I’d like ___ apple.', 'apple', 'an']
+  ].map(([ru, en, word, answer]) => articleDrill('«' + ru + '». ' + en, answer,
+    'Здесь речь об одном из многих. С ' + word + ' подходит ' + answer + '.',
+    'the', 'С the собеседник должен понимать, какой именно предмет имеется в виду.',
+    '—', 'Перед одним ' + word + ' в этой фразе нужен артикль.')),
+  'a-sound': [
+    ['We need ___ umbrella. Any one will do.', 'an', 'umbrella', 'гласный'],
+    ['He told me ___ funny story.', 'a', 'funny', 'согласный'],
+    ['I picked ___ orange from the basket.', 'an', 'orange', 'гласный'],
+    ['I’m looking for ___ useful app.', 'a', 'useful', '«й»'],
+    ['It took us ___ hour to get there.', 'an', 'hour', 'гласный, h не произносится'],
+    ['She bought ___ red umbrella.', 'a', 'red', 'согласный'],
+    ['I need ___ empty box.', 'an', 'empty', 'гласный'],
+    ['They live on ___ quiet street.', 'a', 'quiet', 'согласный'],
+    ['We found ___ old key in the garden.', 'an', 'old', 'гласный'],
+    ['It’s ___ one-way street.', 'a', 'one-way', 'согласный /w/']
+  ].map(row => articleSound(...row)),
+  'a-known': [
+    ['There’s only one door in this room. Please close ___ door.', 'В комнате одна дверь.'],
+    ['I left my keys in a particular spot. ___ keys on the kitchen counter are mine.', 'Уточнение показывает, о каких ключах речь.'],
+    ['We’ve arrived at the station. Look at ___ clock above the entrance.', 'Оба видим часы над входом.'],
+    ['We’re at the table and there’s one pepper grinder. Could you pass ___ pepper?', 'Понятно, какой перец передать.'],
+    ['There is one glass in front of you. Is ___ glass clean?', 'Спрашиваем о стакане перед собеседником.'],
+    ['There are several boxes here. ___ boxes marked “Books” are mine.', 'Надпись выделяет нужные коробки.'],
+    ['I poured water into a bowl. Don’t touch ___ water in that bowl.', 'Речь о воде в конкретной миске.'],
+    ['We’re sitting under one lamp. Could you turn off ___ lamp?', 'Оба понимают, какую лампу выключить.'],
+    ['There is a photo on the wall. Who is ___ person in that photo?', 'Уточнение показывает, о каком человеке спрашивают.'],
+    ['One taxi is waiting for us. Let’s get in ___ taxi.', 'Речь о машине, которая ждёт нас.']
+  ].map(([prompt, cue]) => articleDrill(prompt, 'the', cue + ' Поэтому the.',
+    'a', 'С a говорили бы об одном из многих без уточнения. Здесь предмет уже понятен.',
+    '—', 'В этой ситуации речь о конкретном предмете или группе. Здесь нужен the.')),
+  'a-story': [
+    ['I met ___ cyclist on the bridge. The cyclist showed me the way.', 'a'],
+    ['I found a coin. ___ coin was under the mat.', 'the'],
+    ['We saw ___ owl in the park. The owl flew away.', 'an'],
+    ['She opened a parcel. ___ parcel contained a scarf.', 'the'],
+    ['He bought ___ lamp at the market. The lamp was very old.', 'a'],
+    ['I picked up a leaf. ___ leaf had a tiny hole.', 'the'],
+    ['They rented ___ boat. The boat was yellow.', 'a'],
+    ['We heard an alarm. ___ alarm came from the kitchen.', 'the'],
+    ['There was ___ envelope in the mailbox. The envelope was empty.', 'an'],
+    ['He found a glove. ___ glove belonged to his neighbor.', 'the']
+  ].map(([prompt, answer]) => articleDrill(prompt, answer,
+    answer === 'the' ? 'Об этом предмете уже сказали. Теперь понятно, о каком именно речь.' : 'Знакомим слушателя с новым предметом. Первый звук подсказывает ' + answer + '.',
+    answer === 'the' ? 'a' : 'the',
+    answer === 'the' ? 'A вводило бы ещё один предмет, а здесь продолжаем говорить о том же.' : 'С the слушатель должен был бы уже знать, о каком предмете речь.',
+    '—', 'Здесь говорим об одном предмете. В этом месте нужен артикль.')),
+  'a-zero': [
+    ['Я люблю груши вообще', 'I like ___ pears.'],
+    ['Мне нужна мука, без уточнения', 'I need ___ flour.'],
+    ['Мне нравится слушать музыку', 'I enjoy listening to ___ music.'],
+    ['Купили помидоры, без уточнения какие', 'We bought ___ tomatoes.'],
+    ['Птицам нужны деревья, говорим в целом', 'Birds need ___ trees.'],
+    ['Добавь немного соли', 'Add ___ salt.'],
+    ['Он пьёт чай, говорим о привычке', 'He drinks ___ tea.'],
+    ['Дети любят истории, говорим в целом', 'Children love ___ stories.'],
+    ['В этом рецепте используют рис', 'This recipe uses ___ rice.'],
+    ['Мы выращиваем огурцы', 'We grow ___ cucumbers.']
+  ].map(([ru, en]) => articleDrill('«' + ru + '». ' + en, '—',
+    'В этом контексте говорим в целом или без уточнения. Артикль оставляем пустым.',
+    'a', 'A нужен для одного предмета. Здесь такого предмета нет.',
+    'the', 'The выделил бы конкретную порцию или группу, а здесь уточнения нет.')),
+  'a-other': [
+    ['Я забыл свой телефон', 'I forgot ___ phone.', 'my'],
+    ['Это твой билет?', 'Is this ___ ticket?', 'your'],
+    ['Мне нравится эта песня', 'I like ___ song.', 'this'],
+    ['Где её сумка?', 'Where is ___ bag?', 'her'],
+    ['Открой то окно', 'Open ___ window.', 'that'],
+    ['Те перчатки тёплые', '___ gloves are warm.', 'Those'],
+    ['Наш класс наверху', '___ classroom is upstairs.', 'Our'],
+    ['Возьми эти чашки', 'Take ___ cups.', 'these'],
+    ['Мне нужен его адрес', 'I need ___ address.', 'his'],
+    ['Их автобус уже уехал', '___ bus has already left.', 'Their']
+  ].map(([ru,en,answer]) => articleDrill('«' + ru + '». ' + en, answer,
+    'Слово ' + answer + ' уже передаёт, чей это предмет или на какой предмет показывают.',
+    'the ' + answer.toLowerCase(), 'Перед ' + answer + ' ещё один артикль не нужен.',
+    'the', 'The само по себе не передаёт «чей» или указание «этот», «тот».'))
+};
+
+const QUIZ_A = [
+  articleDrill('«Нам нужен рюкзак, любой». We need ___ backpack.', 'a', 'Подойдёт один из многих рюкзаков.', 'the', 'The указало бы на рюкзак, который слушатель может определить.', '—', 'Перед одним backpack нужен артикль или другое слово вроде my.'),
+  articleSound('It was ___ honest mistake.', 'an', 'honest', 'гласный, h не произносится'),
+  articleDrill('There is only one printer here. Is ___ printer working?', 'the', 'Понятно, о каком принтере речь.', 'a', 'С a спрашивали бы об одном из многих принтеров.', '—', 'Перед конкретным printer нужен the.'),
+  articleDrill('I ordered a sandwich. ___ sandwich arrived cold.', 'the', 'Говорим о бутерброде, который уже заказали и упомянули.', 'a', 'A ввело бы в рассказ ещё один бутерброд.', '—', 'Здесь говорим о конкретном бутерброде, поэтому нужен the.'),
+  articleDrill('«Мне нравятся велосипеды вообще». I like ___ bicycles.', '—', 'Велосипеды во множественном числе, говорим о них в целом.', 'a', 'A не ставим перед множественным числом.', 'the', 'The выделило бы известную группу велосипедов.'),
+  articleDrill('«Где мои очки?» Where are ___ glasses?', 'my', 'My передаёт «мои».', 'the my', 'Перед my артикль не нужен.', 'the', 'The не передаёт принадлежность.'),
+  articleDrill('«Он стоматолог». He’s ___ dentist.', 'a', 'Стоматолог — одна из профессий.', 'the', 'Здесь сообщаем профессию, собеседнику не нужно опознавать конкретного стоматолога.', '—', 'В английском перед dentist здесь нужен a.'),
+  articleSound('They have ___ European office.', 'a', 'European', '«й»'),
+  articleDrill('There are three jars on the shelf. ___ jar with the yellow lid is empty.', 'the', 'Жёлтая крышка выделяет нужную банку.', 'a', 'Фраза указывает на банку с конкретной крышкой.', '—', 'Перед одним jar в этой фразе нужен определитель.'),
+  articleDrill('She found ___ insect on the windowsill. The insect was tiny.', 'an', 'Вводим насекомое впервые. Insect начинается с гласного звука.', 'the', 'На этом месте слушатель ещё не знает, о каком насекомом речь.', 'a', 'Перед начальным гласным звуком нужно an.'),
+  articleDrill('«Нам нужен лёд». We need ___ ice.', '—', 'Лёд нужен без уточнения количества или порции.', 'a', 'Если нужен один кубик, скажем a cube of ice.', 'the', 'The подошло бы к известной порции льда.'),
+  articleDrill('«Эти открытки мои». ___ postcards are mine.', 'These', 'These передаёт «эти».', 'The these', 'Перед these не добавляем the.', 'A', 'A не сочетается с postcards во множественном числе.')
 ];
 </script>
 <script>
@@ -7620,6 +7967,45 @@ function renderPassiveBuild() {
 }));
 renderPassiveBuild();
 
+renderRoadmap('a-road', ALEVELS, A, {
+  pid: 'a', drills: ADRILLS, kindLabel: item => item.short,
+  figure: () => ''
+});
+renderDuels('aDuels', ADUELS);
+makeQuiz(document.getElementById('aQuiz'), QUIZ_A, { title: 'Вопрос' });
+
+const articleScenes = [
+  { ru: 'Мне нужна чашка. Подойдёт любая.', head: 'I need', article: 'a', noun: 'cup', note: 'Нужна одна чашка из многих. Cup начинается с согласного звука.' },
+  { ru: 'Чашка у чайника чистая.', head: '', article: 'The', noun: 'cup', tail: 'by the kettle is clean', note: 'Слова «у чайника» показывают, какая именно чашка.' },
+  { ru: 'Я коллекционирую чашки.', head: 'I collect', article: '', noun: 'cups', note: 'Речь о чашках во множественном числе без уточнения.' },
+  { ru: 'Мне нужна пустая чашка. Подойдёт любая пустая.', head: 'I need', article: 'an', noun: 'empty cup', note: 'Сразу после артикля стоит empty. Первый звук гласный, поэтому an.' },
+  { ru: 'Я ищу свою чашку.', head: 'I’m looking for', article: 'my', noun: 'cup', note: 'My уже говорит, чья чашка. Перед ним артикль не нужен.' }
+];
+const aBuild = document.getElementById('aBuild');
+const aBuildTrain = document.getElementById('aBuildTrain');
+const aBuildRu = document.getElementById('aBuildRu');
+const aBuildNote = document.getElementById('aBuildNote');
+
+function renderArticleBuild(button) {
+  const scene = articleScenes[button.dataset.v];
+  aBuild.querySelector('[aria-pressed="true"]').setAttribute('aria-pressed', 'false');
+  button.setAttribute('aria-pressed', 'true');
+  const row = [];
+  if (scene.head) row.push(['rest', scene.head]);
+  if (scene.article) row.push(['aux', scene.article]);
+  row.push(['subj', scene.noun]);
+  if (scene.tail) row.push(['verb', scene.tail]);
+  row.push(['end', '.']);
+  aBuildRu.textContent = scene.ru;
+  aBuildNote.textContent = scene.note;
+  flipTrain(aBuildTrain, trainHTML(row));
+}
+aBuild.addEventListener('click', event => {
+  const button = event.target.closest('button[data-v]');
+  if (button) renderArticleBuild(button);
+});
+renderArticleBuild(aBuild.querySelector('[aria-pressed="true"]'));
+
 /* ═══════════════════════════════════════════════════════════
    НАВИГАЦИЯ: вкладки, оглавление, меню, точки, прогресс
    ═══════════════════════════════════════════════════════════ */
@@ -7683,6 +8069,18 @@ const TABDEF = {
       { id: 'p-duels', n: 'Сравнение форм', s: 'Пять пар, которые путают', e: 'Разбор' },
       { id: 'p-quiz', n: 'Общая проверка', s: '16 предложений вперемешку', e: 'Тренажёр' },
       { id: 'p-sheet', n: 'Шпаргалка', s: 'Все слова одной таблицей', e: 'Итог' }
+    ]
+  },
+  articles: {
+    panel: 'tab-articles', toc: 'aToc', items: A, total: A.length,
+    nav: [
+      { id: 'a-system', n: 'Конструктор', s: 'Меняем ситуацию', e: 'Старт' },
+      { id: 'a-lvl1', n: 'Один из многих', s: 'A и an на слух', e: 'Уровень 1' },
+      { id: 'a-lvl2', n: 'Та самая вещь', s: 'Когда понятно, о чём речь', e: 'Уровень 2' },
+      { id: 'a-lvl3', n: 'Без артикля', s: 'В целом, my, this и числа', e: 'Уровень 3' },
+      { id: 'a-duels', n: 'Сравнение форм', s: 'Три пары', e: 'Разбор' },
+      { id: 'a-quiz', n: 'Общая проверка', s: '12 предложений', e: 'Тренажёр' },
+      { id: 'a-sheet', n: 'Шпаргалка', s: 'Как выбрать за несколько секунд', e: 'Итог' }
     ]
   },
   passive: {
@@ -7790,7 +8188,7 @@ function setTab(name, scroll) {
   Object.keys(TABDEF).forEach(k => {
     document.getElementById(TABDEF[k].panel).hidden = (k !== name);
   });
-  moveInk(); revealTab(); fillDots(); fillMenu(); paint();
+  fillDots(); fillMenu(); paint(); moveInk(); revealTab();
   if (scroll !== false) window.scrollTo({ top: 0, behavior: motionOK() ? 'smooth' : 'auto' });
 }
 tabBtns.forEach(b => b.addEventListener('click', () => {
@@ -7799,6 +8197,21 @@ tabBtns.forEach(b => b.addEventListener('click', () => {
   if (location.hash !== hash) history.pushState(null, '', hash);
   setTab(name);
 }));
+tabsInk.parentElement.addEventListener('keydown', event => {
+  const index = tabBtns.indexOf(event.target);
+  if (index < 0) return;
+  const last = tabBtns.length - 1;
+  const next = {
+    ArrowLeft: index === 0 ? last : index - 1,
+    ArrowRight: index === last ? 0 : index + 1,
+    Home: 0,
+    End: last
+  }[event.key];
+  if (next === undefined) return;
+  event.preventDefault();
+  tabBtns[next].focus({ preventScroll: true });
+  tabBtns[next].click();
+});
 window.addEventListener('resize', moveInk);
 /* ширина кнопок меняется и без resize — например, когда догружается шрифт */
 if (window.ResizeObserver) new ResizeObserver(moveInk).observe(document.querySelector('.tabs'));
@@ -7811,7 +8224,7 @@ let done = new Set();
 try { done = new Set(JSON.parse(localStorage.getItem(KEY) || '[]')); } catch (e) { done = new Set(); }
 
 function paint() {
-  const all = S.concat(T, C, P, D, V);
+  const all = S.concat(T, C, P, D, V, A);
   all.forEach(x => {
     const on = done.has(x.id);
     const st = document.getElementById(x.id);
@@ -7882,6 +8295,7 @@ function tabForHash(h) {
   if (P.some(x => x.id === id) || id.indexOf('p-') === 0) return 'pron';
   if (D.some(x => x.id === id) || id.indexOf('d-') === 0) return 'deg';
   if (id.indexOf('v-') === 0) return 'passive';
+  if (id.startsWith('a-')) return 'articles';
   if (T.some(t => t.id === id) || id.indexOf('t-') === 0) return 'tenses';
   return null;
 }

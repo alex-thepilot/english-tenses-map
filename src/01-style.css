@@ -177,7 +177,8 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 .hero__sub {
-  margin-top: 22px; max-width: 60ch; font-size: 1.075rem; color: var(--text-dim);
+  margin-top: 22px; font-size: 1.075rem; line-height: 1.6;
+  color: var(--text-dim); text-wrap: pretty;
 }
 .hero__sub b { color: var(--text); font-weight: 600; }
 .hero__meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }

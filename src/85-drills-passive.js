@@ -3,15 +3,15 @@
 const VDRILLS = {
   'v-focus': [
     Q('«Меня пригласили». ___ invited.', ['+I was','I стоит первым, а was invited означает «меня пригласили».'], ['Me was','Me — форма для «меня» после глагола. Здесь первым стоит I.'], ['I','I invited означает «я пригласил».']),
-    Q('«Кто-то разбил окно». Someone ___ the window.', ['+broke','Someone — тот, кто разбил. Здесь подходит broke.'], ['was broken','Was broken описывало бы того или то, что разбили.'], ['were broken','С someone даже в пассиве понадобилось бы was.']),
-    Q('«Нам заплатили». We ___ paid yesterday.', ['+were','Деньги получили мы. С we в прошедшем ставим were paid.'], ['was','С we нужна форма were.'], ['did','Did paid не строит пассив.']),
+    Q('«Кто-то разбил окно». Someone ___ the window.', ['+broke','Someone — тот, кто разбил. Здесь подходит broke.'], ['was broken','Was broken описывало бы того или то, что разбили.'], ['were broken','С someone было бы was, если бы что-то сделали с этим человеком. Здесь он сам разбил окно.']),
+    Q('«Нам заплатили». We ___ paid yesterday.', ['+were','Деньги получили мы. С we в прошедшем ставим were paid.'], ['was','С we нужна форма were.'], ['did','«Нам заплатили» — We were paid. Берём were и третью форму pay — paid.']),
     Q('«Мы заплатили за обед». We ___ for lunch.', ['+paid','Мы сами заплатили, поэтому говорим We paid.'], ['were paid','We were paid означает «нам заплатили».'], ['paid us','Us поменяло бы смысл: заплатили нам.']),
     Q('«Его позвали внутрь». ___ called inside.', ['+He was','He стоит первым, was called говорит, что позвали его.'], ['Him was','В начале нужно he. Him ставится после глагола или предлога.'], ['He','He called означает, что позвал он сам.']),
     Q('«Посылку доставили в полдень». The parcel ___ at noon.', ['+was delivered','Рассказываем о том, что сделали с посылкой.'], ['delivered it','Тогда получилось бы, что посылка что-то доставила.'], ['were delivered','Посылка одна, поэтому was.']),
-    Q('«Я отправил письмо». I ___ the letter.', ['+sent','Я сам отправил письмо.'], ['was sent','I was sent означает «меня отправили».'], ['was send','После was в пассиве нужна третья форма sent.']),
+    Q('«Я отправил письмо». I ___ the letter.', ['+sent','Я сам отправил письмо.'], ['was sent','I was sent означает «меня отправили».'], ['was send','Если кого-то отправили, после was берём третью форму send — sent. Здесь письмо отправил я сам.']),
     Q('«Нас предупредили заранее». ___ warned in advance.', ['+We were','Предупредили нас. Первым ставим we, затем were warned.'], ['Us were','В начале на этом месте нужна форма we.'], ['We','We warned означало бы, что предупредили мы.']),
     Q('«Дверь открыли в восемь». The door ___ at eight.', ['+was opened','Кто-то открыл дверь. Дверь ставим первой и говорим was opened.'], ['was open','Это «дверь была открыта» как состояние, без указания на само открытие.'], ['was opening','Это описание процесса, в котором дверь открывалась.']),
-    Q('«Собака съела бутерброд». The dog ___ the sandwich.', ['+ate','Собака сделала это сама, поэтому ate.'], ['was eaten','Was eaten означало бы, что съели собаку.'], ['was ate','Для пассива нужна третья форма eaten.'])
+    Q('«Собака съела бутерброд». The dog ___ the sandwich.', ['+ate','Собака сделала это сама, поэтому ate.'], ['was eaten','Was eaten означало бы, что съели собаку.'], ['was ate','Если что-то съели, после was ставим третью форму eat — eaten. Здесь собака сама съела бутерброд.'])
   ],
   'v-time': [
     Q('This hall ___ every morning.', ['+is cleaned','Зал один, и уборка регулярная.'], ['are cleaned','С одним залом нужна форма is.'], ['is clean','Это «зал чистый», а здесь речь о регулярной уборке.']),
@@ -28,26 +28,26 @@ const VDRILLS = {
   'v-neg': [
     Q('«Имя не напечатали». The name ___ on the ticket.', ['+was not printed','После was ставим not, затем printed.'], ['did not printed','После did нужна начальная форма, а для этого смысла — was not printed.'], ['was printed not','Not идёт сразу после was.']),
     Q('«Посылку завтра не доставят». The parcel ___ tomorrow.', ['+will not be delivered','Ставим not после will. Be и delivered остаются на месте.'], ['will be not delivered','В обычном отрицании not стоит после will.'], ['won’t delivered','После won’t нужно be.']),
-    Q('«Этот вход не используют». This entrance ___.', ['+isn’t used','Isn’t — это is not. Затем ставим used.'], ['doesn’t used','Doesn’t не строит пассив, а после него также не может стоять used.'], ['aren’t used','Вход один, поэтому isn’t.']),
+    Q('«Этот вход не используют». This entrance ___.', ['+isn’t used','Isn’t — это is not. Затем ставим used.'], ['doesn’t used','«Этот вход не используют» — This entrance isn’t used. Ставим isn’t перед used.'], ['aren’t used','Вход один, поэтому isn’t.']),
     Q('«Двери не заперли вчера». The doors ___ yesterday.', ['+weren’t locked','С doors нужно were not или weren’t.'], ['wasn’t locked','Дверей несколько, поэтому weren’t.'], ['weren’t lock','После weren’t нужна третья форма locked.']),
-    Q('«Письмо не отправили». The letter ___.', ['+wasn’t sent','Wasn’t sent — письмо не отправили.'], ['wasn’t send','Третья форма send — sent.'], ['didn’t sent','После didn’t нужна начальная форма, а для пассива здесь нужно wasn’t.']),
+    Q('«Письмо не отправили». The letter ___.', ['+wasn’t sent','Wasn’t sent — письмо не отправили.'], ['wasn’t send','Третья форма send — sent.'], ['didn’t sent','После didn’t было бы send. Здесь говорим «письмо не отправили», поэтому wasn’t sent.']),
     Q('«Тебя не предупредили». You ___ about the change.', ['+weren’t told','С you берём weren’t и третью форму told.'], ['wasn’t told','С you нужна форма weren’t.'], ['weren’t tell','После weren’t нужна третья форма told.']),
-    Q('«Цены не поднимут». The prices ___ this month.', ['+won’t be raised','Won’t заменяет will not. За ним остаётся be raised.'], ['won’t raised','После won’t в пассиве нужно be.'], ['will be raised','Это утверждение, что цены поднимут.']),
+    Q('«Цены не поднимут». The prices ___ this month.', ['+won’t be raised','Won’t заменяет will not. За ним остаётся be raised.'], ['won’t raised','После won’t ставим be, а затем третью форму основного глагола.'], ['will be raised','Это утверждение, что цены поднимут.']),
     Q('«Столики здесь не бронируют». Tables ___ here.', ['+aren’t reserved','С tables в настоящем подходит are not.'], ['isn’t reserved','С tables нужна форма aren’t.'], ['aren’t reserve','После aren’t берём reserved.']),
     Q('«Мне не заплатили в пятницу». I ___ on Friday.', ['+wasn’t paid','В прошлом с I ставим was not и paid.'], ['weren’t paid','С I здесь нужно wasn’t.'], ['wasn’t pay','Нужна третья форма paid.']),
     Q('«Мост в следующем году не построят». The bridge ___ next year.', ['+will not be built','Not стоит после will, а третья форма build — built.'], ['will not be build','После be нужна третья форма built.'], ['will not built','Между not и built нужно be.'])
   ],
   'v-question': [
-    Q('___ the letter sent yesterday?', ['+Was','Первым ставим was.'], ['Did','В пассиве уже есть помощник was.'], ['Were','Письмо одно, поэтому was.']),
-    Q('___ the rooms cleaned every morning?', ['+Are','Комнат несколько, и речь о привычном порядке.'], ['Is','Комнат несколько, поэтому are.'], ['Do','В пассивном вопросе здесь переставляем are.']),
+    Q('___ the letter sent yesterday?', ['+Was','Первым ставим was.'], ['Did','В обычной фразе уже есть was. Чтобы задать вопрос, переставляем was вперёд.'], ['Were','Письмо одно, поэтому was.']),
+    Q('___ the rooms cleaned every morning?', ['+Are','Комнат несколько, и речь о привычном порядке.'], ['Is','Комнат несколько, поэтому are.'], ['Do','В обычной фразе уже есть are. Для вопроса ставим его перед тем, о чём спрашиваем.']),
     Q('___ the bike be repaired tomorrow?', ['+Will','Вперёд переезжает will, а be остаётся перед repaired.'], ['Will be','Be уже стоит в предложении.'], ['Was','Слово tomorrow указывает на будущее.']),
-    Q('When ___ the window broken?', ['+was','После When ставим was, затем the window.'], ['did','После did нельзя собрать пассив без be.'], ['were','Окно одно, поэтому was.']),
+    Q('When ___ the window broken?', ['+was','После When ставим was, затем the window.'], ['did','Спрашиваем, когда разбили окно. После When ставим was перед the window, а дальше broken.'], ['were','Окно одно, поэтому was.']),
     Q('Why ___ the lights turned off last night?', ['+were','Lights во множественном числе, событие было вчера вечером.'], ['was','Огней несколько, поэтому were.'], ['are','Last night указывает на прошлое.']),
     Q('Where ___ the meeting be held next week?', ['+will','Вопросительное слово стоит первым, за ним идёт will.'], ['will be','Be уже стоит перед held.'], ['is','Здесь речь о будущем и уже дано be.']),
     Q('«Тебя пригласили?» ___ you invited?', ['+Were','С you в прошедшем вопрос начинается с Were.'], ['Was','С you нужна форма were.'], ['Did','Вопрос строится с were, а invited остаётся в третьей форме.']),
     Q('___ this cheese made locally?', ['+Is','С cheese в настоящем ставим is.'], ['Are','Cheese здесь употребляется в единственном числе.'], ['Does','Вопрос уже строится с is.']),
     Q('«Когда опубликуют результаты?» ___ the results be published?', ['+When will','Сначала When, потом will.'], ['Will when','When должно стоять первым.'], ['When were','Were относится к прошлому, а здесь будущее.']),
-    Q('How ___ the boxes packed for shipping?', ['+are','После How выносим are перед the boxes.'], ['is','С boxes нужна форма are.'], ['do','В пассиве здесь уже нужен помощник are.'])
+    Q('How ___ the boxes packed for shipping?', ['+are','После How выносим are перед the boxes.'], ['is','С boxes нужна форма are.'], ['do','В обычной фразе уже есть are. Для вопроса ставим его перед тем, о чём спрашиваем.'])
   ],
   'v-by': [
     Q('The story was written ___ Chekhov.', ['+by','By называет автора.'], ['with','With здесь подошло бы для инструмента.'], ['from','From указывает источник или отправную точку, а здесь нужен автор.']),
@@ -81,8 +81,8 @@ const QUIZ_V = [
   Q('The invitations ___ last Friday.', ['+were sent','Приглашений несколько, а last Friday указывает на прошлое.'], ['was sent','С invitations нужна форма were.'], ['were send','После were берём третью форму sent.']),
   Q('The new timetable ___ tomorrow.', ['+will be posted','Расписание опубликуют завтра. Нужны will be и posted.'], ['will posted','Пропущено be.'], ['will be post','После be нужна третья форма posted.']),
   Q('«Лифт вчера не починили». The lift ___ yesterday.', ['+wasn’t fixed','Отрицание в прошлом: was not + fixed.'], ['was fixed','Это утверждение, что лифт починили.'], ['wasn’t fix','После wasn’t здесь нужна третья форма fixed.']),
-  Q('«Работы в пятницу не проверят». The papers ___ on Friday.', ['+won’t be checked','После won’t остаются be и checked.'], ['will be checked','Это утверждение, а нужно отрицание.'], ['won’t checked','В пассиве после won’t здесь нужно be.']),
-  Q('When ___ the museum built?', ['+was','После When ставим was. Музей один.'], ['were','С museum нужна форма was.'], ['did','Для пассивного вопроса здесь уже есть was.']),
+  Q('«Работы в пятницу не проверят». The papers ___ on Friday.', ['+won’t be checked','После won’t остаются be и checked.'], ['will be checked','Это утверждение, а нужно отрицание.'], ['won’t checked','После won’t ставим be, а затем третью форму основного глагола.']),
+  Q('When ___ the museum built?', ['+was','После When ставим was. Музей один.'], ['were','С museum нужна форма was.'], ['did','В обычной фразе уже есть was. Чтобы задать вопрос, переставляем was вперёд.']),
   Q('___ the results be announced on Monday?', ['+Will','Первым ставим will. Be остаётся перед announced.'], ['Will be','Так be оказалось бы в вопросе дважды.'], ['Were','Для будущего с be нужен will.']),
   Q('The picture was drawn ___ a child.', ['+by','By называет того, кто нарисовал.'], ['with','With указывало бы на инструмент или совместную работу.'], ['to','To здесь не вводит автора.']),
   Q('The rope was cut ___ scissors.', ['+with','Ножницы — инструмент.'], ['by','Здесь указано, чем резали, а не кто резал.'], ['for','For обозначило бы назначение, а не инструмент.']),

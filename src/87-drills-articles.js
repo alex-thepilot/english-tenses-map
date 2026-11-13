@@ -112,7 +112,7 @@ const QUIZ_A = [
   articleDrill('«Где мои очки?» Where are ___ glasses?', 'my', 'My передаёт «мои».', 'the my', 'Перед my артикль не нужен.', 'the', 'The не передаёт принадлежность.'),
   articleDrill('«Он стоматолог». He’s ___ dentist.', 'a', 'Стоматолог — одна из профессий.', 'the', 'Здесь сообщаем профессию, собеседнику не нужно опознавать конкретного стоматолога.', '—', 'В английском перед dentist здесь нужен a.'),
   articleSound('They have ___ European office.', 'a', 'European', '«й»'),
-  articleDrill('There are three jars on the shelf. ___ jar with the yellow lid is empty.', 'the', 'Жёлтая крышка выделяет нужную банку.', 'a', 'Фраза указывает на банку с конкретной крышкой.', '—', 'Перед одним jar в этой фразе нужен определитель.'),
+  articleDrill('There are three jars on the shelf. ___ jar with the yellow lid is empty.', 'the', 'Жёлтая крышка выделяет нужную банку.', 'a', 'Фраза указывает на банку с конкретной крышкой.', '—', 'Речь о конкретной банке с жёлтой крышкой. Перед jar здесь ставим the.'),
   articleDrill('She found ___ insect on the windowsill. The insect was tiny.', 'an', 'Вводим насекомое впервые. Insect начинается с гласного звука.', 'the', 'На этом месте слушатель ещё не знает, о каком насекомом речь.', 'a', 'Перед начальным гласным звуком нужно an.'),
   articleDrill('«Нам нужен лёд». We need ___ ice.', '—', 'Лёд нужен без уточнения количества или порции.', 'a', 'Если нужен один кубик, скажем a cube of ice.', 'the', 'The подошло бы к известной порции льда.'),
   articleDrill('«Эти открытки мои». ___ postcards are mine.', 'These', 'These передаёт «эти».', 'The these', 'Перед these не добавляем the.', 'A', 'A не сочетается с postcards во множественном числе.')

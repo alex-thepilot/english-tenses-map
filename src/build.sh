@@ -11,7 +11,7 @@ cat <<'HEAD'
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Интерактивная методичка по английской грамматике: основа предложения, 12 времён, условные предложения, местоимения, степени сравнения, пассив и артикли. Схемы, конструкторы и 660 заданий с разбором.">
+<meta name="description" content="Интерактивная методичка по английской грамматике: основа предложения, 12 времён, условные предложения, местоимения, степени сравнения, пассив, артикли, долженствование, модальные глаголы и время по часам. Схемы, конструкторы и 810 заданий с разбором.">
 <meta name="color-scheme" content="dark light">
 <meta name="theme-color" content="#0A1213" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#ECF0EE" media="(prefers-color-scheme: light)">
@@ -42,7 +42,7 @@ HEAD
   echo '<body>'
   cat $S/02-body.html
   echo
-  for f in 00-helpers 10-graphics 20-data-tenses 22-data-misc 25-drills-a 26-drills-b 27-quiz-tenses 30-data-cond 35-drills-cond 50-data-sentence 55-drills-sentence 60-data-pron 65-drills-pron 70-data-deg 75-drills-deg 80-data-passive 82-data-articles 85-drills-passive 87-drills-articles 90-app; do
+  for f in 00-helpers 10-graphics 20-data-tenses 22-data-misc 25-drills-a 26-drills-b 27-quiz-tenses 30-data-cond 35-drills-cond 50-data-sentence 55-drills-sentence 60-data-pron 65-drills-pron 70-data-deg 75-drills-deg 80-data-passive 82-data-articles 83-data-obligation 84-data-modals 85-drills-passive 86-data-clock 87-drills-articles 88-drills-obligation 89-drills-modals 91-drills-clock 90-app; do
     echo "<script>"; cat "$S/$f.js"; echo "</script>"
   done
   printf '</body>\n</html>\n'

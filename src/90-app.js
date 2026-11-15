@@ -622,6 +622,126 @@ aBuild.addEventListener('click', event => {
 });
 renderArticleBuild(aBuild.querySelector('[aria-pressed="true"]'));
 
+renderRoadmap('m-road', MLEVELS, M, {
+  pid: 'm', drills: MDRILLS, kindLabel: item => item.short, figure: () => ''
+});
+renderDuels('mDuels', MDUELS);
+makeQuiz(document.getElementById('mQuiz'), QUIZ_M, { title: 'Вопрос' });
+
+const obligationScenes = [
+  ['Тебе стоит купить три конфеты. Тогда и тебе хватит.', 'should', 'buy', 'three candies', 'Подсказываю, как будет лучше. После should сразу ставлю buy.'],
+  ['Ты должен купить три конфеты. Мы уже договорились.', 'have to', 'buy', 'three candies', 'Напоминаю об уговоре. С you говорю have to.'],
+  ['Ты обязан ей помочь. Она твоя дочь.', 'must', 'help', 'her', 'Прямо говорю, что помочь обязательно. После must сразу ставлю help.'],
+  ['Тебе стоило купить три конфеты. А ты купил две.', 'should have', 'bought', 'three candies', 'Смотрю назад и говорю, как стоило поступить. К should have добавляю bought, третью форму глагола buy.'],
+  ['Тогда ты был обязан ей помочь. Она твоя дочь.', 'had to', 'help', 'her', 'Обязанность была тогда. Говорю had to help.']
+];
+const mBuild = document.getElementById('mBuild');
+const mBuildTrain = document.getElementById('mBuildTrain');
+const mBuildRu = document.getElementById('mBuildRu');
+const mBuildNote = document.getElementById('mBuildNote');
+
+function renderObligationBuild(button) {
+  const [ru, form, verb, rest, note] = obligationScenes[button.dataset.v];
+  mBuild.querySelector('[aria-pressed="true"]').setAttribute('aria-pressed', 'false');
+  button.setAttribute('aria-pressed', 'true');
+  mBuildRu.textContent = ru;
+  mBuildNote.textContent = note;
+  flipTrain(mBuildTrain, trainHTML([['subj', 'You'], ['aux', form], ['verb', verb], ['rest', rest], ['end', '.']]));
+}
+mBuild.addEventListener('click', event => {
+  const button = event.target.closest('button[data-v]');
+  if (button) renderObligationBuild(button);
+});
+renderObligationBuild(mBuild.querySelector('[aria-pressed="true"]'));
+
+renderRoadmap('l-road', LLEVELS, L, {
+  pid: 'l', drills: LDRILLS, kindLabel: item => item.short, figure: () => ''
+});
+renderDuels('lDuels', LDUELS);
+makeQuiz(document.getElementById('lQuiz'), QUIZ_L, { title: 'Вопрос' });
+
+const modalScenes = [
+  ['Ты умеешь плавать.', [['subj', 'You'], ['aux', 'can'], ['verb', 'swim'], ['end', '.']],
+    'После can сразу называю действие, без to.'],
+  ['Ты не умеешь плавать.', [['subj', 'You'], ['aux', 'can’t'], ['verb', 'swim'], ['end', '.']],
+    'Добавляю к can слово not. Короткая форма — can’t, полная — cannot.'],
+  ['Ты умеешь плавать?', [['aux', 'Can'], ['subj', 'you'], ['verb', 'swim'], ['end', '?']],
+    'Переставляю can перед you. Слово do здесь лишнее.']
+];
+const lBuild = document.getElementById('lBuild');
+const lBuildRu = document.getElementById('lBuildRu');
+const lBuildNote = document.getElementById('lBuildNote');
+const lBuildTrain = document.getElementById('lBuildTrain');
+
+function renderModalBuild(button) {
+  const [ru, row, note] = modalScenes[button.dataset.v];
+  lBuild.querySelector('[aria-pressed="true"]').setAttribute('aria-pressed', 'false');
+  button.setAttribute('aria-pressed', 'true');
+  lBuildRu.textContent = ru;
+  lBuildNote.textContent = note;
+  flipTrain(lBuildTrain, trainHTML(row));
+}
+lBuild.addEventListener('click', event => {
+  const button = event.target.closest('button[data-v]');
+  if (button) renderModalBuild(button);
+});
+renderModalBuild(lBuild.querySelector('[aria-pressed="true"]'));
+
+renderRoadmap('h-road', CLOCK_LEVELS, CLOCK_STATIONS, {
+  pid: 'h', drills: CLOCK_DRILLS, kindLabel: item => item.short,
+  figure: item => {
+    const [hour, minute] = item.clock;
+    return `<figure class="clock-example">${clockFace(hour, minute, true, 'Циферблат показывает ' + clockTime(hour, minute))}</figure>`;
+  }
+});
+renderDuels('hDuels', CLOCK_DUELS);
+makeQuiz(document.getElementById('hQuiz'), QUIZ_CLOCK, { title: 'Вопрос' });
+
+const hPresets = [...document.querySelectorAll('#hPresets button')];
+const hHour = document.getElementById('hHour');
+const hMinute = document.getElementById('hMinute');
+const hMinuteValue = document.getElementById('hMinuteValue');
+const hDial = document.getElementById('hDial');
+const hTime = document.getElementById('hTime');
+const hAnswer = document.getElementById('hAnswer');
+const hNote = document.getElementById('hNote');
+
+function renderClock() {
+  const hour = Number(hHour.value);
+  const minute = hMinute.valueAsNumber;
+  const next = hour % 12 + 1;
+  const time = clockTime(hour, minute);
+  const [amount, direction, target] = clockParts(hour, minute);
+  hDial.innerHTML = clockFace(hour, minute, true);
+  hTime.textContent = time;
+  hMinuteValue.textContent = minute;
+  hAnswer.dataset.direction = direction;
+  hAnswer.innerHTML = `It’s ${amount} <b>${direction}</b>${target ? ' ' + target : ''}.`;
+  if (minute === 0) {
+    hNote.textContent = 'На часах ровно ' + hour + ':00. Называем час и добавляем o’clock.';
+  } else if (minute === 30) {
+    hNote.textContent = 'После ' + hour + ':00 прошло полчаса. С half past называем текущий час.';
+  } else if (minute > 30) {
+    hNote.textContent = 'До ' + next + ':00 осталось ' + (60 - minute) + ' мин. С to называем следующий час.';
+  } else {
+    hNote.textContent = 'После ' + hour + ':00 прошло ' + minute + ' мин. С past называем текущий час.';
+  }
+  for (const preset of hPresets) {
+    const presetMinute = Number(preset.dataset.minute);
+    preset.textContent = clockTime(hour, presetMinute);
+    preset.setAttribute('aria-pressed', String(presetMinute === minute));
+  }
+}
+hHour.addEventListener('change', renderClock);
+hMinute.addEventListener('input', renderClock);
+for (const button of hPresets) {
+  button.addEventListener('click', () => {
+    hMinute.value = button.dataset.minute;
+    renderClock();
+  });
+}
+renderClock();
+
 /* ═══════════════════════════════════════════════════════════
    НАВИГАЦИЯ: вкладки, оглавление, меню, точки, прогресс
    ═══════════════════════════════════════════════════════════ */
@@ -697,6 +817,39 @@ const TABDEF = {
       { id: 'a-duels', n: 'Сравнение форм', s: 'Три пары', e: 'Разбор' },
       { id: 'a-quiz', n: 'Общая проверка', s: '12 предложений', e: 'Тренажёр' },
       { id: 'a-sheet', n: 'Шпаргалка', s: 'Как выбрать за несколько секунд', e: 'Итог' }
+    ]
+  },
+  obligation: {
+    panel: 'tab-obligation', toc: 'mToc', items: M, total: M.length,
+    nav: [
+      { id: 'm-system', n: 'Конструктор', s: 'Пять ситуаций', e: 'Старт' },
+      { id: 'm-lvl1', n: 'Совет, уговор и обязанность', s: 'Should, have to и must', e: 'Уровень 1' },
+      { id: 'm-lvl2', n: 'Отрицания и прошлое', s: 'От «нельзя» до «надо было»', e: 'Уровень 2' },
+      { id: 'm-duels', n: 'Сравнение форм', s: 'Три пары', e: 'Разбор' },
+      { id: 'm-quiz', n: 'Общая проверка', s: '10 предложений', e: 'Тренажёр' },
+      { id: 'm-sheet', n: 'Шпаргалка', s: 'Все формы одной таблицей', e: 'Итог' }
+    ]
+  },
+  modals: {
+    panel: 'tab-modals', toc: 'lToc', items: L, total: L.length,
+    nav: [
+      { id: 'l-system', n: 'Конструктор', s: 'Фраза, отрицание и вопрос', e: 'Старт' },
+      { id: 'l-lvl1', n: 'Могу или умею', s: 'Can и could', e: 'Уровень 1' },
+      { id: 'l-lvl2', n: 'Просьбы и догадки', s: '«Можно?» и «может быть»', e: 'Уровень 2' },
+      { id: 'l-duels', n: 'Сравнение фраз', s: 'Смотрим на смысл', e: 'Разбор' },
+      { id: 'l-quiz', n: 'Общая проверка', s: '10 предложений', e: 'Тренажёр' },
+      { id: 'l-sheet', n: 'Шпаргалка', s: 'Все формы одной таблицей', e: 'Итог' }
+    ]
+  },
+  clock: {
+    panel: 'tab-clock', toc: 'hToc', items: CLOCK_STATIONS, total: CLOCK_STATIONS.length,
+    nav: [
+      { id: 'h-system', n: 'Интерактивные часы', s: 'Передвинь стрелки', e: 'Старт' },
+      { id: 'h-lvl1', n: 'Past и to', s: 'Сколько прошло и сколько осталось', e: 'Уровень 1' },
+      { id: 'h-lvl2', n: 'Четверть, половина и ровный час', s: 'Quarter, half и o’clock', e: 'Уровень 2' },
+      { id: 'h-duels', n: 'Сравнение фраз', s: '12:20 или 12:40', e: 'Разбор' },
+      { id: 'h-quiz', n: 'Общая проверка', s: '10 заданий', e: 'Тренажёр' },
+      { id: 'h-sheet', n: 'Шпаргалка', s: 'Шесть отметок на часах', e: 'Итог' }
     ]
   },
   passive: {
@@ -840,7 +993,7 @@ let done = new Set();
 try { done = new Set(JSON.parse(localStorage.getItem(KEY) || '[]')); } catch (e) { done = new Set(); }
 
 function paint() {
-  const all = S.concat(T, C, P, D, V, A);
+  const all = S.concat(T, C, P, D, V, A, M, L, CLOCK_STATIONS);
   all.forEach(x => {
     const on = done.has(x.id);
     const st = document.getElementById(x.id);
@@ -912,6 +1065,9 @@ function tabForHash(h) {
   if (D.some(x => x.id === id) || id.indexOf('d-') === 0) return 'deg';
   if (id.indexOf('v-') === 0) return 'passive';
   if (id.startsWith('a-')) return 'articles';
+  if (id.startsWith('m-')) return 'obligation';
+  if (id.startsWith('l-')) return 'modals';
+  if (id.startsWith('h-')) return 'clock';
   if (T.some(t => t.id === id) || id.indexOf('t-') === 0) return 'tenses';
   return null;
 }

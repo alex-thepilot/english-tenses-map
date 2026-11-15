@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Интерактивная методичка по английской грамматике: основа предложения, 12 времён, условные предложения, местоимения, степени сравнения, пассив и артикли. Схемы, конструкторы и 660 заданий с разбором.">
+<meta name="description" content="Интерактивная методичка по английской грамматике: основа предложения, 12 времён, условные предложения, местоимения, степени сравнения, пассив, артикли, долженствование, модальные глаголы и время по часам. Схемы, конструкторы и 810 заданий с разбором.">
 <meta name="color-scheme" content="dark light">
 <meta name="theme-color" content="#0A1213" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#ECF0EE" media="(prefers-color-scheme: light)">
@@ -1065,6 +1065,78 @@ td.ex { color: var(--text-dim); }
   .tabs button { font-size: .64rem; padding: 6px 6px; }
   .menu__btn { padding: 8px 8px; }
 }
+
+/* Часы, которые используются в объяснениях, конструкторе и заданиях. */
+.clock-builder {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(18px, 4vw, 48px);
+}
+.clock-figure { margin: 0; min-width: 0; }
+.clock-face {
+  display: block;
+  width: min(100%, 310px);
+  height: auto;
+  margin-inline: auto;
+}
+.clock-rim { fill: var(--bg-2); stroke: var(--line); stroke-width: 2; }
+.clock-half--to { fill: var(--future-soft); }
+.clock-half--past { fill: var(--present-soft); }
+.clock-divider { stroke: var(--line); stroke-dasharray: 3 4; }
+.clock-tick { stroke: var(--text-mute); stroke-width: 1; opacity: .68; }
+.clock-tick--major { stroke: var(--text-dim); stroke-width: 2; opacity: 1; }
+.clock-number {
+  fill: var(--text);
+  font-family: var(--f-mono);
+  font-size: 14px;
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+.clock-hand { stroke-linecap: round; }
+.clock-hand--hour { stroke: var(--text); stroke-width: 7; }
+.clock-hand--minute { stroke: var(--present); stroke-width: 4; }
+.clock-pin { fill: var(--text); }
+.clock-legend {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 12px auto 0;
+  max-width: 380px;
+  padding: 0;
+  border: 0;
+  font-size: .78rem;
+  text-align: center;
+}
+.clock-legend > span { padding: 5px 6px; border-radius: 8px; }
+.clock-legend__to { color: var(--future); background: var(--future-soft); }
+.clock-legend__past { color: var(--present); background: var(--present-soft); }
+.clock-controls { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: end; gap: 14px; }
+.clock-controls label { min-width: 0; display: grid; font-size: .8rem; gap: 5px; }
+.clock-controls label[for="hMinute"] { display: flex; flex-wrap: wrap; }
+.clock-controls select {
+  padding: 7px 8px;
+  height: 38px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text);
+}
+.clock-controls input { margin: 0; width: 100%; height: 38px; accent-color: var(--present); }
+.clock-digits {
+  margin-top: 14px;
+  font: 600 clamp(2rem, 6vw, 4.2rem)/1.2 var(--f-mono);
+  font-variant-numeric: tabular-nums;
+}
+.clock-answer { margin-block: 3px 10px; font-size: clamp(1.2rem, 3vw, 2rem); font-weight: 600; }
+.clock-answer b { color: var(--present); }
+.clock-answer[data-direction="to"] b { color: var(--future); }
+.clock-example { margin: 0 0 20px; }
+.clock-example .clock-face { width: min(100%, 180px); margin-inline: 0; }
+.qz__q .clock-face { width: min(100%, 195px); margin: 10px 0 0; }
+@media (max-width: 620px) {
+  .clock-builder { grid-template-columns: minmax(0, 1fr); }
+  .clock-figure .clock-face { max-width: 245px; }
+}
 /* Главная использует те же цвета и шрифты, что и уроки. */
 .home { --home-accent: var(--present); padding: 14px 0 32px; }
 .home a { color: inherit; text-decoration: none; }
@@ -1186,6 +1258,9 @@ td.ex { color: var(--text-dim); }
       <button role="tab" data-tab="deg" aria-selected="false" aria-controls="tab-deg">Степени</button>
       <button role="tab" data-tab="passive" aria-selected="false" aria-controls="tab-passive">Пассив</button>
       <button role="tab" id="articlesTab" data-tab="articles" aria-selected="false" aria-controls="tab-articles">Артикли</button>
+      <button role="tab" id="obligationTab" data-tab="obligation" aria-selected="false" aria-controls="tab-obligation">Долженствование</button>
+      <button role="tab" id="modalsTab" data-tab="modals" aria-selected="false" aria-controls="tab-modals">Модальные глаголы</button>
+      <button role="tab" id="clockTab" data-tab="clock" aria-selected="false" aria-controls="tab-clock">Время по часам</button>
     </div>
 
     <div class="dots__wrap">
@@ -1227,7 +1302,7 @@ td.ex { color: var(--text-dim); }
         <a class="home-primary" href="#home-course">Посмотреть программу <span aria-hidden="true">↘</span></a>
         <a class="home-secondary" href="#s-hero">Открыть первый урок <span aria-hidden="true">→</span></a>
       </div>
-      <p class="home-facts">7 разделов <span>·</span> 660 заданий с разбором в методичке</p>
+      <p class="home-facts">10 разделов <span>·</span> 810 заданий с разбором в методичке</p>
     </div>
     <div class="home-example">
       <div class="home-example__label"><span>ПОДСКАЗКА ИЗ УРОКА</span><span>АРТИКЛИ</span></div>
@@ -1269,6 +1344,9 @@ td.ex { color: var(--text-dim); }
       <a class="home-card" href="#d-hero"><span class="home-card__num">05</span><span class="home-card__name">Степени сравнения</span><span class="home-card__text">Как сказать «выше», «красивее» и «самый красивый».</span><span class="home-card__arrow" aria-hidden="true">↗</span></a>
       <a class="home-card" href="#v-hero"><span class="home-card__num">06</span><span class="home-card__name">Пассив</span><span class="home-card__text">Как сказать «меня пригласили», «письмо отправили» или «результаты объявят».</span><span class="home-card__arrow" aria-hidden="true">↗</span></a>
       <a class="home-card" href="#a-hero"><span class="home-card__num">07</span><span class="home-card__name">Артикли</span><span class="home-card__text">Как выбрать между <i>a</i>, <i>an</i>, <i>the</i> и фразой без артикля.</span><span class="home-card__arrow" aria-hidden="true">↗</span></a>
+      <a class="home-card" href="#m-hero"><span class="home-card__num">08</span><span class="home-card__name">Долженствование</span><span class="home-card__text">Как сказать «стоит», «нужно» и «обязательно».</span><span class="home-card__arrow" aria-hidden="true">↗</span></a>
+      <a class="home-card" href="#l-hero"><span class="home-card__num">09</span><span class="home-card__name">Модальные глаголы</span><span class="home-card__text">Как сказать «могу», спросить «можно?» и добавить «может быть».</span><span class="home-card__arrow" aria-hidden="true">↗</span></a>
+      <a class="home-card" href="#h-hero"><span class="home-card__num">10</span><span class="home-card__name">Время по часам</span><span class="home-card__text">Как сказать «половина первого», «без двадцати час» и назвать время по стрелкам.</span><span class="home-card__arrow" aria-hidden="true">↗</span></a>
     </div>
   </section>
   </div>
@@ -2600,6 +2678,326 @@ td.ex { color: var(--text-dim); }
           <tr><td>Один предмет из многих</td><td><code>a / an</code></td><td>I need a cup. I need an empty cup.</td></tr>
           <tr><td>Вещи в целом или без уточнения</td><td>Без артикля</td><td>I collect cups. I need water.</td></tr>
           <tr><td>Уже сказано «моя» или «эта»</td><td><code>my / this</code></td><td>This cup is mine. Where is my cup?</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+</div>
+
+<div class="tabpanel" id="tab-obligation" role="tabpanel" aria-labelledby="obligationTab" hidden>
+<header class="hero" id="m-hero">
+  <div class="wrap">
+    <div class="eyebrow">Долженствование · should, have to, must</div>
+    <h1>Стоит, нужно или <span class="tri">обязательно</span>?</h1>
+    <p class="hero__sub">«Возьми три конфеты, тогда и тебе хватит» — просто совет. «Мы договорились на три конфеты» — уже есть уговор. «Ты обязан помочь ей, она твоя дочь» — так звучит прямое требование. Посмотри, как эти три ситуации звучат по-английски.</p>
+    <div class="hero__meta">
+      <span class="pill">5 станций</span>
+      <span class="pill">конструктор</span>
+      <span class="pill">60 заданий с разбором</span>
+    </div>
+  </div>
+</header>
+
+<section class="sect toc" id="m-toc">
+  <div class="wrap">
+    <div class="sect__head" style="margin-bottom:0">
+      <div class="eyebrow">Оглавление</div>
+      <h2>С чего начать</h2>
+      <p>Сравни ситуации в конструкторе или открой нужную станцию.</p>
+    </div>
+    <div class="toc__g" id="mToc"></div>
+  </div>
+</section>
+
+<section class="sect" id="m-system">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Конструктор</div>
+      <h2>Что ты хочешь сказать?</h2>
+      <p>Выбери ситуацию и посмотри, как собрать фразу.</p>
+    </div>
+    <div class="bu">
+      <div class="bu__ctl">
+        <div class="bu__grp">
+          <div class="eyebrow">Ситуация</div>
+          <div class="seg" id="mBuild" role="group" aria-label="Ситуация">
+            <button type="button" data-v="0" aria-pressed="true">Сам советую</button>
+            <button type="button" data-v="1" aria-pressed="false">Уже договорились</button>
+            <button type="button" data-v="2" aria-pressed="false">Настаиваю</button>
+            <button type="button" data-v="3" aria-pressed="false">Стоило бы тогда</button>
+            <button type="button" data-v="4" aria-pressed="false">Был обязан тогда</button>
+          </div>
+        </div>
+      </div>
+      <div class="bu__out">
+        <div class="bu__ru" id="mBuildRu"></div>
+        <div class="train bu__train" id="mBuildTrain" aria-live="polite"></div>
+        <p class="bu__note" id="mBuildNote"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main class="wrap"><div class="roadmap" id="m-road"></div></main>
+
+<section class="sect" id="m-duels">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Разбор полётов</div>
+      <h2>Три пары, которые легко спутать</h2>
+    </div>
+    <div class="duels" id="mDuels"></div>
+  </div>
+</section>
+
+<section class="sect" id="m-quiz">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Общая проверка</div>
+      <h2>Десять предложений вперемешку</h2>
+      <p>Выбери вариант, который передаёт смысл русской фразы.</p>
+    </div>
+    <div class="drill z-present" id="mQuiz"></div>
+  </div>
+</section>
+
+<section class="sect" id="m-sheet">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">На один экран</div>
+      <h2>Шпаргалка</h2>
+    </div>
+    <div class="sheet">
+      <table>
+        <thead><tr><th>Что имею в виду</th><th>Что ставлю</th><th>Как это звучит</th></tr></thead>
+        <tbody>
+          <tr><td>Я советую</td><td><code>should</code></td><td>You should take a jacket.</td></tr>
+          <tr><td>Так нужно по уговору или по обстоятельствам</td><td><code>have to / has to</code></td><td>We have to leave at five.</td></tr>
+          <tr><td>Я прямо говорю, что это обязательно</td><td><code>must</code></td><td>You must help her.</td></tr>
+          <tr><td>Нельзя</td><td><code>mustn’t</code></td><td>You mustn’t park here.</td></tr>
+          <tr><td>Можно и без этого</td><td><code>don’t / doesn’t have to</code></td><td>You don’t have to come.</td></tr>
+          <tr><td>Я советую этого избегать</td><td><code>shouldn’t</code></td><td>You shouldn’t stay up late.</td></tr>
+          <tr><td>Тогда стоило бы</td><td><code>should have</code> и третья форма глагола</td><td>You should have bought three candies.</td></tr>
+          <tr><td>Тогда нужно было</td><td><code>had to</code></td><td>You had to buy three candies.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+</div>
+
+<div class="tabpanel" id="tab-modals" role="tabpanel" aria-labelledby="modalsTab" hidden>
+<header class="hero" id="l-hero">
+  <div class="wrap">
+    <div class="eyebrow">Модальные глаголы</div>
+    <h1>Могу, можно или <span class="tri">может быть</span>?</h1>
+    <p class="hero__sub">В предложениях «Я приду», «Я могу прийти» и «Может быть, я приду» действие одно и то же. Разница в том, что ты хочешь сказать об этом действии. В английском эту работу делают слова вроде <b>can</b> и <b>might</b>. А вопрос и отрицание они собирают сами.</p>
+    <div class="hero__meta">
+      <span class="pill">3 станции</span>
+      <span class="pill">конструктор</span>
+      <span class="pill">40 заданий с разбором</span>
+    </div>
+  </div>
+</header>
+
+<section class="sect toc" id="l-toc">
+  <div class="wrap">
+    <div class="sect__head" style="margin-bottom:0">
+      <div class="eyebrow">Оглавление</div>
+      <h2>С чего начать</h2>
+      <p>Попробуй конструктор или открой нужную станцию.</p>
+    </div>
+    <div class="toc__g" id="lToc"></div>
+  </div>
+</section>
+
+<section class="sect" id="l-system">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Конструктор</div>
+      <h2>Что происходит с can?</h2>
+      <p>Выбери вид фразы и посмотри, где окажется <b>can</b>.</p>
+    </div>
+    <div class="bu">
+      <div class="bu__ctl">
+        <div class="bu__grp">
+          <div class="seg" id="lBuild" role="group" aria-label="Вид фразы">
+            <button type="button" data-v="0" aria-pressed="true">Можешь</button>
+            <button type="button" data-v="1" aria-pressed="false">Не можешь</button>
+            <button type="button" data-v="2" aria-pressed="false">Можешь?</button>
+          </div>
+        </div>
+      </div>
+      <div class="bu__out">
+        <div class="bu__ru" id="lBuildRu"></div>
+        <div class="train bu__train" id="lBuildTrain" aria-live="polite"></div>
+        <p class="bu__note" id="lBuildNote"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main class="wrap"><div class="roadmap" id="l-road"></div></main>
+
+<section class="sect" id="l-duels">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Разбор полётов</div>
+      <h2>Как меняется смысл</h2>
+    </div>
+    <div class="duels" id="lDuels"></div>
+  </div>
+</section>
+
+<section class="sect" id="l-quiz">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Общая проверка</div>
+      <h2>Десять предложений вперемешку</h2>
+      <p>Выбери вариант, который передаёт смысл русской фразы.</p>
+    </div>
+    <div class="drill z-present" id="lQuiz"></div>
+  </div>
+</section>
+
+<section class="sect" id="l-sheet">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">На один экран</div>
+      <h2>Шпаргалка</h2>
+    </div>
+    <div class="sheet">
+      <table>
+        <thead><tr><th>Что хочу сказать</th><th>Что ставлю</th><th>Как это звучит</th></tr></thead>
+        <tbody>
+          <tr><td>Могу или умею</td><td><code>can</code></td><td>I can swim.</td></tr>
+          <tr><td>Не могу</td><td><code>can’t / cannot</code></td><td>I can’t swim.</td></tr>
+          <tr><td>Умел раньше</td><td><code>could</code></td><td>I could swim when I was five.</td></tr>
+          <tr><td>Можно мне?</td><td><code>Can / Could / May I…?</code></td><td>May I come in?</td></tr>
+          <tr><td>Не мог бы ты?</td><td><code>Could / Would you…?</code></td><td>Could you open the window?</td></tr>
+          <tr><td>Может быть</td><td><code>may / might</code></td><td>It might rain.</td></tr>
+          <tr><td>Возможно, не</td><td><code>may not / might not</code></td><td>She might not come.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+</div>
+
+<div class="tabpanel" id="tab-clock" role="tabpanel" aria-labelledby="clockTab" hidden>
+<header class="hero" id="h-hero">
+  <div class="wrap">
+    <div class="eyebrow">Время по часам · past, to, half, quarter</div>
+    <h1>Сколько минут прошло? <span class="tri">А сколько осталось?</span></h1>
+    <p class="hero__sub">Делим циферблат пополам. В 12:20 считаем минуты после двенадцати. В 12:40 уже ближе к часу, поэтому считаем минуты до него — как по-русски «без двадцати час».</p>
+    <div class="hero__meta">
+      <span class="pill">4 станции</span>
+      <span class="pill">интерактивные часы</span>
+      <span class="pill">50 заданий с разбором</span>
+    </div>
+  </div>
+</header>
+
+<section class="sect toc" id="h-toc">
+  <div class="wrap">
+    <div class="sect__head" style="margin-bottom:0">
+      <div class="eyebrow">Оглавление</div>
+      <h2>С чего начать</h2>
+      <p>Покрути стрелки или открой нужную станцию.</p>
+    </div>
+    <div class="toc__g" id="hToc"></div>
+  </div>
+</section>
+
+<section class="sect" id="h-system">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Конструктор</div>
+      <h2>Который час?</h2>
+      <p>Выбери пример или передвинь минутную стрелку. Посмотри, как меняется фраза после :30.</p>
+    </div>
+    <div class="bu">
+      <div class="bu__ctl">
+        <div class="seg" id="hPresets" role="group" aria-label="Примеры времени на часах">
+          <button type="button" data-minute="0" aria-pressed="false">12:00</button>
+          <button type="button" data-minute="15" aria-pressed="false">12:15</button>
+          <button type="button" data-minute="20" aria-pressed="true">12:20</button>
+          <button type="button" data-minute="30" aria-pressed="false">12:30</button>
+          <button type="button" data-minute="40" aria-pressed="false">12:40</button>
+          <button type="button" data-minute="45" aria-pressed="false">12:45</button>
+        </div>
+      </div>
+      <div class="bu__out clock-builder">
+        <figure class="clock-figure">
+          <div id="hDial"></div>
+          <figcaption class="clock-legend">
+            <span class="clock-legend__to"><b>to</b> · до следующего часа</span>
+            <span class="clock-legend__past"><b>past</b> · после текущего часа</span>
+          </figcaption>
+        </figure>
+        <div class="clock-readout">
+          <div class="clock-controls">
+            <label for="hHour">Час
+              <select id="hHour">
+                <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option selected>12</option>
+              </select>
+            </label>
+            <label for="hMinute">Минуты <span id="hMinuteValue" aria-hidden="true">20</span>
+              <input id="hMinute" type="range" min="0" max="59" value="20">
+            </label>
+          </div>
+          <div class="clock-result" aria-live="polite">
+            <div class="clock-digits" id="hTime"></div>
+            <div class="clock-answer" id="hAnswer" lang="en"></div>
+            <p class="bu__note" id="hNote"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main class="wrap"><div class="roadmap" id="h-road"></div></main>
+
+<section class="sect" id="h-duels">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Разбор полётов</div>
+      <h2>Один час, разные слова</h2>
+    </div>
+    <div class="duels" id="hDuels"></div>
+  </div>
+</section>
+
+<section class="sect" id="h-quiz">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Общая проверка</div>
+      <h2>Десять заданий вперемешку</h2>
+      <p>Посмотри на стрелки или цифры и выбери, как сказать это по-английски.</p>
+    </div>
+    <div class="drill z-present" id="hQuiz"></div>
+  </div>
+</section>
+
+<section class="sect" id="h-sheet">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">На один экран</div>
+      <h2>Шпаргалка</h2>
+    </div>
+    <div class="sheet">
+      <table>
+        <thead><tr><th>На часах</th><th>Как сказать</th><th>Как посчитать</th></tr></thead>
+        <tbody>
+          <tr><td>12:00</td><td><code>twelve o’clock</code></td><td>Ровно двенадцать.</td></tr>
+          <tr><td>12:15</td><td><code>a quarter past twelve</code></td><td>После двенадцати прошла четверть часа.</td></tr>
+          <tr><td>12:20</td><td><code>twenty past twelve</code></td><td>После двенадцати прошло 20 минут.</td></tr>
+          <tr><td>12:30</td><td><code>half past twelve</code></td><td>После двенадцати прошло полчаса.</td></tr>
+          <tr><td>12:40</td><td><code>twenty to one</code></td><td>До часу осталось 20 минут.</td></tr>
+          <tr><td>12:45</td><td><code>a quarter to one</code></td><td>До часу осталась четверть часа.</td></tr>
         </tbody>
       </table>
     </div>
@@ -7168,6 +7566,195 @@ const ADUELS = [
 ];
 </script>
 <script>
+const MLEVELS = [
+  { n: 1, ru: 'Выбор слова', title: 'Совет, необходимость и обязанность', code: 'should · have to · must',
+    txt: 'Сначала спроси себя, что хочешь передать. Ты советуешь, напоминаешь о договорённости или говоришь, что сделать обязательно?' },
+  { n: 2, ru: 'Отрицание и прошлое', title: 'Нельзя, не нужно и надо было', code: 'mustn’t · don’t have to · had to',
+    txt: 'Сравним «лучше не делать», «можно не делать» и «нельзя». Потом перенесём наши примеры в прошлое.' }
+];
+
+const M = [
+  {
+    id: 'm-should', zone: 'present', level: 1, idx: 1, short: 'Совет',
+    name: 'Should — стоит сделать', core: 'You should buy three candies.',
+    thesis: 'Так будет лучше, решать тебе',
+    lead: 'Ты собираешься купить две конфеты, а вас трое. Я говорю <b>You should buy three candies</b>. Стоит взять три, тогда хватит и тебе. Никакого уговора о трёх конфетах не было. Я просто подсказываю.',
+    blocks: [
+      { kind: 'key', h: 'Можно подставить «стоит»', p: 'После <b>should</b> ставим глагол как в словаре. <b>Should buy</b> — стоит купить. Даже с he или she ничего не добавляем.' },
+      { kind: 'plain', h: 'Как спросить совета', p: '<b>Should I buy three?</b> — «Мне стоит купить три?» Для вопроса ставим <b>should</b> перед <b>I</b>. <b>Shouldn’t</b> значит «лучше не делать».' }
+    ],
+    forms: { p: 'You <b>should buy</b> three.', n: 'You <b>shouldn’t buy</b> two.', q: '<b>Should</b> I buy three?' },
+    markers: ['стоит', 'я бы посоветовал', 'лучше не'],
+    ex: [
+      { en: 'You should take an umbrella.', ru: 'Тебе стоит взять зонт.' },
+      { en: 'Should I call her now?', ru: 'Мне стоит ей сейчас позвонить?' },
+      { en: 'You shouldn’t skip breakfast.', ru: 'Тебе лучше не пропускать завтрак.' }
+    ]
+  },
+  {
+    id: 'm-have', zone: 'past', level: 1, idx: 2, short: 'Надо',
+    name: 'Have to — надо, потому что так вышло или так договорились', core: 'You have to buy three candies.',
+    thesis: 'Есть причина, по которой это нужно сделать',
+    lead: 'Мы заранее договорились, что ты принесёшь три конфеты. Напоминаю <b>You have to buy three candies</b>. Купить их или нет решаешь ты. Чтобы выполнить уговор, нужно принести именно три конфеты.',
+    blocks: [
+      { kind: 'key', h: 'С he, she и it говорим has to', p: '<b>I have to leave</b> — мне нужно уйти. <b>She has to leave</b> — ей нужно уйти. Дальше <b>leave</b> остаётся как в словаре.' },
+      { kind: 'plain', h: 'Для вопроса нужен do или does', p: '<b>Do I have to bring anything?</b> — «Мне нужно что-нибудь принести?» С she спрашиваем <b>Does she have to bring anything?</b> После <b>does</b> снова пишем <b>have to</b>.' },
+      { kind: 'plain', h: 'Причина может быть серьёзной', p: '<b>We have to leave now or we’ll miss the train.</b> Нам надо уходить сейчас, иначе опоздаем. <b>Have to</b> подходит и для строгих правил, если ты объясняешь, что от тебя требуют.' }
+    ],
+    forms: { p: 'She <b>has to</b> leave.', n: 'She <b>doesn’t have to</b> leave.', q: '<b>Does</b> she <b>have to</b> leave?' },
+    markers: ['мы договорились', 'по правилам', 'иначе опоздаем'],
+    ex: [
+      { en: 'I have to get up at six. My shift starts at seven.', ru: 'Мне надо встать в шесть. Смена начинается в семь.' },
+      { en: 'Do we have to pay in advance?', ru: 'Нам обязательно платить заранее?' }
+    ]
+  },
+  {
+    id: 'm-must', zone: 'future', level: 1, idx: 3, short: 'Обязан',
+    name: 'Must — это обязательно', core: 'You must help her.',
+    thesis: 'Говорю прямо, что считаю это обязательным',
+    lead: '«Ты обязан ей помочь. Она твоя дочь». Если говорю об этом сейчас, получится <b>You must help her. She’s your daughter.</b> Здесь я прямо говорю, что считаю помощь обязанностью.',
+    blocks: [
+      { kind: 'key', h: 'После must ставим глагол как в словаре', p: '<b>You must help</b>, <b>he must help</b>. Ни <b>to</b>, ни окончания <b>-s</b> добавлять не нужно. Это работает и в правилах: <b>Visitors must show ID</b>.' },
+      { kind: 'plain', h: 'Must и have to иногда подходят оба', p: 'В инструкции можно написать <b>You must show ID</b> — предъявите документ, это обязательно. Другу можно объяснить <b>We have to show ID</b> — нам нужно предъявить документ, таковы правила. Требование одно и то же.' },
+      { kind: 'plain', h: 'Как спросить, обязательно ли', p: '<b>Must I sign here?</b> — «Мне обязательно подписать здесь?» Ставим <b>must</b> перед <b>I</b>. В обычном разговоре часто спрашивают <b>Do I have to sign here?</b>' }
+    ],
+    forms: { p: 'You <b>must</b> sign here.', n: 'You <b>mustn’t</b> sign for someone else.', q: '<b>Must</b> I sign here?' },
+    markers: ['обязательно', 'требование', 'считаю своим долгом'],
+    ex: [
+      { en: 'You must wear a seat belt.', ru: 'Ремень обязательно нужно пристегнуть.' },
+      { en: 'I must apologize to her.', ru: 'Я должен перед ней извиниться.' }
+    ]
+  },
+  {
+    id: 'm-not', zone: 'present', level: 2, idx: 4, short: 'Отрицание',
+    name: 'Mustn’t — нельзя. Don’t have to — не обязательно', core: 'mustn’t ≠ don’t have to',
+    thesis: 'Можно пропустить или нельзя делать?',
+    lead: '<b>You mustn’t bring food into the lab.</b> Еду в лабораторию приносить нельзя. <b>You don’t have to bring food to the party.</b> На вечеринку еду приносить не обязательно. Захочешь — принеси.',
+    blocks: [
+      { kind: 'key', h: 'Сначала переведи «не должен»', p: 'Если по смыслу <b>«нельзя»</b>, ставим <b>mustn’t</b>. Если <b>«можешь не делать»</b>, ставим <b>don’t have to</b>. С he, she и it говорим <b>doesn’t have to</b>.' },
+      { kind: 'plain', h: 'Shouldn’t оставляет выбор', p: '<b>You shouldn’t drink coffee this late.</b> Тебе лучше не пить кофе так поздно. Это совет, а запрет звучал бы как <b>You mustn’t drink coffee here</b>.' }
+    ],
+    forms: { p: 'You <b>have to</b> bring a pen.', n: 'You <b>don’t have to</b> bring a pen.', q: '<b>Do</b> I <b>have to</b> bring a pen?' },
+    markers: ['нельзя', 'можно не делать', 'лучше не делать'],
+    ex: [
+      { en: 'You mustn’t touch the exhibits.', ru: 'Экспонаты трогать нельзя.' },
+      { en: 'You don’t have to print the ticket.', ru: 'Билет распечатывать не обязательно.' },
+      { en: 'She shouldn’t stay up so late.', ru: 'Ей лучше не засиживаться так допоздна.' }
+    ]
+  },
+  {
+    id: 'm-past', zone: 'past', level: 2, idx: 5, short: 'Прошлое',
+    name: 'Стоило купить или нужно было купить?', core: 'should have bought · had to buy',
+    thesis: 'Смотрю назад и спрашиваю, был ли это совет или обязанность',
+    lead: 'Ты уже купил две конфеты. Теперь видно, что тебе не хватит. <b>You should have bought three candies</b> — «Стоило купить три». Если мы заранее договорились о трёх, можно сказать <b>You had to buy three candies</b> — «Тебе нужно было купить три, мы же договорились».',
+    blocks: [
+      { kind: 'key', h: 'Стоило сделать тогда', p: 'Ставим <b>should have</b> и третью форму глагола. У <b>buy</b> это <b>bought</b>. <b>You shouldn’t have bought only two</b> — «Не стоило покупать всего две».' },
+      { kind: 'plain', h: 'Обязан был тогда', p: '<b>You had to help her. She’s your daughter.</b> — «Ты был обязан ей помочь. Она твоя дочь». Если рассказываем о том, что было нужно или обязательно в прошлом, берём <b>had to</b>. Дальше <b>help</b> как в словаре.' },
+      { kind: 'trap', h: 'Must have — это уже догадка', p: '<b>He must have bought three</b> значит «Он, должно быть, купил три». Мы догадываемся, что он сделал. Чтобы сказать «ему нужно было купить три», говорим <b>He had to buy three</b>.' },
+      { kind: 'plain', h: 'Само действие могло не случиться', p: '<b>He had to call me, but he didn’t.</b> Ему нужно было позвонить, но он не позвонил. <b>Had to</b> говорит, что нужно было сделать. Что вышло на деле, понятно из остальной фразы.' }
+    ],
+    forms: { p: 'He <b>had to</b> call.', n: 'He <b>didn’t have to</b> call.', q: '<b>Did</b> he <b>have to</b> call?' },
+    markers: ['стоило тогда', 'нужно было', 'не обязательно было'],
+    ex: [
+      { en: 'I should have told you sooner.', ru: 'Мне стоило сказать тебе раньше.' },
+      { en: 'Did you have to wait long?', ru: 'Тебе пришлось долго ждать?' },
+      { en: 'They didn’t have to pay.', ru: 'Им не нужно было платить.' }
+    ]
+  }
+];
+
+const MDUELS = [
+  { q: 'Одна покупка, две причины взять три',
+    a: { z: 'present', n: 'Совет после покупки', en: 'You should have bought three.', ru: 'Стоило купить три.', why: 'Уже купили две. Теперь видно, что всем не хватит.' },
+    b: { z: 'past', n: 'Договорились заранее', en: 'You had to buy three.', ru: 'Тебе нужно было купить три.', why: 'Три конфеты были частью уговора до покупки.' },
+    r: 'Should have bought оценивает покупку задним числом. Had to buy передаёт, что требовалось тогда.' },
+  { q: 'Нельзя или можно не делать?',
+    a: { z: 'future', n: 'Запрет', en: 'You mustn’t bring a bag.', ru: 'С сумкой нельзя.', why: 'Сумку проносить запрещено.' },
+    b: { z: 'present', n: 'По желанию', en: 'You don’t have to bring a bag.', ru: 'Сумку брать не обязательно.', why: 'Можно прийти и без неё.' },
+    r: '«Нельзя» — mustn’t. «Можно не брать» — don’t have to.' },
+  { q: 'Должен был или должно быть?',
+    a: { z: 'past', n: 'Обязанность', en: 'She had to lock the door.', ru: 'Ей нужно было запереть дверь.', why: 'Мы знаем, что от неё требовалось.' },
+    b: { z: 'future', n: 'Догадка', en: 'She must have locked the door.', ru: 'Она, должно быть, заперла дверь.', why: 'Мы делаем вывод, что дверь уже заперта.' },
+    r: 'Had to передаёт «нужно было», а must have здесь передаёт «должно быть».' }
+];
+</script>
+<script>
+const LLEVELS = [
+  { n: 1, ru: 'Как собрать фразу', title: 'Могу, не могу, могу ли?', code: 'can · can’t · could',
+    txt: 'Начнём с твоего «могу». На нём видно, почему этим словам не нужен помощник для вопроса или отрицания.' },
+  { n: 2, ru: 'Что я хочу сказать', title: 'Разрешение, просьба или «может быть»', code: 'can · could · may · might · would',
+    txt: 'Смотри на ситуацию. Ты спрашиваешь, можно ли тебе что-то сделать, просишь другого человека или пока не уверен, что случится?' }
+];
+
+const L = [
+  {
+    id: 'l-can', zone: 'present', level: 1, idx: 1, short: 'Могу',
+    name: 'Can — могу или умею', core: 'I can swim. I can’t swim. Can you swim?',
+    thesis: 'Модальный глагол сам собирает вопрос и отрицание',
+    lead: 'Сравни <b>I swim</b> — «я плаваю» и <b>I can swim</b> — «я умею плавать». Действие одно, но <b>can</b> добавляет смысл. Так работают модальные глаголы: к одному и тому же действию можно добавить «могу», «можно», «может быть» или «стоит».',
+    blocks: [
+      { kind: 'key', h: 'Модальные глаголы живут сами по себе', p: 'Если в предложении уже есть <b>can</b>, ему не нужны <b>do</b>, <b>does</b> или <b>did</b> для вопроса и отрицания. «Я не могу» — <b>I can’t</b> или <b>I cannot</b>. В полной форме пишем <b>cannot</b> слитно. Так что <b>I don’t can</b> говорить не нужно: <b>can</b> сам справляется с <b>not</b>.' },
+      { kind: 'plain', h: 'В вопросе can выходит вперёд', p: '<b>You can swim</b> — «ты умеешь плавать». <b>Can you swim?</b> — «ты умеешь плавать?» Для вопроса просто переставь <b>can</b> перед <b>you</b>. После <b>can</b> ставь глагол как в словаре, без <b>to</b>. Даже с <b>he</b> или <b>she</b> само <b>can</b> остаётся как есть.' },
+      { kind: 'plain', h: 'Когда умел раньше', p: '<b>I could swim when I was five</b> — «Я умел плавать в пять лет». <b>I couldn’t swim yet</b> — «Я ещё не умел плавать». Здесь <b>could</b> рассказывает об умении в прошлом. В просьбах это же слово передаёт вежливость.' },
+      { kind: 'plain', h: 'А что с have to?', p: '<b>Must</b> и <b>should</b> ведут себя так же: <b>Must I go?</b>, <b>You shouldn’t go</b>. У <b>have to</b> другой порядок: <b>Do I have to go?</b>, <b>I don’t have to go</b>. Эти фразы есть во вкладке <a href="#m-hero">«Долженствование»</a>.' }
+    ],
+    forms: { p: 'I <b>can</b> swim.', n: 'I <b>can’t</b> swim.', q: '<b>Can</b> you swim?' },
+    markers: ['могу', 'умею', 'не получается', 'умел раньше'],
+    ex: [
+      { en: 'She can read music.', ru: 'Она умеет читать ноты.' },
+      { en: 'I can’t hear you.', ru: 'Я тебя не слышу.' },
+      { en: 'Could you read when you were five?', ru: 'Ты умел читать в пять лет?' }
+    ]
+  },
+  {
+    id: 'l-request', zone: 'past', level: 2, idx: 2, short: 'Просьбы',
+    name: 'Можно мне? А ты мог бы?', core: 'Can I sit here? Could you open the window?',
+    thesis: 'Посмотри, кто должен сделать действие',
+    lead: '<b>Can I open the window?</b> — «Можно <b>мне</b> открыть окно?» Я хочу открыть сам и спрашиваю разрешения. <b>Could you open the window?</b> — «Ты <b>мог бы</b> открыть окно?» Теперь я прошу тебя.',
+    blocks: [
+      { kind: 'key', h: 'Если спрашиваешь разрешения', p: '<b>Can I sit here?</b> — обычное «Можно я здесь сяду?». <b>Could I sit here?</b> звучит мягче. <b>May I sit here?</b> может пригодиться в более официальной обстановке.' },
+      { kind: 'plain', h: 'Если просишь другого человека', p: '<b>Can you send me the address?</b> — «Можешь прислать мне адрес?» <b>Could you send me the address?</b> — «Не мог бы ты прислать мне адрес?» Ещё можно сказать <b>Would you send me the address, please?</b> В этих просьбах речь о том, что человек может сделать сейчас.' }
+    ],
+    forms: { p: 'You <b>can</b> sit here.', n: 'You <b>can’t</b> sit here.', q: '<b>May</b> I sit here?' },
+    markers: ['можно мне?', 'можешь?', 'не мог бы ты?'],
+    ex: [
+      { en: 'May I come in?', ru: 'Можно войти?' },
+      { en: 'Could you pass me the salt?', ru: 'Не мог бы ты передать мне соль?' },
+      { en: 'Would you close the door, please?', ru: 'Закройте дверь, пожалуйста.' }
+    ]
+  },
+  {
+    id: 'l-chance', zone: 'future', level: 2, idx: 3, short: 'Не уверен',
+    name: 'May и might — может быть', core: 'It might rain.',
+    thesis: 'Так говорим, когда пока не знаем, что случится',
+    lead: 'Собираешься гулять, а на небе тучи. <b>It might rain</b> — «Может пойти дождь». Ты оставляешь место для разных вариантов. <b>It may rain</b> тоже подходит. В разговоре <b>might</b> часто звучит осторожнее.',
+    blocks: [
+      { kind: 'key', h: 'Умею или пока не знаю, сделаю ли?', p: '<b>I can come on Friday</b> — «Я могу прийти в пятницу», у меня есть такая возможность. <b>I might come on Friday</b> — «Может быть, я приду в пятницу», пока не знаю.' },
+      { kind: 'plain', h: 'Как сказать «возможно, не»', p: '<b>She might not come</b> — «Возможно, она не придёт». Ставим <b>not</b> сразу после <b>might</b>. Ещё можно сказать <b>She may not come</b> с тем же смыслом, если из разговора ясно, что ты не уверен.' },
+      { kind: 'plain', h: 'А если хочешь спросить?', p: 'В разговоре «Анна может опоздать, как думаешь?» удобно спросить так: <b>Do you think Anna might be late?</b> Здесь <b>do</b> помогает спросить <b>you think</b> — «ты думаешь?». Часть <b>Anna might be late</b> внутри вопроса остаётся целой.' }
+    ],
+    forms: { p: 'Anna <b>might</b> be late.', n: 'Anna <b>might not</b> be late.', q: 'Do you think Anna <b>might</b> be late?' },
+    markers: ['может быть', 'возможно', 'пока не знаю'],
+    ex: [
+      { en: 'He may join us later.', ru: 'Возможно, он присоединится к нам позже.' },
+      { en: 'They might not know the address.', ru: 'Возможно, они не знают адреса.' },
+      { en: 'It could rain tonight.', ru: 'Сегодня вечером может пойти дождь.' }
+    ]
+  }
+];
+
+const LDUELS = [
+  { q: 'Кто откроет окно?',
+    a: { z: 'present', n: 'Спрашиваю разрешения', en: 'Can I open the window?', ru: 'Можно я открою окно?', why: 'Окно собираюсь открыть я.' },
+    b: { z: 'past', n: 'Прошу собеседника', en: 'Could you open the window?', ru: 'Не мог бы ты открыть окно?', why: 'Я прошу тебя открыть окно.' },
+    r: 'Посмотри, кто стоит после can или could. С I спрашиваю про себя, с you обращаюсь к собеседнику.' },
+  { q: 'Есть возможность или пока под вопросом?',
+    a: { z: 'present', n: 'Есть возможность', en: 'I can come on Friday.', ru: 'Я могу прийти в пятницу.', why: 'В пятницу у меня получается.' },
+    b: { z: 'future', n: 'Пока под вопросом', en: 'I might come on Friday.', ru: 'Возможно, я приду в пятницу.', why: 'Пока не обещаю.' },
+    r: 'Can говорит «могу». Might добавляет «может быть».' }
+];
+</script>
+<script>
 /* В каждой строке после предложения идут три пары «ответ, пояснение».
    Знак + отмечает верный вариант, как и в других вкладках. */
 const VDRILLS = {
@@ -7259,6 +7846,152 @@ const QUIZ_V = [
   Q('Please wait. The floor ___ right now.', ['+is being cleaned','Пол моют прямо сейчас.'], ['has been cleaned','Это означало бы, что пол уже вымыли.'], ['is been cleaned','Для процесса после is нужно being.']),
   Q('The forms ___ already, so you can pick them up.', ['+have been signed','Подписи уже стоят, и бланки можно забрать.'], ['are being signed','Это означало бы, что бланки ещё подписывают.'], ['has been signed','С forms во множественном числе нужно have.'])
 ];
+</script>
+<script>
+const CLOCK_LEVELS = [
+  { n: 1, ru: 'Две половины', title: 'Минуты после или до часа', code: 'past · to',
+    txt: 'Смотри на длинную стрелку. Справа считаем, сколько минут прошло. Слева — сколько осталось.' },
+  { n: 2, ru: 'Особые отметки', title: 'Четверть, половина и ровный час', code: 'quarter · half · o’clock',
+    txt: 'На отметках :00, :15, :30 и :45 есть свои короткие слова. Научимся узнавать их по циферблату.' }
+];
+
+const CLOCK_STATIONS = [
+  {
+    id: 'h-past', zone: 'present', level: 1, idx: 1, short: 'После часа', clock: [12, 20],
+    name: 'Первая половина часа — past', core: '12:20 · It’s twenty past twelve.',
+    thesis: 'Сколько минут прошло после двенадцати?',
+    lead: 'Делим циферблат пополам линией от 12 до 6. Если длинная стрелка справа, вспоминаем час, который только что начался. На часах <b>12:20</b>. После двенадцати прошло двадцать минут, поэтому говорим <b>twenty past twelve</b>.',
+    blocks: [
+      { kind: 'key', h: 'Сначала минуты, потом past и час', p: '<b>Past</b> здесь значит «после». Говорим, сколько минут прошло, а потом называем час, после которого их считаем.' },
+      { kind: 'plain', h: 'А если на часах 12:07?', p: 'Говорим <b>seven minutes past twelve</b>. На круглых отметках вроде :05, :10 или :20 слово <b>minutes</b> часто опускают. Для 7 минут лучше его оставить.' },
+      { kind: 'plain', h: 'Как спросить, сколько времени', p: '<b>What time is it?</b> — «Который час?» Начни ответ с <b>It’s</b> и назови время.' }
+    ],
+    forms: { q: 'What time is it?', p: 'It’s <b>twenty past</b> twelve.', n: 'It’s not quite half past twelve yet.' },
+    markers: ['минуты уже прошли', 'длинная стрелка справа', 'текущий час'],
+    ex: [
+      { en: 'It’s five past two.', ru: '2:05 · Два часа пять минут.' },
+      { en: 'It’s ten past seven.', ru: '7:10 · Семь часов десять минут.' },
+      { en: 'It’s twenty-five past eight.', ru: '8:25 · Восемь часов двадцать пять минут.' }
+    ]
+  },
+  {
+    id: 'h-to', zone: 'future', level: 1, idx: 2, short: 'До часа', clock: [12, 40],
+    name: 'Перешли за половину — to', core: '12:40 · It’s twenty to one.',
+    thesis: 'Сколько минут осталось до часа?',
+    lead: 'После половины часа длинная стрелка оказалась слева. Мы теперь ближе к следующему часу, поэтому смотрим вперёд. На часах <b>12:40</b>. До часа дня осталось двадцать минут, и мы говорим <b>twenty to one</b>. По-русски точно так же — «без двадцати час».',
+    blocks: [
+      { kind: 'key', h: 'Из 60 вычитаем минуты на часах', p: 'В <b>12:40</b> уже прошло 40 минут. До полного часа осталось <b>60 − 40 = 20</b>. Называем остаток, ставим <b>to</b> и переходим к следующему часу — <b>one</b>.' },
+      { kind: 'plain', h: 'После одиннадцати идём к двенадцати', p: 'В <b>11:55</b> до двенадцати осталось пять минут. Значит, <b>five to twelve</b>. В <b>11:58</b> осталось две — <b>two minutes to twelve</b>.' },
+      { kind: 'plain', h: 'Если кто-то читает цифры напрямую', p: 'Для <b>12:40</b> можно также услышать <b>twelve forty</b>. В этом способе просто называем час и минуты с экрана. С <b>to</b> считаем, сколько минут осталось до следующего часа.' }
+    ],
+    forms: { p: 'It’s <b>twenty to</b> one.', n: 'It’s not one o’clock yet.', q: 'Is it <b>twenty to</b> one?' },
+    markers: ['считаем остаток', 'длинная стрелка слева', 'следующий час'],
+    ex: [
+      { en: 'It’s twenty-five to four.', ru: '3:35 · Без двадцати пяти четыре.' },
+      { en: 'It’s ten to nine.', ru: '8:50 · Без десяти девять.' },
+      { en: 'It’s five to twelve.', ru: '11:55 · Без пяти двенадцать.' }
+    ]
+  },
+  {
+    id: 'h-quarter', zone: 'past', level: 2, idx: 3, short: 'Четверть и половина', clock: [12, 30],
+    name: 'Половина — half, четверть — a quarter', core: 'a quarter past twelve · half past twelve · a quarter to one',
+    thesis: 'Половину считаем от текущего часа, четверть — в обе стороны',
+    lead: '<b>Quarter</b> значит «четверть». Четверть часа — это <b>15 минут</b>, потому что 60 делим на четыре. <b>Half</b> значит «половина». Половина часа — это <b>30 минут</b>.',
+    blocks: [
+      { kind: 'key', h: 'В половине часа говорим half past', p: '<b>12:30</b> — <b>half past twelve</b>. Половина часа прошла <em>после двенадцати</em>. По-русски можно сказать «половина первого», а в английском с <b>half past</b> мы называем <b>текущий</b> час, то есть двенадцать.' },
+      { kind: 'plain', h: 'Четверть уже прошла — a quarter past', p: '<b>12:15</b> — <b>a quarter past twelve</b>. После двенадцати прошло пятнадцать минут.' },
+      { kind: 'plain', h: 'Четверть осталась — a quarter to', p: '<b>12:45</b> — <b>a quarter to one</b>. До часу осталось пятнадцать минут. По-русски — «без четверти час».' }
+    ],
+    forms: { p: 'It’s <b>half past</b> twelve.', n: 'It’s not <b>a quarter to</b> one yet.', q: 'Is it <b>a quarter past</b> twelve?' },
+    markers: ['четверть часа прошла', 'прошло полчаса', 'осталась четверть часа'],
+    ex: [
+      { en: 'It’s a quarter past four.', ru: '4:15 · Четверть пятого.' },
+      { en: 'It’s half past six.', ru: '6:30 · Половина седьмого.' },
+      { en: 'It’s a quarter to ten.', ru: '9:45 · Без четверти десять.' }
+    ]
+  },
+  {
+    id: 'h-exact', zone: 'present', level: 2, idx: 4, short: 'Ровный час', clock: [12, 0],
+    name: 'Ровный час и время на табло', core: 'It’s eight o’clock. · It’s eight forty.',
+    thesis: 'o’clock подходит, когда на часах :00',
+    lead: 'Когда длинная стрелка на 12 и минут ещё нет, называем час и добавляем <b>o’clock</b>. Например, <b>8:00</b> — <b>It’s eight o’clock</b>. Если нужно сказать «в восемь», добавляем <b>at</b>: <b>at eight o’clock</b>.',
+    blocks: [
+      { kind: 'key', h: 'С цифрами тоже можно', p: 'На экране <b>8:40</b>. Читаем по порядку <b>eight forty</b>, а с <b>to</b> получится <b>twenty to nine</b>. При чтении <b>8:05</b> перед <b>five</b> обычно говорим <b>oh</b> — <b>eight oh five</b>.' },
+      { kind: 'plain', h: 'Утром или вечером?', p: '<b>Seven a.m.</b> — семь утра. <b>Seven p.m.</b> — семь вечера. Чтобы на двенадцати точно не запутаться, можно сказать <b>noon</b> — полдень, <b>midnight</b> — полночь.' },
+      { kind: 'plain', h: 'Который час или во сколько?', p: '<b>What time is it?</b> — «Который час?» А <b>What time does the shop open?</b> — «Во сколько открывается магазин?» Можно ответить <b>It opens at nine o’clock</b>.' }
+    ],
+    forms: { p: 'It’s <b>eight o’clock</b>.', n: 'It’s not <b>eight o’clock</b> yet.', q: 'Is it <b>eight o’clock</b>?' },
+    markers: ['ровно', 'в семь утра', 'во сколько?'],
+    ex: [
+      { en: 'It’s twelve noon.', ru: 'Сейчас ровно полдень.' },
+      { en: 'It’s nine oh five.', ru: 'Сейчас 9:05.' },
+      { en: 'The bus leaves at eleven thirty.', ru: 'Автобус отправляется в 11:30.' }
+    ]
+  }
+];
+
+const CLOCK_DUELS = [
+  { q: 'Двадцать минут прошло или осталось?',
+    a: { z: 'present', n: '12:20', en: 'Twenty past twelve.', ru: 'Двадцать минут после двенадцати.', why: 'Уже прошло двадцать. Называем текущий час.' },
+    b: { z: 'future', n: '12:40', en: 'Twenty to one.', ru: 'Без двадцати час.', why: 'Осталось двадцать. Называем следующий час.' },
+    r: 'Past — сколько минут уже прошло. To — сколько осталось.' },
+  { q: 'Половина первого по-русски и по-английски',
+    a: { z: 'past', n: 'По-русски', en: '12:30', ru: 'Половина первого.', why: 'Упоминаем час, к которому идём.' },
+    b: { z: 'present', n: 'По-английски', en: 'Half past twelve.', ru: 'Половина часа после двенадцати.', why: 'Вспоминаем час, который уже начался.' },
+    r: 'На часах одно и то же время. С half past называем двенадцать.' }
+];
+
+const CLOCK_NUMBERS = [
+  'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten',
+  'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen',
+  'twenty', 'twenty-one', 'twenty-two', 'twenty-three', 'twenty-four', 'twenty-five',
+  'twenty-six', 'twenty-seven', 'twenty-eight', 'twenty-nine'
+];
+
+function clockTime(hour, minute) {
+  return hour + ':' + String(minute).padStart(2, '0');
+}
+
+function clockParts(hour, minute) {
+  if (minute === 0) return [CLOCK_NUMBERS[hour], 'o’clock', ''];
+  const to = minute > 30;
+  const minutes = to ? 60 - minute : minute;
+  const target = to ? hour % 12 + 1 : hour;
+  const amount = minutes === 30 ? 'half' : minutes === 15 ? 'a quarter'
+    : CLOCK_NUMBERS[minutes] + (minutes % 5 === 0 ? '' : minutes === 1 ? ' minute' : ' minutes');
+  return [amount, to ? 'to' : 'past', CLOCK_NUMBERS[target]];
+}
+
+function clockFace(hour, minute, showHalves = false, label = '') {
+  const point = (mark, radius) => {
+    const angle = mark * Math.PI / 30;
+    return [140 + radius * Math.sin(angle), 140 - radius * Math.cos(angle)].map(n => n.toFixed(2));
+  };
+  const ticks = Array.from({ length: 60 }, (_, i) => {
+    const major = i % 5 === 0;
+    const [x1, y1] = point(i, 108);
+    const [x2, y2] = point(i, major ? 98 : 104);
+    return `<line class="clock-tick${major ? ' clock-tick--major' : ''}" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}"/>`;
+  }).join('');
+  const numbers = Array.from({ length: 12 }, (_, i) => {
+    const [x, y] = point(i * 5, 84);
+    return `<text class="clock-number" x="${x}" y="${y}">${i || 12}</text>`;
+  }).join('');
+  const [hx, hy] = point((hour % 12) * 5 + minute / 12, 53);
+  const [mx, my] = point(minute, 77);
+  const accessibility = label ? `role="img" aria-label="${label}"` : 'aria-hidden="true"';
+  const halves = showHalves ? `
+    <path class="clock-half clock-half--to" d="M140 24 A116 116 0 0 0 140 256Z"/>
+    <path class="clock-half clock-half--past" d="M140 24 A116 116 0 0 1 140 256Z"/>
+    <line class="clock-divider" x1="140" y1="38" x2="140" y2="242"/>` : '';
+  return `<svg class="clock-face" viewBox="18 18 244 244" ${accessibility}>
+    <circle class="clock-rim" cx="140" cy="140" r="116"/>${halves}
+    ${ticks}${numbers}
+    <line class="clock-hand clock-hand--hour" x1="140" y1="140" x2="${hx}" y2="${hy}"/>
+    <line class="clock-hand clock-hand--minute" x1="140" y1="140" x2="${mx}" y2="${my}"/>
+    <circle class="clock-pin" cx="140" cy="140" r="5"/>
+  </svg>`;
+}
 </script>
 <script>
 /* Вариант «—» означает, что пропуск оставляем пустым. */
@@ -7379,6 +8112,310 @@ const QUIZ_A = [
   articleDrill('She found ___ insect on the windowsill. The insect was tiny.', 'an', 'Вводим насекомое впервые. Insect начинается с гласного звука.', 'the', 'На этом месте слушатель ещё не знает, о каком насекомом речь.', 'a', 'Перед начальным гласным звуком нужно an.'),
   articleDrill('«Нам нужен лёд». We need ___ ice.', '—', 'Лёд нужен без уточнения количества или порции.', 'a', 'Если нужен один кубик, скажем a cube of ice.', 'the', 'The подошло бы к известной порции льда.'),
   articleDrill('«Эти открытки мои». ___ postcards are mine.', 'These', 'These передаёт «эти».', 'The these', 'Перед these не добавляем the.', 'A', 'A не сочетается с postcards во множественном числе.')
+];
+</script>
+<script>
+function obligationDrill(prompt, answer, why, wrongOptions) {
+  return Q(prompt, ['+' + answer, why], ...wrongOptions);
+}
+
+function adviceDrill(prompt, verb) {
+  return obligationDrill(prompt, 'should ' + verb, 'Это совет. После should сразу ставим ' + verb + '.',
+    [['must ' + verb, 'Must прозвучит как требование. Здесь человек просто подсказывает.'],
+     ['should to ' + verb, 'Should подходит по смыслу, но после него сразу ставим ' + verb + ', без to.']]);
+}
+
+function needDrill(prompt, singular) {
+  return obligationDrill(prompt, singular ? 'has to' : 'have to',
+    singular ? 'С he, she или одним человеком говорим has to.' : 'С I, you, we или they говорим have to.',
+    [[singular ? 'have to' : 'has to', singular ? 'Когда речь об одном человеке и его можно назвать he или she, здесь нужно has to.' : 'Has to используем с he, she или it. Здесь говорим have to.'],
+     ['have', 'В выражении «нужно что-то сделать» после have или has должно идти to.']]);
+}
+
+function mustDrill(prompt, verb) {
+  return obligationDrill(prompt, 'must ' + verb, 'Это прямое требование. После must сразу ставим ' + verb + '.',
+    [['should ' + verb, 'Should прозвучит как совет. По условию это требование.'],
+     ['must to ' + verb, 'Must подходит по смыслу, но после него сразу ставим ' + verb + ', без to.']]);
+}
+
+const obligationMeanings = {
+  forbidden: ['mustn’t', 'Здесь прямо запрещают это делать.'],
+  optional: ['don’t have to', 'Это можно сделать по желанию.'],
+  discouraged: ['shouldn’t', 'Здесь советуют этого избегать.']
+};
+
+function negativeObligationDrill(prompt, meaning) {
+  const [answer, reason] = obligationMeanings[meaning];
+  const wrongOptions = Object.entries(obligationMeanings)
+    .filter(([key]) => key !== meaning)
+    .map(([, [form, alternative]]) => [form, form + ' подошло бы в другой ситуации. ' + alternative.replace('Здесь', 'В таком случае')]);
+  return obligationDrill(prompt, answer, reason + ' Поэтому ' + answer + '.', wrongOptions);
+}
+
+function pastObligationDrill(prompt, verb, done, advice) {
+  return obligationDrill(prompt, advice ? 'should have ' + done : 'had to ' + verb,
+    advice
+      ? 'Мы смотрим назад и говорим, как стоило поступить. Ставим should have и третью форму глагола — ' + done + '.'
+      : 'Тогда это было нужно. Говорим had to и добавляем ' + verb + '.',
+    [[advice ? 'had to ' + verb : 'should have ' + done, advice
+      ? 'Had to значит «тогда это было нужно». В этой фразе оцениваем решение задним числом.'
+      : 'Should have здесь означало бы «стоило бы». В этой фразе говорим об обязанности, которая уже действовала.'],
+     ['must have ' + done, 'Must have с третьей формой — это догадка о прошлом. Здесь мы не гадаем, что произошло.']]);
+}
+
+const MDRILLS = {
+  'm-should': [
+    ['Если хочешь, чтобы тебе тоже хватило, стоит купить три конфеты.', 'You ___ three candies.', 'buy'],
+    ['На улице ветер. Тебе стоит взять куртку.', 'You ___ a jacket.', 'take'],
+    ['По-моему, тебе стоит попробовать этот пирог.', 'You ___ this cake.', 'try'],
+    ['Ты устал. Тебе стоит немного отдохнуть.', 'You ___ for a while.', 'rest'],
+    ['Крис скучает по тебе. Тебе стоит ему позвонить.', 'You ___ Chris.', 'call'],
+    ['Тебе стоит сесть ближе, отсюда плохо видно.', 'You ___ closer.', 'sit'],
+    ['В этой пекарне отличный хлеб. Тебе стоит туда сходить.', 'You ___ that bakery.', 'visit'],
+    ['Я бы советовал тебе проверить адрес.', 'You ___ the address.', 'check']
+  ].map(([ru, en, verb]) => adviceDrill(ru + ' · ' + en, verb)).concat([
+    Q('Как спросить совета «Мне взять зонт?»', ['+Should I take an umbrella?', 'Спрашиваем, стоит ли. Ставим should первым, дальше I и take.'], ['Do I should take an umbrella?', 'Вопрос начинается с should. Слово do здесь лишнее.'], ['Should I to take an umbrella?', 'После should используем take без to.']),
+    Q('Тебе стоит записать этот номер. · You should ___ this number.', ['+write down', 'После should сразу ставим глагол write down.'], ['wrote down', 'Wrote — форма прошедшего времени. Здесь даём совет, поэтому write.'], ['to write down', 'После should не добавляем to.'])
+  ]),
+  'm-have': [
+    ['По договорённости ты должен купить три конфеты.', 'You ___ buy three candies.', false],
+    ['По графику Маша должна открыть магазин в восемь.', 'Masha ___ open the shop at eight.', true],
+    ['У нас назначена встреча. Нам нужно уйти в пять.', 'We ___ leave at five.', false],
+    ['Автобусы больше не ходят. Ему нужно идти пешком.', 'He ___ walk home.', true],
+    ['Они обещали вернуть книгу в пятницу.', 'They ___ return the book on Friday.', false],
+    ['У неё приём у врача. Ей нужно уйти пораньше.', 'She ___ leave early.', true],
+    ['Зарядка сломалась. Мне нужно найти другую.', 'I ___ find another charger.', false],
+    ['Чтобы выставить команду на игру, тренеру нужно найти пять игроков.', 'The coach ___ find five players.', true]
+  ].map(([ru, en, singular]) => needDrill(ru + ' · ' + en, singular)).concat([
+    Q('По расписанию ей нужно работать в субботу?', ['+Does she have to work on Saturday?', 'С she начинаем вопрос с does. После этого остаётся have to.'], ['Does she has to work on Saturday?', 'Слово does уже показывает, что речь о she. Дальше пишем have to.'], ['Is she have to work on Saturday?', 'Чтобы задать вопрос с have to и she, начинаем с does.']),
+    Q('Нам нужно переводить весь текст? · ___ we have to translate the whole text?', ['+Do', 'С we вопрос с have to начинается с do.'], ['Does', 'Does подходит с he, she или it. С we ставим do.'], ['Are', 'Вопрос с have to здесь начинается с do.'])
+  ]),
+  'm-must': [
+    ['Ты обязан ей помочь. Она твоя дочь.', 'You ___ her. She’s your daughter.', 'help'],
+    ['Прямое распоряжение сотрудникам. Вы обязаны запереть дверь.', 'You ___ the door.', 'lock'],
+    ['Тренер требует, чтобы все соблюдали правила.', 'You ___ the rules.', 'follow'],
+    ['Строгое правило в лаборатории. Нужно надеть перчатки.', 'You ___ gloves.', 'wear'],
+    ['Начальник даёт прямое указание подписать документ.', 'You ___ this document.', 'sign'],
+    ['Обязательное условие игры. Нужно оставаться за линией.', 'You ___ behind the line.', 'stay'],
+    ['Сотрудник аэропорта требует показать паспорт.', 'You ___ your passport.', 'show'],
+    ['Охранник требует остановиться у ворот.', 'You ___ at the gate.', 'stop']
+  ].map(([ru, en, verb]) => mustDrill(ru + ' · ' + en, verb)).concat([
+    Q('Как спросить с must «Мы обязаны прийти лично?»', ['+Must we come in person?', 'В вопросе с must ставим его перед we. Дальше сразу come.'], ['Do we must come in person?', 'С must в вопросе дополнительное do не нужно.'], ['Must we to come in person?', 'После must ставим come без to.']),
+    Q('Он обязан носить шлем. · He ___ a helmet.', ['+must wear', 'Даже с he пишем must и сразу wear.'], ['must wears', 'После must оставляем wear без окончания s.'], ['must to wear', 'После must ставим wear без to.'])
+  ]),
+  'm-not': [
+    ['На выставке запрещено трогать экспонаты. · You ___ touch the exhibits.', 'forbidden'],
+    ['Если не хочется, можешь не петь. · You ___ sing.', 'optional'],
+    ['Я бы тебе не советовал идти этой дорогой. · You ___ go this way.', 'discouraged'],
+    ['Здесь запрещено парковаться. · You ___ park here.', 'forbidden'],
+    ['Можешь не брать полотенце, их выдают. · You ___ bring a towel.', 'optional'],
+    ['Совет врача. Тебе лучше не пить кофе на ночь. · You ___ drink coffee before bed.', 'discouraged'],
+    ['Билет можно распечатать по желанию. · You ___ print your ticket.', 'optional'],
+    ['В кабинете запрещено есть. · You ___ eat in this room.', 'forbidden'],
+    ['Я бы не советовал покупать этот телефон. · You ___ buy this phone.', 'discouraged'],
+    ['Встреча по желанию. Можешь не приходить. · You ___ come to the meeting.', 'optional']
+  ].map(([prompt, meaning]) => negativeObligationDrill(prompt, meaning)),
+  'm-past': [
+    ['Ты купил две конфеты. Задним числом понятно, что стоило купить три. · You ___ three candies.', 'buy', 'bought', true],
+    ['По вчерашней договорённости ты должен был купить три конфеты. · You ___ three candies.', 'buy', 'bought', false],
+    ['Ты был обязан ей помочь тогда. Она твоя дочь. · You ___ her.', 'help', 'helped', false],
+    ['Стоило записать адрес. Теперь я его не помню. · I ___ the address.', 'write down', 'written down', true],
+    ['По условиям конкурса нам нужно было отправить работу вчера. · We ___ it yesterday.', 'send', 'sent', false],
+    ['Зря я не взял ключи. Стоило взять их с собой. · I ___ my keys.', 'take', 'taken', true],
+    ['Лифт не работал. Нам пришлось подняться пешком. · We ___ up the stairs.', 'walk', 'walked', false],
+    ['Зря ты не позвонил заранее. · You ___ ahead.', 'call', 'called', true]
+  ].map(args => pastObligationDrill(...args)).concat([
+    Q('Вам вчера пришлось ждать? · ___ you have to wait yesterday?', ['+Did', 'С yesterday говорим о прошлом. Вопрос начинаем с did, дальше остаётся have to.'], ['Do', 'Do подходит, когда спрашиваем про настоящее. Здесь речь о вчерашнем дне.'], ['Must', 'Must не добавляем к have to. Для вопроса о вчерашнем дне ставим did.']),
+    Q('Вчера мне не нужно было работать. · I ___ work yesterday.', ['+didn’t have to', 'Вчера такой необходимости не было. После didn’t остаётся have to.'], ['mustn’t', 'Mustn’t означает «нельзя». Здесь речь об отсутствии необходимости вчера.'], ['didn’t had to', 'Didn’t уже показывает прошлое. Дальше используем have to.'])
+  ])
+};
+
+const QUIZ_M = [
+  adviceDrill('Дружеский совет. Тебе стоит попробовать суп. · You ___ the soup.', 'try'),
+  negativeObligationDrill('Брать ноутбук необязательно. · You ___ bring a laptop.', 'optional'),
+  pastObligationDrill('Стоило уйти раньше, теперь опаздываем. · We ___ earlier.', 'leave', 'left', true),
+  needDrill('По графику Ник должен начинать в семь. · Nick ___ start at seven.', true),
+  mustDrill('Прямое требование. Ты обязан выключить телефон. · You ___ your phone off.', 'turn'),
+  negativeObligationDrill('В бассейне запрещено бегать. · You ___ run by the pool.', 'forbidden'),
+  Q('Им нужно платить заранее? · ___ they have to pay in advance?', ['+Do', 'С they вопрос с have to начинается с do.'], ['Does', 'Does используется с he, she и it. Здесь they, поэтому do.'], ['Are', 'Здесь вопрос с have to. Начинаем его с do.']),
+  pastObligationDrill('Вчера мы были обязаны предъявить билеты на входе. · We ___ our tickets at the entrance yesterday.', 'show', 'shown', false),
+  negativeObligationDrill('Я бы не советовал тебе отвечать сгоряча. · You ___ reply while you’re angry.', 'discouraged'),
+  Q('Как спросить совета «Что мне сказать?» · What ___ I say?', ['+should', 'Спрашиваем совета. После what ставим should, затем I и say.'], ['should to', 'После should в вопросе здесь сразу идут I и say. To не нужно.'], ['do should', 'Для вопроса с should дополнительное do не нужно.'])
+];
+</script>
+<script>
+function modalDrill(prompt, answer, why, wrong, wrongWhy, other, otherWhy) {
+  return Q(prompt, ['+' + answer, why], [wrong, wrongWhy], [other, otherWhy]);
+}
+
+function canNegative(prompt) {
+  return modalDrill(prompt, 'can’t', 'Добавляем not к can. Короткая форма — can’t.',
+    'don’t can', 'Can уже может сделать отрицание само. Слово don’t здесь не нужно.',
+    'can’t to', 'После can’t сразу называем действие, без to.');
+}
+
+function modalQuestion(prompt, form) {
+  return modalDrill(prompt, form, 'Для вопроса выносим ' + form.toLowerCase() + ' вперёд.',
+    'Do ' + form.toLowerCase(), 'Вопрос уже начинается с ' + form.toLowerCase() + '. Слово do не нужно.',
+    form + ' to', 'Ставь ' + form.toLowerCase() + ' перед тем, о ком спрашиваешь. To здесь не нужно.');
+}
+
+function permissionDrill(prompt, form, action) {
+  return modalDrill(prompt, form + ' I', 'Ты сам хочешь ' + action + '. После ' + form.toLowerCase() + ' ставим I.',
+    form + ' you', 'С you вопрос обращён к другому человеку. Здесь ты спрашиваешь про себя.',
+    'Do I ' + form.toLowerCase(), form + ' уже начинает вопрос. Дополнительное do не нужно.');
+}
+
+function requestDrill(prompt, form, action) {
+  return modalDrill(prompt, form + ' you', 'Ты просишь собеседника ' + action + '. После ' + form.toLowerCase() + ' ставим you.',
+    form + ' I', 'С I вопрос был бы о тебе. Здесь ты просишь другого человека.',
+    form + ' you to', 'После you сразу называем действие, без to.');
+}
+
+function chanceDrill(prompt, form) {
+  return modalDrill(prompt, form, 'Речь о том, что, возможно, произойдёт. Здесь подходит ' + form + '.',
+    'can', 'Can обычно передаёт «может», когда есть возможность или умение. Здесь гадаем, что случится.',
+    form + ' to', 'Само слово ' + form + ' подходит. После него действие идёт сразу, без to.');
+}
+
+function chanceNegative(prompt, form) {
+  return modalDrill(prompt, form + ' not', 'Чтобы сказать «возможно, не», добавляем not после ' + form + '.',
+    'doesn’t ' + form, 'Здесь ' + form + ' само справляется с отрицанием. Ставим not после него.',
+    form, 'Без not получится обратный смысл. По условию действие, возможно, не случится.');
+}
+
+const LDRILLS = {
+  'l-can': [
+    canNegative('Я не могу открыть файл. · I ___ open the file.'),
+    canNegative('Она не может разобрать мой почерк. · She ___ read my handwriting.'),
+    canNegative('Мы не можем найти ключи. · We ___ find the keys.'),
+    modalQuestion('Ты умеешь водить? · ___ you drive?', 'Can'),
+    modalQuestion('Она может поднять эту коробку? · ___ she lift this box?', 'Can'),
+    modalQuestion('Ты умел кататься на коньках в шесть лет? · ___ you skate when you were six?', 'Could'),
+    modalDrill('Он умеет играть на пианино. · He ___ play the piano.', 'can', 'С he пишем то же can. Дальше сразу play.',
+      'cans', 'Даже с he слово can остаётся как есть.', 'can to', 'После can сразу ставим play, без to.'),
+    modalDrill('В пять лет я уже умел читать. · I ___ read when I was five.', 'could', 'Говорим об умении в прошлом, поэтому could.',
+      'can', 'Can передаёт, что умеешь сейчас. Здесь речь о том, что умел в пять лет.', 'could to', 'Could подходит, но после него сразу идёт read.'),
+    modalDrill('В детстве она ещё не умела плавать. · She ___ swim as a child.', 'couldn’t', 'Для «не умела тогда» ставим couldn’t.',
+      'didn’t could', 'Could само справляется с отрицанием. Добавляем к нему not, без didn’t.', 'can’t', 'Can’t звучит как «не может сейчас». Здесь речь о детстве.'),
+    modalDrill('Я не могу ждать. Используй полную форму. · I ___ wait.', 'cannot', 'Полную форму cannot в этой фразе пишем слитно.',
+      'can not', 'В обычной фразе «я не могу» полную форму пишем слитно.', 'do not can', 'Для отрицания добавляем not к can. Do здесь не нужно.')
+  ],
+  'l-request': [
+    permissionDrill('Можно я здесь сяду? · ___ sit here?', 'Can', 'сесть'),
+    requestDrill('Не мог бы ты придержать дверь? · ___ hold the door?', 'Could', 'придержать дверь'),
+    permissionDrill('Можно мне взглянуть на меню? · ___ see the menu?', 'Could', 'посмотреть меню'),
+    requestDrill('Не могли бы вы подписать здесь? · ___ sign here, please?', 'Would', 'подписать'),
+    permissionDrill('Можно мне войти? · ___ come in?', 'May', 'войти'),
+    requestDrill('Можешь принести два стакана? · ___ bring two glasses?', 'Can', 'принести стаканы'),
+    permissionDrill('Можно я одолжу твой карандаш? · ___ borrow your pencil?', 'Can', 'одолжить карандаш'),
+    requestDrill('Не мог бы ты повторить свой номер? · ___ repeat your number?', 'Could', 'повторить номер'),
+    permissionDrill('Можно я оставлю пальто здесь? · ___ leave my coat here?', 'May', 'оставить пальто'),
+    requestDrill('Не могли бы вы говорить помедленнее? · ___ speak more slowly, please?', 'Would', 'говорить помедленнее')
+  ],
+  'l-chance': [
+    chanceDrill('Возможно, магазин закроется пораньше. · The shop ___ close early.', 'might'),
+    chanceDrill('Возможно, рейс задержится. · The flight ___ be delayed.', 'may'),
+    chanceDrill('Возможно, мы заедем к ним в воскресенье. · We ___ visit them on Sunday.', 'might'),
+    chanceDrill('Возможно, лёд растает к обеду. · The ice ___ melt by lunchtime.', 'may'),
+    chanceNegative('Возможно, она не получит письмо сегодня. · She ___ get the letter today.', 'might'),
+    chanceNegative('Возможно, поезд не остановится в этом городе. · The train ___ stop in this town.', 'may'),
+    chanceNegative('Возможно, он не помнит мой адрес. · He ___ remember my address.', 'might'),
+    modalDrill('В субботу у меня свободно, так что я могу помочь. · I ___ help on Saturday.',
+      'can', 'Ты знаешь, что в субботу у тебя получается. Can передаёт возможность.',
+      'might', 'Might прозвучит как «возможно, помогу». Здесь ты говоришь, что можешь.',
+      'can to', 'После can сразу ставим help, без to.'),
+    modalDrill('Как думаешь, Лена может опоздать? · ___ you think Lena might be late?',
+      'Do', 'Do относится к you think. Часть Lena might be late внутри вопроса остаётся целой.',
+      'Might', 'В этой фразе спрашиваем «ты думаешь?». Might уже стоит рядом с Lena.',
+      'Can', 'Can you think означало бы «Ты можешь думать?». Здесь подойдёт Do you think — «Как думаешь?».'),
+    chanceDrill('Возможно, мы увидим лису у леса. · We ___ see a fox near the woods.', 'might')
+  ]
+};
+
+const QUIZ_L = [
+  canNegative('Я не могу найти очки. · I ___ find my glasses.'),
+  permissionDrill('Можно мне сфотографировать зал? · ___ take a photo of the hall?', 'May', 'сфотографировать зал'),
+  chanceNegative('Возможно, они не услышат звонок. · They ___ hear the bell.', 'might'),
+  modalQuestion('Твой брат умеет печь хлеб? · ___ your brother bake bread?', 'Can'),
+  requestDrill('Не мог бы ты включить свет? · ___ turn on the light?', 'Could', 'включить свет'),
+  chanceDrill('Возможно, Дэн принесёт торт. · Dan ___ bring a cake.', 'may'),
+  modalDrill('В восемь лет мы уже умели ездить на велосипеде. · We ___ ride a bike when we were eight.',
+    'could', 'Вы описываете, что умели раньше. Для этого используем could.',
+    'can', 'Can передаёт умение сейчас. Здесь речь о том, что умели в восемь лет.',
+    'could to', 'После could сразу ставим ride, без to.'),
+  permissionDrill('Можно я открою коробку? · ___ open the box?', 'Can', 'открыть коробку'),
+  requestDrill('Не могли бы вы отправить мне копию? · ___ send me a copy, please?', 'Would', 'отправить копию'),
+  chanceDrill('Возможно, мы встретимся уже завтра. · We ___ meet as early as tomorrow.', 'might')
+];
+</script>
+<script>
+function readClockDrill(hour, minute, onDial = false) {
+  const [amount, direction, target] = clockParts(hour, minute);
+  const current = CLOCK_NUMBERS[hour];
+  const next = CLOCK_NUMBERS[hour % 12 + 1];
+  const when = clockTime(hour, minute);
+  const question = onDial
+    ? 'Назови время по стрелкам.' + clockFace(hour, minute, false, 'Циферблат показывает ' + when)
+    : 'На часах ' + when + '. Как сказать это время?';
+  if (minute === 0) {
+    return Q(question, ['+' + current + ' o’clock', 'На часах :00, поэтому называем час и добавляем o’clock.'],
+      ['half past ' + current, 'Half past означало бы, что после этого часа уже прошло полчаса.'],
+      [next + ' o’clock', 'O’clock выбрано верно. Короткая стрелка показывает ' + hour + ', его и называем.']);
+  }
+  if (minute === 30) {
+    return Q(question, ['+half past ' + current, 'Прошло полчаса. После half past называем текущий час — ' + current + '.'],
+      ['half past ' + next, '«Половина следующего» подсказывает, как сказать по-русски. В английском с half past берём текущий час.'],
+      ['half to ' + next, 'На отметке :30 используем half past и называем текущий час.']);
+  }
+  const before = direction === 'to';
+  const counted = before ? 60 - minute : minute;
+  const why = before
+    ? 'До следующего часа осталось ' + counted + ' мин. Ставим to и называем ' + target + '.'
+    : 'После текущего часа прошло ' + counted + ' мин. Ставим past, затем называем ' + target + '.';
+  return Q(question, ['+' + [amount, direction, target].join(' '), why + (counted === 15 ? ' Пятнадцать минут — a quarter.' : '')],
+    [amount + ' ' + direction + ' ' + (before ? current : next), before
+      ? 'С to называем час, до которого осталось ' + counted + ' мин. Здесь это ' + next + '.'
+      : 'С past называем час, который уже начался. Здесь это ' + current + '.'],
+    [amount + ' ' + (before ? 'past' : 'to') + ' ' + (before ? current : next), before
+      ? 'Стрелка уже прошла отметку :30. Считаем, сколько осталось, и ставим to.'
+      : 'Стрелка ещё в первой половине. Считаем, сколько прошло, и ставим past.']);
+}
+
+const CLOCK_DRILLS = {
+  'h-past': [[12, 20], [1, 5], [9, 25], [4, 10], [6, 20], [3, 7], [8, 1], [2, 25], [10, 17], [11, 5]]
+    .map(([hour, minute], i) => readClockDrill(hour, minute, i === 1 || i === 7)),
+  'h-to': [[12, 40], [11, 55], [6, 50], [4, 35], [1, 40], [10, 58], [3, 59], [9, 55], [7, 37], [8, 50]]
+    .map(([hour, minute], i) => readClockDrill(hour, minute, i === 2 || i === 9)),
+  'h-quarter': [[12, 15], [12, 30], [12, 45], [6, 45], [2, 30], [11, 45], [9, 15], [5, 30], [3, 15], [10, 30]]
+    .map(([hour, minute], i) => readClockDrill(hour, minute, i === 3 || i === 6)),
+  'h-exact': [
+    readClockDrill(4, 0), readClockDrill(10, 0, true), readClockDrill(1, 0, true), readClockDrill(12, 0),
+    Q('На табло 9:06. Прочитай цифры по порядку.', ['+nine oh six', 'Сначала называем час. Ноль в :06 читаем как oh.'],
+      ['nine sixty', 'На табло 06 минут. Слово sixty означает 60.'], ['six oh nine', 'Здесь 9 часов и 6 минут. Сначала говорим nine.']),
+    Q('На табло 3:42. Прочитай цифры по порядку.', ['+three forty-two', 'Сначала называем 3 часа, затем 42 минуты.'],
+      ['three twenty-four', 'Twenty-four — 24. На табло 42, значит forty-two.'], ['four forty-two', 'На табло 3 часа. При чтении цифр час не меняем.']),
+    Q('Как сказать «без четверти девять» в предложении «Мы встречаемся в 8:45»? · We meet ___ a quarter to nine.',
+      ['+at', 'Когда отвечаем на вопрос «во сколько?», перед временем ставим at.'],
+      ['in', 'В этой фразе называем конкретное время встречи. Перед ним ставим at.'],
+      ['on', 'On подходит, например, перед днём недели. Перед временем на часах говорим at.']),
+    Q('Как сказать «семь утра»?', ['+seven a.m.', 'A.m. подходит для семи утра.'],
+      ['seven p.m.', 'Seven p.m. — семь вечера.'], ['a quarter past seven', 'Это 7:15. Из фразы ещё не ясно, утро или вечер.']),
+    Q('Что скажешь, если сейчас ровно полдень?', ['+It’s noon.', 'Noon значит «полдень».'],
+      ['It’s midnight.', 'Midnight — это полночь.'], ['It’s half past twelve.', 'Это 12:30, уже полчаса после двенадцати.']),
+    Q('Что спросить, чтобы узнать, который час?', ['+What time is it?', 'Так спрашивают, сколько времени сейчас.'],
+      ['What time does it start?', 'Это вопрос «Во сколько это начинается?».'], ['What day is it?', 'Так спрашивают, какой сегодня день.'])
+  ]
+};
+
+const QUIZ_CLOCK = [
+  readClockDrill(2, 10, true), readClockDrill(5, 45), readClockDrill(7, 30, true), readClockDrill(12, 55),
+  readClockDrill(6, 0, true), readClockDrill(7, 15), readClockDrill(4, 52), readClockDrill(3, 25),
+  Q('На экране 10:03. Прочитай цифры по порядку.', ['+ten oh three', 'Говорим час, затем читаем ноль как oh и называем три минуты.'],
+    ['three oh ten', 'Так часы и минуты поменялись местами. На табло десять часов.'],
+    ['ten thirty', 'Ten thirty — это 10:30. На табло 10:03.']),
+  Q('Кафе закрывается в шесть вечера. · The cafe closes at ___.', ['+six p.m.', 'P.m. показывает, что речь о шести вечера.'],
+    ['six a.m.', 'Six a.m. — это шесть утра.'], ['half past six', 'Это 6:30, а кафе закрывается ровно в шесть.'])
 ];
 </script>
 <script>
@@ -8006,6 +9043,126 @@ aBuild.addEventListener('click', event => {
 });
 renderArticleBuild(aBuild.querySelector('[aria-pressed="true"]'));
 
+renderRoadmap('m-road', MLEVELS, M, {
+  pid: 'm', drills: MDRILLS, kindLabel: item => item.short, figure: () => ''
+});
+renderDuels('mDuels', MDUELS);
+makeQuiz(document.getElementById('mQuiz'), QUIZ_M, { title: 'Вопрос' });
+
+const obligationScenes = [
+  ['Тебе стоит купить три конфеты. Тогда и тебе хватит.', 'should', 'buy', 'three candies', 'Подсказываю, как будет лучше. После should сразу ставлю buy.'],
+  ['Ты должен купить три конфеты. Мы уже договорились.', 'have to', 'buy', 'three candies', 'Напоминаю об уговоре. С you говорю have to.'],
+  ['Ты обязан ей помочь. Она твоя дочь.', 'must', 'help', 'her', 'Прямо говорю, что помочь обязательно. После must сразу ставлю help.'],
+  ['Тебе стоило купить три конфеты. А ты купил две.', 'should have', 'bought', 'three candies', 'Смотрю назад и говорю, как стоило поступить. К should have добавляю bought, третью форму глагола buy.'],
+  ['Тогда ты был обязан ей помочь. Она твоя дочь.', 'had to', 'help', 'her', 'Обязанность была тогда. Говорю had to help.']
+];
+const mBuild = document.getElementById('mBuild');
+const mBuildTrain = document.getElementById('mBuildTrain');
+const mBuildRu = document.getElementById('mBuildRu');
+const mBuildNote = document.getElementById('mBuildNote');
+
+function renderObligationBuild(button) {
+  const [ru, form, verb, rest, note] = obligationScenes[button.dataset.v];
+  mBuild.querySelector('[aria-pressed="true"]').setAttribute('aria-pressed', 'false');
+  button.setAttribute('aria-pressed', 'true');
+  mBuildRu.textContent = ru;
+  mBuildNote.textContent = note;
+  flipTrain(mBuildTrain, trainHTML([['subj', 'You'], ['aux', form], ['verb', verb], ['rest', rest], ['end', '.']]));
+}
+mBuild.addEventListener('click', event => {
+  const button = event.target.closest('button[data-v]');
+  if (button) renderObligationBuild(button);
+});
+renderObligationBuild(mBuild.querySelector('[aria-pressed="true"]'));
+
+renderRoadmap('l-road', LLEVELS, L, {
+  pid: 'l', drills: LDRILLS, kindLabel: item => item.short, figure: () => ''
+});
+renderDuels('lDuels', LDUELS);
+makeQuiz(document.getElementById('lQuiz'), QUIZ_L, { title: 'Вопрос' });
+
+const modalScenes = [
+  ['Ты умеешь плавать.', [['subj', 'You'], ['aux', 'can'], ['verb', 'swim'], ['end', '.']],
+    'После can сразу называю действие, без to.'],
+  ['Ты не умеешь плавать.', [['subj', 'You'], ['aux', 'can’t'], ['verb', 'swim'], ['end', '.']],
+    'Добавляю к can слово not. Короткая форма — can’t, полная — cannot.'],
+  ['Ты умеешь плавать?', [['aux', 'Can'], ['subj', 'you'], ['verb', 'swim'], ['end', '?']],
+    'Переставляю can перед you. Слово do здесь лишнее.']
+];
+const lBuild = document.getElementById('lBuild');
+const lBuildRu = document.getElementById('lBuildRu');
+const lBuildNote = document.getElementById('lBuildNote');
+const lBuildTrain = document.getElementById('lBuildTrain');
+
+function renderModalBuild(button) {
+  const [ru, row, note] = modalScenes[button.dataset.v];
+  lBuild.querySelector('[aria-pressed="true"]').setAttribute('aria-pressed', 'false');
+  button.setAttribute('aria-pressed', 'true');
+  lBuildRu.textContent = ru;
+  lBuildNote.textContent = note;
+  flipTrain(lBuildTrain, trainHTML(row));
+}
+lBuild.addEventListener('click', event => {
+  const button = event.target.closest('button[data-v]');
+  if (button) renderModalBuild(button);
+});
+renderModalBuild(lBuild.querySelector('[aria-pressed="true"]'));
+
+renderRoadmap('h-road', CLOCK_LEVELS, CLOCK_STATIONS, {
+  pid: 'h', drills: CLOCK_DRILLS, kindLabel: item => item.short,
+  figure: item => {
+    const [hour, minute] = item.clock;
+    return `<figure class="clock-example">${clockFace(hour, minute, true, 'Циферблат показывает ' + clockTime(hour, minute))}</figure>`;
+  }
+});
+renderDuels('hDuels', CLOCK_DUELS);
+makeQuiz(document.getElementById('hQuiz'), QUIZ_CLOCK, { title: 'Вопрос' });
+
+const hPresets = [...document.querySelectorAll('#hPresets button')];
+const hHour = document.getElementById('hHour');
+const hMinute = document.getElementById('hMinute');
+const hMinuteValue = document.getElementById('hMinuteValue');
+const hDial = document.getElementById('hDial');
+const hTime = document.getElementById('hTime');
+const hAnswer = document.getElementById('hAnswer');
+const hNote = document.getElementById('hNote');
+
+function renderClock() {
+  const hour = Number(hHour.value);
+  const minute = hMinute.valueAsNumber;
+  const next = hour % 12 + 1;
+  const time = clockTime(hour, minute);
+  const [amount, direction, target] = clockParts(hour, minute);
+  hDial.innerHTML = clockFace(hour, minute, true);
+  hTime.textContent = time;
+  hMinuteValue.textContent = minute;
+  hAnswer.dataset.direction = direction;
+  hAnswer.innerHTML = `It’s ${amount} <b>${direction}</b>${target ? ' ' + target : ''}.`;
+  if (minute === 0) {
+    hNote.textContent = 'На часах ровно ' + hour + ':00. Называем час и добавляем o’clock.';
+  } else if (minute === 30) {
+    hNote.textContent = 'После ' + hour + ':00 прошло полчаса. С half past называем текущий час.';
+  } else if (minute > 30) {
+    hNote.textContent = 'До ' + next + ':00 осталось ' + (60 - minute) + ' мин. С to называем следующий час.';
+  } else {
+    hNote.textContent = 'После ' + hour + ':00 прошло ' + minute + ' мин. С past называем текущий час.';
+  }
+  for (const preset of hPresets) {
+    const presetMinute = Number(preset.dataset.minute);
+    preset.textContent = clockTime(hour, presetMinute);
+    preset.setAttribute('aria-pressed', String(presetMinute === minute));
+  }
+}
+hHour.addEventListener('change', renderClock);
+hMinute.addEventListener('input', renderClock);
+for (const button of hPresets) {
+  button.addEventListener('click', () => {
+    hMinute.value = button.dataset.minute;
+    renderClock();
+  });
+}
+renderClock();
+
 /* ═══════════════════════════════════════════════════════════
    НАВИГАЦИЯ: вкладки, оглавление, меню, точки, прогресс
    ═══════════════════════════════════════════════════════════ */
@@ -8081,6 +9238,39 @@ const TABDEF = {
       { id: 'a-duels', n: 'Сравнение форм', s: 'Три пары', e: 'Разбор' },
       { id: 'a-quiz', n: 'Общая проверка', s: '12 предложений', e: 'Тренажёр' },
       { id: 'a-sheet', n: 'Шпаргалка', s: 'Как выбрать за несколько секунд', e: 'Итог' }
+    ]
+  },
+  obligation: {
+    panel: 'tab-obligation', toc: 'mToc', items: M, total: M.length,
+    nav: [
+      { id: 'm-system', n: 'Конструктор', s: 'Пять ситуаций', e: 'Старт' },
+      { id: 'm-lvl1', n: 'Совет, уговор и обязанность', s: 'Should, have to и must', e: 'Уровень 1' },
+      { id: 'm-lvl2', n: 'Отрицания и прошлое', s: 'От «нельзя» до «надо было»', e: 'Уровень 2' },
+      { id: 'm-duels', n: 'Сравнение форм', s: 'Три пары', e: 'Разбор' },
+      { id: 'm-quiz', n: 'Общая проверка', s: '10 предложений', e: 'Тренажёр' },
+      { id: 'm-sheet', n: 'Шпаргалка', s: 'Все формы одной таблицей', e: 'Итог' }
+    ]
+  },
+  modals: {
+    panel: 'tab-modals', toc: 'lToc', items: L, total: L.length,
+    nav: [
+      { id: 'l-system', n: 'Конструктор', s: 'Фраза, отрицание и вопрос', e: 'Старт' },
+      { id: 'l-lvl1', n: 'Могу или умею', s: 'Can и could', e: 'Уровень 1' },
+      { id: 'l-lvl2', n: 'Просьбы и догадки', s: '«Можно?» и «может быть»', e: 'Уровень 2' },
+      { id: 'l-duels', n: 'Сравнение фраз', s: 'Смотрим на смысл', e: 'Разбор' },
+      { id: 'l-quiz', n: 'Общая проверка', s: '10 предложений', e: 'Тренажёр' },
+      { id: 'l-sheet', n: 'Шпаргалка', s: 'Все формы одной таблицей', e: 'Итог' }
+    ]
+  },
+  clock: {
+    panel: 'tab-clock', toc: 'hToc', items: CLOCK_STATIONS, total: CLOCK_STATIONS.length,
+    nav: [
+      { id: 'h-system', n: 'Интерактивные часы', s: 'Передвинь стрелки', e: 'Старт' },
+      { id: 'h-lvl1', n: 'Past и to', s: 'Сколько прошло и сколько осталось', e: 'Уровень 1' },
+      { id: 'h-lvl2', n: 'Четверть, половина и ровный час', s: 'Quarter, half и o’clock', e: 'Уровень 2' },
+      { id: 'h-duels', n: 'Сравнение фраз', s: '12:20 или 12:40', e: 'Разбор' },
+      { id: 'h-quiz', n: 'Общая проверка', s: '10 заданий', e: 'Тренажёр' },
+      { id: 'h-sheet', n: 'Шпаргалка', s: 'Шесть отметок на часах', e: 'Итог' }
     ]
   },
   passive: {
@@ -8224,7 +9414,7 @@ let done = new Set();
 try { done = new Set(JSON.parse(localStorage.getItem(KEY) || '[]')); } catch (e) { done = new Set(); }
 
 function paint() {
-  const all = S.concat(T, C, P, D, V, A);
+  const all = S.concat(T, C, P, D, V, A, M, L, CLOCK_STATIONS);
   all.forEach(x => {
     const on = done.has(x.id);
     const st = document.getElementById(x.id);
@@ -8296,6 +9486,9 @@ function tabForHash(h) {
   if (D.some(x => x.id === id) || id.indexOf('d-') === 0) return 'deg';
   if (id.indexOf('v-') === 0) return 'passive';
   if (id.startsWith('a-')) return 'articles';
+  if (id.startsWith('m-')) return 'obligation';
+  if (id.startsWith('l-')) return 'modals';
+  if (id.startsWith('h-')) return 'clock';
   if (T.some(t => t.id === id) || id.indexOf('t-') === 0) return 'tenses';
   return null;
 }

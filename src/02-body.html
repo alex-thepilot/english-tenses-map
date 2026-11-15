@@ -12,6 +12,9 @@
       <button role="tab" data-tab="deg" aria-selected="false" aria-controls="tab-deg">Степени</button>
       <button role="tab" data-tab="passive" aria-selected="false" aria-controls="tab-passive">Пассив</button>
       <button role="tab" id="articlesTab" data-tab="articles" aria-selected="false" aria-controls="tab-articles">Артикли</button>
+      <button role="tab" id="obligationTab" data-tab="obligation" aria-selected="false" aria-controls="tab-obligation">Долженствование</button>
+      <button role="tab" id="modalsTab" data-tab="modals" aria-selected="false" aria-controls="tab-modals">Модальные глаголы</button>
+      <button role="tab" id="clockTab" data-tab="clock" aria-selected="false" aria-controls="tab-clock">Время по часам</button>
     </div>
 
     <div class="dots__wrap">
@@ -53,7 +56,7 @@
         <a class="home-primary" href="#home-course">Посмотреть программу <span aria-hidden="true">↘</span></a>
         <a class="home-secondary" href="#s-hero">Открыть первый урок <span aria-hidden="true">→</span></a>
       </div>
-      <p class="home-facts">7 разделов <span>·</span> 660 заданий с разбором в методичке</p>
+      <p class="home-facts">10 разделов <span>·</span> 810 заданий с разбором в методичке</p>
     </div>
     <div class="home-example">
       <div class="home-example__label"><span>ПОДСКАЗКА ИЗ УРОКА</span><span>АРТИКЛИ</span></div>
@@ -95,6 +98,9 @@
       <a class="home-card" href="#d-hero"><span class="home-card__num">05</span><span class="home-card__name">Степени сравнения</span><span class="home-card__text">Как сказать «выше», «красивее» и «самый красивый».</span><span class="home-card__arrow" aria-hidden="true">↗</span></a>
       <a class="home-card" href="#v-hero"><span class="home-card__num">06</span><span class="home-card__name">Пассив</span><span class="home-card__text">Как сказать «меня пригласили», «письмо отправили» или «результаты объявят».</span><span class="home-card__arrow" aria-hidden="true">↗</span></a>
       <a class="home-card" href="#a-hero"><span class="home-card__num">07</span><span class="home-card__name">Артикли</span><span class="home-card__text">Как выбрать между <i>a</i>, <i>an</i>, <i>the</i> и фразой без артикля.</span><span class="home-card__arrow" aria-hidden="true">↗</span></a>
+      <a class="home-card" href="#m-hero"><span class="home-card__num">08</span><span class="home-card__name">Долженствование</span><span class="home-card__text">Как сказать «стоит», «нужно» и «обязательно».</span><span class="home-card__arrow" aria-hidden="true">↗</span></a>
+      <a class="home-card" href="#l-hero"><span class="home-card__num">09</span><span class="home-card__name">Модальные глаголы</span><span class="home-card__text">Как сказать «могу», спросить «можно?» и добавить «может быть».</span><span class="home-card__arrow" aria-hidden="true">↗</span></a>
+      <a class="home-card" href="#h-hero"><span class="home-card__num">10</span><span class="home-card__name">Время по часам</span><span class="home-card__text">Как сказать «половина первого», «без двадцати час» и назвать время по стрелкам.</span><span class="home-card__arrow" aria-hidden="true">↗</span></a>
     </div>
   </section>
   </div>
@@ -1426,6 +1432,326 @@
           <tr><td>Один предмет из многих</td><td><code>a / an</code></td><td>I need a cup. I need an empty cup.</td></tr>
           <tr><td>Вещи в целом или без уточнения</td><td>Без артикля</td><td>I collect cups. I need water.</td></tr>
           <tr><td>Уже сказано «моя» или «эта»</td><td><code>my / this</code></td><td>This cup is mine. Where is my cup?</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+</div>
+
+<div class="tabpanel" id="tab-obligation" role="tabpanel" aria-labelledby="obligationTab" hidden>
+<header class="hero" id="m-hero">
+  <div class="wrap">
+    <div class="eyebrow">Долженствование · should, have to, must</div>
+    <h1>Стоит, нужно или <span class="tri">обязательно</span>?</h1>
+    <p class="hero__sub">«Возьми три конфеты, тогда и тебе хватит» — просто совет. «Мы договорились на три конфеты» — уже есть уговор. «Ты обязан помочь ей, она твоя дочь» — так звучит прямое требование. Посмотри, как эти три ситуации звучат по-английски.</p>
+    <div class="hero__meta">
+      <span class="pill">5 станций</span>
+      <span class="pill">конструктор</span>
+      <span class="pill">60 заданий с разбором</span>
+    </div>
+  </div>
+</header>
+
+<section class="sect toc" id="m-toc">
+  <div class="wrap">
+    <div class="sect__head" style="margin-bottom:0">
+      <div class="eyebrow">Оглавление</div>
+      <h2>С чего начать</h2>
+      <p>Сравни ситуации в конструкторе или открой нужную станцию.</p>
+    </div>
+    <div class="toc__g" id="mToc"></div>
+  </div>
+</section>
+
+<section class="sect" id="m-system">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Конструктор</div>
+      <h2>Что ты хочешь сказать?</h2>
+      <p>Выбери ситуацию и посмотри, как собрать фразу.</p>
+    </div>
+    <div class="bu">
+      <div class="bu__ctl">
+        <div class="bu__grp">
+          <div class="eyebrow">Ситуация</div>
+          <div class="seg" id="mBuild" role="group" aria-label="Ситуация">
+            <button type="button" data-v="0" aria-pressed="true">Сам советую</button>
+            <button type="button" data-v="1" aria-pressed="false">Уже договорились</button>
+            <button type="button" data-v="2" aria-pressed="false">Настаиваю</button>
+            <button type="button" data-v="3" aria-pressed="false">Стоило бы тогда</button>
+            <button type="button" data-v="4" aria-pressed="false">Был обязан тогда</button>
+          </div>
+        </div>
+      </div>
+      <div class="bu__out">
+        <div class="bu__ru" id="mBuildRu"></div>
+        <div class="train bu__train" id="mBuildTrain" aria-live="polite"></div>
+        <p class="bu__note" id="mBuildNote"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main class="wrap"><div class="roadmap" id="m-road"></div></main>
+
+<section class="sect" id="m-duels">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Разбор полётов</div>
+      <h2>Три пары, которые легко спутать</h2>
+    </div>
+    <div class="duels" id="mDuels"></div>
+  </div>
+</section>
+
+<section class="sect" id="m-quiz">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Общая проверка</div>
+      <h2>Десять предложений вперемешку</h2>
+      <p>Выбери вариант, который передаёт смысл русской фразы.</p>
+    </div>
+    <div class="drill z-present" id="mQuiz"></div>
+  </div>
+</section>
+
+<section class="sect" id="m-sheet">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">На один экран</div>
+      <h2>Шпаргалка</h2>
+    </div>
+    <div class="sheet">
+      <table>
+        <thead><tr><th>Что имею в виду</th><th>Что ставлю</th><th>Как это звучит</th></tr></thead>
+        <tbody>
+          <tr><td>Я советую</td><td><code>should</code></td><td>You should take a jacket.</td></tr>
+          <tr><td>Так нужно по уговору или по обстоятельствам</td><td><code>have to / has to</code></td><td>We have to leave at five.</td></tr>
+          <tr><td>Я прямо говорю, что это обязательно</td><td><code>must</code></td><td>You must help her.</td></tr>
+          <tr><td>Нельзя</td><td><code>mustn’t</code></td><td>You mustn’t park here.</td></tr>
+          <tr><td>Можно и без этого</td><td><code>don’t / doesn’t have to</code></td><td>You don’t have to come.</td></tr>
+          <tr><td>Я советую этого избегать</td><td><code>shouldn’t</code></td><td>You shouldn’t stay up late.</td></tr>
+          <tr><td>Тогда стоило бы</td><td><code>should have</code> и третья форма глагола</td><td>You should have bought three candies.</td></tr>
+          <tr><td>Тогда нужно было</td><td><code>had to</code></td><td>You had to buy three candies.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+</div>
+
+<div class="tabpanel" id="tab-modals" role="tabpanel" aria-labelledby="modalsTab" hidden>
+<header class="hero" id="l-hero">
+  <div class="wrap">
+    <div class="eyebrow">Модальные глаголы</div>
+    <h1>Могу, можно или <span class="tri">может быть</span>?</h1>
+    <p class="hero__sub">В предложениях «Я приду», «Я могу прийти» и «Может быть, я приду» действие одно и то же. Разница в том, что ты хочешь сказать об этом действии. В английском эту работу делают слова вроде <b>can</b> и <b>might</b>. А вопрос и отрицание они собирают сами.</p>
+    <div class="hero__meta">
+      <span class="pill">3 станции</span>
+      <span class="pill">конструктор</span>
+      <span class="pill">40 заданий с разбором</span>
+    </div>
+  </div>
+</header>
+
+<section class="sect toc" id="l-toc">
+  <div class="wrap">
+    <div class="sect__head" style="margin-bottom:0">
+      <div class="eyebrow">Оглавление</div>
+      <h2>С чего начать</h2>
+      <p>Попробуй конструктор или открой нужную станцию.</p>
+    </div>
+    <div class="toc__g" id="lToc"></div>
+  </div>
+</section>
+
+<section class="sect" id="l-system">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Конструктор</div>
+      <h2>Что происходит с can?</h2>
+      <p>Выбери вид фразы и посмотри, где окажется <b>can</b>.</p>
+    </div>
+    <div class="bu">
+      <div class="bu__ctl">
+        <div class="bu__grp">
+          <div class="seg" id="lBuild" role="group" aria-label="Вид фразы">
+            <button type="button" data-v="0" aria-pressed="true">Можешь</button>
+            <button type="button" data-v="1" aria-pressed="false">Не можешь</button>
+            <button type="button" data-v="2" aria-pressed="false">Можешь?</button>
+          </div>
+        </div>
+      </div>
+      <div class="bu__out">
+        <div class="bu__ru" id="lBuildRu"></div>
+        <div class="train bu__train" id="lBuildTrain" aria-live="polite"></div>
+        <p class="bu__note" id="lBuildNote"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main class="wrap"><div class="roadmap" id="l-road"></div></main>
+
+<section class="sect" id="l-duels">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Разбор полётов</div>
+      <h2>Как меняется смысл</h2>
+    </div>
+    <div class="duels" id="lDuels"></div>
+  </div>
+</section>
+
+<section class="sect" id="l-quiz">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Общая проверка</div>
+      <h2>Десять предложений вперемешку</h2>
+      <p>Выбери вариант, который передаёт смысл русской фразы.</p>
+    </div>
+    <div class="drill z-present" id="lQuiz"></div>
+  </div>
+</section>
+
+<section class="sect" id="l-sheet">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">На один экран</div>
+      <h2>Шпаргалка</h2>
+    </div>
+    <div class="sheet">
+      <table>
+        <thead><tr><th>Что хочу сказать</th><th>Что ставлю</th><th>Как это звучит</th></tr></thead>
+        <tbody>
+          <tr><td>Могу или умею</td><td><code>can</code></td><td>I can swim.</td></tr>
+          <tr><td>Не могу</td><td><code>can’t / cannot</code></td><td>I can’t swim.</td></tr>
+          <tr><td>Умел раньше</td><td><code>could</code></td><td>I could swim when I was five.</td></tr>
+          <tr><td>Можно мне?</td><td><code>Can / Could / May I…?</code></td><td>May I come in?</td></tr>
+          <tr><td>Не мог бы ты?</td><td><code>Could / Would you…?</code></td><td>Could you open the window?</td></tr>
+          <tr><td>Может быть</td><td><code>may / might</code></td><td>It might rain.</td></tr>
+          <tr><td>Возможно, не</td><td><code>may not / might not</code></td><td>She might not come.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+</div>
+
+<div class="tabpanel" id="tab-clock" role="tabpanel" aria-labelledby="clockTab" hidden>
+<header class="hero" id="h-hero">
+  <div class="wrap">
+    <div class="eyebrow">Время по часам · past, to, half, quarter</div>
+    <h1>Сколько минут прошло? <span class="tri">А сколько осталось?</span></h1>
+    <p class="hero__sub">Делим циферблат пополам. В 12:20 считаем минуты после двенадцати. В 12:40 уже ближе к часу, поэтому считаем минуты до него — как по-русски «без двадцати час».</p>
+    <div class="hero__meta">
+      <span class="pill">4 станции</span>
+      <span class="pill">интерактивные часы</span>
+      <span class="pill">50 заданий с разбором</span>
+    </div>
+  </div>
+</header>
+
+<section class="sect toc" id="h-toc">
+  <div class="wrap">
+    <div class="sect__head" style="margin-bottom:0">
+      <div class="eyebrow">Оглавление</div>
+      <h2>С чего начать</h2>
+      <p>Покрути стрелки или открой нужную станцию.</p>
+    </div>
+    <div class="toc__g" id="hToc"></div>
+  </div>
+</section>
+
+<section class="sect" id="h-system">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Конструктор</div>
+      <h2>Который час?</h2>
+      <p>Выбери пример или передвинь минутную стрелку. Посмотри, как меняется фраза после :30.</p>
+    </div>
+    <div class="bu">
+      <div class="bu__ctl">
+        <div class="seg" id="hPresets" role="group" aria-label="Примеры времени на часах">
+          <button type="button" data-minute="0" aria-pressed="false">12:00</button>
+          <button type="button" data-minute="15" aria-pressed="false">12:15</button>
+          <button type="button" data-minute="20" aria-pressed="true">12:20</button>
+          <button type="button" data-minute="30" aria-pressed="false">12:30</button>
+          <button type="button" data-minute="40" aria-pressed="false">12:40</button>
+          <button type="button" data-minute="45" aria-pressed="false">12:45</button>
+        </div>
+      </div>
+      <div class="bu__out clock-builder">
+        <figure class="clock-figure">
+          <div id="hDial"></div>
+          <figcaption class="clock-legend">
+            <span class="clock-legend__to"><b>to</b> · до следующего часа</span>
+            <span class="clock-legend__past"><b>past</b> · после текущего часа</span>
+          </figcaption>
+        </figure>
+        <div class="clock-readout">
+          <div class="clock-controls">
+            <label for="hHour">Час
+              <select id="hHour">
+                <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option>
+                <option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option selected>12</option>
+              </select>
+            </label>
+            <label for="hMinute">Минуты <span id="hMinuteValue" aria-hidden="true">20</span>
+              <input id="hMinute" type="range" min="0" max="59" value="20">
+            </label>
+          </div>
+          <div class="clock-result" aria-live="polite">
+            <div class="clock-digits" id="hTime"></div>
+            <div class="clock-answer" id="hAnswer" lang="en"></div>
+            <p class="bu__note" id="hNote"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main class="wrap"><div class="roadmap" id="h-road"></div></main>
+
+<section class="sect" id="h-duels">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Разбор полётов</div>
+      <h2>Один час, разные слова</h2>
+    </div>
+    <div class="duels" id="hDuels"></div>
+  </div>
+</section>
+
+<section class="sect" id="h-quiz">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Общая проверка</div>
+      <h2>Десять заданий вперемешку</h2>
+      <p>Посмотри на стрелки или цифры и выбери, как сказать это по-английски.</p>
+    </div>
+    <div class="drill z-present" id="hQuiz"></div>
+  </div>
+</section>
+
+<section class="sect" id="h-sheet">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">На один экран</div>
+      <h2>Шпаргалка</h2>
+    </div>
+    <div class="sheet">
+      <table>
+        <thead><tr><th>На часах</th><th>Как сказать</th><th>Как посчитать</th></tr></thead>
+        <tbody>
+          <tr><td>12:00</td><td><code>twelve o’clock</code></td><td>Ровно двенадцать.</td></tr>
+          <tr><td>12:15</td><td><code>a quarter past twelve</code></td><td>После двенадцати прошла четверть часа.</td></tr>
+          <tr><td>12:20</td><td><code>twenty past twelve</code></td><td>После двенадцати прошло 20 минут.</td></tr>
+          <tr><td>12:30</td><td><code>half past twelve</code></td><td>После двенадцати прошло полчаса.</td></tr>
+          <tr><td>12:40</td><td><code>twenty to one</code></td><td>До часу осталось 20 минут.</td></tr>
+          <tr><td>12:45</td><td><code>a quarter to one</code></td><td>До часу осталась четверть часа.</td></tr>
         </tbody>
       </table>
     </div>

@@ -2,24 +2,51 @@
   <div class="topbar__in">
     <div class="mark"><b>Английский</b><span>ПРАВИЛА</span></div>
 
-    <div class="tabs" role="tablist" aria-label="Разделы грамматики">
-      <span class="tabs__ink" id="tabsInk"></span>
-      <button role="tab" id="homeTab" data-tab="home" aria-selected="true" aria-controls="tab-home">Главная</button>
-      <button role="tab" data-tab="sentence" aria-selected="false" aria-controls="tab-sentence">Основа</button>
-      <button role="tab" data-tab="tenses" aria-selected="false" aria-controls="tab-tenses">Времена</button>
-      <button role="tab" data-tab="cond" aria-selected="false" aria-controls="tab-cond">Условные</button>
-      <button role="tab" data-tab="pron" aria-selected="false" aria-controls="tab-pron">Местоимения</button>
-      <button role="tab" data-tab="deg" aria-selected="false" aria-controls="tab-deg">Степени</button>
-      <button role="tab" data-tab="passive" aria-selected="false" aria-controls="tab-passive">Пассив</button>
-      <button role="tab" id="articlesTab" data-tab="articles" aria-selected="false" aria-controls="tab-articles">Артикли</button>
-      <button role="tab" id="obligationTab" data-tab="obligation" aria-selected="false" aria-controls="tab-obligation">Долженствование</button>
-      <button role="tab" id="modalsTab" data-tab="modals" aria-selected="false" aria-controls="tab-modals">Модальные глаголы</button>
-      <button role="tab" id="clockTab" data-tab="clock" aria-selected="false" aria-controls="tab-clock">Время по часам</button>
+    <div class="tab-dock">
+      <div class="tabs__clip">
+        <div class="tabs" id="sectionTabs" role="tablist" aria-label="Разделы грамматики">
+          <button type="button" role="tab" id="homeTab" data-tab="home" aria-selected="true" aria-controls="tab-home" aria-label="Главная">
+            <span class="tabs__tile">Главная</span>
+          </button>
+          <button type="button" role="tab" id="sentenceTab" data-tab="sentence" aria-selected="false" aria-controls="tab-sentence" aria-label="Основа" tabindex="-1">
+            <span class="tabs__tile">Основа</span>
+          </button>
+          <button type="button" role="tab" id="tensesTab" data-tab="tenses" aria-selected="false" aria-controls="tab-tenses" aria-label="Времена" tabindex="-1">
+            <span class="tabs__tile">Времена</span>
+          </button>
+          <button type="button" role="tab" id="condTab" data-tab="cond" aria-selected="false" aria-controls="tab-cond" aria-label="Условные предложения" tabindex="-1">
+            <span class="tabs__tile">Условные</span>
+          </button>
+          <button type="button" role="tab" id="pronTab" data-tab="pron" aria-selected="false" aria-controls="tab-pron" aria-label="Местоимения" tabindex="-1">
+            <span class="tabs__tile">Местоимения</span>
+          </button>
+          <button type="button" role="tab" id="degTab" data-tab="deg" aria-selected="false" aria-controls="tab-deg" aria-label="Степени сравнения" tabindex="-1">
+            <span class="tabs__tile">Степени</span>
+          </button>
+          <button type="button" role="tab" id="passiveTab" data-tab="passive" aria-selected="false" aria-controls="tab-passive" aria-label="Пассив" tabindex="-1">
+            <span class="tabs__tile">Пассив</span>
+          </button>
+          <button type="button" role="tab" id="articlesTab" data-tab="articles" aria-selected="false" aria-controls="tab-articles" aria-label="Артикли" tabindex="-1">
+            <span class="tabs__tile">Артикли</span>
+          </button>
+          <button type="button" role="tab" id="obligationTab" data-tab="obligation" aria-selected="false" aria-controls="tab-obligation" aria-label="Долженствование" tabindex="-1">
+            <span class="tabs__tile">Долженствование</span>
+          </button>
+          <button type="button" role="tab" id="modalsTab" data-tab="modals" aria-selected="false" aria-controls="tab-modals" aria-label="Модальные глаголы" tabindex="-1">
+            <span class="tabs__tile">Модальные глаголы</span>
+          </button>
+          <button type="button" role="tab" id="clockTab" data-tab="clock" aria-selected="false" aria-controls="tab-clock" aria-label="Время по часам" tabindex="-1">
+            <span class="tabs__tile">Время по часам</span>
+          </button>
+          <button type="button" role="tab" id="numbersTab" data-tab="numbers" aria-selected="false" aria-controls="tab-numbers" aria-label="Числа и цифры" tabindex="-1">
+            <span class="tabs__tile">Числа и цифры</span>
+          </button>
+        </div>
+      </div>
+      <span class="tabs__tooltip" id="tabsTooltip" aria-hidden="true" hidden></span>
     </div>
 
-    <div class="dots__wrap">
-      <div class="dots" id="dots" aria-label="Переход к блоку"></div>
-
+    <div class="header-tools">
       <div class="menu">
         <button class="menu__btn" id="menuBtn" aria-expanded="false" aria-haspopup="true">
           РАЗДЕЛЫ
@@ -56,7 +83,7 @@
         <a class="home-primary" href="#home-course">Посмотреть программу <span aria-hidden="true">↘</span></a>
         <a class="home-secondary" href="#s-hero">Открыть первый урок <span aria-hidden="true">→</span></a>
       </div>
-      <p class="home-facts">10 разделов <span>·</span> 810 заданий с разбором в методичке</p>
+      <p class="home-facts">11 разделов <span>·</span> 860 заданий с разбором в методичке</p>
     </div>
     <div class="home-example">
       <div class="home-example__label"><span>ПОДСКАЗКА ИЗ УРОКА</span><span>АРТИКЛИ</span></div>
@@ -101,6 +128,7 @@
       <a class="home-card" href="#m-hero"><span class="home-card__num">08</span><span class="home-card__name">Долженствование</span><span class="home-card__text">Как сказать «стоит», «нужно» и «обязательно».</span><span class="home-card__arrow" aria-hidden="true">↗</span></a>
       <a class="home-card" href="#l-hero"><span class="home-card__num">09</span><span class="home-card__name">Модальные глаголы</span><span class="home-card__text">Как сказать «могу», спросить «можно?» и добавить «может быть».</span><span class="home-card__arrow" aria-hidden="true">↗</span></a>
       <a class="home-card" href="#h-hero"><span class="home-card__num">10</span><span class="home-card__name">Время по часам</span><span class="home-card__text">Как сказать «половина первого», «без двадцати час» и назвать время по стрелкам.</span><span class="home-card__arrow" aria-hidden="true">↗</span></a>
+      <a class="home-card" href="#n-hero"><span class="home-card__num">11</span><span class="home-card__name">Числа и цифры</span><span class="home-card__text">Как прочитать 152 365 и сказать «двадцать первый».</span><span class="home-card__arrow" aria-hidden="true">↗</span></a>
     </div>
   </section>
   </div>
@@ -139,7 +167,7 @@
   </div>
 </main>
 
-<div class="tabpanel" id="tab-sentence" role="tabpanel" hidden>
+<div class="tabpanel" id="tab-sentence" role="tabpanel" aria-labelledby="sentenceTab" hidden>
 <!-- ══════════════════ ГЕРОЙ · ОСНОВА ══════════════════ -->
 <header class="hero" id="s-hero">
   <div class="wrap">
@@ -399,7 +427,7 @@
 
 </div>
 
-<div class="tabpanel" id="tab-tenses" role="tabpanel" hidden>
+<div class="tabpanel" id="tab-tenses" role="tabpanel" aria-labelledby="tensesTab" hidden>
 <header class="hero" id="t-hero">
   <div class="wrap">
     <div class="eyebrow">Методичка · все времена · одна система</div>
@@ -600,7 +628,7 @@
 </section>
 </div>
 
-<div class="tabpanel" id="tab-cond" role="tabpanel" hidden>
+<div class="tabpanel" id="tab-cond" role="tabpanel" aria-labelledby="condTab" hidden>
 <!-- ══════════════════ ГЕРОЙ · УСЛОВНЫЕ ══════════════════ -->
 <header class="hero" id="c-hero">
   <div class="wrap">
@@ -820,7 +848,7 @@
 
 </div>
 
-<div class="tabpanel" id="tab-pron" role="tabpanel" hidden>
+<div class="tabpanel" id="tab-pron" role="tabpanel" aria-labelledby="pronTab" hidden>
 <!-- ══════════════════ ГЕРОЙ · МЕСТОИМЕНИЯ ══════════════════ -->
 <header class="hero" id="p-hero">
   <div class="wrap">
@@ -1027,7 +1055,7 @@
 
 </div>
 
-<div class="tabpanel" id="tab-deg" role="tabpanel" hidden>
+<div class="tabpanel" id="tab-deg" role="tabpanel" aria-labelledby="degTab" hidden>
 <!-- ══════════════════ ГЕРОЙ · СТЕПЕНИ ══════════════════ -->
 <header class="hero" id="d-hero">
   <div class="wrap">
@@ -1231,7 +1259,7 @@
 
 </div>
 
-<div class="tabpanel" id="tab-passive" role="tabpanel" hidden>
+<div class="tabpanel" id="tab-passive" role="tabpanel" aria-labelledby="passiveTab" hidden>
 <header class="hero" id="v-hero">
   <div class="wrap">
     <div class="eyebrow">Пассив · Passive Voice</div>
@@ -1752,6 +1780,121 @@
           <tr><td>12:30</td><td><code>half past twelve</code></td><td>После двенадцати прошло полчаса.</td></tr>
           <tr><td>12:40</td><td><code>twenty to one</code></td><td>До часу осталось 20 минут.</td></tr>
           <tr><td>12:45</td><td><code>a quarter to one</code></td><td>До часу осталась четверть часа.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+</div>
+
+<div class="tabpanel" id="tab-numbers" role="tabpanel" aria-labelledby="numbersTab" hidden>
+<header class="hero" id="n-hero">
+  <div class="wrap">
+    <div class="eyebrow">Числа и цифры</div>
+    <h1>Большие числа <span class="tri">по частям</span></h1>
+    <p class="hero__sub">На вид 152 365 — длинное число. Но если разбить его на 152 тысячи и ещё 365, получится два знакомых кусочка. По-английски называем их в том же порядке, что и по-русски.</p>
+    <div class="hero__meta">
+      <span class="pill">4 станции</span>
+      <span class="pill">конструктор</span>
+      <span class="pill">50 заданий с разбором</span>
+    </div>
+  </div>
+</header>
+
+<section class="sect toc" id="n-toc">
+  <div class="wrap">
+    <div class="sect__head" style="margin-bottom:0">
+      <div class="eyebrow">Оглавление</div>
+      <h2>С чего начать</h2>
+      <p>Попробуй своё число в конструкторе или открой нужную станцию.</p>
+    </div>
+    <div class="toc__g" id="nToc"></div>
+  </div>
+</section>
+
+<section class="sect" id="n-system">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Конструктор</div>
+      <h2>Собери своё число</h2>
+      <p>Введи число и посмотри, из каких слов оно складывается.</p>
+    </div>
+    <div class="bu">
+      <div class="bu__ctl">
+        <div class="number-controls">
+          <div>
+            <label for="nValue">Целое число</label>
+            <input id="nValue" type="text" value="152365" inputmode="numeric" maxlength="14" autocomplete="off" spellcheck="false" aria-describedby="nHint nError">
+            <p class="bu__note" id="nHint">От 0 до 999 999 999. Можно ввести цифры подряд или разделить тысячи пробелом либо запятой.</p>
+            <p class="bu__note number-error" id="nError" role="status"></p>
+          </div>
+          <div class="seg" id="nMode" role="group" aria-label="Что хочу сказать">
+            <button type="button" data-ordinal="false" aria-pressed="true">Сколько?</button>
+            <button type="button" data-ordinal="true" aria-pressed="false">Который по счёту?</button>
+          </div>
+        </div>
+        <div class="seg" id="nPresets" role="group" aria-label="Примеры чисел">
+          <button type="button" data-number="21">21</button>
+          <button type="button" data-number="112">112</button>
+          <button type="button" data-number="152365">152 365</button>
+          <button type="button" data-number="2012000">2 012 000</button>
+        </div>
+      </div>
+      <div class="bu__out" id="nOutput" aria-live="polite">
+        <div class="number-digits" id="nDigits"></div>
+        <div class="number-answer" id="nAnswer" lang="en"></div>
+        <div class="number-chunks" id="nChunks" aria-hidden="true"></div>
+        <p class="bu__note" id="nNote"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main class="wrap"><div class="roadmap" id="n-road"></div></main>
+
+<section class="sect" id="n-duels">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Разбор полётов</div>
+      <h2>Похожие слова, разный смысл</h2>
+    </div>
+    <div class="duels" id="nDuels"></div>
+  </div>
+</section>
+
+<section class="sect" id="n-quiz">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Общая проверка</div>
+      <h2>Десять заданий вперемешку</h2>
+      <p>Прочитай число или выбери, как сказать, который по счёту.</p>
+    </div>
+    <div class="drill z-present" id="nQuiz"></div>
+  </div>
+</section>
+
+<section class="sect" id="n-sheet">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">На один экран</div>
+      <h2>Шпаргалка</h2>
+    </div>
+    <h3 class="number-reference-title">От нуля до двадцати</h3>
+    <dl class="number-reference" id="nSmallNumbers"></dl>
+    <h3 class="number-reference-title">Десятки</h3>
+    <dl class="number-reference" id="nTens"></dl>
+    <div class="sheet">
+      <table>
+        <thead><tr><th>Число</th><th>Сколько?</th><th>Который?</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td><code>one</code></td><td><code>first · 1st</code></td></tr>
+          <tr><td>2</td><td><code>two</code></td><td><code>second · 2nd</code></td></tr>
+          <tr><td>3</td><td><code>three</code></td><td><code>third · 3rd</code></td></tr>
+          <tr><td>12</td><td><code>twelve</code></td><td><code>twelfth · 12th</code></td></tr>
+          <tr><td>20</td><td><code>twenty</code></td><td><code>twentieth · 20th</code></td></tr>
+          <tr><td>21</td><td><code>twenty-one</code></td><td><code>twenty-first · 21st</code></td></tr>
+          <tr><td>100</td><td><code>one hundred</code></td><td><code>one hundredth · 100th</code></td></tr>
+          <tr><td>1,000</td><td><code>one thousand</code></td><td><code>one thousandth · 1,000th</code></td></tr>
         </tbody>
       </table>
     </div>

@@ -132,16 +132,7 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
 .mark b { font-family: var(--f-display); font-weight: 800; font-size: .92rem; letter-spacing: -.01em; }
 .mark span { font-family: var(--f-mono); font-size: .66rem; color: var(--text-mute); letter-spacing: .1em; }
 
-.dots { display: flex; gap: 14px; margin-left: auto; }
-.dots__wrap { margin-left: auto; display: flex; align-items: center; gap: 18px; }
-.dots__grp { display: flex; gap: 4px; }
-.dots a {
-  width: 10px; height: 10px; border-radius: 50%;
-  border: 1.5px solid var(--zone); background: transparent;
-  transition: background .25s, transform .2s;
-}
-.dots a:hover, .dots a:focus-visible { transform: scale(1.35); background: var(--zone); }
-.dots a.on { background: var(--zone); }
+.header-tools { display: flex; align-items: center; gap: 18px; flex-shrink: 0; }
 
 .prog { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
 .prog__bar { width: 54px; height: 4px; border-radius: 3px; background: var(--line); overflow: hidden; }
@@ -155,8 +146,6 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
 }
 .tgl:hover { color: var(--text); border-color: var(--present); }
 .tgl svg { width: 15px; height: 15px; }
-@media (max-width: 1120px) { .dots { display: none; } }
-
 /* ═══════════════ ГЕРОЙ ═══════════════ */
 .hero { padding: 76px 0 54px; position: relative; overflow: hidden; }
 .hero::after {

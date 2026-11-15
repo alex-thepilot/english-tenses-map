@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Интерактивная методичка по английской грамматике: основа предложения, 12 времён, условные предложения, местоимения, степени сравнения, пассив, артикли, долженствование, модальные глаголы и время по часам. Схемы, конструкторы и 810 заданий с разбором.">
+<meta name="description" content="Интерактивная методичка по английской грамматике: основа предложения, 12 времён, условные предложения, местоимения, степени сравнения, пассив, артикли, долженствование, модальные глаголы, время по часам и числа. Схемы, конструкторы и 860 заданий с разбором.">
 <meta name="color-scheme" content="dark light">
 <meta name="theme-color" content="#0A1213" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#ECF0EE" media="(prefers-color-scheme: light)">
@@ -159,16 +159,7 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
 .mark b { font-family: var(--f-display); font-weight: 800; font-size: .92rem; letter-spacing: -.01em; }
 .mark span { font-family: var(--f-mono); font-size: .66rem; color: var(--text-mute); letter-spacing: .1em; }
 
-.dots { display: flex; gap: 14px; margin-left: auto; }
-.dots__wrap { margin-left: auto; display: flex; align-items: center; gap: 18px; }
-.dots__grp { display: flex; gap: 4px; }
-.dots a {
-  width: 10px; height: 10px; border-radius: 50%;
-  border: 1.5px solid var(--zone); background: transparent;
-  transition: background .25s, transform .2s;
-}
-.dots a:hover, .dots a:focus-visible { transform: scale(1.35); background: var(--zone); }
-.dots a.on { background: var(--zone); }
+.header-tools { display: flex; align-items: center; gap: 18px; flex-shrink: 0; }
 
 .prog { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
 .prog__bar { width: 54px; height: 4px; border-radius: 3px; background: var(--line); overflow: hidden; }
@@ -182,8 +173,6 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
 }
 .tgl:hover { color: var(--text); border-color: var(--present); }
 .tgl svg { width: 15px; height: 15px; }
-@media (max-width: 1120px) { .dots { display: none; } }
-
 /* ═══════════════ ГЕРОЙ ═══════════════ */
 .hero { padding: 76px 0 54px; position: relative; overflow: hidden; }
 .hero::after {
@@ -548,26 +537,101 @@ td.ex { color: var(--text-dim); }
 @keyframes nudge  { 0%,100% { transform: translateY(0) } 50% { transform: translateY(2.5px) } }
 
 /* ═══════════════ ВКЛАДКИ ПРАВИЛ ═══════════════ */
+.tab-dock {
+  position: relative;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+.tab-dock::before {
+  content: "";
+  position: absolute;
+  inset: 15px 0 0;
+  border: 1px solid var(--line);
+  border-radius: 17px;
+  background: color-mix(in srgb, var(--surface-2) 78%, transparent);
+  box-shadow: 0 7px 18px -14px rgba(0, 0, 0, .56);
+  pointer-events: none;
+}
 .tabs {
-  display: flex; gap: 2px; padding: 3px; border-radius: 12px;
-  background: var(--surface-2); border: 1px solid var(--line-soft);
-  position: relative; flex-shrink: 1; min-width: 0; overflow-x: auto;
-  scrollbar-width: thin; scrollbar-color: var(--text-mute) transparent;
+  position: relative;
+  display: flex;
+  align-items: end;
+  gap: 4px;
+  padding: 0 9px 4px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-inline: contain;
+  scroll-padding-inline: 9px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--text-mute) transparent;
+}
+.tabs__clip {
+  min-width: 0;
+  overflow: hidden;
+  border-radius: 18px;
 }
 .tabs button {
-  position: relative; z-index: 1; flex: 0 0 auto;
-  font-family: var(--f-display); font-weight: 600; font-size: .76rem; letter-spacing: -.01em;
-  padding: 6px 14px; border-radius: 9px; color: var(--text-mute); white-space: nowrap;
-  transition: color .22s;
+  flex: 0 0 auto;
+  display: grid;
+  justify-items: center;
+  align-content: end;
+  min-width: 44px;
+  padding: 20px 10px 0;
+  border-radius: 11px;
+  color: var(--text-dim);
 }
-.tabs button:hover { color: var(--text-dim); }
-.tabs button[aria-selected="true"] { color: var(--bg); }
-.tabs__ink {
-  position: absolute; z-index: 0; top: 3px; bottom: 3px; left: 0; width: 0;
-  border-radius: 9px; background: var(--present);
-  transition: transform .34s cubic-bezier(.34,1.3,.5,1), width .34s cubic-bezier(.34,1.3,.5,1);
+.tabs button:focus-visible { outline: none; }
+.tabs button:focus-visible .tabs__tile { outline: 2px solid var(--present); outline-offset: 2px; }
+.tabs__tile {
+  display: grid;
+  place-items: center;
+  min-height: 36px;
+  padding: 0 11px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: var(--surface);
+  box-shadow: 0 2px 5px -4px rgba(0, 0, 0, .6);
+  font-family: var(--f-display);
+  font-size: .73rem;
+  font-weight: 600;
+  letter-spacing: -.01em;
+  white-space: nowrap;
+  transform: scale(var(--dock-scale, 1));
+  transform-origin: var(--dock-origin, center) bottom;
+  transition: transform .28s cubic-bezier(.2,1.4,.38,1), background .16s, color .16s, border-color .16s;
+  pointer-events: none;
 }
-@media (prefers-reduced-motion: reduce) { .tabs__ink { transition: none; } }
+.tabs button:hover .tabs__tile { border-color: var(--present); color: var(--text); }
+.tabs button[aria-selected="true"] .tabs__tile {
+  border-color: var(--present);
+  background: var(--present-soft);
+  color: var(--present);
+}
+.tabs__tooltip {
+  position: absolute;
+  z-index: 2;
+  top: calc(100% + 5px);
+  left: 0;
+  padding: 5px 9px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  color: var(--text);
+  font-size: .76rem;
+  line-height: 1.35;
+  white-space: nowrap;
+  pointer-events: none;
+}
+@media (hover: none), (pointer: coarse) {
+  .tab-dock::before { inset-block-start: 0; }
+  .tabs { align-items: stretch; gap: 6px; padding: 3px 6px; scroll-padding-inline: 6px; }
+  .tabs button { align-content: center; min-height: 44px; padding: 0; }
+  .tabs__tile { min-height: 36px; padding-inline: 8px; font-size: .69rem; border-radius: 9px; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tabs__tile { transform: none; transition: none; }
+}
 
 .tabpanel[hidden] { display: none !important; }
 @media (prefers-reduced-motion: no-preference) {
@@ -792,9 +856,9 @@ td.ex { color: var(--text-dim); }
 /* ═══════════════ МЕЛОЧИ ═══════════════ */
 .sect__head h2 .accent { color: var(--present); }
 .hero__sub .mono { color: var(--present); }
-.station { scroll-margin-top: 84px; }
-.sect { scroll-margin-top: 84px; }
-.level { scroll-margin-top: 70px; }
+.station, .sect, .level {
+  scroll-margin-top: max(84px, calc(var(--header-height, 70px) + 10px));
+}
 
 /* зоны вкладки «Условные»: цвет кодирует реальность */
 .z-real   { --zone: var(--present); --zone-soft: var(--present-soft); }
@@ -807,11 +871,10 @@ td.ex { color: var(--text-dim); }
   .topbar__in { gap: 10px; padding: 8px 14px; }
   .mark span { display: none; }
   .prog__bar { display: none; }
-  .dots__wrap { gap: 10px; }
+  .header-tools { gap: 10px; }
 }
 @media (max-width: 560px) {
   .mark { display: none; }
-  .tabs button { font-size: .72rem; padding: 6px 10px; }
   .menu__btn { font-size: 0; gap: 0; padding: 8px 10px; letter-spacing: 0; }
   .menu__btn svg { width: 12px; height: 12px; }
   .menu__pop { min-width: 240px; right: -44px; }
@@ -984,7 +1047,7 @@ td.ex { color: var(--text-dim); }
 }
 
 /* якоря героев: переход с другой вкладки не прячет заголовок под панелью */
-.hero { scroll-margin-top: 70px; }
+.hero { scroll-margin-top: max(70px, var(--header-height, 70px)); }
 .steps .goto { margin-top: 4px; }
 
 /* шпаргалка основы: пять столбцов */
@@ -1051,18 +1114,15 @@ td.ex { color: var(--text-dim); }
 }
 @media (max-width: 560px) {
   .prog { display: none; }
-  .tabs button { font-size: .7rem; padding: 6px 9px; }
 }
 @media (max-width: 400px) {
   .topbar__in { gap: 8px; padding: 8px 10px; }
-  .tabs button { font-size: .66rem; padding: 6px 7px; }
 }
 
 /* самые узкие телефоны: три вкладки, меню и тема должны влезть в 320px */
 @media (max-width: 360px) {
   .topbar__in { padding: 8px 8px; gap: 6px; }
-  .dots__wrap { gap: 6px; }
-  .tabs button { font-size: .64rem; padding: 6px 6px; }
+  .header-tools { gap: 6px; }
   .menu__btn { padding: 8px 8px; }
 }
 
@@ -1137,10 +1197,74 @@ td.ex { color: var(--text-dim); }
   .clock-builder { grid-template-columns: minmax(0, 1fr); }
   .clock-figure .clock-face { max-width: 245px; }
 }
+
+.number-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 14px 26px;
+  align-items: start;
+}
+.number-controls label { display: block; margin-bottom: 6px; font-size: .85rem; }
+.number-controls input {
+  display: block;
+  width: min(100%, 300px);
+  min-height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 8px 12px;
+  background: var(--bg-2);
+  color: var(--text);
+  font: 500 1rem var(--f-mono);
+}
+.number-controls .bu__note { margin-top: 6px; }
+.number-error { color: var(--bad); }
+.number-error:empty { display: none; }
+.number-digits {
+  font: 600 clamp(1.45rem, 5vw, 3rem)/1.2 var(--f-mono);
+  overflow-wrap: anywhere;
+}
+.number-answer {
+  font-size: clamp(1.1rem, 3vw, 1.65rem);
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+.number-chunks { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.number-chunks span { color: var(--text-mute); }
+.number-chunk {
+  max-width: 100%;
+  padding: 5px 9px;
+  border-radius: 8px;
+  background: var(--present-soft);
+  color: var(--present);
+  font: 500 .84rem var(--f-mono);
+  overflow-wrap: anywhere;
+}
+.number-chunk--scale { background: var(--future-soft); color: var(--future); }
+.number-reference-title { margin: 20px 0 9px; }
+.number-reference {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 124px), 1fr));
+  gap: 8px;
+  margin: 0 0 22px;
+}
+.number-reference > div {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  padding: 5px 8px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: .88rem;
+}
+.number-reference dt { min-width: 2ch; color: var(--present); font-family: var(--f-mono); }
+.number-reference dd { margin: 0; }
+@media (max-width: 700px) {
+  .number-controls { grid-template-columns: minmax(0, 1fr); }
+}
 /* Главная использует те же цвета и шрифты, что и уроки. */
 .home { --home-accent: var(--present); padding: 14px 0 32px; }
 .home a { color: inherit; text-decoration: none; }
-.home [id] { scroll-margin-top: 76px; }
+.home [id] { scroll-margin-top: max(76px, calc(var(--header-height, 70px) + 4px)); }
 .home-stack {
   max-width: calc(var(--wrap) + 32px); margin-inline: auto;
   padding-inline: clamp(8px, 1.5vw, 16px); display: grid; gap: 20px;
@@ -1248,24 +1372,51 @@ td.ex { color: var(--text-dim); }
   <div class="topbar__in">
     <div class="mark"><b>Английский</b><span>ПРАВИЛА</span></div>
 
-    <div class="tabs" role="tablist" aria-label="Разделы грамматики">
-      <span class="tabs__ink" id="tabsInk"></span>
-      <button role="tab" id="homeTab" data-tab="home" aria-selected="true" aria-controls="tab-home">Главная</button>
-      <button role="tab" data-tab="sentence" aria-selected="false" aria-controls="tab-sentence">Основа</button>
-      <button role="tab" data-tab="tenses" aria-selected="false" aria-controls="tab-tenses">Времена</button>
-      <button role="tab" data-tab="cond" aria-selected="false" aria-controls="tab-cond">Условные</button>
-      <button role="tab" data-tab="pron" aria-selected="false" aria-controls="tab-pron">Местоимения</button>
-      <button role="tab" data-tab="deg" aria-selected="false" aria-controls="tab-deg">Степени</button>
-      <button role="tab" data-tab="passive" aria-selected="false" aria-controls="tab-passive">Пассив</button>
-      <button role="tab" id="articlesTab" data-tab="articles" aria-selected="false" aria-controls="tab-articles">Артикли</button>
-      <button role="tab" id="obligationTab" data-tab="obligation" aria-selected="false" aria-controls="tab-obligation">Долженствование</button>
-      <button role="tab" id="modalsTab" data-tab="modals" aria-selected="false" aria-controls="tab-modals">Модальные глаголы</button>
-      <button role="tab" id="clockTab" data-tab="clock" aria-selected="false" aria-controls="tab-clock">Время по часам</button>
+    <div class="tab-dock">
+      <div class="tabs__clip">
+        <div class="tabs" id="sectionTabs" role="tablist" aria-label="Разделы грамматики">
+          <button type="button" role="tab" id="homeTab" data-tab="home" aria-selected="true" aria-controls="tab-home" aria-label="Главная">
+            <span class="tabs__tile">Главная</span>
+          </button>
+          <button type="button" role="tab" id="sentenceTab" data-tab="sentence" aria-selected="false" aria-controls="tab-sentence" aria-label="Основа" tabindex="-1">
+            <span class="tabs__tile">Основа</span>
+          </button>
+          <button type="button" role="tab" id="tensesTab" data-tab="tenses" aria-selected="false" aria-controls="tab-tenses" aria-label="Времена" tabindex="-1">
+            <span class="tabs__tile">Времена</span>
+          </button>
+          <button type="button" role="tab" id="condTab" data-tab="cond" aria-selected="false" aria-controls="tab-cond" aria-label="Условные предложения" tabindex="-1">
+            <span class="tabs__tile">Условные</span>
+          </button>
+          <button type="button" role="tab" id="pronTab" data-tab="pron" aria-selected="false" aria-controls="tab-pron" aria-label="Местоимения" tabindex="-1">
+            <span class="tabs__tile">Местоимения</span>
+          </button>
+          <button type="button" role="tab" id="degTab" data-tab="deg" aria-selected="false" aria-controls="tab-deg" aria-label="Степени сравнения" tabindex="-1">
+            <span class="tabs__tile">Степени</span>
+          </button>
+          <button type="button" role="tab" id="passiveTab" data-tab="passive" aria-selected="false" aria-controls="tab-passive" aria-label="Пассив" tabindex="-1">
+            <span class="tabs__tile">Пассив</span>
+          </button>
+          <button type="button" role="tab" id="articlesTab" data-tab="articles" aria-selected="false" aria-controls="tab-articles" aria-label="Артикли" tabindex="-1">
+            <span class="tabs__tile">Артикли</span>
+          </button>
+          <button type="button" role="tab" id="obligationTab" data-tab="obligation" aria-selected="false" aria-controls="tab-obligation" aria-label="Долженствование" tabindex="-1">
+            <span class="tabs__tile">Долженствование</span>
+          </button>
+          <button type="button" role="tab" id="modalsTab" data-tab="modals" aria-selected="false" aria-controls="tab-modals" aria-label="Модальные глаголы" tabindex="-1">
+            <span class="tabs__tile">Модальные глаголы</span>
+          </button>
+          <button type="button" role="tab" id="clockTab" data-tab="clock" aria-selected="false" aria-controls="tab-clock" aria-label="Время по часам" tabindex="-1">
+            <span class="tabs__tile">Время по часам</span>
+          </button>
+          <button type="button" role="tab" id="numbersTab" data-tab="numbers" aria-selected="false" aria-controls="tab-numbers" aria-label="Числа и цифры" tabindex="-1">
+            <span class="tabs__tile">Числа и цифры</span>
+          </button>
+        </div>
+      </div>
+      <span class="tabs__tooltip" id="tabsTooltip" aria-hidden="true" hidden></span>
     </div>
 
-    <div class="dots__wrap">
-      <div class="dots" id="dots" aria-label="Переход к блоку"></div>
-
+    <div class="header-tools">
       <div class="menu">
         <button class="menu__btn" id="menuBtn" aria-expanded="false" aria-haspopup="true">
           РАЗДЕЛЫ
@@ -1302,7 +1453,7 @@ td.ex { color: var(--text-dim); }
         <a class="home-primary" href="#home-course">Посмотреть программу <span aria-hidden="true">↘</span></a>
         <a class="home-secondary" href="#s-hero">Открыть первый урок <span aria-hidden="true">→</span></a>
       </div>
-      <p class="home-facts">10 разделов <span>·</span> 810 заданий с разбором в методичке</p>
+      <p class="home-facts">11 разделов <span>·</span> 860 заданий с разбором в методичке</p>
     </div>
     <div class="home-example">
       <div class="home-example__label"><span>ПОДСКАЗКА ИЗ УРОКА</span><span>АРТИКЛИ</span></div>
@@ -1347,6 +1498,7 @@ td.ex { color: var(--text-dim); }
       <a class="home-card" href="#m-hero"><span class="home-card__num">08</span><span class="home-card__name">Долженствование</span><span class="home-card__text">Как сказать «стоит», «нужно» и «обязательно».</span><span class="home-card__arrow" aria-hidden="true">↗</span></a>
       <a class="home-card" href="#l-hero"><span class="home-card__num">09</span><span class="home-card__name">Модальные глаголы</span><span class="home-card__text">Как сказать «могу», спросить «можно?» и добавить «может быть».</span><span class="home-card__arrow" aria-hidden="true">↗</span></a>
       <a class="home-card" href="#h-hero"><span class="home-card__num">10</span><span class="home-card__name">Время по часам</span><span class="home-card__text">Как сказать «половина первого», «без двадцати час» и назвать время по стрелкам.</span><span class="home-card__arrow" aria-hidden="true">↗</span></a>
+      <a class="home-card" href="#n-hero"><span class="home-card__num">11</span><span class="home-card__name">Числа и цифры</span><span class="home-card__text">Как прочитать 152 365 и сказать «двадцать первый».</span><span class="home-card__arrow" aria-hidden="true">↗</span></a>
     </div>
   </section>
   </div>
@@ -1385,7 +1537,7 @@ td.ex { color: var(--text-dim); }
   </div>
 </main>
 
-<div class="tabpanel" id="tab-sentence" role="tabpanel" hidden>
+<div class="tabpanel" id="tab-sentence" role="tabpanel" aria-labelledby="sentenceTab" hidden>
 <!-- ══════════════════ ГЕРОЙ · ОСНОВА ══════════════════ -->
 <header class="hero" id="s-hero">
   <div class="wrap">
@@ -1645,7 +1797,7 @@ td.ex { color: var(--text-dim); }
 
 </div>
 
-<div class="tabpanel" id="tab-tenses" role="tabpanel" hidden>
+<div class="tabpanel" id="tab-tenses" role="tabpanel" aria-labelledby="tensesTab" hidden>
 <header class="hero" id="t-hero">
   <div class="wrap">
     <div class="eyebrow">Методичка · все времена · одна система</div>
@@ -1846,7 +1998,7 @@ td.ex { color: var(--text-dim); }
 </section>
 </div>
 
-<div class="tabpanel" id="tab-cond" role="tabpanel" hidden>
+<div class="tabpanel" id="tab-cond" role="tabpanel" aria-labelledby="condTab" hidden>
 <!-- ══════════════════ ГЕРОЙ · УСЛОВНЫЕ ══════════════════ -->
 <header class="hero" id="c-hero">
   <div class="wrap">
@@ -2066,7 +2218,7 @@ td.ex { color: var(--text-dim); }
 
 </div>
 
-<div class="tabpanel" id="tab-pron" role="tabpanel" hidden>
+<div class="tabpanel" id="tab-pron" role="tabpanel" aria-labelledby="pronTab" hidden>
 <!-- ══════════════════ ГЕРОЙ · МЕСТОИМЕНИЯ ══════════════════ -->
 <header class="hero" id="p-hero">
   <div class="wrap">
@@ -2273,7 +2425,7 @@ td.ex { color: var(--text-dim); }
 
 </div>
 
-<div class="tabpanel" id="tab-deg" role="tabpanel" hidden>
+<div class="tabpanel" id="tab-deg" role="tabpanel" aria-labelledby="degTab" hidden>
 <!-- ══════════════════ ГЕРОЙ · СТЕПЕНИ ══════════════════ -->
 <header class="hero" id="d-hero">
   <div class="wrap">
@@ -2477,7 +2629,7 @@ td.ex { color: var(--text-dim); }
 
 </div>
 
-<div class="tabpanel" id="tab-passive" role="tabpanel" hidden>
+<div class="tabpanel" id="tab-passive" role="tabpanel" aria-labelledby="passiveTab" hidden>
 <header class="hero" id="v-hero">
   <div class="wrap">
     <div class="eyebrow">Пассив · Passive Voice</div>
@@ -2998,6 +3150,121 @@ td.ex { color: var(--text-dim); }
           <tr><td>12:30</td><td><code>half past twelve</code></td><td>После двенадцати прошло полчаса.</td></tr>
           <tr><td>12:40</td><td><code>twenty to one</code></td><td>До часу осталось 20 минут.</td></tr>
           <tr><td>12:45</td><td><code>a quarter to one</code></td><td>До часу осталась четверть часа.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+</div>
+
+<div class="tabpanel" id="tab-numbers" role="tabpanel" aria-labelledby="numbersTab" hidden>
+<header class="hero" id="n-hero">
+  <div class="wrap">
+    <div class="eyebrow">Числа и цифры</div>
+    <h1>Большие числа <span class="tri">по частям</span></h1>
+    <p class="hero__sub">На вид 152 365 — длинное число. Но если разбить его на 152 тысячи и ещё 365, получится два знакомых кусочка. По-английски называем их в том же порядке, что и по-русски.</p>
+    <div class="hero__meta">
+      <span class="pill">4 станции</span>
+      <span class="pill">конструктор</span>
+      <span class="pill">50 заданий с разбором</span>
+    </div>
+  </div>
+</header>
+
+<section class="sect toc" id="n-toc">
+  <div class="wrap">
+    <div class="sect__head" style="margin-bottom:0">
+      <div class="eyebrow">Оглавление</div>
+      <h2>С чего начать</h2>
+      <p>Попробуй своё число в конструкторе или открой нужную станцию.</p>
+    </div>
+    <div class="toc__g" id="nToc"></div>
+  </div>
+</section>
+
+<section class="sect" id="n-system">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Конструктор</div>
+      <h2>Собери своё число</h2>
+      <p>Введи число и посмотри, из каких слов оно складывается.</p>
+    </div>
+    <div class="bu">
+      <div class="bu__ctl">
+        <div class="number-controls">
+          <div>
+            <label for="nValue">Целое число</label>
+            <input id="nValue" type="text" value="152365" inputmode="numeric" maxlength="14" autocomplete="off" spellcheck="false" aria-describedby="nHint nError">
+            <p class="bu__note" id="nHint">От 0 до 999 999 999. Можно ввести цифры подряд или разделить тысячи пробелом либо запятой.</p>
+            <p class="bu__note number-error" id="nError" role="status"></p>
+          </div>
+          <div class="seg" id="nMode" role="group" aria-label="Что хочу сказать">
+            <button type="button" data-ordinal="false" aria-pressed="true">Сколько?</button>
+            <button type="button" data-ordinal="true" aria-pressed="false">Который по счёту?</button>
+          </div>
+        </div>
+        <div class="seg" id="nPresets" role="group" aria-label="Примеры чисел">
+          <button type="button" data-number="21">21</button>
+          <button type="button" data-number="112">112</button>
+          <button type="button" data-number="152365">152 365</button>
+          <button type="button" data-number="2012000">2 012 000</button>
+        </div>
+      </div>
+      <div class="bu__out" id="nOutput" aria-live="polite">
+        <div class="number-digits" id="nDigits"></div>
+        <div class="number-answer" id="nAnswer" lang="en"></div>
+        <div class="number-chunks" id="nChunks" aria-hidden="true"></div>
+        <p class="bu__note" id="nNote"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main class="wrap"><div class="roadmap" id="n-road"></div></main>
+
+<section class="sect" id="n-duels">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Разбор полётов</div>
+      <h2>Похожие слова, разный смысл</h2>
+    </div>
+    <div class="duels" id="nDuels"></div>
+  </div>
+</section>
+
+<section class="sect" id="n-quiz">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Общая проверка</div>
+      <h2>Десять заданий вперемешку</h2>
+      <p>Прочитай число или выбери, как сказать, который по счёту.</p>
+    </div>
+    <div class="drill z-present" id="nQuiz"></div>
+  </div>
+</section>
+
+<section class="sect" id="n-sheet">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">На один экран</div>
+      <h2>Шпаргалка</h2>
+    </div>
+    <h3 class="number-reference-title">От нуля до двадцати</h3>
+    <dl class="number-reference" id="nSmallNumbers"></dl>
+    <h3 class="number-reference-title">Десятки</h3>
+    <dl class="number-reference" id="nTens"></dl>
+    <div class="sheet">
+      <table>
+        <thead><tr><th>Число</th><th>Сколько?</th><th>Который?</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td><code>one</code></td><td><code>first · 1st</code></td></tr>
+          <tr><td>2</td><td><code>two</code></td><td><code>second · 2nd</code></td></tr>
+          <tr><td>3</td><td><code>three</code></td><td><code>third · 3rd</code></td></tr>
+          <tr><td>12</td><td><code>twelve</code></td><td><code>twelfth · 12th</code></td></tr>
+          <tr><td>20</td><td><code>twenty</code></td><td><code>twentieth · 20th</code></td></tr>
+          <tr><td>21</td><td><code>twenty-one</code></td><td><code>twenty-first · 21st</code></td></tr>
+          <tr><td>100</td><td><code>one hundred</code></td><td><code>one hundredth · 100th</code></td></tr>
+          <tr><td>1,000</td><td><code>one thousand</code></td><td><code>one thousandth · 1,000th</code></td></tr>
         </tbody>
       </table>
     </div>
@@ -8419,6 +8686,240 @@ const QUIZ_CLOCK = [
 ];
 </script>
 <script>
+const NUMBER_LEVELS = [
+  { n: 1, ru: 'Сколько?', title: 'От единиц до миллионов', code: 'fifty-two · thousand',
+    txt: 'Сначала выучи числа от одного до двадцати и названия десятков. Из них можно собрать даже число из нескольких групп.' },
+  { n: 2, ru: 'Который по счёту?', title: 'Первый, второй, двадцать первый', code: 'first · second · twenty-first',
+    txt: 'Если важно место в очереди, меняем нужное слово. В составном числе достаточно поменять последнее.' }
+];
+
+const NUMBER_STATIONS = [
+  {
+    id: 'n-small', zone: 'present', level: 1, idx: 1, short: 'До ста',
+    name: 'Сначала до двадцати, потом десятки', core: 'sixteen → sixty → sixty-five',
+    thesis: 'Шестьдесят пять собираем так же, как по-русски',
+    lead: 'Выучи числа от <b>one</b> до <b>twenty</b>. Ноль — <b>zero</b>. Потом запомни названия десятков. После этого <b>65</b> уже не новое слово. Берём <b>sixty</b> («шестьдесят») и <b>five</b> («пять»). Получается <b>sixty-five</b>.',
+    blocks: [
+      { kind: 'plain', h: 'По цифрам или целиком?', p: '<b>6</b> и <b>5</b> — две цифры. Вместе они образуют число <b>65</b>. Если диктуешь эти две цифры из кода, скажи <b>six, five</b>. Если считаешь, сколько всего, скажи <b>sixty-five</b>.' },
+      { kind: 'key', h: 'Сначала десяток, потом единица', p: '32 — <b>thirty-two</b>, 76 — <b>seventy-six</b>. На письме между десятком и единицей ставим дефис. Если единиц нет, просто говорим <b>thirty</b> или <b>seventy</b>.' },
+      { kind: 'plain', h: 'Fifteen и fifty звучат похоже', p: '<b>Fifteen</b> — это 15, <b>fifty</b> — 50. Так же <b>sixteen</b> — 16, а <b>sixty</b> — 60. Следи за концом слова: <b>-teen</b> в этих примерах даёт число до двадцати, <b>-ty</b> — десяток.' },
+      { kind: 'plain', h: 'Запомни forty', p: '<b>Four</b> — четыре, но сорок пишем <b>forty</b>, без <b>u</b>.' }
+    ],
+    forms: { p: 'I need <b>twenty-four</b> chairs.', n: 'We don’t have <b>twenty-four</b> chairs.', q: 'Do we need <b>twenty-four</b> chairs?' },
+    markers: ['единицы', 'десятки', 'сколько?'],
+    ex: [
+      { en: 'fifteen', ru: '15 · пятнадцать' },
+      { en: 'fifty', ru: '50 · пятьдесят' },
+      { en: 'fifty-two', ru: '52 · пятьдесят два' }
+    ]
+  },
+  {
+    id: 'n-big', zone: 'future', level: 1, idx: 2, short: 'Большие числа',
+    name: 'Большое число читаем кусочками', core: '152,365 · one hundred fifty-two thousand three hundred sixty-five',
+    thesis: '152 тысячи и ещё 365',
+    lead: 'Число <b>152 365</b> выглядит длинным. Раздели его справа налево по три цифры: <b>152 | 365</b>. Слева 152 тысячи, справа ещё 365. Дальше просто прочитай по порядку, как по-русски.',
+    blocks: [
+      { kind: 'key', h: 'Один и тот же порядок', p: '<b>Сто + пятьдесят + две + тысячи + триста + шестьдесят + пять.</b><br>По-английски <b>one hundred + fifty-two + thousand + three hundred + sixty-five</b>. Складываем в одну фразу: <b>one hundred fifty-two thousand three hundred sixty-five</b>.' },
+      { kind: 'plain', h: 'После числа thousand остаётся как есть', p: 'Две тысячи — <b>two thousand</b>, триста — <b>three hundred</b>, четыре миллиона — <b>four million</b>. Когда называем точное число, не добавляем <b>-s</b>. Пустые группы пропускаем: <b>2,000,010</b> — <b>two million ten</b>.' },
+      { kind: 'plain', h: 'Можешь услышать and', p: 'В американском английском часто говорят <b>one hundred fifty-two</b>. В британском обычно добавляют <b>and</b>: <b>one hundred and fifty-two</b>. В большом числе получится <b>one hundred and fifty-two thousand three hundred and sixty-five</b>. Порядок кусочков тот же.' },
+      { kind: 'plain', h: 'Как записать цифрами', p: 'По-английски это число обычно записывают <b>152,365</b>. Запятая разделяет тысячи. Точка отделяет дробную часть, как в <b>2.5</b> — «две целых пять десятых».' }
+    ],
+    forms: { p: 'It costs <b>three hundred</b> pounds.', n: 'It doesn’t cost <b>three hundred</b> pounds.', q: 'Does it cost <b>three hundred</b> pounds?' },
+    markers: ['hundred — сто', 'thousand — тысяча', 'million — миллион'],
+    ex: [
+      { en: 'four hundred twenty', ru: '420 · четыреста двадцать' },
+      { en: 'seven thousand five hundred', ru: '7 500 · семь тысяч пятьсот' },
+      { en: 'two million twelve thousand', ru: '2 012 000 · два миллиона двенадцать тысяч' }
+    ]
+  },
+  {
+    id: 'n-order', zone: 'past', level: 2, idx: 3, short: 'Место по счёту',
+    name: 'Два этажа или второй этаж?', core: 'two floors · the second floor',
+    thesis: 'Два отвечает на «сколько?», второй — на «который?»',
+    lead: 'Скажи <b>two floors</b>, если этажей два. Если объясняешь, на какой этаж идти, нужен <b>the second floor</b> — «второй этаж». Слово <b>second</b> говорит, какой он по счёту.',
+    blocks: [
+      { kind: 'key', h: 'Первые три лучше запомнить сразу', p: '<b>One → first</b> («первый»), <b>two → second</b> («второй»), <b>three → third</b> («третий»). Дальше часто достаточно <b>-th</b>: <b>four → fourth</b>, <b>six → sixth</b>, <b>ten → tenth</b>.' },
+      { kind: 'plain', h: 'У нескольких слов меняется написание', p: '<b>Five → fifth</b>, <b>eight → eighth</b>, <b>nine → ninth</b>, <b>twelve → twelfth</b>. У круглых десятков окончание <b>-y</b> превращается в <b>-ieth</b>: <b>twenty → twentieth</b>, <b>forty → fortieth</b>.' },
+      { kind: 'plain', h: 'The second или my second?', p: 'Говорим <b>the second floor</b>, если речь о втором этаже. В <b>my second lesson</b> уже есть <b>my</b> («мой»). Перед ним <b>the</b> не нужно.' }
+    ],
+    forms: { p: 'The office is on <b>the second floor</b>.', n: 'It isn’t on <b>the second floor</b>.', q: 'Is it on <b>the second floor</b>?' },
+    markers: ['сколько? — two', 'который? — second', 'first · second · third'],
+    ex: [
+      { en: 'the first day', ru: 'первый день' },
+      { en: 'the fifth page', ru: 'пятая страница' },
+      { en: 'my third attempt', ru: 'моя третья попытка' }
+    ]
+  },
+  {
+    id: 'n-compound', zone: 'present', level: 2, idx: 4, short: 'Двадцать первый',
+    name: 'В длинном числе меняем только последнее слово', core: 'twenty-one → twenty-first',
+    thesis: 'Двадцать оставляем, один меняем на первый',
+    lead: 'Сравни «двадцать один» и «двадцать первый». В английском та же логика. Оставляем <b>twenty</b> и меняем только <b>one</b> на <b>first</b>. Получается <b>twenty-first</b>.',
+    blocks: [
+      { kind: 'key', h: 'Сначала собери обычное число', p: '<b>Thirty-two → thirty-second</b>, <b>sixty-five → sixty-fifth</b>. Если число заканчивается на <b>hundred</b> или <b>thousand</b>, меняем именно это слово: <b>one hundredth</b> — «сотый», <b>one thousandth</b> — «тысячный».' },
+      { kind: 'plain', h: 'Как сократить на письме', p: '<b>1st</b>, <b>2nd</b>, <b>3rd</b>, <b>4th</b>. Составные пишем так же: <b>21st</b>, <b>32nd</b>, <b>43rd</b>. Если число заканчивается на <b>11</b>, <b>12</b> или <b>13</b>, пишем <b>th</b>: <b>11th</b>, <b>112th</b>, <b>213th</b>.' }
+    ],
+    forms: { p: 'She finished <b>twenty-first</b>.', n: 'She didn’t finish <b>twenty-first</b>.', q: 'Did she finish <b>twenty-first</b>?' },
+    markers: ['меняем последнее слово', '21st · 22nd · 23rd', '11th · 12th · 13th'],
+    ex: [
+      { en: 'the twenty-first page', ru: '21-я страница' },
+      { en: 'his thirty-second birthday', ru: 'его 32-й день рождения' },
+      { en: 'the one hundredth visitor', ru: '100-й посетитель' }
+    ]
+  }
+];
+
+const NUMBER_DUELS = [
+  { q: 'Два этажа или второй этаж?',
+    a: { z: 'present', n: 'Сколько?', en: 'two floors', ru: 'два этажа', why: 'Считаем этажи.' },
+    b: { z: 'past', n: 'Который?', en: 'the second floor', ru: 'второй этаж', why: 'Показываем, куда идти.' },
+    r: 'Если по-русски говоришь «второй», выбирай second.' },
+  { q: 'Пятьдесят или пятнадцать?',
+    a: { z: 'present', n: '50', en: 'fifty', ru: 'пятьдесят', why: 'Fifty — десяток. На конце -ty.' },
+    b: { z: 'future', n: '15', en: 'fifteen', ru: 'пятнадцать', why: 'Fifteen заканчивается на -teen.' },
+    r: 'В числе 52 слышим fifty-two. В числе 15 — одно слово fifteen.' }
+];
+
+const NUMBER_SMALL = [
+  'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten',
+  'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'
+];
+const NUMBER_TENS = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+const NUMBER_SCALES = ['', 'thousand', 'million'];
+const NUMBER_ORDINALS = {
+  one: 'first', two: 'second', three: 'third', five: 'fifth', eight: 'eighth', nine: 'ninth', twelve: 'twelfth'
+};
+
+function numberChunks(value, ordinal = false) {
+  const chunks = [];
+  for (let i = 0; value > 0; i++, value = Math.floor(value / 1000)) {
+    const group = value % 1000;
+    if (!group) continue;
+    const hundred = Math.floor(group / 100);
+    const rest = group % 100;
+    const words = [];
+    if (hundred) words.push(NUMBER_SMALL[hundred] + ' hundred');
+    if (rest > 0 && rest < 20) words.push(NUMBER_SMALL[rest]);
+    if (rest >= 20) {
+      const unit = rest % 10;
+      words.push(NUMBER_TENS[Math.floor(rest / 10)] + (unit ? '-' + NUMBER_SMALL[unit] : ''));
+    }
+    if (NUMBER_SCALES[i]) words.push(NUMBER_SCALES[i]);
+    chunks.unshift(...words);
+  }
+  if (chunks.length === 0) chunks.push('zero');
+  if (ordinal) {
+    const last = chunks.length - 1;
+    chunks[last] = chunks[last].replace(/[a-z]+$/, word => NUMBER_ORDINALS[word] ||
+      (word.endsWith('y') ? word.slice(0, -1) + 'ieth' : word + 'th'));
+  }
+  return chunks;
+}
+
+function numberOrdinalSuffix(value) {
+  if (value % 100 >= 11 && value % 100 <= 13) return 'th';
+  return ['th', 'st', 'nd', 'rd'][value % 10] || 'th';
+}
+</script>
+<script>
+function spellNumber(value) {
+  return numberChunks(value).join(' ');
+}
+
+function showNumber(value) {
+  return String(value).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+}
+
+function readNumberDrill(value, first, second) {
+  const parts = numberChunks(value);
+  const correct = parts.join(' ');
+  return Q('Как сказать ' + showNumber(value) + ' по-английски?',
+    ['+' + correct, 'Читаем по порядку: ' + parts.join(' + ') + '.'],
+    [spellNumber(first), 'Так получится ' + showNumber(first) + '. В задании число ' + showNumber(value) + '.'],
+    [spellNumber(second), 'Так получится ' + showNumber(second) + '. Нужные кусочки здесь: ' + parts.join(' + ') + '.']);
+}
+
+function orderNumberDrill(prompt, value, wrong, wrongWhy) {
+  const words = numberChunks(value, true).join(' ');
+  const plain = spellNumber(value);
+  return Q(prompt, ['+' + words, 'Здесь спрашиваем «который?». Для этого числа говорим ' + words + '.'],
+    [plain, plain + ' отвечает на «сколько?». Здесь важно место по счёту.'],
+    [wrong, wrongWhy || 'Для этого числа нужная форма по счёту — ' + words + '.']);
+}
+
+function ordinalSuffixDrill(prompt, value, first, second) {
+  const suffix = numberOrdinalSuffix(value);
+  const ending = value % 100;
+  const reason = ending >= 11 && ending <= 13
+    ? 'Число заканчивается на ' + ending + ', поэтому пишем th.'
+    : 'Смотрим на последнюю цифру. Для ' + (value % 10) + ' в этом числе используем ' + suffix + '.';
+  return Q(prompt, ['+' + value + suffix, reason],
+    [value + first, reason], [value + second, reason]);
+}
+
+const NUMBER_DRILLS = {
+  'n-small': [
+    [0, 1, 10], [12, 20, 2], [15, 50, 55], [16, 60, 66], [20, 12, 22], [45, 54, 40],
+    [52, 25, 50], [65, 56, 60], [79, 97, 70]
+  ].map(([value, first, second]) => readNumberDrill(value, first, second)).concat([
+    Q('Как пишется число 40?', ['+forty', 'В слове forty нет u.'], ['fourty', 'У four есть u, а у forty его нет.'],
+      ['fourteen', 'Fourteen — четырнадцать. Здесь нужно forty.'])
+  ]),
+  'n-big': [
+    [152365, 125365, 152356], [203, 230, 2003], [1500, 1050, 15000], [72004, 72040, 70204],
+    [240615, 24615, 240650], [1000001, 1001, 1000010], [2040010, 2400010, 2040100],
+    [6010020, 6100020, 6010200], [10000000, 1000000, 100000000]
+  ].map(([value, first, second]) => readNumberDrill(value, first, second)).concat([
+    Q('Для проекта нужно две тысячи кирпичей. · We need ___ bricks.',
+      ['+two thousand', 'После точного числа two слово thousand остаётся как есть.'],
+      ['two thousands', 'Когда называем точное количество, s к thousand не добавляем.'],
+      ['twenty thousand', 'Twenty thousand — двадцать тысяч. Здесь нужно две.'])
+  ]),
+  'n-order': [
+    ['Первый день. · The ___ day.', 1, 'oneth'],
+    ['Второй этаж. · The ___ floor.', 2, 'twoth'],
+    ['Её третий урок. · Her ___ lesson.', 3, 'threeth'],
+    ['Четвёртая остановка. · The ___ stop.', 4, 'fourthe'],
+    ['Пятая страница. · The ___ page.', 5, 'fiveth', 'У five особая форма. Пишем fifth.'],
+    ['Восьмой участник. · The ___ contestant.', 8, 'eightth', 'У eight уже есть t в конце. Пишем eighth.'],
+    ['Девятый день. · The ___ day.', 9, 'nineth', 'В ninth буква e из nine пропадает.'],
+    ['Двенадцатая глава. · The ___ chapter.', 12, 'twelveth', 'Двенадцатый — twelfth. Эту форму лучше запомнить.'],
+    ['Двадцатая минута. · The ___ minute.', 20, 'twentyth', 'У круглых десятков y меняется на ieth.']
+  ].map(([prompt, value, wrong, why]) => orderNumberDrill(prompt, value, wrong, why)).concat([
+    Q('Как сказать «моя вторая попытка»? · It was ___.', ['+my second attempt', 'My уже говорит, чья попытка. После него ставим second.'],
+      ['the my second attempt', 'Слово my уже стоит перед second. The сюда не добавляем.'],
+      ['my two attempt', 'Two — «два». Когда речь о второй попытке, нужно second.'])
+  ]),
+  'n-compound': [
+    orderNumberDrill('Двадцать первая страница. · The ___ page.', 21, 'twentieth-first', 'Меняем последнее слово. Twenty оставляем как есть.'),
+    orderNumberDrill('Тридцать второй день. · The ___ day.', 32, 'thirtieth-second', 'Thirty остаётся как есть. Только two становится second.'),
+    orderNumberDrill('Шестьдесят пятый участник. · The ___ contestant.', 65, 'sixtieth-five', 'Меняем последнее слово: five → fifth.'),
+    orderNumberDrill('Сотый посетитель. · The ___ visitor.', 100, 'first hundred', 'One остаётся как есть. Последнее слово hundred становится hundredth.'),
+    orderNumberDrill('Тысячный заказ. · The ___ order.', 1000, 'first thousand', 'К слову thousand добавляем th. Оно последнее в числе.'),
+    ordinalSuffixDrill('Как записать «сорок третий» цифрами?', 43, 'th', 'st'),
+    ordinalSuffixDrill('Как записать «шестьдесят второй» цифрами?', 62, 'th', 'rd'),
+    ordinalSuffixDrill('Как записать «сто одиннадцатый» цифрами?', 111, 'st', 'nd'),
+    ordinalSuffixDrill('Как записать «сто двенадцатый» цифрами?', 112, 'nd', 'rd'),
+    ordinalSuffixDrill('Как записать «двести тринадцатый» цифрами?', 213, 'rd', 'st')
+  ]
+};
+
+const QUIZ_NUMBERS = [
+  readNumberDrill(17, 70, 77),
+  readNumberDrill(50462, 54062, 50426),
+  orderNumberDrill('Третий этаж. · The ___ floor.', 3, 'threeth'),
+  readNumberDrill(996, 969, 9906),
+  ordinalSuffixDrill('Как записать «пятьдесят первый» цифрами?', 51, 'th', 'nd'),
+  readNumberDrill(46, 64, 16),
+  orderNumberDrill('Восемьдесят девятая страница. · The ___ page.', 89, 'eightieth-nine', 'Eighty оставляем, а nine меняем на ninth.'),
+  readNumberDrill(6050000, 6005000, 6500000),
+  Q('В доме два этажа. · The house has ___ floors.', ['+two', 'Здесь спрашиваем, сколько этажей. Значит, two.'],
+    ['second', 'Second означает «второй». Так мы бы назвали один этаж по счёту.'],
+    ['twenty', 'Twenty — двадцать, а этажей два.']),
+  orderNumberDrill('Тридцатая попытка. · The ___ try.', 30, 'thirtyth', 'У thirty меняем y на ieth. Получится thirtieth.')
+];
+</script>
+<script>
 /* ═══════════════════════════════════════════════════════════
    ТРЕНАЖЁР · один компонент на все блоки заданий
    Показывает по одному вопросу. После ответа — разбор:
@@ -9163,6 +9664,69 @@ for (const button of hPresets) {
 }
 renderClock();
 
+renderRoadmap('n-road', NUMBER_LEVELS, NUMBER_STATIONS, {
+  pid: 'n', drills: NUMBER_DRILLS, kindLabel: item => item.short, figure: () => ''
+});
+renderDuels('nDuels', NUMBER_DUELS);
+makeQuiz(document.getElementById('nQuiz'), QUIZ_NUMBERS, { title: 'Вопрос' });
+
+const nValue = document.getElementById('nValue');
+const nMode = document.getElementById('nMode');
+const nError = document.getElementById('nError');
+const nOutput = document.getElementById('nOutput');
+const nDigits = document.getElementById('nDigits');
+const nAnswer = document.getElementById('nAnswer');
+const nChunks = document.getElementById('nChunks');
+const nNote = document.getElementById('nNote');
+const numberFormat = new Intl.NumberFormat('en-US');
+
+function renderNumberBuilder() {
+  const raw = nValue.value.trim();
+  const valid = /^\d{1,9}$|^\d{1,3}(?:,\d{3}){1,2}$|^\d{1,3}(?:[ \u00a0\u202f]\d{3}){1,2}$/.test(raw);
+  nOutput.hidden = !valid;
+  const invalid = raw !== '' && !valid;
+  nValue.setAttribute('aria-invalid', String(invalid));
+  nError.textContent = invalid ? 'Введи целое число до 999 999 999. Например, 152365 или 152,365.' : '';
+  if (!valid) return;
+
+  const value = Number(raw.replace(/[^\d]/g, ''));
+  const ordinal = nMode.querySelector('[aria-pressed="true"]').dataset.ordinal === 'true';
+  const parts = numberChunks(value, ordinal);
+  nDigits.textContent = numberFormat.format(value) + (ordinal ? numberOrdinalSuffix(value) : '');
+  nAnswer.textContent = parts.join(' ');
+  nChunks.hidden = parts.length === 1;
+  nChunks.innerHTML = parts.map(part => {
+    const scale = /^(thousand|million)(th)?$/.test(part) ? ' number-chunk--scale' : '';
+    return `<code class="number-chunk${scale}">${part}</code>`;
+  }).join('<span>+</span>');
+  nNote.textContent = ordinal
+    ? 'Собираем число как обычно, а в конце меняем последнее слово.'
+    : 'Читаем кусочки слева направо. Thousand обозначает тысячи, million — миллионы.';
+}
+
+nValue.addEventListener('input', renderNumberBuilder);
+nMode.addEventListener('click', event => {
+  const button = event.target.closest('button[data-ordinal]');
+  if (!button) return;
+  nMode.querySelector('[aria-pressed="true"]').setAttribute('aria-pressed', 'false');
+  button.setAttribute('aria-pressed', 'true');
+  renderNumberBuilder();
+});
+document.getElementById('nPresets').addEventListener('click', event => {
+  const button = event.target.closest('button[data-number]');
+  if (!button) return;
+  nValue.value = button.dataset.number;
+  renderNumberBuilder();
+});
+renderNumberBuilder();
+
+function renderNumberReference(id, values) {
+  document.getElementById(id).innerHTML = values.map(value =>
+    `<div><dt>${value}</dt><dd lang="en">${spellNumber(value)}</dd></div>`).join('');
+}
+renderNumberReference('nSmallNumbers', Array.from({length: 21}, (_, i) => i));
+renderNumberReference('nTens', NUMBER_TENS.slice(2).map((_, i) => (i + 2) * 10));
+
 /* ═══════════════════════════════════════════════════════════
    НАВИГАЦИЯ: вкладки, оглавление, меню, точки, прогресс
    ═══════════════════════════════════════════════════════════ */
@@ -9273,6 +9837,17 @@ const TABDEF = {
       { id: 'h-sheet', n: 'Шпаргалка', s: 'Шесть отметок на часах', e: 'Итог' }
     ]
   },
+  numbers: {
+    panel: 'tab-numbers', toc: 'nToc', items: NUMBER_STATIONS, total: NUMBER_STATIONS.length,
+    nav: [
+      { id: 'n-system', n: 'Конструктор чисел', s: 'Введи своё число', e: 'Старт' },
+      { id: 'n-lvl1', n: 'Сколько?', s: 'От единиц до миллионов', e: 'Уровень 1' },
+      { id: 'n-lvl2', n: 'Который по счёту?', s: 'От first до twenty-first', e: 'Уровень 2' },
+      { id: 'n-duels', n: 'Сравнение чисел', s: 'Two и second, fifteen и fifty', e: 'Разбор' },
+      { id: 'n-quiz', n: 'Общая проверка', s: '10 заданий', e: 'Тренажёр' },
+      { id: 'n-sheet', n: 'Шпаргалка', s: 'Первые числа, десятки и формы по счёту', e: 'Итог' }
+    ]
+  },
   passive: {
     panel: 'tab-passive', toc: 'vToc', items: V, total: V.length,
     nav: [
@@ -9306,8 +9881,10 @@ if (window.ResizeObserver) {
   const topbar = document.querySelector('.topbar');
   const measureStack = new ResizeObserver(entries => {
     for (const { target } of entries) {
-      if (target === topbar) stack.style.setProperty('--stack-top', topbar.offsetHeight + 12 + 'px');
-      else target.style.setProperty('--stack-card-height', target.offsetHeight + 'px');
+      if (target === topbar) {
+        document.documentElement.style.setProperty('--header-height', topbar.offsetHeight + 'px');
+        stack.style.setProperty('--stack-top', topbar.offsetHeight + 12 + 'px');
+      } else target.style.setProperty('--stack-card-height', target.offsetHeight + 'px');
     }
   });
   measureStack.observe(topbar);
@@ -9346,39 +9923,103 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape' && !menuPop.hidden) { menuPop.hidden = true; menuBtn.setAttribute('aria-expanded', 'false'); menuBtn.focus(); }
 });
 
-/* точки-станции в панели */
-function fillDots() {
-  const d = TABDEF[tab];
-  const groups = {};
-  d.items.forEach(x => { (groups[x.level] = groups[x.level] || []).push(x); });
-  document.getElementById('dots').innerHTML = Object.keys(groups).map(lv =>
-    `<span class="dots__grp">${groups[lv].map(x =>
-      `<a class="z-${x.zone}" href="#${x.id}" data-dot="${x.id}" title="${x.name}" aria-label="${x.name}"></a>`).join('')}</span>`).join('');
+/* переключение вкладок */
+const tabsEl = document.getElementById('sectionTabs');
+const tabsTooltip = document.getElementById('tabsTooltip');
+const tabBtns = [...tabsEl.querySelectorAll('[role="tab"]')];
+const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+let dockPointer;
+let dockFrame = 0;
+let tooltipTab;
+let dismissedTooltip;
+
+function updateDock() {
+  if (dockFrame) return;
+  dockFrame = requestAnimationFrame(() => {
+    dockFrame = 0;
+    const underPointer = dockPointer && document.elementFromPoint(dockPointer.x, dockPointer.y);
+    const hovered = underPointer?.closest('#sectionTabs [role="tab"]');
+    const focused = tabsEl.querySelector('[role="tab"]:focus-visible');
+    const target = hovered || focused;
+    const track = tabsEl.getBoundingClientRect();
+    const inside = underPointer && tabsEl.contains(underPointer);
+    const pointerX = inside ? dockPointer.x - track.left + tabsEl.scrollLeft : null;
+    const x = pointerX ?? (focused ? focused.offsetLeft + focused.offsetWidth / 2 : null);
+    if (finePointer.matches && motionOK() && x !== null) {
+      const sizes = tabBtns.map(button => {
+        const center = button.offsetLeft + button.offsetWidth / 2;
+        const proximity = Math.max(0, 1 - Math.abs(x - center) / 220);
+        return (1 + .26 * proximity ** 2).toFixed(3);
+      });
+      tabBtns.forEach((button, i) => {
+        const left = button.offsetLeft - tabsEl.scrollLeft;
+        const right = left + button.offsetWidth;
+        const edge = 48;
+        const origin = left < edge ? 'left' : right > tabsEl.clientWidth - edge ? 'right' : 'center';
+        button.style.setProperty('--dock-scale', sizes[i]);
+        button.style.setProperty('--dock-origin', origin);
+      });
+    } else {
+      tabBtns.forEach(button => {
+        button.style.removeProperty('--dock-scale');
+        button.style.removeProperty('--dock-origin');
+      });
+    }
+
+    if (target !== tooltipTab) {
+      tooltipTab = target;
+      dismissedTooltip = null;
+    }
+    const label = target?.getAttribute('aria-label');
+    tabsTooltip.hidden = !label || label === target.textContent.trim() || target === dismissedTooltip;
+    if (tabsTooltip.hidden) return;
+    const box = target.getBoundingClientRect();
+    tabsTooltip.textContent = label;
+    const width = tabsTooltip.offsetWidth;
+    const center = Math.min(track.right, Math.max(track.left, box.left + box.width / 2));
+    const left = Math.max(8, Math.min(center - width / 2, document.documentElement.clientWidth - width - 8));
+    tabsTooltip.style.left = (left - track.left) + 'px';
+  });
 }
 
-/* переключение вкладок */
-const tabsInk = document.getElementById('tabsInk');
-const tabBtns = [...document.querySelectorAll('.tabs button')];
-function moveInk() {
-  const active = tabBtns.find(b => b.getAttribute('aria-selected') === 'true');
-  if (!active) return;
-  tabsInk.style.width = active.offsetWidth + 'px';
-  tabsInk.style.transform = `translateX(${active.offsetLeft - 3}px)`;
-}
+tabsEl.addEventListener('pointermove', event => {
+  if (event.pointerType === 'touch' || !finePointer.matches) return;
+  dockPointer = { x: event.clientX, y: event.clientY };
+  updateDock();
+});
+tabsEl.addEventListener('pointerleave', () => {
+  dockPointer = null;
+  updateDock();
+});
+tabsEl.addEventListener('focusin', updateDock);
+tabsEl.addEventListener('focusout', updateDock);
+tabsEl.addEventListener('scroll', updateDock, { passive: true });
+window.addEventListener('scroll', () => {
+  if (dockPointer || tooltipTab) updateDock();
+}, { passive: true });
+document.addEventListener('keydown', event => {
+  if (event.key !== 'Escape' || tabsTooltip.hidden) return;
+  dismissedTooltip = tooltipTab;
+  updateDock();
+});
+
 /* на узком экране панель вкладок прокручивается — активную вкладку подводим в видимую часть */
 function revealTab() {
-  const tabsEl = tabsInk.parentElement;
   const active = tabBtns.find(b => b.getAttribute('aria-selected') === 'true');
   if (!active || tabsEl.scrollWidth <= tabsEl.clientWidth) return;
   tabsEl.scrollLeft = active.offsetLeft - (tabsEl.clientWidth - active.offsetWidth) / 2;
 }
 function setTab(name, scroll) {
   tab = name;
-  tabBtns.forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === name)));
+  tabBtns.forEach(button => {
+    const selected = button.dataset.tab === name;
+    button.setAttribute('aria-selected', String(selected));
+    button.tabIndex = selected ? 0 : -1;
+  });
   Object.keys(TABDEF).forEach(k => {
     document.getElementById(TABDEF[k].panel).hidden = (k !== name);
   });
-  fillDots(); fillMenu(); paint(); moveInk(); revealTab();
+  fillMenu(); paint(); revealTab(); updateDock();
   if (scroll !== false) window.scrollTo({ top: 0, behavior: motionOK() ? 'smooth' : 'auto' });
 }
 tabBtns.forEach(b => b.addEventListener('click', () => {
@@ -9387,7 +10028,7 @@ tabBtns.forEach(b => b.addEventListener('click', () => {
   if (location.hash !== hash) history.pushState(null, '', hash);
   setTab(name);
 }));
-tabsInk.parentElement.addEventListener('keydown', event => {
+tabsEl.addEventListener('keydown', event => {
   const index = tabBtns.indexOf(event.target);
   if (index < 0) return;
   const last = tabBtns.length - 1;
@@ -9399,12 +10040,14 @@ tabsInk.parentElement.addEventListener('keydown', event => {
   }[event.key];
   if (next === undefined) return;
   event.preventDefault();
+  dockPointer = null;
   tabBtns[next].focus({ preventScroll: true });
   tabBtns[next].click();
 });
-window.addEventListener('resize', moveInk);
-/* ширина кнопок меняется и без resize — например, когда догружается шрифт */
-if (window.ResizeObserver) new ResizeObserver(moveInk).observe(document.querySelector('.tabs'));
+window.addEventListener('resize', () => {
+  revealTab();
+  updateDock();
+});
 
 function motionOK() { return !window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
 
@@ -9414,7 +10057,7 @@ let done = new Set();
 try { done = new Set(JSON.parse(localStorage.getItem(KEY) || '[]')); } catch (e) { done = new Set(); }
 
 function paint() {
-  const all = S.concat(T, C, P, D, V, A, M, L, CLOCK_STATIONS);
+  const all = S.concat(T, C, P, D, V, A, M, L, CLOCK_STATIONS, NUMBER_STATIONS);
   all.forEach(x => {
     const on = done.has(x.id);
     const st = document.getElementById(x.id);
@@ -9489,6 +10132,7 @@ function tabForHash(h) {
   if (id.startsWith('m-')) return 'obligation';
   if (id.startsWith('l-')) return 'modals';
   if (id.startsWith('h-')) return 'clock';
+  if (id.startsWith('n-')) return 'numbers';
   if (T.some(t => t.id === id) || id.indexOf('t-') === 0) return 'tenses';
   return null;
 }
@@ -9509,8 +10153,8 @@ function openHashTab() {
 setTab(tabForHash(location.hash) || 'home', false);
 window.addEventListener('hashchange', openHashTab);
 /* шрифт догружается и меняет ширину кнопок — ползунок и прокрутку панели пересчитываем заново */
-requestAnimationFrame(() => { moveInk(); revealTab(); });
-if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { moveInk(); revealTab(); });
+requestAnimationFrame(() => { revealTab(); updateDock(); });
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { revealTab(); updateDock(); });
 if (location.hash) openHashTab();
 </script>
 </body>

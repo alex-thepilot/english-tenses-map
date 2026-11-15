@@ -742,6 +742,69 @@ for (const button of hPresets) {
 }
 renderClock();
 
+renderRoadmap('n-road', NUMBER_LEVELS, NUMBER_STATIONS, {
+  pid: 'n', drills: NUMBER_DRILLS, kindLabel: item => item.short, figure: () => ''
+});
+renderDuels('nDuels', NUMBER_DUELS);
+makeQuiz(document.getElementById('nQuiz'), QUIZ_NUMBERS, { title: 'Вопрос' });
+
+const nValue = document.getElementById('nValue');
+const nMode = document.getElementById('nMode');
+const nError = document.getElementById('nError');
+const nOutput = document.getElementById('nOutput');
+const nDigits = document.getElementById('nDigits');
+const nAnswer = document.getElementById('nAnswer');
+const nChunks = document.getElementById('nChunks');
+const nNote = document.getElementById('nNote');
+const numberFormat = new Intl.NumberFormat('en-US');
+
+function renderNumberBuilder() {
+  const raw = nValue.value.trim();
+  const valid = /^\d{1,9}$|^\d{1,3}(?:,\d{3}){1,2}$|^\d{1,3}(?:[ \u00a0\u202f]\d{3}){1,2}$/.test(raw);
+  nOutput.hidden = !valid;
+  const invalid = raw !== '' && !valid;
+  nValue.setAttribute('aria-invalid', String(invalid));
+  nError.textContent = invalid ? 'Введи целое число до 999 999 999. Например, 152365 или 152,365.' : '';
+  if (!valid) return;
+
+  const value = Number(raw.replace(/[^\d]/g, ''));
+  const ordinal = nMode.querySelector('[aria-pressed="true"]').dataset.ordinal === 'true';
+  const parts = numberChunks(value, ordinal);
+  nDigits.textContent = numberFormat.format(value) + (ordinal ? numberOrdinalSuffix(value) : '');
+  nAnswer.textContent = parts.join(' ');
+  nChunks.hidden = parts.length === 1;
+  nChunks.innerHTML = parts.map(part => {
+    const scale = /^(thousand|million)(th)?$/.test(part) ? ' number-chunk--scale' : '';
+    return `<code class="number-chunk${scale}">${part}</code>`;
+  }).join('<span>+</span>');
+  nNote.textContent = ordinal
+    ? 'Собираем число как обычно, а в конце меняем последнее слово.'
+    : 'Читаем кусочки слева направо. Thousand обозначает тысячи, million — миллионы.';
+}
+
+nValue.addEventListener('input', renderNumberBuilder);
+nMode.addEventListener('click', event => {
+  const button = event.target.closest('button[data-ordinal]');
+  if (!button) return;
+  nMode.querySelector('[aria-pressed="true"]').setAttribute('aria-pressed', 'false');
+  button.setAttribute('aria-pressed', 'true');
+  renderNumberBuilder();
+});
+document.getElementById('nPresets').addEventListener('click', event => {
+  const button = event.target.closest('button[data-number]');
+  if (!button) return;
+  nValue.value = button.dataset.number;
+  renderNumberBuilder();
+});
+renderNumberBuilder();
+
+function renderNumberReference(id, values) {
+  document.getElementById(id).innerHTML = values.map(value =>
+    `<div><dt>${value}</dt><dd lang="en">${spellNumber(value)}</dd></div>`).join('');
+}
+renderNumberReference('nSmallNumbers', Array.from({length: 21}, (_, i) => i));
+renderNumberReference('nTens', NUMBER_TENS.slice(2).map((_, i) => (i + 2) * 10));
+
 /* ═══════════════════════════════════════════════════════════
    НАВИГАЦИЯ: вкладки, оглавление, меню, точки, прогресс
    ═══════════════════════════════════════════════════════════ */
@@ -852,6 +915,17 @@ const TABDEF = {
       { id: 'h-sheet', n: 'Шпаргалка', s: 'Шесть отметок на часах', e: 'Итог' }
     ]
   },
+  numbers: {
+    panel: 'tab-numbers', toc: 'nToc', items: NUMBER_STATIONS, total: NUMBER_STATIONS.length,
+    nav: [
+      { id: 'n-system', n: 'Конструктор чисел', s: 'Введи своё число', e: 'Старт' },
+      { id: 'n-lvl1', n: 'Сколько?', s: 'От единиц до миллионов', e: 'Уровень 1' },
+      { id: 'n-lvl2', n: 'Который по счёту?', s: 'От first до twenty-first', e: 'Уровень 2' },
+      { id: 'n-duels', n: 'Сравнение чисел', s: 'Two и second, fifteen и fifty', e: 'Разбор' },
+      { id: 'n-quiz', n: 'Общая проверка', s: '10 заданий', e: 'Тренажёр' },
+      { id: 'n-sheet', n: 'Шпаргалка', s: 'Первые числа, десятки и формы по счёту', e: 'Итог' }
+    ]
+  },
   passive: {
     panel: 'tab-passive', toc: 'vToc', items: V, total: V.length,
     nav: [
@@ -885,8 +959,10 @@ if (window.ResizeObserver) {
   const topbar = document.querySelector('.topbar');
   const measureStack = new ResizeObserver(entries => {
     for (const { target } of entries) {
-      if (target === topbar) stack.style.setProperty('--stack-top', topbar.offsetHeight + 12 + 'px');
-      else target.style.setProperty('--stack-card-height', target.offsetHeight + 'px');
+      if (target === topbar) {
+        document.documentElement.style.setProperty('--header-height', topbar.offsetHeight + 'px');
+        stack.style.setProperty('--stack-top', topbar.offsetHeight + 12 + 'px');
+      } else target.style.setProperty('--stack-card-height', target.offsetHeight + 'px');
     }
   });
   measureStack.observe(topbar);
@@ -925,39 +1001,103 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape' && !menuPop.hidden) { menuPop.hidden = true; menuBtn.setAttribute('aria-expanded', 'false'); menuBtn.focus(); }
 });
 
-/* точки-станции в панели */
-function fillDots() {
-  const d = TABDEF[tab];
-  const groups = {};
-  d.items.forEach(x => { (groups[x.level] = groups[x.level] || []).push(x); });
-  document.getElementById('dots').innerHTML = Object.keys(groups).map(lv =>
-    `<span class="dots__grp">${groups[lv].map(x =>
-      `<a class="z-${x.zone}" href="#${x.id}" data-dot="${x.id}" title="${x.name}" aria-label="${x.name}"></a>`).join('')}</span>`).join('');
+/* переключение вкладок */
+const tabsEl = document.getElementById('sectionTabs');
+const tabsTooltip = document.getElementById('tabsTooltip');
+const tabBtns = [...tabsEl.querySelectorAll('[role="tab"]')];
+const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+let dockPointer;
+let dockFrame = 0;
+let tooltipTab;
+let dismissedTooltip;
+
+function updateDock() {
+  if (dockFrame) return;
+  dockFrame = requestAnimationFrame(() => {
+    dockFrame = 0;
+    const underPointer = dockPointer && document.elementFromPoint(dockPointer.x, dockPointer.y);
+    const hovered = underPointer?.closest('#sectionTabs [role="tab"]');
+    const focused = tabsEl.querySelector('[role="tab"]:focus-visible');
+    const target = hovered || focused;
+    const track = tabsEl.getBoundingClientRect();
+    const inside = underPointer && tabsEl.contains(underPointer);
+    const pointerX = inside ? dockPointer.x - track.left + tabsEl.scrollLeft : null;
+    const x = pointerX ?? (focused ? focused.offsetLeft + focused.offsetWidth / 2 : null);
+    if (finePointer.matches && motionOK() && x !== null) {
+      const sizes = tabBtns.map(button => {
+        const center = button.offsetLeft + button.offsetWidth / 2;
+        const proximity = Math.max(0, 1 - Math.abs(x - center) / 220);
+        return (1 + .26 * proximity ** 2).toFixed(3);
+      });
+      tabBtns.forEach((button, i) => {
+        const left = button.offsetLeft - tabsEl.scrollLeft;
+        const right = left + button.offsetWidth;
+        const edge = 48;
+        const origin = left < edge ? 'left' : right > tabsEl.clientWidth - edge ? 'right' : 'center';
+        button.style.setProperty('--dock-scale', sizes[i]);
+        button.style.setProperty('--dock-origin', origin);
+      });
+    } else {
+      tabBtns.forEach(button => {
+        button.style.removeProperty('--dock-scale');
+        button.style.removeProperty('--dock-origin');
+      });
+    }
+
+    if (target !== tooltipTab) {
+      tooltipTab = target;
+      dismissedTooltip = null;
+    }
+    const label = target?.getAttribute('aria-label');
+    tabsTooltip.hidden = !label || label === target.textContent.trim() || target === dismissedTooltip;
+    if (tabsTooltip.hidden) return;
+    const box = target.getBoundingClientRect();
+    tabsTooltip.textContent = label;
+    const width = tabsTooltip.offsetWidth;
+    const center = Math.min(track.right, Math.max(track.left, box.left + box.width / 2));
+    const left = Math.max(8, Math.min(center - width / 2, document.documentElement.clientWidth - width - 8));
+    tabsTooltip.style.left = (left - track.left) + 'px';
+  });
 }
 
-/* переключение вкладок */
-const tabsInk = document.getElementById('tabsInk');
-const tabBtns = [...document.querySelectorAll('.tabs button')];
-function moveInk() {
-  const active = tabBtns.find(b => b.getAttribute('aria-selected') === 'true');
-  if (!active) return;
-  tabsInk.style.width = active.offsetWidth + 'px';
-  tabsInk.style.transform = `translateX(${active.offsetLeft - 3}px)`;
-}
+tabsEl.addEventListener('pointermove', event => {
+  if (event.pointerType === 'touch' || !finePointer.matches) return;
+  dockPointer = { x: event.clientX, y: event.clientY };
+  updateDock();
+});
+tabsEl.addEventListener('pointerleave', () => {
+  dockPointer = null;
+  updateDock();
+});
+tabsEl.addEventListener('focusin', updateDock);
+tabsEl.addEventListener('focusout', updateDock);
+tabsEl.addEventListener('scroll', updateDock, { passive: true });
+window.addEventListener('scroll', () => {
+  if (dockPointer || tooltipTab) updateDock();
+}, { passive: true });
+document.addEventListener('keydown', event => {
+  if (event.key !== 'Escape' || tabsTooltip.hidden) return;
+  dismissedTooltip = tooltipTab;
+  updateDock();
+});
+
 /* на узком экране панель вкладок прокручивается — активную вкладку подводим в видимую часть */
 function revealTab() {
-  const tabsEl = tabsInk.parentElement;
   const active = tabBtns.find(b => b.getAttribute('aria-selected') === 'true');
   if (!active || tabsEl.scrollWidth <= tabsEl.clientWidth) return;
   tabsEl.scrollLeft = active.offsetLeft - (tabsEl.clientWidth - active.offsetWidth) / 2;
 }
 function setTab(name, scroll) {
   tab = name;
-  tabBtns.forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === name)));
+  tabBtns.forEach(button => {
+    const selected = button.dataset.tab === name;
+    button.setAttribute('aria-selected', String(selected));
+    button.tabIndex = selected ? 0 : -1;
+  });
   Object.keys(TABDEF).forEach(k => {
     document.getElementById(TABDEF[k].panel).hidden = (k !== name);
   });
-  fillDots(); fillMenu(); paint(); moveInk(); revealTab();
+  fillMenu(); paint(); revealTab(); updateDock();
   if (scroll !== false) window.scrollTo({ top: 0, behavior: motionOK() ? 'smooth' : 'auto' });
 }
 tabBtns.forEach(b => b.addEventListener('click', () => {
@@ -966,7 +1106,7 @@ tabBtns.forEach(b => b.addEventListener('click', () => {
   if (location.hash !== hash) history.pushState(null, '', hash);
   setTab(name);
 }));
-tabsInk.parentElement.addEventListener('keydown', event => {
+tabsEl.addEventListener('keydown', event => {
   const index = tabBtns.indexOf(event.target);
   if (index < 0) return;
   const last = tabBtns.length - 1;
@@ -978,12 +1118,14 @@ tabsInk.parentElement.addEventListener('keydown', event => {
   }[event.key];
   if (next === undefined) return;
   event.preventDefault();
+  dockPointer = null;
   tabBtns[next].focus({ preventScroll: true });
   tabBtns[next].click();
 });
-window.addEventListener('resize', moveInk);
-/* ширина кнопок меняется и без resize — например, когда догружается шрифт */
-if (window.ResizeObserver) new ResizeObserver(moveInk).observe(document.querySelector('.tabs'));
+window.addEventListener('resize', () => {
+  revealTab();
+  updateDock();
+});
 
 function motionOK() { return !window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
 
@@ -993,7 +1135,7 @@ let done = new Set();
 try { done = new Set(JSON.parse(localStorage.getItem(KEY) || '[]')); } catch (e) { done = new Set(); }
 
 function paint() {
-  const all = S.concat(T, C, P, D, V, A, M, L, CLOCK_STATIONS);
+  const all = S.concat(T, C, P, D, V, A, M, L, CLOCK_STATIONS, NUMBER_STATIONS);
   all.forEach(x => {
     const on = done.has(x.id);
     const st = document.getElementById(x.id);
@@ -1068,6 +1210,7 @@ function tabForHash(h) {
   if (id.startsWith('m-')) return 'obligation';
   if (id.startsWith('l-')) return 'modals';
   if (id.startsWith('h-')) return 'clock';
+  if (id.startsWith('n-')) return 'numbers';
   if (T.some(t => t.id === id) || id.indexOf('t-') === 0) return 'tenses';
   return null;
 }
@@ -1088,6 +1231,6 @@ function openHashTab() {
 setTab(tabForHash(location.hash) || 'home', false);
 window.addEventListener('hashchange', openHashTab);
 /* шрифт догружается и меняет ширину кнопок — ползунок и прокрутку панели пересчитываем заново */
-requestAnimationFrame(() => { moveInk(); revealTab(); });
-if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { moveInk(); revealTab(); });
+requestAnimationFrame(() => { revealTab(); updateDock(); });
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { revealTab(); updateDock(); });
 if (location.hash) openHashTab();

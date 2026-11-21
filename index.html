@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Интерактивная методичка по английской грамматике: основа предложения, 12 времён, условные предложения, местоимения, степени сравнения, пассив, артикли, долженствование, модальные глаголы, время по часам и числа. Схемы, конструкторы и 860 заданий с разбором.">
+<meta name="description" content="Интерактивная методичка по английской грамматике: основа предложения, 12 времён, условные предложения, местоимения, степени сравнения, пассив, артикли, долженствование, модальные глаголы, время по часам, числа, отрицания и связки. Схемы, конструкторы и 932 задания с разбором.">
 <meta name="color-scheme" content="dark light">
 <meta name="theme-color" content="#0A1213" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#ECF0EE" media="(prefers-color-scheme: light)">
@@ -907,6 +907,7 @@ td.ex { color: var(--text-dim); }
 .r-verb { --rc: var(--present);  --rs: var(--present-soft); }
 .r-subj { --rc: var(--text);     --rs: var(--surface-2); }
 .r-rest { --rc: var(--text-dim); --rs: transparent; }
+.r-neg  { --rc: var(--past);     --rs: var(--past-soft); }
 
 /* ячейки-слова */
 .train { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; }
@@ -1411,6 +1412,9 @@ td.ex { color: var(--text-dim); }
           <button type="button" role="tab" id="numbersTab" data-tab="numbers" aria-selected="false" aria-controls="tab-numbers" aria-label="Числа и цифры" tabindex="-1">
             <span class="tabs__tile">Числа и цифры</span>
           </button>
+          <button type="button" role="tab" id="negationTab" data-tab="negation" aria-selected="false" aria-controls="tab-negation" aria-label="Отрицания и связки" tabindex="-1">
+            <span class="tabs__tile">Отрицания и связки</span>
+          </button>
         </div>
       </div>
       <span class="tabs__tooltip" id="tabsTooltip" aria-hidden="true" hidden></span>
@@ -1453,7 +1457,7 @@ td.ex { color: var(--text-dim); }
         <a class="home-primary" href="#home-course">Посмотреть программу <span aria-hidden="true">↘</span></a>
         <a class="home-secondary" href="#s-hero">Открыть первый урок <span aria-hidden="true">→</span></a>
       </div>
-      <p class="home-facts">11 разделов <span>·</span> 860 заданий с разбором в методичке</p>
+      <p class="home-facts">12 разделов <span>·</span> 932 задания с разбором в методичке</p>
     </div>
     <div class="home-example">
       <div class="home-example__label"><span>ПОДСКАЗКА ИЗ УРОКА</span><span>АРТИКЛИ</span></div>
@@ -1499,6 +1503,7 @@ td.ex { color: var(--text-dim); }
       <a class="home-card" href="#l-hero"><span class="home-card__num">09</span><span class="home-card__name">Модальные глаголы</span><span class="home-card__text">Как сказать «могу», спросить «можно?» и добавить «может быть».</span><span class="home-card__arrow" aria-hidden="true">↗</span></a>
       <a class="home-card" href="#h-hero"><span class="home-card__num">10</span><span class="home-card__name">Время по часам</span><span class="home-card__text">Как сказать «половина первого», «без двадцати час» и назвать время по стрелкам.</span><span class="home-card__arrow" aria-hidden="true">↗</span></a>
       <a class="home-card" href="#n-hero"><span class="home-card__num">11</span><span class="home-card__name">Числа и цифры</span><span class="home-card__text">Как прочитать 152 365 и сказать «двадцать первый».</span><span class="home-card__arrow" aria-hidden="true">↗</span></a>
+      <a class="home-card" href="#g-hero"><span class="home-card__num">12</span><span class="home-card__name">Отрицания и связки</span><span class="home-card__text">Почему «никто не пришёл» — <i>Nobody came</i>. Как сказать «или — или», «ни — ни» и «и — и».</span><span class="home-card__arrow" aria-hidden="true">↗</span></a>
     </div>
   </section>
   </div>
@@ -1523,9 +1528,9 @@ td.ex { color: var(--text-dim); }
       <div>
         <p class="eyebrow">Выдаётся отдельно</p>
         <h2>Дополнительный тренажёр</h2>
-        <p>Отдельный HTML-файл на 1 680 заданий. Подойдёт для домашней работы и повторения. В смешанных наборах сначала решаешь задачу, а затем читаешь разбор. Во «Временах» можно также выбрать одно время и потренировать его отдельно.</p>
+        <p>Отдельный HTML-файл на 2 160 заданий. Подойдёт для домашней работы и повторения. В смешанных наборах сначала решаешь задачу, а затем читаешь разбор. Во «Временах» можно также выбрать одно время и потренировать его отдельно.</p>
       </div>
-      <div class="home-practice__num" aria-hidden="true">1 680<span>заданий</span></div>
+      <div class="home-practice__num" aria-hidden="true">2 160<span>заданий</span></div>
     </div>
   </section>
 
@@ -3265,6 +3270,116 @@ td.ex { color: var(--text-dim); }
           <tr><td>21</td><td><code>twenty-one</code></td><td><code>twenty-first · 21st</code></td></tr>
           <tr><td>100</td><td><code>one hundred</code></td><td><code>one hundredth · 100th</code></td></tr>
           <tr><td>1,000</td><td><code>one thousand</code></td><td><code>one thousandth · 1,000th</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+</div>
+
+<div class="tabpanel" id="tab-negation" role="tabpanel" aria-labelledby="negationTab" hidden>
+<header class="hero" id="g-hero">
+  <div class="wrap">
+    <div class="eyebrow">Отрицания и связки</div>
+    <h1>Одного «нет» <span class="tri">достаточно</span></h1>
+    <p class="hero__sub">По-русски «никто не пришёл», а по-английски <b>Nobody came</b>. Слово <b>nobody</b> уже всё отрицает. Разберём, когда русское «не» не нужно переносить в английский, а потом научимся соединять варианты: «или — или», «ни — ни» и «и — и».</p>
+    <div class="hero__meta">
+      <span class="pill">6 станций</span>
+      <span class="pill">конструктор</span>
+      <span class="pill">72 задания с разбором</span>
+    </div>
+  </div>
+</header>
+
+<section class="sect toc" id="g-toc">
+  <div class="wrap">
+    <div class="sect__head" style="margin-bottom:0">
+      <div class="eyebrow">Оглавление</div>
+      <h2>С чего начать</h2>
+      <p>Сначала разберись с одним отрицанием, потом сравни три пары связок.</p>
+    </div>
+    <div class="toc__g" id="gToc"></div>
+  </div>
+</section>
+
+<section class="sect" id="g-system">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Конструктор</div>
+      <h2>Скажи по-русски — собери по-английски</h2>
+      <p>Выбери смысл и посмотри, какое слово уже отвечает за отрицание или соединяет две части.</p>
+    </div>
+    <div class="bu">
+      <div class="bu__ctl">
+        <div class="bu__grp">
+          <div class="seg" id="gBuild" role="group" aria-label="Что хочу сказать">
+            <button type="button" data-v="0" aria-pressed="true">Никогда не видел</button>
+            <button type="button" data-v="1" aria-pressed="false">Никого не видел</button>
+            <button type="button" data-v="2" aria-pressed="false">То же через didn’t</button>
+            <button type="button" data-v="3" aria-pressed="false">Когда-нибудь видел?</button>
+            <button type="button" data-v="4" aria-pressed="false">Или — или</button>
+            <button type="button" data-v="5" aria-pressed="false">Ни — ни</button>
+            <button type="button" data-v="6" aria-pressed="false">И — и</button>
+          </div>
+        </div>
+      </div>
+      <div class="bu__out">
+        <div class="bu__ru" id="gBuildRu"></div>
+        <div class="train bu__train" id="gBuildTrain" aria-live="polite"></div>
+        <p class="bu__note" id="gBuildNote"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main class="wrap"><div class="roadmap" id="g-road"></div></main>
+
+<section class="sect" id="g-duels">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Разбор полётов</div>
+      <h2>Похожие слова, разный смысл</h2>
+      <p>Сравни два способа отрицания и посмотри, что меняется при выборе связки.</p>
+    </div>
+    <div class="duels" id="gDuels"></div>
+  </div>
+</section>
+
+<section class="sect" id="g-quiz">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">Общая проверка</div>
+      <h2>Двенадцать заданий вперемешку</h2>
+      <p>Сначала реши, что хочешь сказать, потом выбери английскую сборку.</p>
+    </div>
+    <div class="drill z-present" id="gQuiz"></div>
+  </div>
+</section>
+
+<section class="sect" id="g-sheet">
+  <div class="wrap">
+    <div class="sect__head">
+      <div class="eyebrow">На один экран</div>
+      <h2>Шпаргалка</h2>
+      <p>Уже есть never, nobody или nothing? Не добавляй ещё одно «не» только потому, что оно есть в русском переводе.</p>
+    </div>
+    <div class="sheet">
+      <table>
+        <thead><tr><th>Слово</th><th>Что означает</th><th>Пример</th></tr></thead>
+        <tbody id="gWords"></tbody>
+      </table>
+    </div>
+    <div class="sheet">
+      <table>
+        <thead><tr><th>Хочу сказать</th><th>Пара</th><th>Подсказка</th></tr></thead>
+        <tbody>
+          <tr><td>Или одно, или другое</td><td><code>either … or …</code></td><td>Выбираем один вариант.</td></tr>
+          <tr><td>Ни одно, ни другое</td><td><code>neither … nor …</code></td><td>N напоминает no. Она есть у обоих слов.</td></tr>
+          <tr><td>И одно, и другое</td><td><code>both … and …</code></td><td>Подходят оба.</td></tr>
+          <tr><td>Я никого не видел</td><td><code>I saw nobody.</code></td><td>Отрицание уже в nobody.</td></tr>
+          <tr><td>То же другим способом</td><td><code>I didn’t see anybody.</code></td><td>Didn’t отрицает, поэтому дальше anybody.</td></tr>
+          <tr><td>Я никогда этого не видел</td><td><code>I have never seen it.</code></td><td>Have оставляем. Don’t не добавляем.</td></tr>
+          <tr><td>Ты когда-нибудь это видел?</td><td><code>Have you ever seen it?</code></td><td>Вопрос: have вперёд, «когда-нибудь» — ever.</td></tr>
         </tbody>
       </table>
     </div>
@@ -8920,6 +9035,271 @@ const QUIZ_NUMBERS = [
 ];
 </script>
 <script>
+const NEGATION_LEVELS = [
+  { n: 1, ru: 'Одного отрицания достаточно', title: 'Не переноси русское «не» дважды', code: 'never · nobody · nothing',
+    txt: 'По-русски говорим «никто не пришёл». По-английски nobody уже сообщает, что не пришёл ни один человек. Ещё одно «не» ему не нужно.' },
+  { n: 2, ru: 'Выбор и две части', title: 'Один, ни один или оба', code: 'either · neither · both',
+    txt: 'Сначала реши, что хочешь сказать: выбрать один вариант, отказаться от обоих или взять оба. Потом соедини две части нужной парой слов.' }
+];
+
+const NEGATION_WORDS = [
+  ['never', 'никогда', 'I never smoke.', 'Я никогда не курю.'],
+  ['nobody / no one', 'никто, никого', 'Nobody called.', 'Никто не позвонил.'],
+  ['nothing', 'ничего', 'I know nothing about it.', 'Я ничего об этом не знаю.'],
+  ['nowhere', 'нигде, никуда', 'We went nowhere.', 'Мы никуда не ходили.'],
+  ['no + название', 'нет, ни одного', 'I have no questions.', 'У меня нет вопросов.'],
+  ['neither … nor …', 'ни … ни …', 'I drink neither tea nor coffee.', 'Я не пью ни чай, ни кофе.']
+];
+
+const NEGATION_STATIONS = [
+  {
+    id: 'g-once', zone: 'past', level: 1, idx: 1, short: 'Одно отрицание',
+    name: '«Никто пришёл» — английскому всё понятно', core: 'Nobody came. · I have never seen this before.',
+    thesis: 'По-русски повторяем «не», а по-английски одного слова уже достаточно',
+    lead: 'По-русски мы спокойно говорим: «Я <b>никогда не</b> видел», «Я <b>ничего не</b> знаю», «<b>Никто не</b> пришёл». Хочется перенести в английский сразу оба отрицания. Но в обычном английском слова <b>never</b>, <b>nothing</b> и <b>nobody</b> уже сами говорят «нет».',
+    blocks: [
+      { kind: 'key', h: 'Мысленно прочитай «я видел никого»', p: '<b>I saw nobody.</b> — «Я никого не видел». Чтобы понять сборку, мысленно прочитай «я видел никого». Это подсказка, а не перевод на хороший русский. Так же <b>Nobody came</b> буквально собирается как «никто пришёл». Английскому всё понятно: <b>nobody</b> уже означает, что не пришёл ни один человек.' },
+      { kind: 'plain', h: 'Разберём твоё «я никогда раньше этого не видел»', p: '<b>I have seen this before.</b> — «Я раньше это видел». Добавляем <b>never</b>: <b>I have never seen this before.</b> — «Я никогда раньше этого не видел». Всё: отрицание уже появилось. <b>Have</b> помогает построить фразу «видел раньше», а <b>seen</b> — третья форма <b>see</b>, «видеть». Слово <b>never</b> стоит между ними.' },
+      { kind: 'trap', h: 'Не вставляй don’t из русского перевода', p: 'Если хочешь сказать «я никогда этого не видел», нужно <b>I have never seen this before</b>. Вариант <b>I have never don’t see this before</b> так не собирается. И не убирай <b>have</b>: оно помогает построить фразу, само по себе оно не означает «не».' },
+      { kind: 'plain', h: 'Где поставить never', p: 'Перед обычным действием: <b>I never smoke.</b> После <b>am, is, are</b>: <b>She is never late.</b> Если есть помощник вроде <b>have</b> или <b>will</b>, ставим после него: <b>I have never seen it.</b> · <b>I will never forget you.</b>' },
+      { kind: 'plain', h: 'Почему иногда слышно I don’t know nothing', p: 'Такое можно услышать в песнях и некоторых вариантах разговорной речи. Но для своей обычной речи и письма держись схем из этой вкладки: <b>I know nothing</b> или <b>I don’t know anything</b>.' }
+    ],
+    forms: { p: 'I have seen this before.', n: 'I have <b>never</b> seen this before.', q: 'Have you <b>ever</b> seen this before?' },
+    markers: ['никогда не → never', 'никто не → nobody', 'ничего не → nothing'],
+    ex: [
+      { en: 'Nobody came.', ru: 'Никто не пришёл.', nb: 'Nobody уже отрицает приход.' },
+      { en: 'She is never late.', ru: 'Она никогда не опаздывает.' },
+      { en: 'I have never seen snow.', ru: 'Я никогда не видел снег.' }
+    ]
+  },
+  {
+    id: 'g-any', zone: 'present', level: 1, idx: 2, short: 'Два способа',
+    name: 'Nobody или not anybody — выбери одну сборку', core: 'I saw nobody. = I didn’t see anybody.',
+    thesis: 'Отрицание уже в слове или стоит рядом с глаголом',
+    lead: 'Можно сказать <b>I saw nobody</b>. А можно поставить отрицание рядом с глаголом: <b>I didn’t see anybody</b>. По-русски оба варианта означают «я никого не видел». Главное — не склеивать два способа.',
+    blocks: [
+      { kind: 'key', h: 'Меняем слова парой', p: '<b>I saw nobody. → I didn’t see anybody.</b><br><b>I know nothing. → I don’t know anything.</b><br><b>We went nowhere. → We didn’t go anywhere.</b><br><b>I have no questions. → I don’t have any questions.</b>' },
+      { kind: 'trap', h: 'Не оставляй nothing после don’t для «ничего не»', p: 'Если хочешь сказать «я ничего не знаю», выбирай <b>I know nothing</b> или <b>I don’t know anything</b>. Не собирай <b>I don’t know nothing</b> по русским словам. После <b>don’t</b> здесь нужно <b>anything</b>.' },
+      { kind: 'plain', h: 'После didn’t действие возвращаем к обычному виду', p: '<b>I saw nobody.</b> Слово <b>saw</b> уже показывает, что дело было в прошлом. Когда добавили <b>didn’t</b>, прошлое показывает оно: <b>I didn’t see anybody</b>. Поэтому <b>see</b>, а не <b>saw</b>.' },
+      { kind: 'plain', h: 'No ставим перед названием чего-то', p: '<b>I have no money.</b> — «У меня нет денег». Ещё можно сказать <b>I don’t have any money</b>. После <b>no</b> называем, чего нет: <b>no money</b>, <b>no questions</b>, <b>no time</b>.' },
+      { kind: 'plain', h: 'А если отрицательных слов по-русски три?', p: '«Никто никогда ничего мне не рассказывает» → <b>Nobody ever tells me anything.</b> Здесь отрицание уже в <b>nobody</b>, поэтому дальше <b>ever</b> и <b>anything</b>. Не переводим каждое русское «ни» отдельным английским отрицанием.' }
+    ],
+    forms: { p: 'I know something.', n: 'I know <b>nothing</b>. = I <b>don’t</b> know <b>anything</b>.', q: 'Do you know <b>anything</b> about it?' },
+    markers: ['nobody ↔ not anybody', 'nothing ↔ not anything', 'nowhere ↔ not anywhere', 'no ↔ not any'],
+    ex: [
+      { en: 'We didn’t go anywhere.', ru: 'Мы никуда не ходили.' },
+      { en: 'There is nothing in the box.', ru: 'В коробке ничего нет.' },
+      { en: 'There isn’t anything in the box.', ru: 'В коробке ничего нет. Другой способ сказать то же самое.' }
+    ]
+  },
+  {
+    id: 'g-questions', zone: 'future', level: 1, idx: 3, short: 'Вопросы',
+    name: 'Вопрос строим как обычно', core: 'Did you see anybody? · Did nobody call?',
+    thesis: 'Слово с отрицанием не заменяет порядок слов в вопросе',
+    lead: '<b>Never</b> и <b>nobody</b> уже дают отрицание, но не строят за тебя вопрос. Если нужен вопрос, используем знакомую сборку: помощник → кто → действие → остальное.',
+    blocks: [
+      { kind: 'key', h: 'Кого-нибудь и когда-нибудь', p: '<b>Did you see anybody?</b> — «Ты кого-нибудь видел?»<br><b>Have you ever seen this before?</b> — «Ты когда-нибудь раньше это видел?» Спрашиваем «когда-нибудь?», поэтому здесь <b>ever</b>, а не <b>never</b>.' },
+      { kind: 'plain', h: 'Само did не означает «не»', p: '<b>Did nobody call?</b> — «Никто не позвонил?» Здесь есть <b>did</b>, но нет <b>not</b>. Слово <b>did</b> помогает спросить, а <b>nobody</b> сообщает «никто». Поэтому два отрицания здесь не появились.' },
+      { kind: 'plain', h: 'Если уже есть be или can', p: '<b>Is anybody home?</b> — «Кто-нибудь дома?» Вперёд выходит <b>is</b>.<br><b>Can anybody help me?</b> — «Кто-нибудь может мне помочь?» Вперёд выходит <b>can</b>. Дополнительное <b>do</b> им не нужно.' },
+      { kind: 'plain', h: 'С nothing тоже можно спросить', p: '<b>Is there nothing in the box?</b> — «В коробке ничего нет?» Ты уже предполагаешь, что коробка пустая. Нейтральное «там что-нибудь есть?» звучит как <b>Is there anything in the box?</b> Смысл выбирает слово.' }
+    ],
+    forms: { p: 'Somebody called.', n: '<b>Nobody</b> called.', q: '<b>Did</b> anybody call?' },
+    markers: ['когда-нибудь? → ever', 'кто-нибудь? → anybody', 'did ≠ didn’t'],
+    ex: [
+      { en: 'Have you ever been to London?', ru: 'Ты когда-нибудь был в Лондоне?' },
+      { en: 'Does nobody know the answer?', ru: 'Никто не знает ответ?' },
+      { en: 'Can anybody hear me?', ru: 'Кто-нибудь меня слышит?' }
+    ]
+  },
+  {
+    id: 'g-either', zone: 'future', level: 2, idx: 4, short: 'Или — или',
+    name: 'Either … or … — предлагаю выбор', core: 'either tea or coffee',
+    thesis: 'Сейчас будут варианты: или одно, или другое',
+    lead: '<b>You can have either tea or coffee.</b> — «Можешь взять или чай, или кофе». Сначала <b>either</b> показывает: сейчас будут варианты. Потом <b>or</b> соединяет их. Запомни готовую пару: <b>either → or</b>, «или → или».',
+    blocks: [
+      { kind: 'key', h: 'Соединяй то, между чем выбираешь', p: 'Два напитка: <b>either tea or coffee</b>.<br>Два действия: <b>either walk or take a taxi</b>.<br>Два человека: <b>either Tom or Anna</b>. Сначала придумай две части, потом соедини их.' },
+      { kind: 'plain', h: 'Вопрос и отрицание собираются вокруг выбора', p: '<b>Can we either walk or take a taxi?</b> — «Мы можем или пойти пешком, или взять такси?» Вопрос делает <b>can</b> в начале. В <b>You can’t choose both; you can choose either tea or coffee</b> запрещаем брать оба напитка и предлагаем выбрать один.' },
+      { kind: 'plain', h: 'Если действие делает один из двух', p: '<b>Either Tom or Anna works here.</b> — «Здесь работает или Том, или Анна». В этом примере оба человека названы по одному. Поэтому <b>works</b>, как в <b>Tom works here</b>. Если соединяешь разные варианты вроде <b>Tom</b> и <b>his friends</b>, смотри на ближайшую к действию часть: <b>Either Tom or his friends are coming.</b>' }
+    ],
+    forms: { p: 'We can <b>either</b> walk <b>or</b> take a taxi.', n: 'We can’t take <b>either</b> route.', q: 'Can we <b>either</b> walk <b>or</b> take a taxi?' },
+    markers: ['either → or', 'или → или', 'выбор из двух'],
+    ex: [
+      { en: 'Either Tom or Anna will call you.', ru: 'Тебе позвонит или Том, или Анна.' },
+      { en: 'You can either stay here or come with us.', ru: 'Можешь или остаться здесь, или пойти с нами.' },
+      { en: 'We can’t take either route.', ru: 'Мы не можем поехать ни по одному из двух маршрутов.', nb: 'Отрицает can’t. После него either не означает, что один маршрут всё-таки подходит.' }
+    ]
+  },
+  {
+    id: 'g-neither', zone: 'past', level: 2, idx: 5, short: 'Ни — ни',
+    name: 'Neither … nor … — буква n напоминает no', core: 'neither tea nor coffee',
+    thesis: 'Поставили n перед either — поставим её и перед or',
+    lead: 'Было <b>either</b> — «или». Поставили впереди <b>n</b>, получили <b>neither</b> — «ни». Буква <b>n</b> напоминает слово <b>no</b> — «нет». Во второй части тоже ставим <b>n</b>: <b>or → nor</b>. Получилась пара <b>neither → nor</b>, «ни → ни».',
+    blocks: [
+      { kind: 'key', h: 'У обоих слов впереди n', p: '<b>I drink neither tea nor coffee.</b> — «Я не пью ни чай, ни кофе». Русское «не пью» не заставляет добавлять <b>don’t</b>: <b>neither … nor …</b> уже всё отрицает. Если выбрал <b>neither</b>, дальше ищи <b>nor</b>.' },
+      { kind: 'trap', h: 'Не склеивай два отрицания', p: 'Для «я не пью ни чай, ни кофе» выбирай <b>I drink neither tea nor coffee</b>. Не добавляй <b>don’t</b> и не меняй пару на <b>neither … or …</b>.' },
+      { kind: 'plain', h: 'Можно соединять действия и качества', p: '<b>She can neither sing nor dance.</b> — «Она не умеет ни петь, ни танцевать».<br><b>The room is neither big nor comfortable.</b> — «Комната ни большая, ни удобная». Слова <b>can</b> и <b>is</b> остаются на месте, дополнительное <b>not</b> не нужно.' },
+      { kind: 'plain', h: 'Если не сделал ни тот ни другой', p: '<b>Neither Tom nor Anna called.</b> — «Ни Том, ни Анна не позвонили». В настоящем: <b>Neither Tom nor Anna works here.</b> Оба названы по одному, поэтому <b>works</b>. Если ближе к действию стоит <b>his friends</b>, выбираем форму для «они»: <b>Neither Tom nor his friends are coming.</b>' }
+    ],
+    forms: { p: 'I drink tea and coffee.', n: 'I drink <b>neither</b> tea <b>nor</b> coffee.', q: 'Do you drink tea or coffee?' },
+    markers: ['n → no → нет', 'neither → nor', 'ни → ни'],
+    ex: [
+      { en: 'Neither Tom nor Anna called.', ru: 'Ни Том, ни Анна не позвонили.' },
+      { en: 'She can neither sing nor dance.', ru: 'Она не умеет ни петь, ни танцевать.' },
+      { en: 'I like neither of them.', ru: 'Мне не нравится ни один из них двоих.' }
+    ]
+  },
+  {
+    id: 'g-both', zone: 'present', level: 2, idx: 6, short: 'И — и',
+    name: 'Both … and … — подходят оба', core: 'both tea and coffee',
+    thesis: 'Ничего не выбираем и не отрицаем: берём обе части',
+    lead: '<b>I like both tea and coffee.</b> — «Мне нравятся и чай, и кофе». Слово <b>both</b> подсказывает: подходят оба варианта. Соединяем их через <b>and</b>. Запомни парой: <b>both → and</b>, «и → и».',
+    blocks: [
+      { kind: 'key', h: 'Люди, действия или качества', p: '<b>Both Tom and Anna work here.</b> — «И Том, и Анна работают здесь».<br><b>She can both sing and dance.</b> — «Она умеет и петь, и танцевать».<br><b>The room is both cheap and comfortable.</b> — «Комната и дешёвая, и удобная».' },
+      { kind: 'plain', h: 'Двое вместе — как they', p: 'Если и Том, и Анна что-то делают, считаем их вместе: <b>they</b>, «они». Поэтому <b>Both Tom and Anna work here</b>, как <b>They work here</b>. Не добавляем к <b>work</b> окончание <b>-s</b>.' },
+      { kind: 'trap', h: '«Не оба» ещё не значит «ни один»', p: '<b>I don’t like both of them.</b> — «Мне нравятся не оба». Это не означает, что не нравится никто: один может нравиться, а другой — нет. Если хочешь сказать «ни тот ни другой», скажи <b>I like neither of them</b>.' },
+      { kind: 'plain', h: 'Три пары — три разных смысла', p: '<b>Either tea or coffee</b> — выбираем один напиток.<br><b>Neither tea nor coffee</b> — ни один не подходит.<br><b>Both tea and coffee</b> — подходят оба. Сначала реши, какой смысл тебе нужен.' }
+    ],
+    forms: { p: 'I like <b>both</b> tea <b>and</b> coffee.', n: 'I like <b>neither</b> tea <b>nor</b> coffee.', q: 'Do you like <b>both</b> tea <b>and</b> coffee?' },
+    markers: ['both → and', 'и → и', 'оба вместе → they'],
+    ex: [
+      { en: 'Both Tom and Anna are here.', ru: 'И Том, и Анна здесь.' },
+      { en: 'The route is both short and safe.', ru: 'Маршрут и короткий, и безопасный.' },
+      { en: 'Do you speak both English and French?', ru: 'Ты говоришь и по-английски, и по-французски?' }
+    ]
+  }
+];
+
+const NEGATION_DUELS = [
+  { q: 'Два способа сказать «я никого не видел»',
+    a: { z: 'past', n: 'Отрицание в слове', en: 'I saw nobody.', ru: 'Я никого не видел.', why: 'Nobody уже говорит «никого». Слово saw показывает прошлое.' },
+    b: { z: 'present', n: 'Отрицание рядом с действием', en: 'I didn’t see anybody.', ru: 'Я никого не видел.', why: 'Didn’t уже отрицает. Поэтому anybody, а действие — see.' },
+    r: 'Выбери одну сборку. Для этого смысла не ставь didn’t и nobody вместе.' },
+  { q: 'Или один, или ни один?',
+    a: { z: 'future', n: 'Предлагаю выбор', en: 'You can have either tea or coffee.', ru: 'Можно взять или чай, или кофе.', why: 'Выбирай один из двух напитков.' },
+    b: { z: 'past', n: 'Отказываюсь от обоих', en: 'I drink neither tea nor coffee.', ru: 'Я не пью ни чай, ни кофе.', why: 'Буква n напоминает no. Она есть у neither и у nor.' },
+    r: 'Either идёт с or. Neither идёт с nor.' },
+  { q: 'Оба или ни один?',
+    a: { z: 'present', n: 'Подходят оба', en: 'I like both of them.', ru: 'Мне нравятся они оба.', why: 'Both включает обоих.' },
+    b: { z: 'past', n: 'Не подходит ни один', en: 'I like neither of them.', ru: 'Мне не нравится ни один из них двоих.', why: 'Neither исключает обоих.' },
+    r: 'I don’t like both of them — «мне нравятся не оба». Это не то же самое, что neither.' }
+];
+
+const NEGATION_SCENES = [
+  ['Я никогда раньше этого не видел.', [['subj', 'I'], ['aux', 'have'], ['neg', 'never'], ['verb', 'seen'], ['rest', 'this before'], ['end', '.']],
+    'Never уже означает «никогда не». Have помогает построить фразу, seen — третья форма see. Don’t сюда не добавляем.'],
+  ['Я никого не видел.', [['subj', 'I'], ['verb', 'saw'], ['neg', 'nobody'], ['end', '.']],
+    'Для сборки мысленно прочитай «я видел никого». Nobody уже даёт отрицание.'],
+  ['Я никого не видел. Другой способ.', [['subj', 'I'], ['aux', 'didn’t'], ['verb', 'see'], ['rest', 'anybody'], ['end', '.']],
+    'Отрицание уже в didn’t. Поэтому anybody, а действие возвращаем к обычному виду: see.'],
+  ['Ты когда-нибудь раньше это видел?', [['aux', 'Have'], ['subj', 'you'], ['rest', 'ever'], ['verb', 'seen'], ['rest', 'this before'], ['end', '?']],
+    'Спрашиваем «когда-нибудь?» — ever. Have выходит перед you, как в обычном вопросе.'],
+  ['Можно взять или чай, или кофе.', [['subj', 'You'], ['aux', 'can'], ['verb', 'have'], ['rest', 'either tea'], ['rest', 'or coffee'], ['end', '.']],
+    'Предлагаем выбор. Пара either … or … означает «или … или …».'],
+  ['Я не пью ни чай, ни кофе.', [['subj', 'I'], ['verb', 'drink'], ['neg', 'neither tea'], ['neg', 'nor coffee'], ['end', '.']],
+    'N напоминает no. Она есть и в neither, и в nor. Дополнительное don’t не нужно.'],
+  ['Мне нравятся и чай, и кофе.', [['subj', 'I'], ['verb', 'like'], ['rest', 'both tea'], ['rest', 'and coffee'], ['end', '.']],
+    'Подходят оба напитка. Both … and … означает «и … и …».']
+];
+</script>
+<script>
+function negationQuestions(block) {
+  return block.trim().split('\n').map(line => {
+    const [sentence, answer, why, first, firstWhy, second, secondWhy] = line.trim().split('|');
+    return Q(sentence, ['+' + answer, why], [first, firstWhy], [second, secondWhy]);
+  });
+}
+
+const NEGATION_DRILLS = {
+  'g-once': negationQuestions(`
+    Я никогда не курю. · I ___ smoke.|never|Never уже означает «никогда не». Ещё одно не не нужно.|never don’t|Never уже отрицает. Don’t сюда не добавляем.|not never|Для «никогда не» достаточно never без not.
+    Никто не пришёл. · ___ came.|Nobody|Nobody уже сообщает, что не пришёл ни один человек.|Anybody|Anybody не сообщает, что никто не пришёл.|Nobody didn’t|Nobody уже даёт отрицание. Came оставляем без didn’t.
+    Я ничего не знаю об этом. · I know ___ about it.|nothing|Nothing уже означает «ничего». Перед know не нужно don’t.|anything|В этой сборке нет другого отрицания. Нужно nothing.|not nothing|Для «ничего не знаю» достаточно nothing после know.
+    Мы никуда не ходили. · We went ___.|nowhere|Nowhere означает «никуда». Went оставляем без didn’t.|anywhere|Без отрицания anywhere не передаст «никуда не».|not nowhere|Здесь нужно одно отрицание: nowhere.
+    Я никогда раньше этого не видел. · I have ___ seen this before.|never|Never ставим после have. Don’t здесь не нужно.|never don’t|Отрицание уже в never. Don’t лишнее, а seen оставляем.|not never|Для «никогда не» здесь нужно never без not.
+    Она никогда не опаздывает. · She is ___ late.|never|После is ставим never: She is never late.|never doesn’t|Never уже даёт отрицание. Doesn’t не добавляем.|not never|Здесь говорим «никогда не», поэтому достаточно never.
+    Никто не позвонил. · ___ called.|No one|No one означает то же, что nobody: никто.|No one didn’t|No one уже отрицает. Не добавляем didn’t.|Someone|Someone — кто-то. Здесь не позвонил никто.
+    Я никогда тебя не забуду. · I will ___ forget you.|never|Never ставим после will. Оно уже означает «никогда не».|never won’t|Will уже стоит перед пропуском. Отрицание даёт never.|not never|Нужно never без второго отрицания not.
+    В коробке ничего нет. · There is ___ in the box.|nothing|Nothing уже говорит, что внутри ничего нет.|anything|В этой фразе нет not. Для пустой коробки нужно nothing.|not nothing|Не добавляем not к nothing для «ничего нет».
+    У меня нет вопросов. · I have ___ questions.|no|No ставим перед названием того, чего нет: no questions.|nothing|Nothing — самостоятельное «ничего». Перед questions нужно no.|not no|No уже означает отсутствие вопросов. Ещё одно not не нужно.
+  `),
+  'g-any': negationQuestions(`
+    Я никого не видел. · I didn’t see ___.|anybody|Didn’t уже отрицает. После него выбираем anybody.|nobody|Для этого смысла не соединяем didn’t и nobody.|somebody|Somebody — кто-то определённый. Здесь говорим, что не видели никого.
+    Я ничего не знаю. · I don’t know ___.|anything|Don’t уже означает «не». Поэтому дальше anything.|nothing|Не склеиваем don’t и nothing для «ничего не».|everything|Not everything означает «не всё». Это другой смысл.
+    Мы никуда не ходили. · We didn’t go ___.|anywhere|Отрицание уже в didn’t. Выбираем anywhere.|nowhere|Для «никуда не» после didn’t не нужно nowhere.|everywhere|Not everywhere — «не везде». Здесь не ходили вообще никуда.
+    У меня нет денег. · I don’t have ___ money.|any|Don’t уже отрицает. Перед money ставим any.|no|Не соединяем don’t и no для «денег нет».|nothing|Nothing не ставим перед money. Здесь нужно any money.
+    У меня нет времени. · I have ___ time.|no|В этой сборке нет don’t. Слово no само показывает отсутствие времени.|any|Any само не передаёт «нет». Здесь нужно no.|nothing|Перед time ставим no. Nothing означает «ничего» и стоит само.
+    Я никого не видел. Другой способ: I didn’t ___ anybody.|see|Прошлое уже показывает didn’t. Действие возвращаем к виду see.|saw|Saw уже показывает прошлое. После didn’t говорим see.|seen|После didn’t нужна обычная форма see, а не третья форма seen.
+    В сумке ничего нет. · There isn’t ___ in the bag.|anything|Isn’t уже содержит not. Дальше выбираем anything.|nothing|Для пустой сумки не соединяем isn’t и nothing.|everything|Not everything — «не всё». Нам нужно «ничего».
+    Я никогда этого не пробовал. · I haven’t ___ tried it.|ever|Haven’t уже отрицает. С ever получится «никогда не пробовал».|never|Для «никогда не» после haven’t не добавляем never.|not ever|В haven’t уже есть not. Второе not не нужно.
+    Никто никогда ничего мне не рассказывает. · Nobody ___ tells me anything.|ever|Отрицание уже в nobody. Поэтому дальше ever, а не never.|never|Не переносим каждое русское «ни» отдельным отрицанием.|doesn’t|Nobody уже сообщает «никто не». Doesn’t здесь не нужно.
+    Никто ничего не знает об этом. · Nobody knows ___ about it.|anything|Nobody уже отрицает всю фразу. Поэтому дальше anything.|nothing|Для этого смысла не ставим nobody и nothing вместе.|not anything|Отрицание уже есть в nobody. Дополнительное not не нужно.
+  `),
+  'g-questions': negationQuestions(`
+    Ты когда-нибудь раньше это видел? · Have you ___ seen this before?|ever|Спрашиваем «когда-нибудь?», поэтому ever.|never|Never дало бы «неужели никогда?». Это другой вопрос.|don’t ever|Вопрос уже строится через have. Don’t здесь не нужно.
+    Ты кого-нибудь видел? · ___ you see anybody?|Did|Вопрос о прошлом: did выходит перед you, дальше see.|Do|Do спросило бы про настоящее. Здесь спрашиваем, видел ли ты.|Didn’t nobody|Это не сборка вопроса «ты кого-нибудь видел?». Здесь достаточно Did you.
+    Кто-нибудь дома? · ___ anybody home?|Is|В такой фразе вперёд выходит is. Do ему не нужно.|Does|Home здесь говорит, где человек. Нужен is, как в He is home.|Do is|Не добавляем do перед is. Вопрос делает само is.
+    Кто-нибудь может мне помочь? · ___ anybody help me?|Can|Can выходит в начало и само задаёт вопрос.|Does can|Can не нужен помощник does. Говорим Can anybody help me?|Do can|Не ставим do перед can. Вперёд выходит can.
+    Никто не позвонил? · ___ nobody call?|Did|Did помогает спросить. Оно само не означает «не». Отрицание уже в nobody.|Didn’t|Для этого смысла не добавляем didn’t к nobody.|Was|С call здесь спрашиваем через did. Was не нужно.
+    Никто не знает ответ? · Does nobody ___ the answer?|know|Does уже помогает задать вопрос. После него обычное know.|knows|Окончание s после does к know не добавляем.|doesn’t know|Отрицание уже в nobody, а does уже стоит в начале.
+    Ты когда-нибудь был в Лондоне? · ___ you ever been to London?|Have|Вопрос строим через have: Have you ever been…?|Did|С been и ever здесь нужна сборка Have you ever been…?|Do|Для «когда-нибудь был» в этой фразе нужно Have you ever been…?
+    В коробке что-нибудь есть? · Is there ___ in the box?|anything|Нейтрально спрашиваем, есть ли что-нибудь.|nothing|Nothing сделало бы вопрос «неужели ничего нет?».|not nothing|Для нейтрального вопроса не нужны два отрицания. Нужно anything.
+    Кто-нибудь знает дорогу? · Does ___ know the way?|anybody|Для «кто-нибудь?» в этом вопросе подходит anybody.|nobody|Nobody изменит смысл: «никто не знает дорогу?»|not anybody|Does здесь лишь помогает спросить. Для нужного вопроса выбираем anybody.
+    Никто не опаздывает? · ___ nobody late?|Is|Late говорит, в каком человек состоянии. Нужен is, как в Nobody is late.|Does|Не говорим Does nobody late. Здесь вперёд выходит is.|Isn’t|Для этого смысла nobody уже даёт отрицание. Достаточно Is nobody late?
+  `),
+  'g-either': negationQuestions(`
+    Можно взять или чай, или кофе. · You can have ___ tea or coffee.|either|Either идёт в паре с or: «или … или …».|neither|Neither требует nor и убирает оба варианта.|both|Both соединяем через and. Здесь предлагаем выбор.
+    Или идём пешком, или берём такси. · We can either walk ___ take a taxi.|or|Пара either … or … соединяет два варианта.|nor|Nor ставим с neither. Здесь either, поэтому or.|and|And подошло бы к both. Здесь выбираем.
+    Или Том, или Анна тебе позвонит. · ___ Tom or Anna will call you.|Either|Either … or …: позвонит один из двух.|Neither|Neither соединяем с nor. Оно означает «ни тот ни другой».|Both|Both идёт с and и означает обоих.
+    Можно остаться здесь или пойти с нами. · You can either stay here or ___.|come with us|Соединяем два действия: stay here и come with us.|coming with us|После can здесь оба действия называем прямо: stay и come.|to come with us|Can уже относится к обеим частям. To перед come не добавляем.
+    Здесь работает или Том, или Анна. · Either Tom or Anna ___ here.|works|Ближе к действию Anna, один человек. Поэтому works, как Anna works.|work|Здесь Anna — один человек. Говорим Anna works.|working|Для обычного «работает здесь» нужно works. Working само по себе так не ставим.
+    Приходи или в понедельник, или во вторник. · Come either on Monday ___ on Tuesday.|or|После either выбираем or: два дня на выбор.|nor|N есть у neither и nor. Здесь either без n.|and|And означало бы соединение обоих дней. Здесь выбираем один.
+    Можно заплатить наличными или картой. · You can pay ___ in cash or by card.|either|Either … or … предлагает два способа оплаты.|both|Для both потребовалось бы and и смысл «обоими способами».|neither|Neither исключает оба способа и требует nor.
+    Мы можем или пройти пешком, или взять такси? · ___ we either walk or take a taxi?|Can|Вопрос задаёт can в начале. Пара either … or … остаётся внутри.|Do can|Перед can не ставим do. Can само выходит вперёд.|Can’t neither|Здесь обычный вопрос о выборе. Нужно Can we either…?
+    Мы не можем поехать ни по одному из двух маршрутов. · We can’t take ___ route.|either|Can’t уже отрицает. После него either route означает «ни один из двух».|neither|Для этого смысла после can’t не добавляем neither.|both|Both route так не собирается: для обоих нужно both routes.
+    Или Том, или его друзья придут. · Either Tom or his friends ___ coming.|are|Рядом с действием his friends — «они». Поэтому are coming.|is|Ближе к действию his friends. Для «они» нужно are.|am|Am подходит к I. Здесь friends, поэтому are.
+  `),
+  'g-neither': negationQuestions(`
+    Я не пью ни чай, ни кофе. · I drink ___ tea nor coffee.|neither|Neither идёт с nor. N напоминает no: ни один напиток.|either|Either требует or и предлагает выбор, а не отказ от обоих.|both|Both идёт с and и означает оба напитка.
+    Она не умеет ни петь, ни танцевать. · She can neither sing ___ dance.|nor|После neither ставим nor. У обоих впереди n.|or|Or — пара для either. Здесь нужно nor.|and|And — пара для both. Здесь отрицаем оба действия.
+    Я не пью ни чай, ни кофе. · I ___ neither tea nor coffee.|drink|Neither … nor … уже отрицает. Drink оставляем без don’t.|don’t drink|Не добавляем don’t к neither … nor … для этого смысла.|doesn’t drink|После I не ставим doesn’t, а отрицание уже есть в neither.
+    Ни Том, ни Анна не позвонили. · ___ Tom nor Anna called.|Neither|Neither … nor … означает «ни … ни …».|Either|Для either нужно or. Здесь отказываемся от обоих.|Both|Both … and … означало бы, что позвонили оба.
+    Комната ни большая, ни удобная. · The room is neither big ___ comfortable.|nor|Соединяем два качества через neither … nor ….|or|Не меняем пару: neither требует nor.|and|And ставим с both. Здесь оба качества отрицаем.
+    Мне не нравится ни один из них двоих. · I like ___ of them.|neither|Neither of them — ни один из двух. Don’t не нужно.|both|Both of them означает обоих. Это противоположный смысл.|either|Без отрицания either не передаст отказ от обоих.
+    Ни Том, ни Анна здесь не работает. · Neither Tom nor Anna ___ here.|works|Ближе к действию Anna — один человек. Works, как Anna works.|work|В этой фразе после nor стоит Anna. Для неё выбираем works.|doesn’t work|Neither уже даёт отрицание. Не добавляем doesn’t.
+    Она не умеет ни читать, ни писать. · She ___ neither read nor write.|can|Отрицание уже в neither … nor …, поэтому can без not.|can’t|Для этого смысла не добавляем can’t к neither … nor ….|does can|Can не нужен помощник does.
+    Ни Том, ни его друзья не придут. · Neither Tom nor his friends ___ coming.|are|Ближе к действию his friends — «они». Выбираем are.|is|Рядом с действием друзья, поэтому are, а не is.|aren’t|Neither … nor … уже отрицает. Второе отрицание не нужно.
+    Еда ни горячая, ни свежая. · The food ___ neither hot nor fresh.|is|Состояние называем через is. Neither … nor … уже отрицает.|isn’t|Для этого смысла не соединяем isn’t и neither.|does|С hot и fresh нужен is. Does сюда не ставим.
+  `),
+  'g-both': negationQuestions(`
+    Мне нравятся и чай, и кофе. · I like ___ tea and coffee.|both|Both … and … включает оба напитка.|either|Either идёт с or и предлагает выбор.|neither|Neither идёт с nor и исключает оба варианта.
+    Она умеет и петь, и танцевать. · She can both sing ___ dance.|and|Пара both … and … означает «и … и …».|or|Or ставим с either, когда выбираем.|nor|Nor ставим с neither, когда отрицаем оба.
+    И Том, и Анна работают здесь. · Both Tom and Anna ___ here.|work|Двое вместе — как they. Поэтому work без s.|works|Works подходит одному человеку. Здесь вместе работают двое.|is working|Для двоих было бы are working. Здесь привычное действие: work.
+    И Том, и Анна здесь. · Both Tom and Anna ___ here.|are|Том и Анна вместе — «они». Для них выбираем are.|is|Is подходит одному. Здесь двое, поэтому are.|am|Am ставим с I. Здесь двое, поэтому are.
+    Маршрут и короткий, и безопасный. · The route is both short ___ safe.|and|Два качества соединяем через both … and ….|nor|Nor нужно с neither. Здесь оба качества есть.|or|Or даёт выбор. Здесь есть оба качества.
+    Мне нравятся они оба. · I like ___ of them.|both|Both of them означает «они оба».|neither|Neither of them — ни один из двоих. Это другой смысл.|nobody|Nobody — «никто». Nobody of them так не говорим.
+    Мне нравятся не оба. · I don’t like both of them. Это значит: ___|не обязательно нравятся оба|Фраза не говорит, что не нравится ни один. Один может нравиться.|точно не нравится ни один|Для «ни один из двух» скажи I like neither of them.|точно нравятся оба|Don’t отрицает «оба нравятся». Оба сразу здесь не утверждаем.
+    Мне не нравится ни один из двух фильмов. · I like ___ film.|neither|Neither film исключает оба фильма. Don’t не нужно.|both|Both film так не собирается, а both films означало бы оба фильма.|either|Здесь нет другого отрицания. Для отказа от обоих нужно neither.
+    Ты говоришь и по-английски, и по-французски? · Do you speak ___ English and French?|both|Пара both … and … сохраняется внутри вопроса.|either|Either требует or и предлагает выбрать.|neither|Neither требует nor. Вопрос здесь про оба языка.
+    Можно взять и яблоко, и грушу. · You can have both an apple ___ a pear.|and|Both идёт с and: можно взять оба фрукта.|or|Or оставило бы выбор. Здесь разрешены оба.|nor|Nor отрицает вместе с neither. Здесь оба фрукта можно.
+  `)
+};
+
+const QUIZ_NEGATION = negationQuestions(`
+  Никто не ответил. · ___ answered.|Nobody|Nobody уже означает «никто не». Второе отрицание не нужно.|Nobody didn’t|Для «никто не ответил» не добавляем didn’t к nobody.|Anybody|Anybody не сообщает, что никто не ответил.
+  Я ничего не слышал. · I didn’t hear ___.|anything|Отрицание уже в didn’t. Поэтому anything.|nothing|Не склеиваем didn’t и nothing для «ничего не».|everything|Not everything — «не всё». Здесь не слышал вообще ничего.
+  Я никогда не был в Париже. · I have ___ been to Paris.|never|Never ставим после have. Оно уже означает «никогда не».|never don’t|Отрицание уже в never. Don’t не добавляем.|not never|Для «никогда не» здесь достаточно never.
+  Можно взять или суп, или салат. · You can have either soup ___ salad.|or|Either идёт с or: или один вариант, или другой.|nor|Nor нужно с neither. Здесь either.|and|And нужно с both. Здесь предлагаем выбор.
+  Он не говорит ни по-английски, ни по-французски. · He speaks ___ English nor French.|neither|Neither … nor … уже отрицает. Speaks оставляем без doesn’t.|either|Either идёт с or и даёт выбор.|both|Both идёт с and и включает оба языка.
+  И Марк, и Лиза живут здесь. · Both Mark and Lisa ___ here.|live|Двое вместе — как they. Поэтому live без s.|lives|Lives подходит одному. Здесь двое вместе.|is living|Для двоих было бы are living. В этой фразе выбираем live.
+  Ты когда-нибудь видел кита? · Have you ___ seen a whale?|ever|Спрашиваем «когда-нибудь?» — ever.|never|Never изменит вопрос на «неужели никогда?».|don’t ever|Вопрос строит have. Don’t сюда не добавляем.
+  Мы никуда не ездили в воскресенье. · We went ___ on Sunday.|nowhere|Nowhere уже означает «никуда». Went остаётся без didn’t.|anywhere|В этой сборке нет другого отрицания. Нужно nowhere.|not nowhere|Не добавляем not к nowhere для «никуда не».
+  Она не умеет ни водить, ни плавать. · She can neither drive ___ swim.|nor|Neither идёт с nor. У обоих слов впереди n.|or|Or — пара для either. Здесь ни одно действие не умеет.|and|And — пара для both. Здесь оба действия отрицаем.
+  Комната и тёплая, и тихая. · The room is ___ warm and quiet.|both|Both … and … включает оба качества.|neither|Neither потребовало бы nor и отрицало бы оба качества.|either|Either идёт с or. Здесь не выбор, а два качества вместе.
+  Никто не помог? · ___ nobody help?|Did|Did задаёт вопрос, но само не означает «не». Отрицание уже в nobody.|Didn’t|Для этого смысла не добавляем didn’t к nobody.|Was|С help здесь вопрос строится через did.
+  У меня нет билетов. · I don’t have ___ tickets.|any|Don’t уже отрицает. Перед tickets выбираем any.|no|Для «билетов нет» не ставим don’t и no вместе.|nothing|Nothing стоит само. Перед tickets нужно any.
+`);
+</script>
+<script>
 /* ═══════════════════════════════════════════════════════════
    ТРЕНАЖЁР · один компонент на все блоки заданий
    Показывает по одному вопросу. После ответа — разбор:
@@ -9727,6 +10107,29 @@ function renderNumberReference(id, values) {
 renderNumberReference('nSmallNumbers', Array.from({length: 21}, (_, i) => i));
 renderNumberReference('nTens', NUMBER_TENS.slice(2).map((_, i) => (i + 2) * 10));
 
+renderRoadmap('g-road', NEGATION_LEVELS, NEGATION_STATIONS, {
+  pid: 'g', drills: NEGATION_DRILLS, kindLabel: item => item.short, figure: () => ''
+});
+renderDuels('gDuels', NEGATION_DUELS);
+makeQuiz(document.getElementById('gQuiz'), QUIZ_NEGATION, { title: 'Вопрос' });
+document.getElementById('gWords').innerHTML = NEGATION_WORDS.map(([word, meaning, en, ru]) =>
+  `<tr><td><code>${word}</code></td><td>${meaning}</td><td><span lang="en">${en}</span><br>${ru}</td></tr>`).join('');
+
+const gBuild = document.getElementById('gBuild');
+function renderNegationBuilder(button) {
+  const [ru, row, note] = NEGATION_SCENES[Number(button.dataset.v)];
+  gBuild.querySelector('[aria-pressed="true"]').setAttribute('aria-pressed', 'false');
+  button.setAttribute('aria-pressed', 'true');
+  document.getElementById('gBuildRu').textContent = ru;
+  document.getElementById('gBuildNote').textContent = note;
+  flipTrain(document.getElementById('gBuildTrain'), trainHTML(row));
+}
+gBuild.addEventListener('click', event => {
+  const button = event.target.closest('button[data-v]');
+  if (button) renderNegationBuilder(button);
+});
+renderNegationBuilder(gBuild.querySelector('[aria-pressed="true"]'));
+
 /* ═══════════════════════════════════════════════════════════
    НАВИГАЦИЯ: вкладки, оглавление, меню, точки, прогресс
    ═══════════════════════════════════════════════════════════ */
@@ -9846,6 +10249,17 @@ const TABDEF = {
       { id: 'n-duels', n: 'Сравнение чисел', s: 'Two и second, fifteen и fifty', e: 'Разбор' },
       { id: 'n-quiz', n: 'Общая проверка', s: '10 заданий', e: 'Тренажёр' },
       { id: 'n-sheet', n: 'Шпаргалка', s: 'Первые числа, десятки и формы по счёту', e: 'Итог' }
+    ]
+  },
+  negation: {
+    panel: 'tab-negation', toc: 'gToc', items: NEGATION_STATIONS, total: NEGATION_STATIONS.length,
+    nav: [
+      { id: 'g-system', n: 'Конструктор фразы', s: 'Выбери смысл, собери слова', e: 'Старт' },
+      { id: 'g-lvl1', n: 'Одно отрицание', s: 'Never, nobody, nothing и вопросы', e: 'Уровень 1' },
+      { id: 'g-lvl2', n: 'Или, ни, и', s: 'Either, neither и both', e: 'Уровень 2' },
+      { id: 'g-duels', n: 'Сравнение фраз', s: 'Два способа и три смысла', e: 'Разбор' },
+      { id: 'g-quiz', n: 'Общая проверка', s: '12 заданий', e: 'Тренажёр' },
+      { id: 'g-sheet', n: 'Шпаргалка', s: 'Слова с отрицанием и пары связок', e: 'Итог' }
     ]
   },
   passive: {
@@ -10057,7 +10471,7 @@ let done = new Set();
 try { done = new Set(JSON.parse(localStorage.getItem(KEY) || '[]')); } catch (e) { done = new Set(); }
 
 function paint() {
-  const all = S.concat(T, C, P, D, V, A, M, L, CLOCK_STATIONS, NUMBER_STATIONS);
+  const all = S.concat(T, C, P, D, V, A, M, L, CLOCK_STATIONS, NUMBER_STATIONS, NEGATION_STATIONS);
   all.forEach(x => {
     const on = done.has(x.id);
     const st = document.getElementById(x.id);
@@ -10133,6 +10547,7 @@ function tabForHash(h) {
   if (id.startsWith('l-')) return 'modals';
   if (id.startsWith('h-')) return 'clock';
   if (id.startsWith('n-')) return 'numbers';
+  if (id.startsWith('g-')) return 'negation';
   if (T.some(t => t.id === id) || id.indexOf('t-') === 0) return 'tenses';
   return null;
 }

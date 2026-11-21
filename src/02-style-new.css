@@ -370,6 +370,7 @@
 .r-verb { --rc: var(--present);  --rs: var(--present-soft); }
 .r-subj { --rc: var(--text);     --rs: var(--surface-2); }
 .r-rest { --rc: var(--text-dim); --rs: transparent; }
+.r-neg  { --rc: var(--past);     --rs: var(--past-soft); }
 
 /* ячейки-слова */
 .train { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; }

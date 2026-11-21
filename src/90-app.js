@@ -805,6 +805,29 @@ function renderNumberReference(id, values) {
 renderNumberReference('nSmallNumbers', Array.from({length: 21}, (_, i) => i));
 renderNumberReference('nTens', NUMBER_TENS.slice(2).map((_, i) => (i + 2) * 10));
 
+renderRoadmap('g-road', NEGATION_LEVELS, NEGATION_STATIONS, {
+  pid: 'g', drills: NEGATION_DRILLS, kindLabel: item => item.short, figure: () => ''
+});
+renderDuels('gDuels', NEGATION_DUELS);
+makeQuiz(document.getElementById('gQuiz'), QUIZ_NEGATION, { title: 'Вопрос' });
+document.getElementById('gWords').innerHTML = NEGATION_WORDS.map(([word, meaning, en, ru]) =>
+  `<tr><td><code>${word}</code></td><td>${meaning}</td><td><span lang="en">${en}</span><br>${ru}</td></tr>`).join('');
+
+const gBuild = document.getElementById('gBuild');
+function renderNegationBuilder(button) {
+  const [ru, row, note] = NEGATION_SCENES[Number(button.dataset.v)];
+  gBuild.querySelector('[aria-pressed="true"]').setAttribute('aria-pressed', 'false');
+  button.setAttribute('aria-pressed', 'true');
+  document.getElementById('gBuildRu').textContent = ru;
+  document.getElementById('gBuildNote').textContent = note;
+  flipTrain(document.getElementById('gBuildTrain'), trainHTML(row));
+}
+gBuild.addEventListener('click', event => {
+  const button = event.target.closest('button[data-v]');
+  if (button) renderNegationBuilder(button);
+});
+renderNegationBuilder(gBuild.querySelector('[aria-pressed="true"]'));
+
 /* ═══════════════════════════════════════════════════════════
    НАВИГАЦИЯ: вкладки, оглавление, меню, точки, прогресс
    ═══════════════════════════════════════════════════════════ */
@@ -924,6 +947,17 @@ const TABDEF = {
       { id: 'n-duels', n: 'Сравнение чисел', s: 'Two и second, fifteen и fifty', e: 'Разбор' },
       { id: 'n-quiz', n: 'Общая проверка', s: '10 заданий', e: 'Тренажёр' },
       { id: 'n-sheet', n: 'Шпаргалка', s: 'Первые числа, десятки и формы по счёту', e: 'Итог' }
+    ]
+  },
+  negation: {
+    panel: 'tab-negation', toc: 'gToc', items: NEGATION_STATIONS, total: NEGATION_STATIONS.length,
+    nav: [
+      { id: 'g-system', n: 'Конструктор фразы', s: 'Выбери смысл, собери слова', e: 'Старт' },
+      { id: 'g-lvl1', n: 'Одно отрицание', s: 'Never, nobody, nothing и вопросы', e: 'Уровень 1' },
+      { id: 'g-lvl2', n: 'Или, ни, и', s: 'Either, neither и both', e: 'Уровень 2' },
+      { id: 'g-duels', n: 'Сравнение фраз', s: 'Два способа и три смысла', e: 'Разбор' },
+      { id: 'g-quiz', n: 'Общая проверка', s: '12 заданий', e: 'Тренажёр' },
+      { id: 'g-sheet', n: 'Шпаргалка', s: 'Слова с отрицанием и пары связок', e: 'Итог' }
     ]
   },
   passive: {
@@ -1135,7 +1169,7 @@ let done = new Set();
 try { done = new Set(JSON.parse(localStorage.getItem(KEY) || '[]')); } catch (e) { done = new Set(); }
 
 function paint() {
-  const all = S.concat(T, C, P, D, V, A, M, L, CLOCK_STATIONS, NUMBER_STATIONS);
+  const all = S.concat(T, C, P, D, V, A, M, L, CLOCK_STATIONS, NUMBER_STATIONS, NEGATION_STATIONS);
   all.forEach(x => {
     const on = done.has(x.id);
     const st = document.getElementById(x.id);
@@ -1211,6 +1245,7 @@ function tabForHash(h) {
   if (id.startsWith('l-')) return 'modals';
   if (id.startsWith('h-')) return 'clock';
   if (id.startsWith('n-')) return 'numbers';
+  if (id.startsWith('g-')) return 'negation';
   if (T.some(t => t.id === id) || id.indexOf('t-') === 0) return 'tenses';
   return null;
 }

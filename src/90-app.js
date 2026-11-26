@@ -96,8 +96,9 @@ function makeQuiz(root, questions, opts) {
    СТАНЦИЯ · общая для всех вкладок
    ═══════════════════════════════════════════════════════════ */
 function stationHTML(it, cfg) {
-  const blocks = it.blocks.map(b => `
+  const blocks = it.blocks.map((b, i) => `
     <div class="blk callout ${b.kind === 'trap' ? 'trap' : b.kind === 'key' ? 'key' : ''}"
+         id="${it.id}-block-${i + 1}"
          ${b.kind === 'plain' ? 'style="border-left-color:var(--line)"' : ''}>
       <h4>${b.h}</h4><p>${b.p}</p>
     </div>`).join('');
@@ -124,16 +125,16 @@ function stationHTML(it, cfg) {
       <div class="prose">
         <p class="lead">${it.lead}</p>
         ${blocks}
-        <div class="blk">
+        <div class="blk" id="${it.id}-examples">
           <h4>Как это звучит</h4>
           <ul class="ex-list">${ex}</ul>
         </div>
       </div>
       <aside class="side">
-        <div class="forms">
-          <div class="p"><i>+</i><code>${it.forms.p}</code></div>
-          <div class="n"><i>−</i><code>${it.forms.n}</code></div>
-          <div class="q"><i>?</i><code>${it.forms.q}</code></div>
+        <div class="forms" id="${it.id}-forms" role="group" aria-label="Формы предложений: ${it.name}">
+          <div class="p" id="${it.id}-form-p"><i>+</i><code>${it.forms.p}</code></div>
+          <div class="n" id="${it.id}-form-n"><i>−</i><code>${it.forms.n}</code></div>
+          <div class="q" id="${it.id}-form-q"><i>?</i><code>${it.forms.q}</code></div>
         </div>
         <div class="chips">
           <h4 class="eyebrow">Слова-маркеры</h4>
@@ -1021,6 +1022,7 @@ function fillMenu() {
 }
 menuBtn.addEventListener('click', e => {
   e.stopPropagation();
+  closeMoreMenu(false);
   const open = menuPop.hidden;
   menuPop.hidden = !open;
   menuBtn.setAttribute('aria-expanded', String(open));
@@ -1037,101 +1039,56 @@ document.addEventListener('keydown', e => {
 
 /* переключение вкладок */
 const tabsEl = document.getElementById('sectionTabs');
-const tabsTooltip = document.getElementById('tabsTooltip');
-const tabBtns = [...tabsEl.querySelectorAll('[role="tab"]')];
-const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
-let dockPointer;
-let dockFrame = 0;
-let tooltipTab;
-let dismissedTooltip;
+const tabBtns = [...document.querySelectorAll('.tab-dock [data-tab]')];
+const primaryTabs = [...tabsEl.querySelectorAll('[role="tab"]')];
+const moreTabsButton = document.getElementById('moreTabsButton');
+const moreTabsMenu = document.getElementById('moreTabsMenu');
+const moreTabs = [...moreTabsMenu.querySelectorAll('[role="menuitemradio"]')];
+const moreTabsWrap = moreTabsButton.parentElement;
+const courseHeader = document.querySelector('.topbar--course');
 
-function updateDock() {
-  if (dockFrame) return;
-  dockFrame = requestAnimationFrame(() => {
-    dockFrame = 0;
-    const underPointer = dockPointer && document.elementFromPoint(dockPointer.x, dockPointer.y);
-    const hovered = underPointer?.closest('#sectionTabs [role="tab"]');
-    const focused = tabsEl.querySelector('[role="tab"]:focus-visible');
-    const target = hovered || focused;
-    const track = tabsEl.getBoundingClientRect();
-    const inside = underPointer && tabsEl.contains(underPointer);
-    const pointerX = inside ? dockPointer.x - track.left + tabsEl.scrollLeft : null;
-    const x = pointerX ?? (focused ? focused.offsetLeft + focused.offsetWidth / 2 : null);
-    if (finePointer.matches && motionOK() && x !== null) {
-      const sizes = tabBtns.map(button => {
-        const center = button.offsetLeft + button.offsetWidth / 2;
-        const proximity = Math.max(0, 1 - Math.abs(x - center) / 220);
-        return (1 + .26 * proximity ** 2).toFixed(3);
-      });
-      tabBtns.forEach((button, i) => {
-        const left = button.offsetLeft - tabsEl.scrollLeft;
-        const right = left + button.offsetWidth;
-        const edge = 48;
-        const origin = left < edge ? 'left' : right > tabsEl.clientWidth - edge ? 'right' : 'center';
-        button.style.setProperty('--dock-scale', sizes[i]);
-        button.style.setProperty('--dock-origin', origin);
-      });
-    } else {
-      tabBtns.forEach(button => {
-        button.style.removeProperty('--dock-scale');
-        button.style.removeProperty('--dock-origin');
-      });
-    }
-
-    if (target !== tooltipTab) {
-      tooltipTab = target;
-      dismissedTooltip = null;
-    }
-    const label = target?.getAttribute('aria-label');
-    tabsTooltip.hidden = !label || label === target.textContent.trim() || target === dismissedTooltip;
-    if (tabsTooltip.hidden) return;
-    const box = target.getBoundingClientRect();
-    tabsTooltip.textContent = label;
-    const width = tabsTooltip.offsetWidth;
-    const center = Math.min(track.right, Math.max(track.left, box.left + box.width / 2));
-    const left = Math.max(8, Math.min(center - width / 2, document.documentElement.clientWidth - width - 8));
-    tabsTooltip.style.left = (left - track.left) + 'px';
-  });
+function closeMoreMenu(restoreFocus) {
+  moreTabsMenu.hidden = true;
+  moreTabsButton.setAttribute('aria-expanded', 'false');
+  courseHeader.classList.remove('topbar--menu-open');
+  if (restoreFocus) moreTabsButton.focus({preventScroll:true});
 }
-
-tabsEl.addEventListener('pointermove', event => {
-  if (event.pointerType === 'touch' || !finePointer.matches) return;
-  dockPointer = { x: event.clientX, y: event.clientY };
-  updateDock();
-});
-tabsEl.addEventListener('pointerleave', () => {
-  dockPointer = null;
-  updateDock();
-});
-tabsEl.addEventListener('focusin', updateDock);
-tabsEl.addEventListener('focusout', updateDock);
-tabsEl.addEventListener('scroll', updateDock, { passive: true });
-window.addEventListener('scroll', () => {
-  if (dockPointer || tooltipTab) updateDock();
-}, { passive: true });
-document.addEventListener('keydown', event => {
-  if (event.key !== 'Escape' || tabsTooltip.hidden) return;
-  dismissedTooltip = tooltipTab;
-  updateDock();
-});
-
-/* на узком экране панель вкладок прокручивается — активную вкладку подводим в видимую часть */
-function revealTab() {
-  const active = tabBtns.find(b => b.getAttribute('aria-selected') === 'true');
-  if (!active || tabsEl.scrollWidth <= tabsEl.clientWidth) return;
-  tabsEl.scrollLeft = active.offsetLeft - (tabsEl.clientWidth - active.offsetWidth) / 2;
+function openMoreMenu(focusItem, last = false) {
+  menuPop.hidden = true;
+  menuBtn.setAttribute('aria-expanded', 'false');
+  const navigator = document.getElementById('courseNavigator');
+  if (navigator && !navigator.hidden) {
+    document.getElementById('courseNavigatorClose').click();
+    moreTabsButton.focus({preventScroll:true});
+  }
+  moreTabsMenu.hidden = false;
+  moreTabsButton.setAttribute('aria-expanded', 'true');
+  courseHeader.classList.add('topbar--menu-open');
+  if (focusItem) {
+    const selected = moreTabs.find(button => button.getAttribute('aria-checked') === 'true');
+    (last ? moreTabs.at(-1) : selected || moreTabs[0]).focus();
+  }
 }
 function setTab(name, scroll) {
   tab = name;
   tabBtns.forEach(button => {
     const selected = button.dataset.tab === name;
-    button.setAttribute('aria-selected', String(selected));
-    button.tabIndex = selected ? 0 : -1;
+    if (button.getAttribute('role') === 'tab') {
+      button.setAttribute('aria-selected', String(selected));
+      button.tabIndex = selected ? 0 : -1;
+    } else {
+      button.setAttribute('aria-checked', String(selected));
+    }
   });
+  const extra = moreTabs.find(button => button.dataset.tab === name);
+  moreTabsButton.dataset.current = String(Boolean(extra));
+  moreTabsButton.setAttribute('aria-label', extra ? 'Ещё. Открыт раздел: ' + extra.textContent.trim() : 'Ещё темы');
+  if (extra) primaryTabs[0].tabIndex = 0;
+  closeMoreMenu(false);
   Object.keys(TABDEF).forEach(k => {
     document.getElementById(TABDEF[k].panel).hidden = (k !== name);
   });
-  fillMenu(); paint(); revealTab(); updateDock();
+  fillMenu(); paint();
   if (scroll !== false) window.scrollTo({ top: 0, behavior: motionOK() ? 'smooth' : 'auto' });
 }
 tabBtns.forEach(b => b.addEventListener('click', () => {
@@ -1139,11 +1096,13 @@ tabBtns.forEach(b => b.addEventListener('click', () => {
   const hash = '#' + TABDEF[name].panel;
   if (location.hash !== hash) history.pushState(null, '', hash);
   setTab(name);
+  if (moreTabs.includes(b)) moreTabsButton.focus({preventScroll:true});
 }));
-tabsEl.addEventListener('keydown', event => {
-  const index = tabBtns.indexOf(event.target);
+const headerControls = [...primaryTabs, moreTabsButton];
+function headerKeydown(event) {
+  const index = headerControls.indexOf(event.target);
   if (index < 0) return;
-  const last = tabBtns.length - 1;
+  const last = headerControls.length - 1;
   const next = {
     ArrowLeft: index === 0 ? last : index - 1,
     ArrowRight: index === last ? 0 : index + 1,
@@ -1152,13 +1111,45 @@ tabsEl.addEventListener('keydown', event => {
   }[event.key];
   if (next === undefined) return;
   event.preventDefault();
-  dockPointer = null;
-  tabBtns[next].focus({ preventScroll: true });
-  tabBtns[next].click();
+  const button = headerControls[next];
+  button.focus({preventScroll:true});
+  if (button !== moreTabsButton) button.click();
+}
+tabsEl.addEventListener('keydown', headerKeydown);
+moreTabsButton.addEventListener('keydown', event => {
+  if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+    event.preventDefault();
+    openMoreMenu(true, event.key === 'ArrowUp');
+  } else headerKeydown(event);
 });
-window.addEventListener('resize', () => {
-  revealTab();
-  updateDock();
+moreTabsButton.addEventListener('click', event => {
+  if (moreTabsMenu.hidden) openMoreMenu(event.detail === 0);
+  else closeMoreMenu(false);
+});
+moreTabsMenu.addEventListener('keydown', event => {
+  const index = moreTabs.indexOf(event.target);
+  if (index < 0) return;
+  const next = {
+    ArrowDown: (index + 1) % moreTabs.length,
+    ArrowUp: (index + moreTabs.length - 1) % moreTabs.length,
+    Home: 0,
+    End: moreTabs.length - 1
+  }[event.key];
+  if (next === undefined) return;
+  event.preventDefault();
+  moreTabs[next].focus();
+});
+document.addEventListener('click', event => {
+  if (!moreTabsWrap.contains(event.target)) closeMoreMenu(false);
+});
+document.addEventListener('focusin', event => {
+  if (!moreTabsMenu.hidden && !moreTabsWrap.contains(event.target)) closeMoreMenu(false);
+});
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && !moreTabsMenu.hidden) {
+    event.preventDefault();
+    closeMoreMenu(true);
+  }
 });
 
 function motionOK() { return !window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
@@ -1246,7 +1237,7 @@ function tabForHash(h) {
   if (id.startsWith('h-')) return 'clock';
   if (id.startsWith('n-')) return 'numbers';
   if (id.startsWith('g-')) return 'negation';
-  if (T.some(t => t.id === id) || id.indexOf('t-') === 0) return 'tenses';
+  if (T.some(t => t.id === id || id.startsWith(t.id + '-')) || id.indexOf('t-') === 0) return 'tenses';
   return null;
 }
 document.addEventListener('click', e => {
@@ -1265,7 +1256,4 @@ function openHashTab() {
 
 setTab(tabForHash(location.hash) || 'home', false);
 window.addEventListener('hashchange', openHashTab);
-/* шрифт догружается и меняет ширину кнопок — ползунок и прокрутку панели пересчитываем заново */
-requestAnimationFrame(() => { revealTab(); updateDock(); });
-if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { revealTab(); updateDock(); });
 if (location.hash) openHashTab();

@@ -536,101 +536,55 @@ td.ex { color: var(--text-dim); }
 @keyframes breathe{ 0%,100% { opacity: .10 } 50% { opacity: .26 } }
 @keyframes nudge  { 0%,100% { transform: translateY(0) } 50% { transform: translateY(2.5px) } }
 
-/* ═══════════════ ВКЛАДКИ ПРАВИЛ ═══════════════ */
-.tab-dock {
-  position: relative;
-  min-width: 0;
-  flex: 1 1 auto;
+/* ═══════════════ ЧЕТЫРЕ ВКЛАДКИ И МЕНЮ «ЕЩЁ» ═══════════════ */
+.tab-dock { position: relative; display: flex; align-items: center; gap: 8px; min-width: 0; flex: 1 1 auto; }
+.topbar--course.topbar--menu-open { z-index: 110; }
+.tabs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; flex: 1 1 auto; min-width: 0; }
+.tabs-more { position: relative; flex-shrink: 0; }
+.tabs .course-cta, .tabs-more > .course-cta {
+  justify-content: center; gap: 7px; min-width: 0; min-height: 44px; padding: 10px 13px;
+  font: 600 .76rem var(--f-body);
 }
-.tab-dock::before {
-  content: "";
-  position: absolute;
-  inset: 15px 0 0;
-  border: 1px solid var(--line);
-  border-radius: 17px;
-  background: color-mix(in srgb, var(--surface-2) 78%, transparent);
-  box-shadow: 0 7px 18px -14px rgba(0, 0, 0, .56);
-  pointer-events: none;
-}
-.tabs {
-  position: relative;
-  display: flex;
-  align-items: end;
-  gap: 4px;
-  padding: 0 9px 4px;
-  overflow-x: auto;
-  overflow-y: hidden;
-  overscroll-behavior-inline: contain;
-  scroll-padding-inline: 9px;
-  scrollbar-width: thin;
-  scrollbar-color: var(--text-mute) transparent;
-}
-.tabs__clip {
-  min-width: 0;
-  overflow: hidden;
-  border-radius: 18px;
-}
-.tabs button {
-  flex: 0 0 auto;
-  display: grid;
-  justify-items: center;
-  align-content: end;
-  min-width: 44px;
-  padding: 20px 10px 0;
-  border-radius: 11px;
-  color: var(--text-dim);
-}
-.tabs button:focus-visible { outline: none; }
-.tabs button:focus-visible .tabs__tile { outline: 2px solid var(--present); outline-offset: 2px; }
-.tabs__tile {
-  display: grid;
-  place-items: center;
-  min-height: 36px;
-  padding: 0 11px;
-  border: 1px solid var(--line);
-  border-radius: 11px;
-  background: var(--surface);
-  box-shadow: 0 2px 5px -4px rgba(0, 0, 0, .6);
-  font-family: var(--f-display);
-  font-size: .73rem;
-  font-weight: 600;
-  letter-spacing: -.01em;
-  white-space: nowrap;
-  transform: scale(var(--dock-scale, 1));
-  transform-origin: var(--dock-origin, center) bottom;
-  transition: transform .28s cubic-bezier(.2,1.4,.38,1), background .16s, color .16s, border-color .16s;
-  pointer-events: none;
-}
-.tabs button:hover .tabs__tile { border-color: var(--present); color: var(--text); }
-.tabs button[aria-selected="true"] .tabs__tile {
+.tabs .course-cta > svg, .tabs-more > .course-cta > svg { width: 14px; height: 14px; }
+.tabs button[aria-selected="true"], .tabs-more__button[data-current="true"] {
   border-color: var(--present);
-  background: var(--present-soft);
-  color: var(--present);
+  box-shadow: var(--shadow), inset 0 0 0 1px color-mix(in srgb, var(--present) 18%, transparent);
 }
-.tabs__tooltip {
-  position: absolute;
-  z-index: 2;
-  top: calc(100% + 5px);
-  left: 0;
-  padding: 5px 9px;
-  border: 1px solid var(--line);
-  border-radius: 9px;
-  background: var(--surface);
-  box-shadow: var(--shadow);
-  color: var(--text);
-  font-size: .76rem;
-  line-height: 1.35;
-  white-space: nowrap;
-  pointer-events: none;
+.tabs button[aria-selected="true"] .course-cta__label::after,
+.tabs-more__button[data-current="true"] .course-cta__label::after { transform: scaleX(1); }
+.tabs-more .tabs-more__button[aria-expanded="true"] .tabs-more__chevron { transform: rotate(180deg); }
+.tabs-more__menu {
+  position: absolute; top: calc(100% + 10px); right: 0; z-index: 90;
+  width: min(300px, calc(100vw - 28px)); padding: 7px; border-radius: 17px;
+  background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow);
+  max-height: calc(100dvh - var(--header-height, 80px) - 24px); overflow-y: auto;
+  overscroll-behavior: contain; transform-origin: top right;
 }
-@media (hover: none), (pointer: coarse) {
-  .tab-dock::before { inset-block-start: 0; }
-  .tabs { align-items: stretch; gap: 6px; padding: 3px 6px; scroll-padding-inline: 6px; }
-  .tabs button { align-content: center; min-height: 44px; padding: 0; }
-  .tabs__tile { min-height: 36px; padding-inline: 8px; font-size: .69rem; border-radius: 9px; transform: none; }
+.tabs-more__menu button {
+  display: flex; align-items: center; justify-content: space-between; gap: 14px;
+  width: 100%; min-height: 44px; padding: 10px 12px; border-radius: 10px; text-align: left;
+  color: var(--text-dim); font: 400 .87rem/1.4 var(--f-body);
 }
-@media (prefers-reduced-motion: reduce) {
-  .tabs__tile { transform: none; transition: none; }
+.tabs-more__menu button::after { content: ''; width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; background: transparent; }
+.tabs-more__menu button:hover, .tabs-more__menu button:focus-visible { color: var(--text); background: var(--surface-2); }
+.tabs-more__menu button:focus-visible { outline: 2px solid var(--present); outline-offset: -2px; }
+.tabs-more__menu button[aria-checked="true"] { color: var(--present); background: var(--present-soft); }
+.tabs-more__menu button[aria-checked="true"]::after { background: var(--present); }
+@media (prefers-reduced-motion: no-preference) {
+  .tabs-more__menu { animation: popIn .2s cubic-bezier(.22,1.2,.4,1) both; }
+}
+@media (max-width: 860px) {
+  .topbar--course .topbar__in { flex-wrap: wrap; gap: 10px 14px; padding: 9px 14px; }
+  .topbar--course .mark { display: flex; }
+  .topbar--course .header-tools { margin-left: auto; }
+  .topbar--course .tab-dock { order: 3; flex-basis: 100%; }
+}
+@media (max-width: 600px) {
+  .topbar--course .tab-dock { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+  .topbar--course .tabs { display: contents; }
+  .topbar--course .tabs-more { grid-column: span 2; }
+  .topbar--course .tabs-more > button { width: 100%; }
+  .topbar--course .tabs .course-cta, .topbar--course .tabs-more > .course-cta { padding: 10px 8px; gap: 5px; font-size: .74rem; }
 }
 
 .tabpanel[hidden] { display: none !important; }
@@ -1366,58 +1320,194 @@ td.ex { color: var(--text-dim); }
   .home-grid, .home-route { grid-template-columns: 1fr; }
   .home-card { min-height: auto; }
 }
+/* Навигатор доступен на любой вкладке и работает без внешних сервисов. */
+.course-cta {
+  --nav-pointer-x: 50%; --nav-pointer-y: 50%;
+  position: relative; display: flex; align-items: center; gap: 12px;
+  isolation: isolate; overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--present) 45%, var(--line));
+  border-radius: 999px; padding: 15px 20px;
+  color: var(--text); background: linear-gradient(130deg, var(--surface-2), var(--surface));
+  box-shadow: var(--shadow), 0 0 0 1px color-mix(in srgb, var(--present) 6%, transparent);
+  font: 600 .88rem var(--f-body); min-height: 48px;
+  transition: border-color .25s, box-shadow .25s, transform .2s;
+  animation: course-nav-button-enter .65s cubic-bezier(.22, 1, .36, 1) .08s backwards;
+}
+.course-nav-button {
+  position: fixed; right: max(22px, env(safe-area-inset-right)); bottom: max(22px, env(safe-area-inset-bottom));
+  z-index: 90;
+}
+.course-cta::before {
+  content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: radial-gradient(105px circle at var(--nav-pointer-x) var(--nav-pointer-y),
+    color-mix(in srgb, var(--present) 32%, transparent), transparent 78%);
+  opacity: 0; transition: opacity .25s;
+}
+.course-cta > svg { width: 19px; height: 19px; flex-shrink: 0; color: var(--present); }
+.course-cta__label { position: relative; display: inline-block; padding-bottom: 2px; white-space: nowrap; }
+.course-cta__label::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: -2px; height: 1px;
+  background: var(--present); border-radius: 999px;
+  transform: scaleX(0); transform-origin: left; transition: transform .3s cubic-bezier(.22, 1, .36, 1);
+}
+.course-cta__arrow { transition: transform .3s cubic-bezier(.22, 1, .36, 1); }
+.course-cta:focus-visible { border-color: var(--present); outline: 2px solid var(--present); outline-offset: 3px; }
+.course-cta:focus-visible::before { opacity: 1; }
+.course-cta:focus-visible .course-cta__label::after { transform: scaleX(1); }
+.course-cta:focus-visible .course-cta__arrow { transform: translateX(3px); }
+.course-cta:active { transform: translateY(1px); }
+.course-cta[aria-expanded="true"] { border-color: var(--present); }
+@media (hover: hover) and (pointer: fine) {
+  .course-cta:hover {
+    border-color: var(--present);
+    box-shadow: var(--shadow), 0 0 26px -10px color-mix(in srgb, var(--present) 55%, transparent);
+  }
+  .course-cta:hover::before { opacity: 1; }
+  .course-cta:hover .course-cta__label::after { transform: scaleX(1); }
+  .course-cta:hover .course-cta__arrow { transform: translateX(3px); }
+}
+@keyframes course-nav-button-enter {
+  from { opacity: 0; transform: translateY(16px); filter: blur(7px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .course-cta { animation: none; transition: none; }
+  .course-cta::before, .course-cta__arrow, .course-cta__label::after { transition: none; }
+  .course-cta:active,
+  .course-cta:hover .course-cta__arrow,
+  .course-cta:focus-visible .course-cta__arrow { transform: none; }
+}
+.course-nav {
+  position: fixed; z-index: 100; right: max(22px, env(safe-area-inset-right));
+  bottom: calc(86px + env(safe-area-inset-bottom));
+  width: min(400px, calc(100vw - 28px)); max-height: calc(100vh - 110px);
+  max-height: calc(100dvh - 110px); display: flex; flex-direction: column;
+  border: 1px solid var(--line); border-radius: 20px; overflow: hidden;
+  background: var(--surface); color: var(--text); box-shadow: var(--shadow);
+}
+.course-nav__header { padding: 18px 18px 12px; display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; flex-shrink: 0; }
+.course-nav__header h2 { font: 600 1rem/1.4 var(--f-body); margin: 0; }
+.course-nav__header p { color: var(--text-dim); font-size: .76rem; margin: 3px 0 0; }
+.course-nav__close { color: var(--text-dim); background: transparent; border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; font: 400 .72rem var(--f-body); }
+.course-nav__body { padding: 0 18px; min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
+.course-nav__greeting { padding: 13px; border-radius: 12px; background: var(--surface-2); font-size: .88rem; line-height: 1.65; }
+.course-nav__examples { display: flex; flex-wrap: wrap; gap: 7px; margin: 12px 0; }
+.course-nav--searched .course-nav__greeting, .course-nav--searched .course-nav__examples { display: none; }
+.course-nav__examples button, .course-nav__all {
+  border: 1px solid var(--line); border-radius: 9px; padding: 7px 10px;
+  color: var(--text-dim); background: var(--surface); font: 400 .76rem var(--f-body);
+}
+.course-nav__examples button:hover, .course-nav__all:hover { border-color: var(--present); color: var(--present); }
+.course-nav__question { margin: 12px 0; padding: 9px 12px; border-radius: 12px 12px 3px 12px; background: var(--present-soft); font-size: .88rem; overflow-wrap: anywhere; }
+.course-nav__status { margin: 10px 0; font-size: .82rem; color: var(--text-dim); line-height: 1.6; }
+.course-nav__status:empty { display: none; }
+.course-nav__links { display: grid; gap: 8px; margin: 0 0 14px; padding: 0; list-style: none; }
+.course-nav__links a { display: grid; gap: 3px; border: 1px solid var(--line); border-radius: 11px; padding: 11px 12px; color: var(--text); text-decoration: none; overflow-wrap: anywhere; }
+.course-nav__links a:hover { border-color: var(--present); background: var(--present-soft); }
+.course-nav__links a span { font: 500 .87rem/1.45 var(--f-body); }
+.course-nav__links a small { font-size: .72rem; color: var(--present); }
+.course-nav__links .course-nav__excerpt { margin: 5px 0 0; font-size: .78rem; line-height: 1.55; color: var(--text-dim); }
+.station .forms[id], .station .forms [id], .station .blk[id] {
+  scroll-margin-top: max(90px, calc(var(--header-height, 70px) + 16px));
+}
+.station .forms [id]:target { box-shadow: inset 3px 0 var(--present); background: var(--present-soft); }
+.course-nav__form { padding: 12px 18px 16px; border-top: 1px solid var(--line); flex-shrink: 0; margin-top: 4px; }
+.course-nav__form label { display: block; font-size: .76rem; color: var(--text-dim); margin-bottom: 7px; }
+.course-nav__input-row { display: flex; gap: 7px; }
+.course-nav__form input { flex: 1; width: 0; min-width: 0; border: 1px solid var(--line); border-radius: 10px; background: var(--bg-2); color: var(--text); padding: 11px 10px; font: 400 16px var(--f-body); }
+.course-nav__form input::placeholder { color: var(--text-mute); }
+.course-nav__form button { border: 1px solid var(--present); border-radius: 10px; color: var(--bg); background: var(--present); padding: 10px 12px; font: 600 .82rem var(--f-body); }
+.course-nav__form input:focus-visible, .course-nav button:focus-visible, .course-nav a:focus-visible, .course-nav-button:focus-visible { outline: 2px solid var(--present); outline-offset: 3px; }
+.course-nav-ready .totop { right: auto; left: 22px; }
+.course-nav-ready .totop::after { right: auto; left: calc(100% + 10px); }
+@media (max-width: 620px) {
+  .course-nav-button { right: 14px; bottom: max(14px, env(safe-area-inset-bottom)); padding: 12px 15px; }
+  .course-nav { right: 14px; bottom: calc(76px + env(safe-area-inset-bottom)); max-height: calc(100dvh - 96px); }
+  .course-nav__header { padding: 14px 14px 10px; }
+  .course-nav__body { padding: 0 14px; }
+  .course-nav__form { padding: 10px 14px 14px; }
+  .course-nav__close, .course-nav__examples button, .course-nav__all { min-height: 44px; }
+  .course-nav-ready .totop { left: 14px; }
+}
+/* Текст занимает ширину своей колонки, без дополнительных узких ограничений. */
+.sect__head, .st__thesis, .prose, .level p, figcaption,
+.mxout__l p, .bu__note, .home-hero__lead, .home-letter p,
+.home-practice__inner p:last-child, .home-example {
+  max-width: none;
+}
+
+.tabpanel :is(p, figcaption, .en, .ru, .nb, .why, .bu__note, .qz__row > span) {
+  text-wrap: pretty;
+  hyphens: none;
+}
+.st__thesis { text-wrap: pretty; line-height: 1.5; }
+.st__top > div, .st__grid > *, .home-hero > *, .home-letter > *,
+.home-practice__inner > div, .duel__s, .mxout__l, .bu__out, .steps li {
+  min-width: 0;
+}
+.st__top > div { max-width: 100%; }
+.home-practice__inner > div { flex: 1; }
+.steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.duel__b { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.forms div { grid-template-columns: 30px minmax(0, 1fr); }
+
+/* Ответ и разбор не сжимают друг друга в две узкие колонки. */
+.qz__row { grid-template-columns: minmax(0, 1fr); gap: 5px; }
+.qz__row b { white-space: normal; }
+.qz__q, .quiz__q, .det__q { text-wrap: pretty; }
+
+/* Класс ставится только на фразы, которые целиком помещаются в колонку. */
+.typography-keep { white-space: nowrap; }
+
+@media (max-width: 760px) {
+  .steps { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 720px) {
+  .duel__b { grid-template-columns: minmax(0, 1fr); }
+}
 </style>
 </head>
 <body>
-<nav class="topbar">
+<nav class="topbar topbar--course">
   <div class="topbar__in">
     <div class="mark"><b>Английский</b><span>ПРАВИЛА</span></div>
 
     <div class="tab-dock">
-      <div class="tabs__clip">
-        <div class="tabs" id="sectionTabs" role="tablist" aria-label="Разделы грамматики">
-          <button type="button" role="tab" id="homeTab" data-tab="home" aria-selected="true" aria-controls="tab-home" aria-label="Главная">
-            <span class="tabs__tile">Главная</span>
+        <div class="tabs" id="sectionTabs" role="tablist" aria-label="Основные разделы">
+          <button type="button" class="course-cta" role="tab" id="homeTab" data-tab="home" aria-selected="true" aria-controls="tab-home" aria-label="Главная">
+            <span class="course-cta__label">Главная</span>
+            <svg class="course-cta__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
           </button>
-          <button type="button" role="tab" id="sentenceTab" data-tab="sentence" aria-selected="false" aria-controls="tab-sentence" aria-label="Основа" tabindex="-1">
-            <span class="tabs__tile">Основа</span>
+          <button type="button" class="course-cta" role="tab" id="sentenceTab" data-tab="sentence" aria-selected="false" aria-controls="tab-sentence" aria-label="Основа" tabindex="-1">
+            <span class="course-cta__label">Основа</span>
+            <svg class="course-cta__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
           </button>
-          <button type="button" role="tab" id="tensesTab" data-tab="tenses" aria-selected="false" aria-controls="tab-tenses" aria-label="Времена" tabindex="-1">
-            <span class="tabs__tile">Времена</span>
+          <button type="button" class="course-cta" role="tab" id="tensesTab" data-tab="tenses" aria-selected="false" aria-controls="tab-tenses" aria-label="Времена" tabindex="-1">
+            <span class="course-cta__label">Времена</span>
+            <svg class="course-cta__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
           </button>
-          <button type="button" role="tab" id="condTab" data-tab="cond" aria-selected="false" aria-controls="tab-cond" aria-label="Условные предложения" tabindex="-1">
-            <span class="tabs__tile">Условные</span>
-          </button>
-          <button type="button" role="tab" id="pronTab" data-tab="pron" aria-selected="false" aria-controls="tab-pron" aria-label="Местоимения" tabindex="-1">
-            <span class="tabs__tile">Местоимения</span>
-          </button>
-          <button type="button" role="tab" id="degTab" data-tab="deg" aria-selected="false" aria-controls="tab-deg" aria-label="Степени сравнения" tabindex="-1">
-            <span class="tabs__tile">Степени</span>
-          </button>
-          <button type="button" role="tab" id="passiveTab" data-tab="passive" aria-selected="false" aria-controls="tab-passive" aria-label="Пассив" tabindex="-1">
-            <span class="tabs__tile">Пассив</span>
-          </button>
-          <button type="button" role="tab" id="articlesTab" data-tab="articles" aria-selected="false" aria-controls="tab-articles" aria-label="Артикли" tabindex="-1">
-            <span class="tabs__tile">Артикли</span>
-          </button>
-          <button type="button" role="tab" id="obligationTab" data-tab="obligation" aria-selected="false" aria-controls="tab-obligation" aria-label="Долженствование" tabindex="-1">
-            <span class="tabs__tile">Долженствование</span>
-          </button>
-          <button type="button" role="tab" id="modalsTab" data-tab="modals" aria-selected="false" aria-controls="tab-modals" aria-label="Модальные глаголы" tabindex="-1">
-            <span class="tabs__tile">Модальные глаголы</span>
-          </button>
-          <button type="button" role="tab" id="clockTab" data-tab="clock" aria-selected="false" aria-controls="tab-clock" aria-label="Время по часам" tabindex="-1">
-            <span class="tabs__tile">Время по часам</span>
-          </button>
-          <button type="button" role="tab" id="numbersTab" data-tab="numbers" aria-selected="false" aria-controls="tab-numbers" aria-label="Числа и цифры" tabindex="-1">
-            <span class="tabs__tile">Числа и цифры</span>
-          </button>
-          <button type="button" role="tab" id="negationTab" data-tab="negation" aria-selected="false" aria-controls="tab-negation" aria-label="Отрицания и связки" tabindex="-1">
-            <span class="tabs__tile">Отрицания и связки</span>
+          <button type="button" class="course-cta" role="tab" id="condTab" data-tab="cond" aria-selected="false" aria-controls="tab-cond" aria-label="Условные предложения" tabindex="-1">
+            <span class="course-cta__label">Условные</span>
+            <svg class="course-cta__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
           </button>
         </div>
+      <div class="tabs-more">
+        <button type="button" class="course-cta tabs-more__button" id="moreTabsButton" aria-expanded="false" aria-haspopup="menu" aria-controls="moreTabsMenu">
+          <span class="course-cta__label">Ещё</span>
+          <svg class="course-cta__arrow tabs-more__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="tabs-more__menu" id="moreTabsMenu" role="menu" aria-label="Остальные разделы методички" hidden>
+          <button type="button" role="menuitemradio" id="pronTab" data-tab="pron" aria-checked="false" aria-controls="tab-pron" tabindex="-1">Местоимения</button>
+          <button type="button" role="menuitemradio" id="degTab" data-tab="deg" aria-checked="false" aria-controls="tab-deg" tabindex="-1">Степени сравнения</button>
+          <button type="button" role="menuitemradio" id="passiveTab" data-tab="passive" aria-checked="false" aria-controls="tab-passive" tabindex="-1">Пассив</button>
+          <button type="button" role="menuitemradio" id="articlesTab" data-tab="articles" aria-checked="false" aria-controls="tab-articles" tabindex="-1">Артикли</button>
+          <button type="button" role="menuitemradio" id="obligationTab" data-tab="obligation" aria-checked="false" aria-controls="tab-obligation" tabindex="-1">Долженствование</button>
+          <button type="button" role="menuitemradio" id="modalsTab" data-tab="modals" aria-checked="false" aria-controls="tab-modals" tabindex="-1">Модальные глаголы</button>
+          <button type="button" role="menuitemradio" id="clockTab" data-tab="clock" aria-checked="false" aria-controls="tab-clock" tabindex="-1">Время по часам</button>
+          <button type="button" role="menuitemradio" id="numbersTab" data-tab="numbers" aria-checked="false" aria-controls="tab-numbers" tabindex="-1">Числа и цифры</button>
+          <button type="button" role="menuitemradio" id="negationTab" data-tab="negation" aria-checked="false" aria-controls="tab-negation" tabindex="-1">Отрицания и связки</button>
+        </div>
       </div>
-      <span class="tabs__tooltip" id="tabsTooltip" aria-hidden="true" hidden></span>
     </div>
 
     <div class="header-tools">
@@ -1616,7 +1706,7 @@ td.ex { color: var(--text-dim); }
       </li>
     </ol>
 
-    <div class="callout trap" style="margin-top:28px;max-width:66ch">
+    <div class="callout trap" style="margin-top:28px">
       <h4>Исключение: модальные глаголы</h4>
       <p>Правила выше не касаются <span class="mono">can, must, should, may</span> и их родственников. Модальный глагол — самостоятельная
          сущность и сам работает помощником, поэтому do ему не нужен ни в вопросе, ни в утверждении.
@@ -2161,7 +2251,7 @@ td.ex { color: var(--text-dim); }
       <figcaption>Три ступени одной лестницы. Нулевой тип в неё не входит: он про то, что верно всегда, поэтому обе половины остаются в настоящем.</figcaption>
     </figure>
 
-    <div class="callout trap" style="margin-top:30px;max-width:66ch">
+    <div class="callout trap" style="margin-top:30px">
       <h4>Сквозное правило: после if не ставят will</h4>
       <p>
         Ни <span class="mono">will</span>, ни <span class="mono">would</span> не заходят за <span class="mono">if</span> — никогда, ни в одном типе.
@@ -2368,7 +2458,7 @@ td.ex { color: var(--text-dim); }
       <div class="roles" id="pbRoles"></div>
     </div>
 
-    <div class="callout key" style="margin-top:30px;max-width:66ch">
+    <div class="callout key" style="margin-top:30px">
       <h4>Отдельная тема: «чей?»</h4>
       <p>
         Слова <span class="mono">my, your, his, her, our, their</span> отвечают на вопрос «чей?» и стоят перед существительным.
@@ -2505,7 +2595,7 @@ td.ex { color: var(--text-dim); }
       </li>
     </ol>
 
-    <div class="callout trap" style="margin-top:28px;max-width:66ch">
+    <div class="callout trap" style="margin-top:28px">
       <h4>Исключения: пять слов меняются целиком</h4>
       <p><span class="mono">good → better → the best</span>, <span class="mono">bad → worse → the worst</span> и ещё три слова: far, little, many / much. Слух тут не поможет — их просто нужно запомнить.</p>
       <a class="goto" href="#d-irr">К исключениям →</a>
@@ -3386,6 +3476,44 @@ td.ex { color: var(--text-dim); }
   </div>
 </section>
 </div>
+
+<button type="button" class="course-cta course-nav-button" id="courseNavigatorButton" aria-controls="courseNavigator" aria-expanded="false" hidden>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+    <path d="M5 4h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-6 3V6a2 2 0 0 1 2-2Z"/><path d="M7 9h10M7 13h7"/>
+  </svg>
+  <span class="course-cta__label">Найти тему</span>
+  <svg class="course-cta__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M5 12h14m-6-6 6 6-6 6"/>
+  </svg>
+</button>
+<section class="course-nav" id="courseNavigator" role="dialog" aria-modal="false" aria-labelledby="courseNavigatorTitle" hidden>
+  <header class="course-nav__header">
+    <div>
+      <h2 id="courseNavigatorTitle">Навигатор по методичке</h2>
+      <p>Помогу найти нужный раздел</p>
+    </div>
+    <button type="button" class="course-nav__close" id="courseNavigatorClose" aria-label="Закрыть навигатор">Закрыть</button>
+  </header>
+  <div class="course-nav__body">
+    <p class="course-nav__greeting">Привет! Я могу подсказать, где в методичке находится интересующая тебя тема. Напиши название правила или знакомые слова — я найду раздел и дам ссылку.</p>
+    <div class="course-nav__examples" aria-label="Примеры запросов">
+      <button type="button" data-nav-query="Где объясняются артикли?">Артикли</button>
+      <button type="button" data-nav-query="Ни-ни">Ни — ни</button>
+      <button type="button" data-nav-query="Большие числа">Большие числа</button>
+    </div>
+    <button type="button" class="course-nav__all" id="courseNavigatorAll">Все темы</button>
+    <p class="course-nav__question" id="courseNavigatorQuestion" hidden></p>
+    <p class="course-nav__status" id="courseNavigatorStatus" role="status" aria-live="polite" aria-atomic="true"></p>
+    <div id="courseNavigatorResults"></div>
+  </div>
+  <form class="course-nav__form" id="courseNavigatorForm" role="search" aria-label="Поиск темы в методичке">
+    <label for="courseNavigatorInput">Какую тему ищешь?</label>
+    <div class="course-nav__input-row">
+      <input id="courseNavigatorInput" type="search" placeholder="Например: вопросы в прошлом" maxlength="240" autocomplete="off" enterkeyhint="search">
+      <button type="submit">Найти</button>
+    </div>
+  </form>
+</section>
 
 <button class="totop" id="totop" aria-label="Вернуться в начало страницы">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -9398,8 +9526,9 @@ function makeQuiz(root, questions, opts) {
    СТАНЦИЯ · общая для всех вкладок
    ═══════════════════════════════════════════════════════════ */
 function stationHTML(it, cfg) {
-  const blocks = it.blocks.map(b => `
+  const blocks = it.blocks.map((b, i) => `
     <div class="blk callout ${b.kind === 'trap' ? 'trap' : b.kind === 'key' ? 'key' : ''}"
+         id="${it.id}-block-${i + 1}"
          ${b.kind === 'plain' ? 'style="border-left-color:var(--line)"' : ''}>
       <h4>${b.h}</h4><p>${b.p}</p>
     </div>`).join('');
@@ -9426,16 +9555,16 @@ function stationHTML(it, cfg) {
       <div class="prose">
         <p class="lead">${it.lead}</p>
         ${blocks}
-        <div class="blk">
+        <div class="blk" id="${it.id}-examples">
           <h4>Как это звучит</h4>
           <ul class="ex-list">${ex}</ul>
         </div>
       </div>
       <aside class="side">
-        <div class="forms">
-          <div class="p"><i>+</i><code>${it.forms.p}</code></div>
-          <div class="n"><i>−</i><code>${it.forms.n}</code></div>
-          <div class="q"><i>?</i><code>${it.forms.q}</code></div>
+        <div class="forms" id="${it.id}-forms" role="group" aria-label="Формы предложений: ${it.name}">
+          <div class="p" id="${it.id}-form-p"><i>+</i><code>${it.forms.p}</code></div>
+          <div class="n" id="${it.id}-form-n"><i>−</i><code>${it.forms.n}</code></div>
+          <div class="q" id="${it.id}-form-q"><i>?</i><code>${it.forms.q}</code></div>
         </div>
         <div class="chips">
           <h4 class="eyebrow">Слова-маркеры</h4>
@@ -10323,6 +10452,7 @@ function fillMenu() {
 }
 menuBtn.addEventListener('click', e => {
   e.stopPropagation();
+  closeMoreMenu(false);
   const open = menuPop.hidden;
   menuPop.hidden = !open;
   menuBtn.setAttribute('aria-expanded', String(open));
@@ -10339,101 +10469,56 @@ document.addEventListener('keydown', e => {
 
 /* переключение вкладок */
 const tabsEl = document.getElementById('sectionTabs');
-const tabsTooltip = document.getElementById('tabsTooltip');
-const tabBtns = [...tabsEl.querySelectorAll('[role="tab"]')];
-const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
-let dockPointer;
-let dockFrame = 0;
-let tooltipTab;
-let dismissedTooltip;
+const tabBtns = [...document.querySelectorAll('.tab-dock [data-tab]')];
+const primaryTabs = [...tabsEl.querySelectorAll('[role="tab"]')];
+const moreTabsButton = document.getElementById('moreTabsButton');
+const moreTabsMenu = document.getElementById('moreTabsMenu');
+const moreTabs = [...moreTabsMenu.querySelectorAll('[role="menuitemradio"]')];
+const moreTabsWrap = moreTabsButton.parentElement;
+const courseHeader = document.querySelector('.topbar--course');
 
-function updateDock() {
-  if (dockFrame) return;
-  dockFrame = requestAnimationFrame(() => {
-    dockFrame = 0;
-    const underPointer = dockPointer && document.elementFromPoint(dockPointer.x, dockPointer.y);
-    const hovered = underPointer?.closest('#sectionTabs [role="tab"]');
-    const focused = tabsEl.querySelector('[role="tab"]:focus-visible');
-    const target = hovered || focused;
-    const track = tabsEl.getBoundingClientRect();
-    const inside = underPointer && tabsEl.contains(underPointer);
-    const pointerX = inside ? dockPointer.x - track.left + tabsEl.scrollLeft : null;
-    const x = pointerX ?? (focused ? focused.offsetLeft + focused.offsetWidth / 2 : null);
-    if (finePointer.matches && motionOK() && x !== null) {
-      const sizes = tabBtns.map(button => {
-        const center = button.offsetLeft + button.offsetWidth / 2;
-        const proximity = Math.max(0, 1 - Math.abs(x - center) / 220);
-        return (1 + .26 * proximity ** 2).toFixed(3);
-      });
-      tabBtns.forEach((button, i) => {
-        const left = button.offsetLeft - tabsEl.scrollLeft;
-        const right = left + button.offsetWidth;
-        const edge = 48;
-        const origin = left < edge ? 'left' : right > tabsEl.clientWidth - edge ? 'right' : 'center';
-        button.style.setProperty('--dock-scale', sizes[i]);
-        button.style.setProperty('--dock-origin', origin);
-      });
-    } else {
-      tabBtns.forEach(button => {
-        button.style.removeProperty('--dock-scale');
-        button.style.removeProperty('--dock-origin');
-      });
-    }
-
-    if (target !== tooltipTab) {
-      tooltipTab = target;
-      dismissedTooltip = null;
-    }
-    const label = target?.getAttribute('aria-label');
-    tabsTooltip.hidden = !label || label === target.textContent.trim() || target === dismissedTooltip;
-    if (tabsTooltip.hidden) return;
-    const box = target.getBoundingClientRect();
-    tabsTooltip.textContent = label;
-    const width = tabsTooltip.offsetWidth;
-    const center = Math.min(track.right, Math.max(track.left, box.left + box.width / 2));
-    const left = Math.max(8, Math.min(center - width / 2, document.documentElement.clientWidth - width - 8));
-    tabsTooltip.style.left = (left - track.left) + 'px';
-  });
+function closeMoreMenu(restoreFocus) {
+  moreTabsMenu.hidden = true;
+  moreTabsButton.setAttribute('aria-expanded', 'false');
+  courseHeader.classList.remove('topbar--menu-open');
+  if (restoreFocus) moreTabsButton.focus({preventScroll:true});
 }
-
-tabsEl.addEventListener('pointermove', event => {
-  if (event.pointerType === 'touch' || !finePointer.matches) return;
-  dockPointer = { x: event.clientX, y: event.clientY };
-  updateDock();
-});
-tabsEl.addEventListener('pointerleave', () => {
-  dockPointer = null;
-  updateDock();
-});
-tabsEl.addEventListener('focusin', updateDock);
-tabsEl.addEventListener('focusout', updateDock);
-tabsEl.addEventListener('scroll', updateDock, { passive: true });
-window.addEventListener('scroll', () => {
-  if (dockPointer || tooltipTab) updateDock();
-}, { passive: true });
-document.addEventListener('keydown', event => {
-  if (event.key !== 'Escape' || tabsTooltip.hidden) return;
-  dismissedTooltip = tooltipTab;
-  updateDock();
-});
-
-/* на узком экране панель вкладок прокручивается — активную вкладку подводим в видимую часть */
-function revealTab() {
-  const active = tabBtns.find(b => b.getAttribute('aria-selected') === 'true');
-  if (!active || tabsEl.scrollWidth <= tabsEl.clientWidth) return;
-  tabsEl.scrollLeft = active.offsetLeft - (tabsEl.clientWidth - active.offsetWidth) / 2;
+function openMoreMenu(focusItem, last = false) {
+  menuPop.hidden = true;
+  menuBtn.setAttribute('aria-expanded', 'false');
+  const navigator = document.getElementById('courseNavigator');
+  if (navigator && !navigator.hidden) {
+    document.getElementById('courseNavigatorClose').click();
+    moreTabsButton.focus({preventScroll:true});
+  }
+  moreTabsMenu.hidden = false;
+  moreTabsButton.setAttribute('aria-expanded', 'true');
+  courseHeader.classList.add('topbar--menu-open');
+  if (focusItem) {
+    const selected = moreTabs.find(button => button.getAttribute('aria-checked') === 'true');
+    (last ? moreTabs.at(-1) : selected || moreTabs[0]).focus();
+  }
 }
 function setTab(name, scroll) {
   tab = name;
   tabBtns.forEach(button => {
     const selected = button.dataset.tab === name;
-    button.setAttribute('aria-selected', String(selected));
-    button.tabIndex = selected ? 0 : -1;
+    if (button.getAttribute('role') === 'tab') {
+      button.setAttribute('aria-selected', String(selected));
+      button.tabIndex = selected ? 0 : -1;
+    } else {
+      button.setAttribute('aria-checked', String(selected));
+    }
   });
+  const extra = moreTabs.find(button => button.dataset.tab === name);
+  moreTabsButton.dataset.current = String(Boolean(extra));
+  moreTabsButton.setAttribute('aria-label', extra ? 'Ещё. Открыт раздел: ' + extra.textContent.trim() : 'Ещё темы');
+  if (extra) primaryTabs[0].tabIndex = 0;
+  closeMoreMenu(false);
   Object.keys(TABDEF).forEach(k => {
     document.getElementById(TABDEF[k].panel).hidden = (k !== name);
   });
-  fillMenu(); paint(); revealTab(); updateDock();
+  fillMenu(); paint();
   if (scroll !== false) window.scrollTo({ top: 0, behavior: motionOK() ? 'smooth' : 'auto' });
 }
 tabBtns.forEach(b => b.addEventListener('click', () => {
@@ -10441,11 +10526,13 @@ tabBtns.forEach(b => b.addEventListener('click', () => {
   const hash = '#' + TABDEF[name].panel;
   if (location.hash !== hash) history.pushState(null, '', hash);
   setTab(name);
+  if (moreTabs.includes(b)) moreTabsButton.focus({preventScroll:true});
 }));
-tabsEl.addEventListener('keydown', event => {
-  const index = tabBtns.indexOf(event.target);
+const headerControls = [...primaryTabs, moreTabsButton];
+function headerKeydown(event) {
+  const index = headerControls.indexOf(event.target);
   if (index < 0) return;
-  const last = tabBtns.length - 1;
+  const last = headerControls.length - 1;
   const next = {
     ArrowLeft: index === 0 ? last : index - 1,
     ArrowRight: index === last ? 0 : index + 1,
@@ -10454,13 +10541,45 @@ tabsEl.addEventListener('keydown', event => {
   }[event.key];
   if (next === undefined) return;
   event.preventDefault();
-  dockPointer = null;
-  tabBtns[next].focus({ preventScroll: true });
-  tabBtns[next].click();
+  const button = headerControls[next];
+  button.focus({preventScroll:true});
+  if (button !== moreTabsButton) button.click();
+}
+tabsEl.addEventListener('keydown', headerKeydown);
+moreTabsButton.addEventListener('keydown', event => {
+  if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+    event.preventDefault();
+    openMoreMenu(true, event.key === 'ArrowUp');
+  } else headerKeydown(event);
 });
-window.addEventListener('resize', () => {
-  revealTab();
-  updateDock();
+moreTabsButton.addEventListener('click', event => {
+  if (moreTabsMenu.hidden) openMoreMenu(event.detail === 0);
+  else closeMoreMenu(false);
+});
+moreTabsMenu.addEventListener('keydown', event => {
+  const index = moreTabs.indexOf(event.target);
+  if (index < 0) return;
+  const next = {
+    ArrowDown: (index + 1) % moreTabs.length,
+    ArrowUp: (index + moreTabs.length - 1) % moreTabs.length,
+    Home: 0,
+    End: moreTabs.length - 1
+  }[event.key];
+  if (next === undefined) return;
+  event.preventDefault();
+  moreTabs[next].focus();
+});
+document.addEventListener('click', event => {
+  if (!moreTabsWrap.contains(event.target)) closeMoreMenu(false);
+});
+document.addEventListener('focusin', event => {
+  if (!moreTabsMenu.hidden && !moreTabsWrap.contains(event.target)) closeMoreMenu(false);
+});
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && !moreTabsMenu.hidden) {
+    event.preventDefault();
+    closeMoreMenu(true);
+  }
 });
 
 function motionOK() { return !window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
@@ -10548,7 +10667,7 @@ function tabForHash(h) {
   if (id.startsWith('h-')) return 'clock';
   if (id.startsWith('n-')) return 'numbers';
   if (id.startsWith('g-')) return 'negation';
-  if (T.some(t => t.id === id) || id.indexOf('t-') === 0) return 'tenses';
+  if (T.some(t => t.id === id || id.startsWith(t.id + '-')) || id.indexOf('t-') === 0) return 'tenses';
   return null;
 }
 document.addEventListener('click', e => {
@@ -10567,10 +10686,599 @@ function openHashTab() {
 
 setTab(tabForHash(location.hash) || 'home', false);
 window.addEventListener('hashchange', openHashTab);
-/* шрифт догружается и меняет ширину кнопок — ползунок и прокрутку панели пересчитываем заново */
-requestAnimationFrame(() => { revealTab(); updateDock(); });
-if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { revealTab(); updateDock(); });
 if (location.hash) openHashTab();
+</script>
+<script>
+/* Поиск по теории и формам предложений, с учётом темы и времени. Без сети. */
+(() => {
+  const launcher = document.getElementById('courseNavigatorButton');
+  const panel = document.getElementById('courseNavigator');
+  const form = document.getElementById('courseNavigatorForm');
+  const input = document.getElementById('courseNavigatorInput');
+  const results = document.getElementById('courseNavigatorResults');
+  const status = document.getElementById('courseNavigatorStatus');
+  const question = document.getElementById('courseNavigatorQuestion');
+
+  const normal = value => value.toLowerCase().replace(/ё/g, 'е')
+    .replace(/[’‘`]/g, "'").replace(/<[^>]*>/g, ' ')
+    .replace(/[^\p{L}\p{N}'*]+/gu, ' ').replace(/\s+/g, ' ').trim();
+  const stop = new Set(('где найти найдите найди покажи покажите открыть открой находится находятся расположен расположена расположено ' +
+    'расскажи подскажи пожалуйста мне меня у есть в во на по об про о с со из для к и или а но это эта этот эти ' +
+    'такое такой такая как почему когда какой какая какие какую нужная нужную интересует тему тема темы правило правила ' +
+    'методичке методички методичку методичка курсе курса курс английском английскому английский языке язык ' +
+    'я хочу ищу ищем объясняется объясняются объясняют рассказывается говорится написано правильно использовать ' +
+    'употреблять применение объяснение объяснения раздел разделе разделы урок уроке глава главе ' +
+    'материал материалы разобраться понять узнать').split(' '));
+  const tokens = value => normal(value).replace(/\b(where can i find|where do i find|where is|where are|show me)\b/g, ' ')
+    .split(' ').filter(word => word && !stop.has(word));
+  const aliases = {
+    's-be': 'to be|be|ту би|am is are|was were|нет глагола|я дома|мне холодно|я саша',
+    's-verb': 'есть глагол|действие в предложении|глагол в нужном времени',
+    's-order': 'порядок слов|порядок в предложении|построение предложений|строить предложени*|составить предложени*',
+    's-yesno': 'общий вопрос|вопрос*|вопросительное предложение|do does did|помощник в вопросе|как задать вопрос|вопросы в прошлом',
+    's-wh': 'вопросительные слова|who what where when why how|вопрос со словом',
+    's-whgroup': 'какого цвета|what color|группа вопросительных слов|сколько лет',
+    's-neg': 'обычное отрицание|not|dont|don t|do not|отрицательное предложение',
+    's-modal': 'без помощников|самостоятельные глаголы',
+    'present-simple': 'present simple|презент симпл|настоящее простое|простое настоящее|обычное настоящее|каждый день|привычки|расписани*|поезд*',
+    'past-simple': 'past simple|паст симпл|прошедшее простое|простое прошедшее|что сделал|вчера',
+    'future-simple': 'future simple|фьюче симпл|простое будущее|будущее простое|will',
+    'present-continuous': 'present continuous|презент континиус|презент континьюс|настоящее длительное|прямо сейчас|процесс сейчас',
+    'past-continuous': 'past continuous|паст континиус|паст континьюс|прошедшее длительное|процесс в прошлом',
+    'future-continuous': 'future continuous|фьюче континиус|будущее длительное|процесс в будущем',
+    'present-perfect': 'present perfect|презент перфект|настоящее совершенное|результат сейчас|have has',
+    'past-perfect': 'past perfect|паст перфект|прошедшее совершенное|предпрошедшее|раньше другого прошлого',
+    'future-perfect': 'future perfect|фьюче перфект|будущее совершенное|результат к моменту в будущем',
+    'present-perfect-continuous': 'present perfect continuous|презент перфект континиус|процесс до сих пор|как долго уже',
+    'past-perfect-continuous': 'past perfect continuous|паст перфект континиус|сколько длилось до прошлого момента',
+    'future-perfect-continuous': 'future perfect continuous|фьюче перфект континиус|сколько наберется к будущему моменту',
+    zero: 'zero conditional|нулевой тип|нулевое условное|закономерности',
+    first: 'first conditional|первый тип|первое условное|реальное условие|если в будущем',
+    second: 'second conditional|второй тип|второе условное|если бы сейчас|якобы да кабы|бы в настоящем',
+    third: 'third conditional|третий тип|третье условное|если бы тогда|бы в прошлом',
+    mixed: 'mixed conditional|смешанные условные|смешанный тип',
+    inversion: 'инверси*|условие без if|were had should',
+    wish: 'i wish|if only|жаль|желание о прошлом',
+    'p-test': 'she her|he him|i me|как выбрать местоимение',
+    'p-nom': 'я он она мы они|i he she we they|кто делает',
+    'p-acc': 'мне меня ему его ей ее|me him her us them|после предлогов',
+    'p-same': 'you it|не меняются',
+    'p-pair': 'tom and i|tom and me|я и мой друг',
+    'p-ru': 'мне нравится|у нее есть|мне нужно',
+    'p-poss': 'my your his her its our their|чей|чья|притяжательн*',
+    'p-his': 'him his|her hers|его ее их|its it s',
+    'd-test': 'степени на слух|красивее|выше|сравнивать прилагательные',
+    'd-short': 'er est|короткие прилагательные|окончания er est',
+    'd-long': 'more most|the most|длинные прилагательные|самый красивый',
+    'd-y': 'happy happier|слова на y|двусложные',
+    'd-irr': 'good better best|bad worse worst|исключения сравнения',
+    'd-than': 'than|чем|самый|taller than',
+    'd-as': 'as as|такой же|less|менее',
+    'd-adv': 'наречи*|much taller|усилители сравнения|more slowly',
+    'v-focus': 'меня пригласили|что с ним сделали|актив и пассив|active passive|страдательный залог',
+    'v-time': 'времена пассива|убирают убрали уберут|was done|is done|will be done',
+    'v-neg': 'отрицание в пассиве|не сделали',
+    'v-question': 'вопрос в пассиве|спросить сделали',
+    'v-by': 'by|кем сделано|кем написано',
+    'v-extra': 'being|been|can be|пассив сейчас',
+    'a-one': 'a|неопределенный артикль|один из многих',
+    'a-sound': 'an|a или an|a an|гласный звук|согласный звук|a university|an hour',
+    'a-known': 'the|определенный артикль|та самая|bmw|бмв|the 5',
+    'a-story': 'сначала a потом the|первое упоминание|повторное упоминание',
+    'a-zero': 'без артикля|нулевой артикль|в целом|исчисляемые неисчисляемые',
+    'a-other': 'артикль с my|my this|перед числами',
+    'm-should': 'should|шуд|совет|стоит сделать|следует',
+    'm-have': 'have to|хэв ту|нужно|надо|договорились|должен',
+    'm-must': 'must|маст|обязан|обязательно',
+    'm-not': 'mustn t|mustnt|dont have to|don t have to|нельзя или не обязательно',
+    'm-past': 'should have|had to|должен был|нужно было|стоило купить',
+    'l-can': 'can|could|кэн|могу|мог|умею|не могу',
+    'l-request': 'may i|can i|could you|разрешени*|просьб*|можно мне|не мог бы ты',
+    'l-chance': 'may|might|мэй|майт|вероятност*|возможно|может быть',
+    'h-past': 'past по часам|twenty past|первая половина часа|после двенадцати',
+    'h-to': 'to по часам|twenty to|без двадцати|без десяти|следующий час',
+    'h-quarter': 'half|quarter|половина первого|половина часа|четверть часа|полчаса|15 минут|30 минут',
+    'h-exact': 'o clock|oclock|ровно час|электронные часы|время на табло',
+    'n-small': 'числа до ста|цифры|единицы десятки|fifteen fifty|forty|пятнадцать пятьдесят',
+    'n-big': 'большие числа|составные числа|тысяч*|миллион*|сотни|hundred|thousand|million|152365|152 365',
+    'n-order': 'порядковые|второй этаж|второй|first second third|который по счету',
+    'n-compound': 'двадцать первый|21st|22nd|23rd|th|окончания чисел|сто первый',
+    'g-once': 'двойное отрицание|два отрицания|никто не|никогда не|ничего не|я видел никого|never|nobody|nothing|nowhere|no one',
+    'g-any': 'any anybody anything anywhere|nobody anybody|nothing anything|после отрицания|not any',
+    'g-questions': 'вопросы с отрицанием|отрицательные вопросы|did nobody|ever|когда нибудь',
+    'g-either': 'either|either or|или или',
+    'g-neither': 'neither|nor|neither nor|ни ни|ни чай ни кофе',
+    'g-both': 'both|both and|и и|оба',
+  };
+  const groups = [
+    ['sentence', 'Основа', 's-hero', 'основа|начать|начало|с нуля|основы|предложени*'],
+    ['tenses', 'Времена', 't-hero', 'времена|времен*|tenses|время|12 времен'],
+    ['cond', 'Условные предложения', 'c-hero', 'условн*|conditionals|conditional|кондишнл|если|если бы'],
+    ['pron', 'Местоимения', 'p-hero', 'местоимен*|pronouns'],
+    ['deg', 'Степени сравнения', 'd-hero', 'степен*|сравнен*|прилагательн*|comparison|comparatives'],
+    ['passive', 'Пассив', 'v-hero', 'пассив*|passive|залог'],
+    ['articles', 'Артикли', 'a-hero', 'артикл*|articles'],
+    ['obligation', 'Долженствование', 'm-hero', 'долженствован*|должен|обязанности|must have to should'],
+    ['modals', 'Модальные глаголы', 'l-hero', 'модальн*|modal|modals'],
+    ['clock', 'Время по часам', 'h-hero', 'время по часам|говорить время|называть время|час*|clock|time|время|циферблат*'],
+    ['numbers', 'Числа и цифры', 'n-hero', 'числ*|цифр*|numbers|numerals'],
+    ['negation', 'Отрицания и связки', 'g-hero', 'отрицани*|связк*|negation|союзы'],
+  ];
+  const catalog = [];
+  const plainText = value => {
+    const span = document.createElement('span');
+    span.innerHTML = String(value || '').replace(/<br\s*\/?\s*>/gi, ' ');
+    return span.textContent.replace(/\s+/g, ' ').trim();
+  };
+  const chunksOf = station => [
+    {id: station.id, title: station.name, text: plainText(station.lead)},
+    ...station.blocks.map((block, index) => ({
+      id: station.id + '-block-' + (index + 1), title: block.h,
+      text: plainText(block.h + ' ' + block.p)
+    })),
+    {id: station.id + '-examples', title: 'Как это звучит',
+      text: station.ex.map(ex => plainText(ex.en + ' ' + ex.ru + ' ' + (ex.nb || ''))).join(' ')},
+    ...Object.entries(station.forms).map(([kind, text]) => ({
+      id: station.id + '-form-' + kind, title: {p:'Утверждение', n:'Отрицание', q:'Вопрос'}[kind],
+      text: plainText(text), kind
+    }))
+  ].map(chunk => ({...chunk, words: [...new Set(tokens(chunk.text))]}));
+  const asAliases = value => (value || '').split('|').filter(Boolean).map(normal);
+  for (const [tab, group, id, words] of groups) {
+    catalog.push({id, title: group, group, section: true, names: tokens(group), aliases: asAliases(words)});
+    for (const station of TABDEF[tab].items) {
+      const chunks = chunksOf(station);
+      catalog.push({ id: station.id, title: station.name, group, tab, station, chunks, section: false,
+        names: tokens(station.name + ' ' + (station.short || '') + ' ' + (station.core || '')),
+        body: [...new Set(chunks.flatMap(chunk => chunk.words))],
+        aliases: asAliases(aliases[station.id]) });
+    }
+    for (const item of TABDEF[tab].nav) {
+      if (!/-quiz$|-sheet$|-system$|-duels$/.test(item.id)) continue;
+      catalog.push({id: item.id, title: item.n, group, section: false,
+        names: tokens(group + ' ' + item.n + ' ' + item.s + ' ' +
+          (item.id.endsWith('-system') ? 'конструктор' : item.id.endsWith('-quiz') ? 'тест задания упражнения' : item.id.endsWith('-sheet') ? 'шпаргалка таблица' : 'сравнение')),
+        aliases: []});
+    }
+  }
+  const info = [
+    {id: 'home-guide', title: 'Как заниматься', group: 'Главная', section: true, names: tokens('как заниматься пользоваться курсом'), aliases: asAliases('как заниматься|как пользоваться|маршрут|с чего начать')},
+    {id: 'home-practice', title: 'Дополнительный тренажёр', group: 'Главная', section: true, names: tokens('дополнительные задания тренажер упражнения'), aliases: asAliases('тренажер|упражнени*|дополнительные задания|домашняя работа|домашнее задание')},
+  ];
+  catalog.push(...info);
+
+  // Допускаем одну опечатку в достаточно длинном слове, включая перестановку букв.
+  function closeWord(a, b) {
+    if (a === b) return true;
+    if (Math.min(a.length, b.length) < 5 || Math.abs(a.length - b.length) > 1) return false;
+    if (a.length === b.length) {
+      const differences = [];
+      for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) differences.push(i);
+      return differences.length === 1 || (differences.length === 2 &&
+        differences[1] === differences[0] + 1 &&
+        a[differences[0]] === b[differences[1]] && a[differences[1]] === b[differences[0]]);
+    }
+    const short = a.length < b.length ? a : b;
+    const long = a.length < b.length ? b : a;
+    let i = 0, j = 0, skipped = false;
+    while (i < short.length && j < long.length) {
+      if (short[i] === long[j]) { i++; j++; }
+      else if (!skipped) { j++; skipped = true; }
+      else return false;
+    }
+    return true;
+  }
+  function wordMatch(query, word) {
+    if (word.endsWith('*')) return query.startsWith(word.slice(0, -1));
+    if (query === word) return true;
+    if (/^[а-я]+$/.test(query) && /^[а-я]+$/.test(word)) {
+      const stem = value => value.replace(/(иями|ами|ями|ого|его|ому|ему|ыми|ими|ую|юю|ая|яя|ое|ее|ие|ые|ий|ый|ой|ым|им|ом|ем|ах|ях|ов|ей|ам|ям|ы|и|а|я|у|ю|е|о)$/, '');
+      if (stem(query).length >= 3 && stem(query) === stem(word)) return true;
+    }
+    return closeWord(query, word);
+  }
+
+  const formNames = {p: 'утверждение', n: 'отрицание', q: 'вопрос'};
+  const timeNames = {past:'прошлое', present:'настоящее', future:'будущее'};
+  let previousContext = null;
+  function queryContext(query) {
+    const q = normal(query).replace(/\b(where can i find|where do i find|where is|where are|show me)\b/g, ' ');
+    const words = tokens(q);
+    const forms = [];
+    if (/отрицан|отрицател|\bnegative\b|\bnot\b|n't\b|\b(dont|doesnt|didnt|isnt|arent|wasnt|werent|havent|hasnt|hadnt|wont|wouldnt|couldnt|shouldnt|mustnt|cant)\b|(?:^| )не(?: |$)/u.test(q) ||
+      words.some(word => wordMatch(word, 'отрицание') || wordMatch(word, 'отрицательный'))) forms.push('n');
+    if (/вопрос|спросить|\bquestions?\b|\binterrogative\b/u.test(q) ||
+      words.some(word => wordMatch(word, 'вопрос'))) forms.push('q');
+    if (/утвержд|утвердител|\baffirmative\b|\bpositive\b/u.test(q)) forms.push('p');
+    const times = [];
+    if (/прошл|прошедш|предпрош|вчера|\bpast\b|паст|\bdid\b|didn/u.test(q) ||
+      words.some(word => wordMatch(word, 'прошлом') || wordMatch(word, 'прошедшем'))) times.push('past');
+    if (/настоящ|сейчас|\bpresent\b|презент/u.test(q)) times.push('present');
+    if (/будущ|завтра|\bfuture\b|фьюче/u.test(q)) times.push('future');
+    const perfect = /\bperfect\b|перфект|совершенн/u.test(q);
+    const continuous = /\bcontinuous\b|континиус|континьюс|длительн|процесс/u.test(q);
+    const aspect = perfect && continuous ? 'perfectcont' : perfect ? 'perfect' : continuous ? 'continuous'
+      : /\bsimple\b|симпл|простое|простом|простой/u.test(q) ? 'simple' : null;
+
+    // Сначала ищем длинные названия, чтобы Past Perfect не перехватывал
+    // запрос про Past Perfect Continuous.
+    let remaining = ' ' + q + ' ';
+    const named = [];
+    const names = T.flatMap(station =>
+      [normal(station.name), ...asAliases(aliases[station.id]).slice(0, 4)]
+        .filter(name => !name.includes('*')).map(name => ({id:station.id, name})))
+      .sort((a, b) => b.name.length - a.name.length);
+    for (const {id, name} of names) {
+      if (remaining.includes(' ' + name + ' ')) {
+        if (!named.includes(id)) named.push(id);
+        remaining = remaining.replaceAll(' ' + name + ' ', ' ');
+      } else {
+        const parts = tokens(name);
+        if (!parts.length || (parts.length === 1 && parts[0].length < 5)) continue;
+        const available = remaining.trim().split(' ');
+        const used = new Set();
+        const matches = parts.every(part => {
+          const index = available.findIndex((word, i) => !used.has(i) && wordMatch(word, part));
+          if (index < 0) return false;
+          used.add(index);
+          return true;
+        });
+        if (matches) {
+          if (!named.includes(id)) named.push(id);
+          remaining = ' ' + available.filter((_, i) => !used.has(i)).join(' ') + ' ';
+        }
+      }
+    }
+    let tab = null;
+    if (/пассив|страдательн|\bpassive\b/u.test(q)) tab = 'passive';
+    else if (/должен|обязан|\bmust\b|\bshould\b|\bhave to\b/u.test(q)) tab = 'obligation';
+    else if (/модальн|\bmodal|\bcan\b|\bcould\b|\bmay\b|\bmight\b/u.test(q)) tab = 'modals';
+    else if (/\bto be\b|\bbe\b|am is are|was were/u.test(q)) tab = 'sentence';
+    else if (/условн|\bconditional|\bif\b/u.test(q)) tab = 'cond';
+    else if (/артикл|\barticles?\b/u.test(q)) tab = 'articles';
+    else if (/местоимен|\bpronouns?\b/u.test(q)) tab = 'pron';
+    const topicExplicit = Boolean(tab);
+    if (!tab && (named.length || times.length || aspect)) tab = 'tenses';
+    return {forms, times, aspect, named, tab, topicExplicit};
+  }
+  function formTimes(text) {
+    const value = plainText(text).toLowerCase().replace(/[’‘]/g, "'");
+    const found = [];
+    if (/\b(did|was|were|had|could)\b|\b(didn't|wasn't|weren't|hadn't|couldn't)\b/.test(value)) found.push('past');
+    if (/\bwill\b|\bwon't\b/.test(value)) found.push('future');
+    if (/\b(am|is|are|do|does|have|has|can)\b|\b(isn't|aren't|don't|doesn't|haven't|hasn't|can't)\b/.test(value)) found.push('present');
+    return found;
+  }
+  function chunkForms(chunk) {
+    if (chunk.kind) return [chunk.kind];
+    const text = chunk.text.toLowerCase().replace(/[’‘]/g, "'");
+    const kinds = [];
+    if (/\bnot\b|n't\b|отрицан|отрицател|\b(never|nobody|nothing|nowhere)\b/u.test(text)) kinds.push('n');
+    if (/\?|вопрос|спрос/u.test(text)) kinds.push('q');
+    if (/утвержд|утвердител/u.test(text)) kinds.push('p');
+    return kinds;
+  }
+  function contextSearch(query) {
+    let context = queryContext(query);
+    const continuation = /^(а(?: |$)|тогда |теперь |в (будущем|настоящем|прошлом)( времени)?$)/u.test(normal(query));
+    if (previousContext && continuation &&
+      (!context.topicExplicit || context.tab === previousContext.tab)) {
+      context = {
+        ...context,
+        forms: context.forms.length ? context.forms : previousContext.forms,
+        times: context.times.length ? context.times : previousContext.times,
+        named: context.named.length ? context.named
+          : context.times.length || context.aspect ? [] : previousContext.named,
+        aspect: context.aspect || previousContext.aspect,
+        tab: context.topicExplicit || context.named.length ? context.tab : previousContext.tab
+      };
+    }
+    if (!context.forms.length || !context.tab) return null;
+    if (/циферблат|по часам|минут|\bquarter\b|\bhalf\b/u.test(normal(query))) return null;
+    if (context.tab === 'tenses' && /двойно|никто|никогда|ничего|\bnobody\b|\bnever\b|\bnothing\b/u.test(normal(query)) && !context.named.length) return null;
+    let entries = catalog.filter(item => item.station && item.tab === context.tab);
+    if (context.tab === 'sentence') entries = entries.filter(item => item.id === 's-be');
+    if (context.tab === 'tenses') {
+      if (context.named.length) entries = entries.filter(item => context.named.includes(item.id));
+      else {
+        if (context.times.length) entries = entries.filter(item => context.times.includes(item.station.zone));
+        if (context.aspect) entries = entries.filter(item => item.station.aspect === context.aspect);
+      }
+      // Названные времена из разных зон оставляем все. Для неопределённого
+      // «прошлого» показываем все четыре варианта, а не только Simple.
+      entries.sort((a, b) => a.station.idx - b.station.idx);
+    } else {
+      entries = entries.map(item => ({
+        ...item,
+        matchedChunks: context.forms.map(kind => item.chunks.filter(chunk =>
+          chunkForms(chunk).includes(kind) &&
+          (!context.times.length || formTimes(chunk.text).some(time => context.times.includes(time))))
+          .sort((a, b) => Number(b.kind === kind) - Number(a.kind === kind))[0])
+      })).filter(item => item.matchedChunks.every(Boolean));
+    }
+    const kind = context.forms[0];
+    if (context.tab === 'passive') {
+      entries.sort((a, b) => Number(b.id === (kind === 'q' ? 'v-question' : 'v-neg')) -
+        Number(a.id === (kind === 'q' ? 'v-question' : 'v-neg')));
+    }
+    const requested = context.forms.map(form => formNames[form]).join(' и ');
+    const matched = entries.map(item => {
+      const multiple = context.forms.length > 1;
+      const chunks = item.matchedChunks;
+      const formsOnly = !chunks || chunks.every(chunk => chunk.kind);
+      return {
+        id: formsOnly ? item.id + (multiple ? '-forms' : '-form-' + kind)
+          : multiple ? item.id : chunks[0].id,
+        title: item.title + ' — ' + requested,
+        group: item.group, section: false,
+        location: item.group + ' → формы предложений',
+        excerpt: chunks ? chunks.map(chunk => chunk.text).join(' · ')
+          : context.forms.map(form => plainText(item.station.forms[form])).join(' · ')
+      };
+    });
+    const limit = context.tab === 'tenses' ? 12 : 4;
+    const matchedTimes = context.tab === 'tenses' ? [...new Set(entries.map(item => item.station.zone))] : context.times;
+    const time = matchedTimes.length === 1 ? ' · ' + timeNames[matchedTimes[0]] : '';
+    return {
+      items: matched.slice(0, limit),
+      context,
+      message: matched.length
+        ? 'Ищу: ' + requested + time + '. ' + (matched.length > 1
+          ? 'В подходящих уроках есть отдельные формы предложений. Выбери нужный вариант:'
+          : 'Вот ссылка прямо на нужную форму в уроке:')
+        : 'Не нашёл в курсе отдельной формы для этого сочетания темы и времени. Уточни запрос или выбери раздел через «Все темы».'
+    };
+  }
+  function rank(query) {
+    const q = normal(query);
+    const terms = tokens(q);
+    if (!terms.length) return catalog.filter(item =>
+      item.aliases.some(alias => alias.length > 2 && !alias.includes('*') &&
+        (' ' + q + ' ').includes(' ' + alias + ' '))).slice(0, 4);
+    const ranked = catalog.map(item => {
+      const all = [...item.names, ...item.aliases.flatMap(a => a.split(' '))].filter(w => !stop.has(w));
+      const hits = terms.filter(t => all.some(w => wordMatch(t, w)));
+      const bodyHits = terms.filter(t => (item.body || []).some(w => wordMatch(t, w)));
+      const combined = terms.filter(t => hits.includes(t) || bodyHits.includes(t));
+      // Одно случайное слово из примера не считается темой. При этом длинный
+      // запрос может находить объяснение, даже если его нет в заголовке.
+      if (!hits.length && (bodyHits.length < 2 || bodyHits.length / terms.length < .75)) return {item, score: 0};
+      const coverage = combined.length / terms.length;
+      let phrase = 0;
+      for (const alias of item.aliases) {
+        const parts = alias.split(' ');
+        const useful = parts.filter(w => !stop.has(w));
+        if (!useful.length) continue;
+        if (parts.length === 1 && parts[0].length < 3 && q !== alias) continue;
+        const exact = (' ' + q + ' ').includes(' ' + alias + ' ');
+        const covered = useful.every(w => terms.some(t => wordMatch(t, w)));
+        if (exact) phrase = Math.max(phrase, 55 + Math.min(25, useful.length * 7));
+        else if (covered) phrase = Math.max(phrase, 30 + Math.min(20, useful.length * 5));
+      }
+      const nameHits = terms.filter(t => item.names.some(w => wordMatch(t, w))).length;
+      const score = coverage * 45 + Math.min(hits.length, 5) * 6 + Math.min(bodyHits.length, 5) * 2 + phrase +
+        (nameHits === terms.length && terms.length > 1 ? 30 : 0);
+      let target = item;
+      if (item.chunks && (!hits.length || (terms.length >= 3 && hits.length / terms.length < .5))) {
+        const best = item.chunks.map(chunk => ({chunk, count: terms.filter(t =>
+          chunk.words.some(w => wordMatch(t, w))).length})).sort((a, b) => b.count - a.count)[0];
+        if (best.count >= 2) target = {...item, id:best.chunk.id,
+          title:item.title + ' — ' + best.chunk.title, excerpt:best.chunk.text};
+      }
+      return {item:target, score: coverage >= .5 ? score : 0};
+    }).filter(hit => hit.score >= 48).sort((a, b) => b.score - a.score || Number(b.item.section) - Number(a.item.section));
+    if (!ranked.length) return [];
+    return ranked.filter(hit => hit.score >= Math.max(48, ranked[0].score - 25) &&
+      !(terms.length === 1 && ranked[0].item.section && !hit.item.section))
+      .slice(0, 4).map(hit => hit.item);
+  }
+  function clear() {
+    panel.classList.add('course-nav--searched');
+    results.replaceChildren();
+    question.hidden = true;
+    status.textContent = '';
+    panel.querySelector('.course-nav__body').scrollTop = 0;
+  }
+  function showLinks(items) {
+    const list = document.createElement('ul');
+    list.className = 'course-nav__links';
+    for (const item of items) {
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = '#' + item.id;
+      const name = document.createElement('span');
+      name.textContent = item.title;
+      const location = document.createElement('small');
+      location.textContent = item.location || (item.section ? 'Открыть раздел' : item.group + ' → открыть тему');
+      a.append(name, location);
+      if (item.excerpt) {
+        const excerpt = document.createElement('p');
+        excerpt.className = 'course-nav__excerpt';
+        excerpt.textContent = item.excerpt.length > 240 ? item.excerpt.slice(0, 237) + '…' : item.excerpt;
+        a.append(excerpt);
+      }
+      li.append(a);
+      list.append(li);
+    }
+    results.append(list);
+    results.scrollTop = 0;
+  }
+  function search(value) {
+    const query = value.trim().slice(0, 240);
+    if (!query) { input.focus(); return; }
+    clear();
+    question.textContent = query;
+    question.hidden = false;
+    // Это навигатор: у него нет обработчика переводов или свободных ответов.
+    if (/\b(translate|translation)\b|переведи|переведите|сделай перевод|как перевести|реши задани|напиши сочинени|напиши эссе|реши пример/iu.test(query)) {
+      status.textContent = 'Я помогаю найти тему в методичке. Напиши, какое правило ищешь, например «артикли» или «вопросы в прошлом».';
+      return;
+    }
+    const context = contextSearch(query);
+    const found = context ? context.items : rank(query);
+    previousContext = context && found.length ? context.context : null;
+    if (!found.length) {
+      status.textContent = context?.message || 'Не нашёл подходящую тему. Попробуй назвать правило короче или нажми «Все темы». Я могу подсказать только, где что находится в этой методичке.';
+      return;
+    }
+    status.textContent = context?.message || (found.length === 1 ? 'Нашёл подходящий раздел. Нажми, чтобы перейти:' : 'Вот подходящие темы. Выбери нужную:');
+    showLinks(found);
+  }
+  function setOpen(open, restoreFocus = true) {
+    panel.hidden = !open;
+    launcher.setAttribute('aria-expanded', String(open));
+    if (open) input.focus({preventScroll: true});
+    else if (restoreFocus) launcher.focus({preventScroll: true});
+  }
+  launcher.hidden = false;
+  document.body.classList.add('course-nav-ready');
+  launcher.addEventListener('click', () => setOpen(panel.hidden));
+  document.getElementById('courseNavigatorClose').addEventListener('click', () => setOpen(false));
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && !panel.hidden) { event.preventDefault(); setOpen(false); }
+  });
+  form.addEventListener('submit', event => { event.preventDefault(); search(input.value); });
+  panel.addEventListener('click', event => {
+    const example = event.target.closest('[data-nav-query]');
+    if (example) { input.value = example.dataset.navQuery; search(input.value); return; }
+    const link = event.target.closest('a[href^="#"]');
+    if (!link || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+    setOpen(false, false);
+    requestAnimationFrame(() => {
+      const target = document.getElementById(link.hash.slice(1));
+      const heading = target?.querySelector('h1,h2,h3') || target;
+      if (heading) { heading.setAttribute('tabindex', '-1'); heading.focus({preventScroll: true}); }
+    });
+  });
+  document.getElementById('courseNavigatorAll').addEventListener('click', () => {
+    previousContext = null;
+    clear();
+    status.textContent = 'Все темы методички. Нажми на раздел, чтобы открыть его:';
+    showLinks(catalog.filter(item => item.section && item.group !== 'Главная'));
+  });
+})();
+</script>
+<script>
+/* Одинаковое свечение у кнопок хедера и навигатора, без внешних библиотек. */
+(() => {
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  document.querySelectorAll('.course-cta').forEach(button => {
+    let frame = 0;
+    let point = null;
+    button.addEventListener('pointermove', event => {
+      if (event.pointerType !== 'mouse' || reducedMotion.matches) return;
+      point = {x:event.clientX, y:event.clientY};
+      if (frame) return;
+      frame = requestAnimationFrame(() => {
+        frame = 0;
+        const box = button.getBoundingClientRect();
+        if (!point || !box.width || !box.height) return;
+        const percent = (value, start, size) => Math.max(0, Math.min(100, (value - start) / size * 100));
+        button.style.setProperty('--nav-pointer-x', percent(point.x, box.left, box.width) + '%');
+        button.style.setProperty('--nav-pointer-y', percent(point.y, box.top, box.height) + '%');
+      });
+    }, {passive:true});
+    button.addEventListener('pointerleave', () => {
+      if (frame) cancelAnimationFrame(frame);
+      frame = 0;
+      point = null;
+      button.style.removeProperty('--nav-pointer-x');
+      button.style.removeProperty('--nav-pointer-y');
+    });
+  });
+})();
+</script>
+<script>
+/* Мягкая типографика только в отображаемом тексте: исходные задания не меняются. */
+(() => {
+  const panels = [...document.querySelectorAll('.tabpanel')];
+  const originals = new WeakMap();
+  const canvas = document.createElement('canvas');
+  const measure = canvas.getContext('2d');
+  if (!measure) return;
+
+  const copy = 'p,li,figcaption,h1,h2,h3,h4,.en,.ru,.nb,.why,.bu__note,.bu__schema,.st__top .mono,.home-card__text,.home-card__name,.qz__row > span';
+  const skip = 'svg,script,style,button,input,select,textarea,.train,.qz__opts,.qz__q,.drill__top,.qz__nav';
+  const emphasis = 'b,strong,.v,.yes,.no,.mono,code';
+  const nbsp = '\u00a0';
+  const shortWords = /(^|[\s«(—])((?:в|во|на|к|ко|с|со|у|о|об|от|до|из|по|за|не|ни|а|и|но|для|без|под|при|над|про|же|бы|ли)) +(?=([^\s«»()[\]<>]+))/giu;
+  let scheduled = false;
+
+  function column(element) {
+    let box = element;
+    while (box.parentElement && getComputedStyle(box).display === 'inline') box = box.parentElement;
+    const css = getComputedStyle(box);
+    return Math.max(0, box.clientWidth - parseFloat(css.paddingLeft) - parseFloat(css.paddingRight));
+  }
+
+  function width(text, element) {
+    const css = getComputedStyle(element);
+    measure.font = css.font;
+    return measure.measureText(text).width + (parseFloat(css.letterSpacing) || 0) * Math.max(0, text.length - 1);
+  }
+
+  function formatText(node) {
+    const element = node.parentElement;
+    if (!element || element.closest(skip) || !element.closest(copy)) return;
+    const old = originals.get(node);
+    const original = old && old.rendered === node.data ? old.original : node.data;
+    const available = column(element) - 2;
+    // Не собираем длинные неразрывные строки: короткая связка — максимум половина колонки.
+    const fits = value => width(value, element) <= available * .5;
+    let rendered = original.replace(/«([^«»\n]{1,72})»/gu, (all, phrase) => {
+      return phrase.trim().split(/\s+/u).length <= 5 && fits(all) ? all.replace(/ +/gu, nbsp) : all;
+    });
+    rendered = rendered.replace(shortWords, (all, before, word, next) => {
+      return fits(word + ' ' + next) ? before + word + nbsp : all;
+    });
+    if (node.data !== rendered) node.data = rendered;
+    originals.set(node, {original, rendered});
+  }
+
+  function formatEmphasis(root) {
+    root.querySelectorAll(emphasis).forEach(element => {
+      element.classList.remove('typography-keep');
+      if (element.closest(skip) || !element.closest(copy) || element.querySelector('br') ||
+          getComputedStyle(element).display !== 'inline') return;
+      const text = element.textContent.trim();
+      if (!text || text.split(/\s+/u).length > 6) return;
+      // Range учитывает разные шрифты во вложенных span и реальную ширину пробелов.
+      element.classList.add('typography-keep');
+      const range = document.createRange();
+      range.selectNodeContents(element);
+      if (range.getBoundingClientRect().width > column(element) - 2) element.classList.remove('typography-keep');
+    });
+  }
+
+  const observer = new MutationObserver(schedule);
+  function observe() {
+    panels.forEach(root => observer.observe(root, {
+      subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ['hidden']
+    }));
+  }
+  function format() {
+    scheduled = false;
+    observer.disconnect();
+    panels.filter(root => !root.hidden).forEach(root => {
+      const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+      while (walker.nextNode()) formatText(walker.currentNode);
+      formatEmphasis(root);
+    });
+    observe();
+  }
+  function schedule() {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(format);
+  }
+  window.addEventListener('resize', schedule, {passive: true});
+  if (document.fonts) {
+    document.fonts.ready.then(schedule);
+    document.fonts.addEventListener('loadingdone', schedule);
+  }
+  observe();
+  schedule();
+})();
 </script>
 </body>
 </html>

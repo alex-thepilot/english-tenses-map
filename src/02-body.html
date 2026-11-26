@@ -1,52 +1,43 @@
-<nav class="topbar">
+<nav class="topbar topbar--course">
   <div class="topbar__in">
     <div class="mark"><b>Английский</b><span>ПРАВИЛА</span></div>
 
     <div class="tab-dock">
-      <div class="tabs__clip">
-        <div class="tabs" id="sectionTabs" role="tablist" aria-label="Разделы грамматики">
-          <button type="button" role="tab" id="homeTab" data-tab="home" aria-selected="true" aria-controls="tab-home" aria-label="Главная">
-            <span class="tabs__tile">Главная</span>
+        <div class="tabs" id="sectionTabs" role="tablist" aria-label="Основные разделы">
+          <button type="button" class="course-cta" role="tab" id="homeTab" data-tab="home" aria-selected="true" aria-controls="tab-home" aria-label="Главная">
+            <span class="course-cta__label">Главная</span>
+            <svg class="course-cta__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
           </button>
-          <button type="button" role="tab" id="sentenceTab" data-tab="sentence" aria-selected="false" aria-controls="tab-sentence" aria-label="Основа" tabindex="-1">
-            <span class="tabs__tile">Основа</span>
+          <button type="button" class="course-cta" role="tab" id="sentenceTab" data-tab="sentence" aria-selected="false" aria-controls="tab-sentence" aria-label="Основа" tabindex="-1">
+            <span class="course-cta__label">Основа</span>
+            <svg class="course-cta__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
           </button>
-          <button type="button" role="tab" id="tensesTab" data-tab="tenses" aria-selected="false" aria-controls="tab-tenses" aria-label="Времена" tabindex="-1">
-            <span class="tabs__tile">Времена</span>
+          <button type="button" class="course-cta" role="tab" id="tensesTab" data-tab="tenses" aria-selected="false" aria-controls="tab-tenses" aria-label="Времена" tabindex="-1">
+            <span class="course-cta__label">Времена</span>
+            <svg class="course-cta__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
           </button>
-          <button type="button" role="tab" id="condTab" data-tab="cond" aria-selected="false" aria-controls="tab-cond" aria-label="Условные предложения" tabindex="-1">
-            <span class="tabs__tile">Условные</span>
-          </button>
-          <button type="button" role="tab" id="pronTab" data-tab="pron" aria-selected="false" aria-controls="tab-pron" aria-label="Местоимения" tabindex="-1">
-            <span class="tabs__tile">Местоимения</span>
-          </button>
-          <button type="button" role="tab" id="degTab" data-tab="deg" aria-selected="false" aria-controls="tab-deg" aria-label="Степени сравнения" tabindex="-1">
-            <span class="tabs__tile">Степени</span>
-          </button>
-          <button type="button" role="tab" id="passiveTab" data-tab="passive" aria-selected="false" aria-controls="tab-passive" aria-label="Пассив" tabindex="-1">
-            <span class="tabs__tile">Пассив</span>
-          </button>
-          <button type="button" role="tab" id="articlesTab" data-tab="articles" aria-selected="false" aria-controls="tab-articles" aria-label="Артикли" tabindex="-1">
-            <span class="tabs__tile">Артикли</span>
-          </button>
-          <button type="button" role="tab" id="obligationTab" data-tab="obligation" aria-selected="false" aria-controls="tab-obligation" aria-label="Долженствование" tabindex="-1">
-            <span class="tabs__tile">Долженствование</span>
-          </button>
-          <button type="button" role="tab" id="modalsTab" data-tab="modals" aria-selected="false" aria-controls="tab-modals" aria-label="Модальные глаголы" tabindex="-1">
-            <span class="tabs__tile">Модальные глаголы</span>
-          </button>
-          <button type="button" role="tab" id="clockTab" data-tab="clock" aria-selected="false" aria-controls="tab-clock" aria-label="Время по часам" tabindex="-1">
-            <span class="tabs__tile">Время по часам</span>
-          </button>
-          <button type="button" role="tab" id="numbersTab" data-tab="numbers" aria-selected="false" aria-controls="tab-numbers" aria-label="Числа и цифры" tabindex="-1">
-            <span class="tabs__tile">Числа и цифры</span>
-          </button>
-          <button type="button" role="tab" id="negationTab" data-tab="negation" aria-selected="false" aria-controls="tab-negation" aria-label="Отрицания и связки" tabindex="-1">
-            <span class="tabs__tile">Отрицания и связки</span>
+          <button type="button" class="course-cta" role="tab" id="condTab" data-tab="cond" aria-selected="false" aria-controls="tab-cond" aria-label="Условные предложения" tabindex="-1">
+            <span class="course-cta__label">Условные</span>
+            <svg class="course-cta__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
           </button>
         </div>
+      <div class="tabs-more">
+        <button type="button" class="course-cta tabs-more__button" id="moreTabsButton" aria-expanded="false" aria-haspopup="menu" aria-controls="moreTabsMenu">
+          <span class="course-cta__label">Ещё</span>
+          <svg class="course-cta__arrow tabs-more__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="tabs-more__menu" id="moreTabsMenu" role="menu" aria-label="Остальные разделы методички" hidden>
+          <button type="button" role="menuitemradio" id="pronTab" data-tab="pron" aria-checked="false" aria-controls="tab-pron" tabindex="-1">Местоимения</button>
+          <button type="button" role="menuitemradio" id="degTab" data-tab="deg" aria-checked="false" aria-controls="tab-deg" tabindex="-1">Степени сравнения</button>
+          <button type="button" role="menuitemradio" id="passiveTab" data-tab="passive" aria-checked="false" aria-controls="tab-passive" tabindex="-1">Пассив</button>
+          <button type="button" role="menuitemradio" id="articlesTab" data-tab="articles" aria-checked="false" aria-controls="tab-articles" tabindex="-1">Артикли</button>
+          <button type="button" role="menuitemradio" id="obligationTab" data-tab="obligation" aria-checked="false" aria-controls="tab-obligation" tabindex="-1">Долженствование</button>
+          <button type="button" role="menuitemradio" id="modalsTab" data-tab="modals" aria-checked="false" aria-controls="tab-modals" tabindex="-1">Модальные глаголы</button>
+          <button type="button" role="menuitemradio" id="clockTab" data-tab="clock" aria-checked="false" aria-controls="tab-clock" tabindex="-1">Время по часам</button>
+          <button type="button" role="menuitemradio" id="numbersTab" data-tab="numbers" aria-checked="false" aria-controls="tab-numbers" tabindex="-1">Числа и цифры</button>
+          <button type="button" role="menuitemradio" id="negationTab" data-tab="negation" aria-checked="false" aria-controls="tab-negation" tabindex="-1">Отрицания и связки</button>
+        </div>
       </div>
-      <span class="tabs__tooltip" id="tabsTooltip" aria-hidden="true" hidden></span>
     </div>
 
     <div class="header-tools">
@@ -245,7 +236,7 @@
       </li>
     </ol>
 
-    <div class="callout trap" style="margin-top:28px;max-width:66ch">
+    <div class="callout trap" style="margin-top:28px">
       <h4>Исключение: модальные глаголы</h4>
       <p>Правила выше не касаются <span class="mono">can, must, should, may</span> и их родственников. Модальный глагол — самостоятельная
          сущность и сам работает помощником, поэтому do ему не нужен ни в вопросе, ни в утверждении.
@@ -790,7 +781,7 @@
       <figcaption>Три ступени одной лестницы. Нулевой тип в неё не входит: он про то, что верно всегда, поэтому обе половины остаются в настоящем.</figcaption>
     </figure>
 
-    <div class="callout trap" style="margin-top:30px;max-width:66ch">
+    <div class="callout trap" style="margin-top:30px">
       <h4>Сквозное правило: после if не ставят will</h4>
       <p>
         Ни <span class="mono">will</span>, ни <span class="mono">would</span> не заходят за <span class="mono">if</span> — никогда, ни в одном типе.
@@ -997,7 +988,7 @@
       <div class="roles" id="pbRoles"></div>
     </div>
 
-    <div class="callout key" style="margin-top:30px;max-width:66ch">
+    <div class="callout key" style="margin-top:30px">
       <h4>Отдельная тема: «чей?»</h4>
       <p>
         Слова <span class="mono">my, your, his, her, our, their</span> отвечают на вопрос «чей?» и стоят перед существительным.
@@ -1134,7 +1125,7 @@
       </li>
     </ol>
 
-    <div class="callout trap" style="margin-top:28px;max-width:66ch">
+    <div class="callout trap" style="margin-top:28px">
       <h4>Исключения: пять слов меняются целиком</h4>
       <p><span class="mono">good → better → the best</span>, <span class="mono">bad → worse → the worst</span> и ещё три слова: far, little, many / much. Слух тут не поможет — их просто нужно запомнить.</p>
       <a class="goto" href="#d-irr">К исключениям →</a>
@@ -2015,6 +2006,44 @@
   </div>
 </section>
 </div>
+
+<button type="button" class="course-cta course-nav-button" id="courseNavigatorButton" aria-controls="courseNavigator" aria-expanded="false" hidden>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+    <path d="M5 4h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-6 3V6a2 2 0 0 1 2-2Z"/><path d="M7 9h10M7 13h7"/>
+  </svg>
+  <span class="course-cta__label">Найти тему</span>
+  <svg class="course-cta__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M5 12h14m-6-6 6 6-6 6"/>
+  </svg>
+</button>
+<section class="course-nav" id="courseNavigator" role="dialog" aria-modal="false" aria-labelledby="courseNavigatorTitle" hidden>
+  <header class="course-nav__header">
+    <div>
+      <h2 id="courseNavigatorTitle">Навигатор по методичке</h2>
+      <p>Помогу найти нужный раздел</p>
+    </div>
+    <button type="button" class="course-nav__close" id="courseNavigatorClose" aria-label="Закрыть навигатор">Закрыть</button>
+  </header>
+  <div class="course-nav__body">
+    <p class="course-nav__greeting">Привет! Я могу подсказать, где в методичке находится интересующая тебя тема. Напиши название правила или знакомые слова — я найду раздел и дам ссылку.</p>
+    <div class="course-nav__examples" aria-label="Примеры запросов">
+      <button type="button" data-nav-query="Где объясняются артикли?">Артикли</button>
+      <button type="button" data-nav-query="Ни-ни">Ни — ни</button>
+      <button type="button" data-nav-query="Большие числа">Большие числа</button>
+    </div>
+    <button type="button" class="course-nav__all" id="courseNavigatorAll">Все темы</button>
+    <p class="course-nav__question" id="courseNavigatorQuestion" hidden></p>
+    <p class="course-nav__status" id="courseNavigatorStatus" role="status" aria-live="polite" aria-atomic="true"></p>
+    <div id="courseNavigatorResults"></div>
+  </div>
+  <form class="course-nav__form" id="courseNavigatorForm" role="search" aria-label="Поиск темы в методичке">
+    <label for="courseNavigatorInput">Какую тему ищешь?</label>
+    <div class="course-nav__input-row">
+      <input id="courseNavigatorInput" type="search" placeholder="Например: вопросы в прошлом" maxlength="240" autocomplete="off" enterkeyhint="search">
+      <button type="submit">Найти</button>
+    </div>
+  </form>
+</section>
 
 <button class="totop" id="totop" aria-label="Вернуться в начало страницы">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

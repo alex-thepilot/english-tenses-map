@@ -37,12 +37,14 @@ HEAD
   cat $S/01-style.css
   cat $S/02-style-new.css
   cat $S/03-home.css
+  cat $S/04-navigator.css
+  cat $S/05-typography.css
   echo '</style>'
   echo '</head>'
   echo '<body>'
   cat $S/02-body.html
   echo
-  for f in 00-helpers 10-graphics 20-data-tenses 22-data-misc 25-drills-a 26-drills-b 27-quiz-tenses 30-data-cond 35-drills-cond 50-data-sentence 55-drills-sentence 60-data-pron 65-drills-pron 70-data-deg 75-drills-deg 80-data-passive 82-data-articles 83-data-obligation 84-data-modals 85-drills-passive 86-data-clock 87-drills-articles 88-drills-obligation 89-drills-modals 91-drills-clock 92-data-numbers 93-drills-numbers 94-data-negation 95-drills-negation 90-app; do
+  for f in 00-helpers 10-graphics 20-data-tenses 22-data-misc 25-drills-a 26-drills-b 27-quiz-tenses 30-data-cond 35-drills-cond 50-data-sentence 55-drills-sentence 60-data-pron 65-drills-pron 70-data-deg 75-drills-deg 80-data-passive 82-data-articles 83-data-obligation 84-data-modals 85-drills-passive 86-data-clock 87-drills-articles 88-drills-obligation 89-drills-modals 91-drills-clock 92-data-numbers 93-drills-numbers 94-data-negation 95-drills-negation 90-app 96-navigator 97-cta 98-typography; do
     echo "<script>"; cat "$S/$f.js"; echo "</script>"
   done
   printf '</body>\n</html>\n'

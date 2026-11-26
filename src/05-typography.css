@@ -1,0 +1,36 @@
+/* Текст занимает ширину своей колонки, без дополнительных узких ограничений. */
+.sect__head, .st__thesis, .prose, .level p, figcaption,
+.mxout__l p, .bu__note, .home-hero__lead, .home-letter p,
+.home-practice__inner p:last-child, .home-example {
+  max-width: none;
+}
+
+.tabpanel :is(p, figcaption, .en, .ru, .nb, .why, .bu__note, .qz__row > span) {
+  text-wrap: pretty;
+  hyphens: none;
+}
+.st__thesis { text-wrap: pretty; line-height: 1.5; }
+.st__top > div, .st__grid > *, .home-hero > *, .home-letter > *,
+.home-practice__inner > div, .duel__s, .mxout__l, .bu__out, .steps li {
+  min-width: 0;
+}
+.st__top > div { max-width: 100%; }
+.home-practice__inner > div { flex: 1; }
+.steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.duel__b { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.forms div { grid-template-columns: 30px minmax(0, 1fr); }
+
+/* Ответ и разбор не сжимают друг друга в две узкие колонки. */
+.qz__row { grid-template-columns: minmax(0, 1fr); gap: 5px; }
+.qz__row b { white-space: normal; }
+.qz__q, .quiz__q, .det__q { text-wrap: pretty; }
+
+/* Класс ставится только на фразы, которые целиком помещаются в колонку. */
+.typography-keep { white-space: nowrap; }
+
+@media (max-width: 760px) {
+  .steps { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 720px) {
+  .duel__b { grid-template-columns: minmax(0, 1fr); }
+}
